@@ -1,0 +1,982 @@
+<div class="main-title-container">
+    <p>{{ 'DPLResult.Label.DPLCheckResultSearch' | translate }}</p>
+</div>
+
+<p-tabView>
+    <p-tabPanel header="{{ 'DPLResult.Label.TransactionCheckResultQuery' | translate }}" leftIcon="pi pi-home">
+        <form class="form-table form-search">
+            <div class="form-row grid">
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">Trx Reference No</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText name="trxReferenceNo"
+                                    [(ngModel)]="queryReq.trxReferenceNo"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">Precision Run Number</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText name="precisionRunNumber"
+                                    [(ngModel)]="queryReq.precisionRunNumber"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">Source Type</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-select">
+                                <p-dropdown name="sourceType" [(ngModel)]="queryReq.sourceType" [filter]="true"
+                                    [options]="sourceTypeOptions"
+                                    placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-row grid">
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">Cust Name</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText name="custNameE" [(ngModel)]="queryReq.custNameE"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">Address Id</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText name="addressId" [(ngModel)]="queryReq.addressId"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">Address Line</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText name="addressLine" [(ngModel)]="queryReq.addressLine"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-row grid">
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'DPLResult.Label.StartDate' | translate }}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-date">
+                                  <p-calendar
+                                  [selectOtherMonths]="true"
+                                  [showButtonBar]="true"
+                                  [showIcon]="true"
+                                  name="startDate"
+                                  [(ngModel)]="queryReq.startDate"
+                                  dateFormat="yy/mm/dd" appendTo="body"
+                                  (onInput)="onDatePickerInput($event)"
+                                  (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler('queryReq')"
+                                  (onBlur)="onDatePickerSelectAndBlur()"
+                                  (onClose)="onDatePickerClose('queryReq','startDate');onCheckDateHandler('queryReq')"
+                                  placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                ></p-calendar>
+                                <p class="error-active" *ngIf="!queryReq.startDate">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'DPLResult.Label.EndDate' | translate }}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-date">
+                                <p-calendar
+                                  [selectOtherMonths]="true"
+                                  [showButtonBar]="true"
+                                  [showIcon]="true"
+                                  name="endDate"
+                                  [(ngModel)]="queryReq.endDate"
+                                  [minDate]="queryReq.startDate"
+                                  dateFormat="yy/mm/dd" appendTo="body"
+                                  (onInput)="onDatePickerInput($event)"
+                                  (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler('queryReq')"
+                                  (onBlur)="onDatePickerSelectAndBlur()"
+                                  (onClose)="onDatePickerClose('queryReq','endDate');onCheckDateHandler('queryReq')"
+                                  placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                ></p-calendar>
+                                <p class="error-active" *ngIf="!queryReq.endDate">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'DPLResult.Label.AreaOrCountry' | translate }}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-select">
+                                <p-dropdown name="country" [(ngModel)]="queryReq.country" [filter]="true"
+                                    [virtualScroll]="true" itemSize="30" [options]="countryOptions"
+                                    placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <button pButton type="button" label="{{'Button.Label.Reset' | translate}}" class="btn-secondary"
+                    (click)="resetBtnClick()"></button>
+                <!--重設-->
+                <button pButton type="button" label="{{'Button.Label.Query' | translate}}" (click)="searchBtnClick()"
+                    *ngIf="permissions.includes('view')"></button>
+                <!--查詢-->
+                <button pButton type="button" label="{{'Button.Label.Download' | translate}}" class="btn-teal"
+                    (click)="downloadBtnClick()" *ngIf="permissions.includes('view')"></button>
+                <!--下載-->
+            </div>
+        </form>
+
+        <!--# TK-35854 -->
+        <ng-container *ngIf="displayResult">
+            <p-table #lazyTable class="table-panel" [value]="data" [columns]="selectedCols" [scrollable]="true"
+                scrollHeight="500px" [paginator]="true" [rows]="10" paginatorPosition="bottom"
+                [rowsPerPageOptions]="[10,20]" dataKey="seq" [lazy]="true"
+                (onLazyLoad)="onLazyLoad($event)" (onSort)="onSort($event)" (onPage)="onPage($event)"
+                [totalRecords]="totalRecords">
+                <ng-template pTemplate="caption">
+                    <div class="table-action-block">
+                        <div class="table-search ui-inputgroup">
+                            <input pInputText type="text" size="30" (input)="filterLazy($event.target.value)"
+                                [(ngModel)]="globalFilter" placeholder="Search keyword" />
+                            <span class="ui-inputgroup-addon">
+                                <i class="pi pi-search"></i>
+                            </span>
+                        </div>
+                        <div class="btn-container right">
+                            <button pButton type="button" icon="pi pi-sliders-h"
+                                label="{{ 'Button.Label.Filter' | translate }}" class="btn-line"
+                                (click)="showFilter()"></button>
+                        </div>
+                    </div>
+                    <!-- end: table-action-block -->
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <ng-container *ngFor="let col of selectedCols">
+                            <th [ngClass]="col.css" *ngIf="col.field === 'detail'" scope="col"
+                                [style]="{'min-width': 'unset !important', 'max-width': col.maxWidth + '', 'text-align': col.textAlign + ''}">
+                                {{col.header}}
+                            </th>
+                            <th [pSortableColumn]="col.field" [ngClass]="col.css" *ngIf="col.field !== 'detail'"
+                                scope="col"
+                                [style]="{'min-width': 'unset !important', 'max-width': col.maxWidth + '', 'text-align': col.textAlign + ''}">
+                                {{col.header}}
+                                <p-sortIcon [field]="col.field"></p-sortIcon>
+                            </th>
+                        </ng-container>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-data>
+                    <tr>
+                        <td *ngFor="let col of selectedCols" [ngClass]="col.css"
+                            [style]="{'min-width': 'unset !important', 'max-width': col.maxWidth + '', 'text-align': col.textAlign + ''}">
+                            <ng-container *ngIf="col.field === 'detail'">
+                                <button pButton type="button" class="icon-btn btn-teal"
+                                    (click)="viewDetail(data['headerId'] , data['lineId'])">
+                                    <img src="./assets/imgs/icon-btn/detail.svg" alt="Detail">
+                                </button>
+                            </ng-container>
+                            <ng-container *ngIf="col.field === 'resultsUrl'">
+                                <a class="txt" href="{{data[col.field]}}" target="_blank"
+                                    rel="noopener">{{data[col.field]}}</a>
+                            </ng-container>
+                            <ng-container *ngIf="col.field !== 'detail' && col.field !== 'resultsUrl'">
+                                <p>{{data[col.field]}}</p>
+                            </ng-container>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-container>
+
+        <p-dialog header="{{ 'Dialog.Header.FilterColumns' | translate }}" [(visible)]="displayFilter"
+            [draggable]="false" [blockScroll]="true" [modal]="true">
+            <form>
+                <div class="form-row grid">
+                    <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of cols">
+                        <div class="form-checkbox">
+                            <p-checkbox name="checkboxGroup" [label]="col.header" [value]="col"
+                                [(ngModel)]="selectedCols" [disabled]="col?.isDisabled"></p-checkbox>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}"
+                        class="btn-gray btn-line" (click)="changeFilter()"></button>
+                </div>
+            </form>
+        </p-dialog>
+
+        <p-dialog header="資料明細" [(visible)]="displayResultDetail" [draggable]="false" [blockScroll]="true"
+            [modal]="true" [style]="{width: '1200px'}">
+            <p-tabView>
+                <p-tabPanel header="表頭資料"></p-tabPanel>
+            </p-tabView>
+            <form class="form-table">
+                <div class="form-row grid">
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Customer No</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{detailRsp.customerNo}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Shipment Reference</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{detailRsp.shipmentReference}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Source Reference3</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{detailRsp.sourceReference3}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row grid">
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Trx Reference No</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{detailRsp.trxReferenceNo}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Source Reference1</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{detailRsp.sourceReference1}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Source Reference4</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{detailRsp.sourceReference4}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row grid">
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Ou Code</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{detailRsp.ouCode}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Source Reference2</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{detailRsp.sourceReference2}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Tested Date</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{detailRsp.testedDate}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <p-tabView *ngIf="detailRsp.dataType=='party'">
+                <p-tabPanel header="地址/客戶名稱比對細節">
+                    <p-table #detail class="table-panel" [value]="detailData" [columns]="detailCols" [scrollable]="true"
+                        scrollHeight="500px" [paginator]="true" [rows]="10" paginatorPosition="bottom"
+                        [rowsPerPageOptions]="[10,20]" dataKey="id">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th *ngFor="let col of detailCols" [pSortableColumn]="col.field" [ngClass]="{
+                    'icon-col': (col.field == 'checkbox')
+                  }" scope="col">
+                                    <ng-container *ngIf="col.field != 'checkbox'">
+                                        {{col.header}}
+                                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                                    </ng-container>
+                                </th>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-detailData>
+                            <tr>
+                                <td *ngFor="let col of detailCols" [ngClass]="{
+                    'icon-col': (col.field == 'checkbox')
+                  }">
+                                    <ng-container *ngIf="col.field != 'checkbox'">
+                                        <p>{{detailData[col.field]}}</p>
+                                    </ng-container>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+
+                <p-tabPanel header="國家比對細節" [hidden]="detailRsp.dataType!='party'">
+                    <p-table #detailEbc class="table-panel" [value]="detailEbcData" [columns]="detailEbcCols"
+                        [scrollable]="true" scrollHeight="500px" [paginator]="true" [rows]="10"
+                        paginatorPosition="bottom" [rowsPerPageOptions]="[10,20]" dataKey="id">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th *ngFor="let col of detailEbcCols" [pSortableColumn]="col.field" [ngClass]="{
+                    'icon-col': (col.field == 'checkbox')
+                  }" scope="col">
+                                    <ng-container *ngIf="col.field != 'checkbox'">
+                                        {{col.header}}
+                                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                                    </ng-container>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-detailEbcData>
+                            <tr>
+                                <td *ngFor="let col of detailEbcCols" [ngClass]="{
+                    'icon-col': (col.field == 'checkbox')
+                  }">
+                                    <ng-container *ngIf="col.field != 'checkbox'">
+                                        <p>{{detailEbcData[col.field]}}</p>
+                                    </ng-container>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+            </p-tabView>
+
+            <p-tabView *ngIf="detailRsp.dataType=='item'">
+                <p-tabPanel header="料號細節資料">
+                    <p-table #detailEccn class="table-panel" [value]="detailEccnData" [columns]="detailEccnCols"
+                        [scrollable]="true" scrollHeight="500px" [paginator]="true" [rows]="10"
+                        paginatorPosition="bottom" [rowsPerPageOptions]="[10,20]" dataKey="id">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th *ngFor="let col of detailEccnCols" [pSortableColumn]="col.field" [ngClass]="{
+                    'icon-col': (col.field == 'checkbox')
+                  }" scope="col">
+                                    <ng-container *ngIf="col.field != 'checkbox'">
+                                        {{col.header}}
+                                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                                    </ng-container>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-detailEccnData>
+                            <tr>
+                                <td *ngFor="let col of cols" [ngClass]="{
+                    'icon-col': (col.field == 'checkbox')
+                  }">
+                                    <ng-container *ngIf="col.field != 'checkbox'">
+                                        <p>{{detailEccnData[col.field]}}</p>
+                                    </ng-container>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+            </p-tabView>
+        </p-dialog>
+    </p-tabPanel>
+    <p-tabPanel header="{{ 'DPLResult.Label.BatchCheckResultQuery' | translate }}" leftIcon="pi pi-calendar">
+        <form class="form-table form-search">
+            <div class="form-row grid">
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">Batch Reference</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText name="batchReference"
+                                    [(ngModel)]="batchReq.batchReference"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'DPLResult.Label.AreaOrCountry' | translate }}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-select">
+                                <p-dropdown name="country" [(ngModel)]="batchReq.country" [filter]="true"
+                                    [virtualScroll]="true" itemSize="30" [options]="countryOptions"
+                                    placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-row grid">
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">Cust Name</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText name="custName" [(ngModel)]="batchReq.custName"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">Address Id</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText name="addressId" [(ngModel)]="batchReq.addressId"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">Address Line</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText name="addressLine" [(ngModel)]="batchReq.addressLine"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-row grid">
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'DPLResult.Label.StartDate' | translate }}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-date">
+                                <p-calendar
+                                  [selectOtherMonths]="true"
+                                  [showButtonBar]="true"
+                                  [showIcon]="true"
+                                  name="startDate"
+                                  [(ngModel)]="batchReq.startDate"
+                                  dateFormat="yy/mm/dd" appendTo="body"
+                                  (onInput)="onDatePickerInput($event)"
+                                  (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler('batchReq')"
+                                  (onBlur)="onDatePickerSelectAndBlur()"
+                                  (onClose)="onDatePickerClose('batchReq','startDate');onCheckDateHandler('batchReq')"
+                                  placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                ></p-calendar>
+                                <p class="error-active" *ngIf="!batchReq.startDate">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'DPLResult.Label.EndDate' | translate }}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-date">
+                                <p-calendar
+                                  [selectOtherMonths]="true"
+                                  [showButtonBar]="true"
+                                  [showIcon]="true"
+                                  name="endDate"
+                                  [(ngModel)]="batchReq.endDate"
+                                  [minDate]="batchReq.startDate"
+                                  dateFormat="yy/mm/dd" appendTo="body"
+                                  (onInput)="onDatePickerInput($event)"
+                                  (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler('batchReq')"
+                                  (onBlur)="onDatePickerSelectAndBlur()"
+                                  (onClose)="onDatePickerClose('batchReq','endDate');onCheckDateHandler('batchReq')"
+                                  placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                ></p-calendar>
+                                <p class="error-active" *ngIf="!batchReq.endDate">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="btn-container">
+                <button pButton type="button" label="{{'Button.Label.Reset' | translate}}" class="btn-secondary"
+                    (click)="resetBatchBtnClick()"></button>
+                <!--重設-->
+                <button pButton type="button" label="{{'Button.Label.Query' | translate}}"
+                    (click)="searchBatchBtnClick()" *ngIf="permissions.includes('view')"></button>
+                <!--查詢-->
+                <button pButton type="button" label="{{'Button.Label.Download' | translate}}" class="btn-teal"
+                    (click)="downloadBatchBtnClick()" *ngIf="permissions.includes('view')"></button>
+                <!--下載-->
+            </div>
+        </form>
+        <ng-container *ngIf="displayBatchResult">
+            <p-table #lazyTableBatch class="table-panel" [value]="batchData" [columns]="batchSelectedCols"
+                [scrollable]="true" scrollHeight="500px" [paginator]="true" [rows]="10" paginatorPosition="bottom"
+                [rowsPerPageOptions]="[10,20]" dataKey="seq" [lazy]="true"
+                (onLazyLoad)="onLazyLoadBatch($event)" (onSort)="onSortBatch($event)" (onPage)="onPageBatch($event)"
+                [totalRecords]="totalBatchRecords">
+                <ng-template pTemplate="caption">
+                    <div class="table-action-block">
+                        <div class="table-search ui-inputgroup">
+                            <input pInputText type="text" size="30" (input)="filterLazyBatch($event.target.value)"
+                                [(ngModel)]="globalFilterBatch" placeholder="Search keyword" />
+                            <span class="ui-inputgroup-addon">
+                                <i class="pi pi-search"></i>
+                            </span>
+                        </div>
+                        <div class="btn-container right">
+                            <button pButton type="button" icon="pi pi-sliders-h"
+                                label="{{ 'Button.Label.Filter' | translate }}" class="btn-line"
+                                (click)="showBatchFilter()"></button>
+                        </div>
+                    </div>
+                    <!-- end: table-action-block -->
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <ng-container *ngFor="let col of batchSelectedCols">
+                            <th [ngClass]="col.css" *ngIf="col.field === 'detail'" scope="col"
+                                [style]="{'min-width': 'unset !important', 'max-width': col.maxWidth + '', 'text-align': col.textAlign + ''}">
+                                {{col.header}}
+                            </th>
+                            <th [pSortableColumn]="col.field" [ngClass]="col.css" *ngIf="col.field !== 'detail'"
+                                scope="col"
+                                [style]="{'min-width': 'unset !important', 'max-width': col.maxWidth + '', 'text-align': col.textAlign + ''}">
+                                {{col.header}}
+                                <p-sortIcon [field]="col.field"></p-sortIcon>
+                            </th>
+                        </ng-container>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-batchData>
+                    <tr>
+                        <td *ngFor="let col of batchSelectedCols" [ngClass]="col.css"
+                            [style]="{'min-width': 'unset !important', 'max-width': col.maxWidth + '', 'text-align': col.textAlign + ''}">
+                            <ng-container *ngIf="col.field === 'detail'">
+                                <button pButton type="button" class="icon-btn btn-teal"
+                                    (click)="viewBatchDetail(batchData['seq'])">
+                                    <img src="./assets/imgs/icon-btn/detail.svg" alt="Detail">
+                                </button>
+                            </ng-container>
+                            <ng-container *ngIf="col.field === 'resultsUrl'">
+                                <a class="txt" href="{{batchData[col.field]}}" target="_blank"
+                                    rel="noopener">{{batchData[col.field]}}</a>
+                            </ng-container>
+                            <ng-container *ngIf="col.field !== 'detail' && col.field !== 'resultsUrl'">
+                                <p>{{batchData[col.field]}}</p>
+                            </ng-container>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-container>
+
+        <p-dialog header="{{ 'Dialog.Header.FilterColumns' | translate }}" [(visible)]="displayBatchFilter"
+            [draggable]="false" [blockScroll]="true" [modal]="true">
+            <form>
+                <div class="form-row grid">
+                    <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of batchCols">
+                        <div class="form-checkbox">
+                            <p-checkbox name="checkboxGroup" [label]="col.header" [value]="col"
+                                [(ngModel)]="batchSelectedCols" [disabled]="col?.isDisabled"></p-checkbox>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}"
+                        class="btn-gray btn-line" (click)="changeBatchFilter()"></button>
+                </div>
+            </form>
+        </p-dialog>
+
+        <p-dialog header="資料明細" [(visible)]="displayBatchDetail" [draggable]="false" [blockScroll]="true" [modal]="true"
+            [style]="{width: '1200px'}">
+            <p-tabView>
+                <p-tabPanel header="表頭資料"></p-tabPanel>
+            </p-tabView>
+            <form class="form-table">
+                <div class="form-row grid">
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Postal Code</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{batchDetailRsp.postalCode}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">City</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{batchDetailRsp.city}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">&nbsp;</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">&nbsp;</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row grid">
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">SourceReferenceKey1</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{batchDetailRsp.sourceReferenceKey1}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">SourceReferenceKey2</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{batchDetailRsp.sourceReferenceKey2}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">SourceReferenceKey3</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{batchDetailRsp.sourceReferenceKey3}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row grid">
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">AdditionalReference1</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{batchDetailRsp.additionalReference1}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">AdditionalReference2</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{batchDetailRsp.additionalReference2}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col md:col-4 sm:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">AdditionalReference3</label>
+                                </div>
+                            </div>
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <label class="txt">{{batchDetailRsp.additionalReference3}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <p-tabView>
+                <p-tabPanel header="地址/客戶名稱比對細節">
+                    <p-table #batchDetail class="table-panel" [value]="batchDetailData" [columns]="batchDetailCols"
+                        [scrollable]="true" scrollHeight="500px" [paginator]="true" [rows]="10"
+                        paginatorPosition="bottom" [rowsPerPageOptions]="[10,20]" dataKey="id">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th *ngFor="let col of batchDetailCols" [pSortableColumn]="col.field" [ngClass]="{
+                    'icon-col': (col.field == 'checkbox')
+                  }" scope="col">
+                                    <ng-container *ngIf="col.field != 'checkbox'">
+                                        {{col.header}}
+                                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                                    </ng-container>
+                                </th>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-batchDetailData>
+                            <tr>
+                                <td *ngFor="let col of batchDetailCols" [ngClass]="{
+                    'icon-col': (col.field == 'checkbox')
+                  }">
+                                    <ng-container *ngIf="col.field != 'checkbox'">
+                                        <p>{{batchDetailData[col.field]}}</p>
+                                    </ng-container>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+            </p-tabView>
+        </p-dialog>
+    </p-tabPanel>
+</p-tabView>
+
+<p-dialog header="{{ 'Dialog.Header.MessagePrompt' | translate }}" [(visible)]="displayDialog" [draggable]="false"
+    [blockScroll]="true" [closeOnEscape]="true" [modal]="true">
+    <form>
+        <div class="form-row grid">
+            <div class="form-label">
+                <label class="success-active">{{dialogMsg}}</label>
+            </div>
+        </div>
+    </form>
+</p-dialog>

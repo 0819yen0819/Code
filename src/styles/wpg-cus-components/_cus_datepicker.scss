@@ -1,0 +1,13 @@
+.p-datepicker,
+.p-monthpicker,
+.p-yearpicker {
+  .p-datepicker-date,
+  .p-monthpicker-month,
+  .p-yearpicker-year {
+    &.p-highlight {
+      @apply font-semibold #{!important};
+      @apply text-white #{!important};
+      @apply bg-blue-500  #{!important};
+    }
+  }
+}

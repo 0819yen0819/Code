@@ -1,0 +1,69 @@
+<div class="sub-title-container form-section">
+    <p>{{ "LicenseMgmt.Common.Title.AuditHistoryLog" | translate }}</p>
+</div>
+
+<ng-container *ngIf="historyData.mainList.length !== 0">
+
+    <p-table
+    #dt
+    class="table-panel upload"
+    [value]="historyData.mainList"
+    [columns]="historyCols"
+    [scrollable]="false"
+    [resetPageOnSort]="false"
+    breakpoint="640px"
+    [resizableColumns]="true"
+    [responsive]="true"
+    responsiveLayout="stack"
+    dataKey="id">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let col of historyCols" scope="col">
+                    {{col.label}}
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-data>
+            <tr>
+                <td *ngFor="let col of historyCols">
+
+                    <p class="p-column-title">{{ col.label }}</p>
+
+                    <ng-container *ngIf="col.field === 'signerCode'">
+                        <div class="p-column-content">
+                            <p>{{data[col.field] + ' ' + data['signerNameEn'] + ' ' + data['signerNameCn']}}</p>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="col.field === 'completeTime'">
+                        <div class="p-column-content">
+                            <p>{{data[col.field] | date : 'yyyy/MM/dd HH:mm:ss'}}</p>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="col.field === 'signerPhoneNumber'">
+                        <div class="p-column-content">
+                            <p>{{data[col.field] !== '[]' ? data[col.field] : '' }}</p>
+                        </div>
+                    </ng-container>
+                    <ng-container
+                        *ngIf="col.field !== 'signerCode' && col.field !== 'completeTime' && col.field !== 'signerPhoneNumber'">
+                        <div class="p-column-content">
+                          <p>{{data[col.field]}}</p>
+                        </div>
+                    </ng-container>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</ng-container>
+<div class="wait-approving-container">
+  <span>{{ historyData.pendingString }}</span>
+  <span
+    class="reminder-send-btn"
+    *ngIf="historyData.pendingString && historyData.pendingString.length > 0"
+    (click)="onReminderSend()"
+    ><img src="./assets/imgs/mail.jpg" alt="mail"
+  /></span>
+</div>

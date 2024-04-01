@@ -1,0 +1,105 @@
+<div class="main-title-container">
+  <p>{{ "EccnMtn.Label.AreaEccnSetting" | translate }}</p>
+</div>
+
+<form class="form-table form-search">
+  <div class="form-row grid">
+    <!-- ITEM選擇 -->
+    <div class="form-col md:col-12 sm:col-12 col-12">
+      <div class="form-row grid setting-container">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">Item No</label>
+          </div>
+        </div>
+
+        <div class="form-select">
+          <p-dropdown
+            name="itemFilterType"
+            [(ngModel)]="filterType"
+            [options]="itemFilterTypeOptions"
+            placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"
+            (onChange)="onSelectModeChange()"
+          ></p-dropdown>
+        </div>
+
+        <div class="form-input" *ngIf="filterType !== 'Multi'">
+          <input
+            type="text"
+            pInputText
+            name="item"
+            [(ngModel)]="itemInfo"
+            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+
+        <div class="form-chip" *ngIf="filterType === 'Multi'">
+          <p-chips
+            name="itemInfo"
+            [(ngModel)]="itemInfo"
+            placeholder="{{ 'MyApplication.PlaceHolder.Keyword' | translate }}"
+          >
+          </p-chips>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 按鈕區域 -->
+  <div class="btn-container">
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Reset' | translate }}"
+      class="btn-secondary"
+      (click)="resetOnClick()"
+    ></button>
+    <button
+      pButton
+      type="button"
+      *ngIf="permissions.includes('view')"
+      label="{{ 'Button.Label.Query' | translate }}"
+      (click)="searchOnClick('S')"
+    ></button>
+    <button
+      pButton
+      type="button"
+      *ngIf="permissions.includes('view')"
+      label="{{ 'Button.Label.Download' | translate }}"
+      class="btn-teal"
+      (click)="searchOnClick('E')"
+      class="btn-teal"
+    ></button>
+  </div>
+</form>
+
+<!-- Table -->
+<app-common-data-table-viewer
+  [data]="itemQueue.getValue()"
+  [tableCols]="tableCols"
+  [tableSettings]="dataTableSettings"
+  (outputTargetData)="onEditSelectedDataCallback($event)"
+  (outputAfterDeletedData)="onAfterModifiedDataCallback($event)"
+  (isAddItemActive)="tableAddOnClick()"
+>
+</app-common-data-table-viewer>
+
+<!-- Dialog -->
+<app-eccn-dialog
+  [showDialog]="showDialog"
+  (closeDialog)="dialogOnClose()"
+  (submit)="getDialogResult($event)"
+  [editObj]="editObj"
+>
+</app-eccn-dialog>
+
+<!-- Spinner -->
+<p-progressSpinner *ngIf="showSpinner"></p-progressSpinner>
+
+<!-- 訊息 -->
+<app-common-notice-check-dialog
+  [settingParams]="noticeCheckDialogParams"
+  [contentList]="noticeContentList"
+>
+</app-common-notice-check-dialog>

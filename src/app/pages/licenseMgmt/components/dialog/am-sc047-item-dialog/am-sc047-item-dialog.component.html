@@ -1,0 +1,260 @@
+<p-dialog
+  [header]="dialogSetting.getValue().title"
+  [(visible)]="dialogSetting.getValue().visiable"
+  [modal]="dialogSetting.getValue().modal"
+  [draggable]="dialogSetting.getValue().draggable"
+  [resizable]="dialogSetting.getValue().resizeable"
+>
+  <form [formGroup]="formGroup" class="form-container form-table">
+    <!--# Item Selector-->
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">Item</label>
+            </div>
+          </div>
+          <div class="md:col col-12">
+            <div class="form-col">
+              <ng-container
+                *ngIf="
+                  this.dialogSetting.getValue().data == undefined ||
+                    this.dialogSetting.getValue().data.mode == 'add';
+                  then addItemTemplate;
+                  else editItemTemplate
+                "
+              ></ng-container>
+              <ng-template #addItemTemplate>
+                <div class="form-select">
+                  <p-dropdown
+                    name="productCode"
+                    [options]="this.selecteItemOptions.getValue()"
+                    formControlName="productCode"
+                    filter="true"
+                    appendTo="body"
+                    (onChange)="onItemSelectChangeHandler()"
+                    placeholder="{{
+                      'DropDown.PlaceHolder.PleaseChoose' | translate
+                    }}"
+                  ></p-dropdown>
+                </div>
+              </ng-template>
+              <ng-template #editItemTemplate>
+                <div class="form-label">
+                  <label class="txt">{{
+                    selectedTargetItem.getValue() != null
+                      ? selectedTargetItem.getValue().invItemNo
+                      : ""
+                  }}</label>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-container
+      *ngIf="isLoading && dialogSetting.getValue().data.mode != 'edit'"
+    >
+      <div class="loading-container">
+        <span>Loading...</span>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="targetItemInfo.getValue() != null">
+      <!--# target item info-->
+      <div class="form-row grid">
+        <!--# Brand -->
+        <div class="form-col lg:col-6 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">Brand</label>
+              </div>
+            </div>
+            <div class="grid md:col col-12">
+              <div class="form-col form-input col-12">
+                <div class="form-label">
+                  <label class="txt">{{
+                    targetItemInfo.getValue().brand || "---"
+                  }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# ECCN -->
+        <div class="form-col lg:col-6 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">ECCN</label>
+              </div>
+            </div>
+            <div class="grid md:col col-12">
+              <div class="form-col form-input col-12">
+                <div class="form-label">
+                  <label class="txt">{{
+                    targetItemInfo.getValue().eccn || "---"
+                  }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# CCATs -->
+        <div class="form-col lg:col-6 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">CCATs</label>
+              </div>
+            </div>
+            <div class="grid md:col col-12">
+              <div class="form-col form-input col-12">
+                <div class="form-label">
+                  <label class="txt">{{
+                    targetItemInfo.getValue().ccats || "---"
+                  }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# Proviso -->
+        <div class="form-col lg:col-6 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">Proviso</label>
+              </div>
+            </div>
+            <div class="grid md:col col-12">
+              <div class="form-col form-input col-12">
+                <div class="form-label">
+                  <label class="txt">{{
+                    targetItemInfo.getValue().proviso || "---"
+                  }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--# Applied QTY-->
+      <div class="form-row grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label require">
+                <label class="txt">Applied QTY</label>
+              </div>
+            </div>
+            <div class="md:col col-12">
+              <div class="form-col">
+                <div class="form-input">
+                  <input
+                    autocomplete="off"
+                    type="number"
+                    pInputText
+                    name="quantity"
+                    formControlName="quantity"
+                    placeholder="{{
+                      'Input.PlaceHolder.OnlyPosIntAndBig0' | translate
+                    }}"
+                    onwheel="this.blur()"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--# Receipt -->
+      <div class="form-row remark grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">Receipt</label>
+              </div>
+            </div>
+            <div class="grid md:col col-12">
+              <div class="form-col form-input col-12">
+                <div class="form-input">
+                  <input
+                    autocomplete="off"
+                    type="text"
+                    pInputText
+                    name="receipt"
+                    formControlName="receipt"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--# Remark -->
+      <div class="form-row remark grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">Remark</label>
+              </div>
+            </div>
+            <div class="grid md:col col-12">
+              <div class="form-col form-input col-12">
+                <div class="form-input">
+                  <textarea
+                    autocomplete="off"
+                    type="text"
+                    pInputTextarea
+                    name="remark"
+                    formControlName="remark"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!--# Form Actions -->
+    <div
+      class="btn-container"
+      [class]="
+        isLoading && dialogSetting.getValue().data.mode != 'edit'
+          ? 'loading'
+          : ''
+      "
+    >
+      <button
+        pButton
+        type="button"
+        label="{{ 'Button.Label.Cancel' | translate }}"
+        class="btn-gray"
+        (click)="onCloseAddItemDialogEvent()"
+      ></button>
+      <ng-container *ngIf="targetItemInfo.getValue() != null">
+        <button
+          pButton
+          type="submit"
+          [label]="submitBtnLabel"
+          [disabled]="formGroup.invalid"
+          (click)="onFormSubmit()"
+        ></button>
+      </ng-container>
+    </div>
+  </form>
+</p-dialog>

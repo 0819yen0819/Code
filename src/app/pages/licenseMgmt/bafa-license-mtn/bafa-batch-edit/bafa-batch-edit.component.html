@@ -1,0 +1,56 @@
+<form class="form-container form-table" [formGroup]="formData">
+    <div class="form-row grid">
+        <div class="form-col col-12">
+            <div class="form-row grid" style="border: 1px solid rgb(249 250 251);">
+                <!-- 有效/無效 -->
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">{{ 'BafaLicenseMtn.Label.Flag' | translate }}</label>
+                    </div>
+                </div>
+                <div class="md:col col-12" style="display: flex; align-items: center; width: 100%;  ">
+                    <div class="form-col col">
+                        <div class="form-select">
+                            <p-dropdown [options]="flagOptions"
+                                placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"
+                                formControlName="flag">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- End Date -->
+                <ng-container>
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">{{ 'BafaLicenseMtn.Label.EndDate' | translate}}</label>
+                        </div>
+                    </div>
+                    <div class="md:col col-12" style="display: flex; align-items: center; width: 100%; ">
+                        <div class="form-col col">
+                            <div class="form-date">
+                                <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true" name="endDate" dateFormat="yy/mm/dd"
+                                    formControlName="endDate" appendTo="body"
+                                    (onInput)="onDatePickerInput($event)"
+                                    (onSelect)="onDatePickerSelectAndBlur()"
+                                    (onBlur)="onDatePickerSelectAndBlur()"
+                                    (onClose)="onDatePickerClose('endDate')"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                    >
+                                </p-calendar>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <div class="btn-container">
+                    <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray"
+                        (click)="cancelOnClick()"></button>
+                    <button pButton type="button" class="btn-teal" label="{{ 'Button.Label.Save' | translate }}"
+                        (click)="saveOnClick()"></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

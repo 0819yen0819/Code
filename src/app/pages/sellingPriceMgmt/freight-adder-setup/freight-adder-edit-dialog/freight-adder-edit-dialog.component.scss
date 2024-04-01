@@ -1,0 +1,43 @@
+@import "../../../../../styles/wpg-cus-components/cus_form";
+@include FormBaseOverride;
+
+
+div {
+    &.txt {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+}
+
+:host ::ng-deep {
+    .p-autocomplete {
+        &.p-component {
+            width: 100%
+        }
+    }
+
+    p-inputnumber {
+        width: 100%;
+
+        span {
+            width: 100%;
+        }
+    }
+
+    .p-selectbutton {
+        opacity: 0.6;
+        .p-button {
+          @apply w-fit #{!important};
+        }
+      }
+}
+
+.ou-name {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: rgb(107 114 128);
+    padding-left: 20px;
+    min-height: 63px;
+  }

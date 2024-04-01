@@ -1,0 +1,91 @@
+<p-dialog [header]="dialogTitle" [(visible)]="data.show" modal="true" [draggable]="false"
+    [style]="{width: 'auto'}">
+
+
+    <div class="cotent-container">
+
+        <p-table #dt [value]="tableData" responsiveLayout="stack" [breakpoint]="'1300px'">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let col of tableCols" class="xs-col" id="pcf_line_mtn_th">
+                        <ng-container>
+                            <div [ngClass]="{'require' : requireCols.includes(col.field)  }"> {{col.label}} </div>
+                        </ng-container>
+                    </th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-data>
+                <tr class="xs-col">
+                    <td *ngFor="let col of tableCols ; let i = index;" style="border: none;" [ngClass]="col.colSize"
+                        class="pcf-line-mtn-td">
+
+                        <!-- 表頭：一般 -->
+                        <div class="p-column-title" style="white-space: nowrap;">
+                            <div [ngClass]="{'require' : requireCols.includes(col.field) }">{{col.label}} </div>
+                        </div>
+
+                        <div class="data-content"
+                            [ngClass]="{'align-right' : priceCols.includes(col.label) && innerWidth > 768 }">
+                            <!-- 一般顯示 -->
+
+                            <p-dropdown *ngIf="(col.type === 'currency')" [options]="currencyOptions" appendTo="body"
+                                [(ngModel)]="data[col.field]" [disabled]="!enableEdit">
+                            </p-dropdown>
+
+                            <input *ngIf="(col.type === 'input') && (col.field !== 'endCustomer') && (col.field !== 'controlFlag')" type="text"
+                                pInputText [ngStyle]="{'width':  col.colSize === 'sm-col' ? '10vw' : '20vw'}"
+                                [(ngModel)]="data[col.field]" [disabled]="!enableEdit" />
+
+                            <input *ngIf="(col.type === 'number') && (col.label !== 'Worst Sales GP%') && (col.label !== 'Worst Selling Price')" type="number"
+                                pInputText [ngStyle]="{'width':  col.colSize === 'sm-col' ? '10vw' : '20vw'}"
+                                [(ngModel)]="data[col.field]" [disabled]="!enableEdit" />
+                            <input *ngIf="(col.type === 'number') && (col.label === 'Worst Sales GP%')" type="number"
+                                pInputText [ngStyle]="{'width':  col.colSize === 'sm-col' ? '10vw' : '20vw'}" min="0"
+                                max="1" [(ngModel)]="data[col.field]" [disabled]="!enableEdit" />
+                                <input *ngIf="(col.type === 'number') && (col.label === 'Worst Selling Price')" type="number"
+                                pInputText [ngStyle]="{'width':  col.colSize === 'sm-col' ? '10vw' : '20vw'}"
+                                [(ngModel)]="data[col.field]" [disabled]="!enableEdit" (ngModelChange)="worstSellingChange()"/>
+
+                            <p-calendar *ngIf="col.label === 'Effective From'" [(ngModel)]="data[col.field]"
+                                dateFormat="yy/mm/dd" appendTo="body" [minDate]="nowDate"
+                                (ngModelChange)="startDateChange()" [disabled]="!enableEdit"></p-calendar>
+                            <p-calendar *ngIf="col.label === 'Effective To'" [(ngModel)]="data[col.field]"
+                                dateFormat="yy/mm/dd" appendTo="body" [minDate]="data['startDate']"
+                                [disabled]="!enableEdit"></p-calendar>
+
+
+                            <p-dropdown *ngIf="(col.field === 'endCustomer')" [options]="endCustomerOptions"
+                                appendTo="body" placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate  }}"
+                                [(ngModel)]="data['endCustomer']" name="endCustomer" [disabled]="!enableEdit"
+                                (onBlur)="data['endCustomer'] ?? (data['endCustomer'] = null)"
+                                [ngModelOptions]="{ standalone: true }" [style]="{ width: '100%' }" [filter]="true"
+                                [showClear]="true" (onClear)="data['endCustomer'] = null">
+                            </p-dropdown> 
+                            
+                            <p-dropdown *ngIf="(col.field === 'controlFlag')" [options]="controlFlagOptions"
+                                appendTo="body" placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate  }}"
+                                [(ngModel)]="data['controlFlag']" name="controlFlag" [disabled]="!enableEdit"
+                                (onBlur)="data['controlFlag'] ?? (data['controlFlag'] = null)"
+                                [ngModelOptions]="{ standalone: true }" [style]="{ width: '100%', maxWidth: '180px' }" [filter]="true"
+                                [showClear]="true" (onClear)="data['controlFlag'] = null">
+                            </p-dropdown>
+
+                        </div>
+
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+
+    <div class="btn-container">
+        <button style="margin-left: auto;" pButton type="button" label="{{ 'Button.Label.Save' | translate }}"
+            (click)="saveOnClick()" *ngIf="enableEdit"></button>
+    </div>
+</p-dialog>
+
+
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams" [contentList]="noticeContentList">
+</app-common-notice-check-dialog>

@@ -1,0 +1,354 @@
+<p-dialog header="{{ 'FreightAdder.Label.modifyFreightAdder' | translate }}" [(visible)]="showDialog"
+    [draggable]="false" [closeOnEscape]="true" [blockScroll]="true" [modal]="true" (onHide)="onHideDetailDialog()">
+
+    <form #ngForm="ngForm" class="form-table">
+
+        <!-- Group -->
+        <div class="form-row grid">
+            <div class="form-col lg:col-12 md:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Group</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-label">
+                            <label class="txt">{{formValue.groupName}}</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row grid">
+            <!-- OU Code -->
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">OU Code</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-label">
+                            <label class="txt">{{formValue.ouCode}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OU Name -->
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">OU Name</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col lg:col-6 md:col-6 col-12">
+                        <label class="txt" class="ou-name">{{formValue.ouName}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row grid">
+            <div class="form-col lg:col-12 md:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Customer</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-label">
+                            <label class="txt">{{formValue.customer}}</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row grid">
+            <div class="form-col lg:col-12 md:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Vendor</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-label">
+                            <label class="txt">{{formValue.vendor}}</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Brand -->
+        <div class="form-row grid">
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Brand</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-label">
+                            <label class="txt">{{formValue.brand}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Ctg1</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-label">
+                            <label class="txt">{{formValue.ctg1}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row grid">
+            <div class="form-col col-12">
+                <div class="form-row grid">
+
+
+                    <div class="form-col lg:col-12 md:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">End Customer</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col">
+                                <div class="form-label">
+                                    <label class="txt">{{formValue.endCustomer}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row grid">
+            <div class="form-col col-12">
+                <div class="form-row grid">
+
+                    <div class="form-col lg:col-6 md:col-6 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">NCNR</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col">
+
+                                <div class="form-select-btnkit">
+                                    <p-selectButton [options]="selectButtonOptions" optionLabel="label"
+                                        optionValue="value" [(ngModel)]="formValue.ncnr" disabled
+                                        [ngModelOptions]="{ standalone: true }"></p-selectButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-col lg:col-6 md:col-6 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">EOL</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col">
+                                <div class="form-select-btnkit">
+                                    <p-selectButton [options]="selectButtonOptions" optionLabel="label"
+                                        optionValue="value" [(ngModel)]="formValue.eol" disabled
+                                        [ngModelOptions]="{ standalone: true }"></p-selectButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row grid">
+            <div class="form-col col-12">
+                <div class="form-row grid">
+
+                    <div class="form-col lg:col-6 md:col-6 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Single</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col">
+                                <div class="form-select-btnkit">
+                                    <p-selectButton [options]="selectButtonOptions" optionLabel="label"
+                                        optionValue="value" [(ngModel)]="formValue.single" disabled
+                                        [ngModelOptions]="{ standalone: true }"></p-selectButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-col lg:col-6 md:col-6 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Customize</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col">
+                                <div class="form-select-btnkit">
+                                    <p-selectButton [options]="selectButtonOptions" optionLabel="label"
+                                        optionValue="value" [(ngModel)]="formValue.customize" disabled
+                                        [ngModelOptions]="{ standalone: true }"></p-selectButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Item -->
+        <div class="form-row grid">
+            <div class="form-col lg:col-12 md:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Item</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-label">
+                            <label class="txt">{{formValue.productCode}}</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Adder -->
+        <div class="form-row grid">
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Adder</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-label">
+                            <label class="txt">{{formValue.freightAdder}}</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">{{"SalesMarginToleranceSetup.Label.EnabledFlag" |
+                                translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-select">
+                            <p-dropdown [options]="flagOptions" appendTo="body"
+                                placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate }}"
+                                [ngModelOptions]="{ standalone: true }" [(ngModel)]="formValue.flag">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row grid">
+            <!-- Start Date -->
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">{{"SalesMarginToleranceSetup.Label.FromDate" | translate }}</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-label">
+                            <label class="txt">{{formValue.startDate | date : 'yyyy/MM/dd' }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- End Date -->
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">{{ "SalesMarginToleranceSetup.Label.ToDate" | translate }}</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-label">
+                            <label class="txt">{{formValue.endDate | date : 'yyyy/MM/dd' }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+    <div class="btn-container">
+        <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray"
+            (click)="onHideDetailDialog()"></button>
+        <button pButton type="button" label="{{ 'Button.Label.Save' | translate }}" (click)="saveOnClick()"></button>
+    </div>
+
+
+</p-dialog>

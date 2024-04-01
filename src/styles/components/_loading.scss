@@ -1,0 +1,132 @@
+p-progressspinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(25, 55, 98, 0.9);
+  z-index: 999999;
+
+  .p-progress-spinner-svg {
+    display: none;
+  }
+
+  .p-progress-spinner {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #78c8f2;
+    color: #78c8f2;
+    animation: dot-flashing 0.5s infinite linear alternate;
+
+    &::before,
+    &::after {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      top: 0;
+
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      border-radius: 50%;
+      background-color: #78c8f2;
+      color: #78c8f2;
+      animation: kick 0.6s infinite linear alternate;
+    }
+    &::before {
+      left: -50px;
+      animation-delay: 0s;
+    }
+    &::after {
+      left: 50px;
+      animation-delay: 0.2s;
+      animation-name: kick-reverse;
+    }
+
+    @keyframes dot-flashing {
+      // 0% {
+      //   background-color: #78C8F2;
+      // }
+      // 33% {
+      //   background-color: #9AD6F5;
+      // }
+      // 66% {
+      //   background-color: #BBE3F8;
+      // }
+      // 100% {
+      //   background-color: #DDF1FC;
+      // }
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0.3;
+        transform: translateY(-1rem);
+      }
+    }
+    @keyframes kick {
+      from {
+        opacity: 0.5;
+        transform: translateY(-1rem);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(1rem);
+      }
+    }
+    @keyframes kick-reverse {
+      from {
+        opacity: 1;
+        transform: translateY(1rem);
+      }
+      to {
+        opacity: 0.5;
+        transform: translateY(-1rem);
+      }
+    }
+
+    /*&:before,
+    &:after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      position: absolute;
+      top: calc(50% - 10px);
+      left: calc(50% - 10px);
+      border-radius: 50%;
+      background-color: #78C8F2;
+      animation: kick 0.6s infinite alternate;
+
+    }
+
+    &:after {
+      margin-left: -30px;
+      animation: kick 0.6s infinite alternate;
+    }
+
+    &:before {
+      animation-delay: 0.2s;
+    }
+
+    @keyframes kick {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      to {
+        opacity: .3;
+        transform: translateY(-1rem);
+      }
+    }*/
+  } // end spinner
+}

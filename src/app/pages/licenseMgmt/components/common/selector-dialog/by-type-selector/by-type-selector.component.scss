@@ -1,0 +1,79 @@
+@import "../../../../../../../styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+.no-data-container {
+  .no-data-notice {
+    @apply h-24 flex justify-center items-center;
+    span {
+      @apply font-semibold text-base text-gray-400;
+    }
+  }
+  .btn-container {
+    @apply mt-0;
+  }
+}
+
+.loading-container {
+  @apply flex justify-center items-center h-24 w-full;
+  span {
+    @apply text-gray-400 font-semibold;
+  }
+
+  ~ .btn-container {
+    @apply mt-0;
+  }
+}
+
+.p-input-icon-right {
+  .clean-btn {
+    @apply mr-2;
+    &:hover {
+      @apply cursor-pointer;
+    }
+  }
+}
+
+:host ::ng-deep {
+  .result-list-container {
+    @apply ml-2 mt-2.5;
+    > p-table {
+      .p-datatable-header {
+        span {
+          @apply w-full;
+          .p-inputtext {
+            @apply w-full;
+          }
+        }
+      }
+    }
+    .p-datatable-virtual-scrollable-body {
+      @apply border-l border-r border-solid border-gray-50;
+      @apply mt-1;
+      @apply rounded-md;
+      height: calc(
+        80vh - 40px - 100px - 40px - 16px - 60px - 52px - 30px - 30px - 16px
+      );
+
+      .cdk-virtual-scroll-content-wrapper {
+        .p-datatable-table {
+          .p-datatable-tbody {
+            .p-selectable-row {
+              @apply pl-2 pt-1.5 pb-1.5;
+              > div {
+                @apply text-gray-500 text-sm;
+              }
+
+              &.p-highlight {
+                @apply bg-blue-500;
+                > div {
+                  @apply text-gray-50 font-semibold;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

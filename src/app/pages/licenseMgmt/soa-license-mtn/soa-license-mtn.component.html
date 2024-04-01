@@ -1,0 +1,686 @@
+<ng-container *ngIf="!disabledPage">
+
+<div class="main-title-container">
+  <p>{{ "SoaLicenseMtn.PageTitle" | translate }}</p>
+</div>
+
+<form class="form-table form-search">
+  <!-- orderGroup, oOuCode, ouCode -->
+  <div class="form-row grid">
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "SoaLicenseMtn.Label.OuGroup" | translate
+            }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-select">
+            <p-dropdown
+              name="ouGroup"
+              [(ngModel)]="queryReq.ouGroup"
+              [options]="groupOptions"
+              placeholder="{{
+                'DropDown.PlaceHolder.PleaseChoose' | translate
+              }}"
+            ></p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "SoaLicenseMtn.Label.OOuCode" | translate
+            }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-input">
+            <span class="p-input-icon-right" style="width: 100%">
+              <ng-container *ngIf="curOOULable != ''">
+                <i
+                  class="pi pi-times input-icon"
+                  (click)="onSelectorClean('oou')"
+                ></i>
+              </ng-container>
+              <input
+                type="text"
+                pInputText
+                name="oouCode"
+                readonly
+                placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                [value]="curOOULable"
+                (click)="onOpenSelectorDialogEvent('oou')"
+              />
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="form-col md:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">{{ 'SoaLicenseMtn.Label.OuCode' | translate }}</label>
+                    </div>
+                </div>
+                <div class="form-col col">
+                    <div class="form-input">
+                        <span class="p-input-icon-right" style="width:100%">
+                            <ng-container *ngIf="curOULable != ''">
+                                <i
+                                class="pi pi-times input-icon"
+                                (click)="onSelectorClean('ou')"
+                            ></i>
+                            </ng-container>
+                            <input type="text" pInputText name="ouCode" readonly
+                            placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}" [value]="curOULable"
+                            (click)="onOpenSelectorDialogEvent('ou')" />
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "ImpExpLicenseMtn.Label.Flag" | translate
+            }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-select">
+            <p-dropdown
+              name="flag"
+              [(ngModel)]="queryReq.flag"
+              [options]="flagOptions"
+              placeholder="{{
+                'DropDown.PlaceHolder.PleaseChoose' | translate
+              }}"
+            ></p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- licenseNo, 正本/副本, flag -->
+  <div class="form-row grid">
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "ImpExpLicenseMtn.Label.LicenseNo" | translate
+            }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-input">
+            <input
+              type="text"
+              pInputText
+              name="licenseNo"
+              [(ngModel)]="queryReq.licenseNo"
+              placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "SoaLicenseMtn.Label.IsOriginal" | translate
+            }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-select">
+            <p-dropdown
+              name="isOriginal"
+              [(ngModel)]="queryReq.isOriginal"
+              [options]="isOriginalOptions"
+              placeholder="{{
+                'DropDown.PlaceHolder.PleaseChoose' | translate
+              }}"
+            ></p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 客戶/廠商區 2 cols-->
+  <div class="form-row grid">
+    <div class="form-col md:col-12 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "ImpExpLicenseMtn.Label.CustomerVendorType" | translate
+            }}</label>
+          </div>
+        </div>
+        <div class="form-col col-2">
+          <div class="form-select">
+            <p-dropdown
+              name="customerVendorType"
+              [(ngModel)]="queryReq.customerVendorType"
+              [options]="customerVendorTypeOptions"
+              placeholder="{{
+                'DropDown.PlaceHolder.PleaseChoose' | translate
+              }}"
+              (onChange)="onChangeVCType($event)"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="form-col col pl-2">
+          <div class="form-input">
+            <span class="p-input-icon-right" style="width: 100%">
+              <ng-container *ngIf="curCVLable != ''">
+                <i
+                  class="pi pi-times input-icon"
+                  (click)="onSelectorClean('customer')"
+                ></i>
+              </ng-container>
+              <input
+                type="text"
+                pInputText
+                name="curstorId"
+                readonly
+                placeholder="{{
+                  'DropDown.PlaceHolder.PleaseChoose' | translate
+                }}"
+                [value]="curCVLable"
+                (click)="onOpenSelectorDialogEvent('customer')"
+              />
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ItemNo 2 cols -->
+  <div class="form-row grid">
+    <div class="form-col md:col-8 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "ImpExpLicenseMtn.Label.Item" | translate
+            }}</label>
+          </div>
+        </div>
+        <div class="form-col col-3">
+          <div class="form-select">
+            <p-dropdown
+              name="itemFilterType"
+              [(ngModel)]="queryReq.itemFilterType"
+              [options]="itemFilterTypeOptions"
+              placeholder="{{
+                'DropDown.PlaceHolder.PleaseChoose' | translate
+              }}"
+              (onChange)="onChangeItemFilterType('')"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="form-col col pl-2">
+          <div class="form-input" *ngIf="queryReq.itemFilterType !== 'Multi'">
+            <input
+              type="text"
+              pInputText
+              name="item"
+              [(ngModel)]="queryReq.item"
+              placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <div class="form-chip" *ngIf="queryReq.itemFilterType === 'Multi'">
+            <p-chips
+              name="items"
+              [(ngModel)]="queryReq.items"
+              placeholder="{{
+                'ImpExpLicenseMtn.PlaceHolder.Items' | translate
+              }}"
+            >
+            </p-chips>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- startDate, endDate-->
+  <div class="form-row grid">
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "ImpExpLicenseMtn.Label.StartDate" | translate
+            }}</label>
+          </div>
+        </div>
+
+        <div class="form-col col">
+          <div class="form-date">
+            <p-calendar
+              [selectOtherMonths]="true"
+              [showButtonBar]="true"
+              [showIcon]="true"
+              appendTo="body"
+              name="startDate"
+              [(ngModel)]="queryReq.startDate"
+              dateFormat="yy/mm/dd"
+              (onInput)="onDatePickerInput($event)"
+              (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+              (onBlur)="onDatePickerSelectAndBlur()"
+              (onClose)="onDatePickerClose('startDate');onCheckDateHandler()"
+              placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+              >
+            </p-calendar>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "ImpExpLicenseMtn.Label.EndDate" | translate
+            }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-date">
+            <p-calendar
+              [selectOtherMonths]="true"
+              [showButtonBar]="true"
+              [showIcon]="true"
+              name="endDate"
+              appendTo="body"
+              [(ngModel)]="queryReq.endDate"
+              dateFormat="yy/mm/dd"
+              [minDate]="queryReq.startDate"
+              (onInput)="onDatePickerInput($event)"
+              (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+              (onBlur)="onDatePickerSelectAndBlur()"
+              (onClose)="onDatePickerClose('endDate');onCheckDateHandler()"
+              placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+              >
+            </p-calendar>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "SOA.Label.SpecialApproval" | translate
+            }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-select">
+            <p-dropdown
+              name="specialApproval"
+              [(ngModel)]="queryReq.specialApproval"
+              [options]="flagOptions"
+              placeholder="{{
+                'DropDown.PlaceHolder.PleaseChoose' | translate
+              }}"
+            ></p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  <div class="form-row grid"> 
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">Trx Number</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-input">
+            <span class="p-input-icon-right" style="width: 100%">
+              <input type="text" pInputText name="trxReferenceNo" 
+               placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" [(ngModel)]="queryReq.trxReferenceNo"
+              />
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-container">
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Reset' | translate }}"
+      class="btn-secondary"
+      (click)="resetBtnClick()"
+    ></button>
+    <!-- <button pButton type="button" label="{{ 'Button.Label.Query' | translate }}"
+                    (click)="searchBtnClick()" *ngIf="permissions.includes('view')"></button> -->
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Query' | translate }}"
+      (click)="searchBtnClick()"
+    ></button>
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Download' | translate }}"
+      (click)="downloadBtnClick()"
+    ></button>
+  </div>
+</form>
+
+<ng-container *ngIf="displayResult && dataPermission">
+  <!--# TK-35860 -->
+  <p-table
+    #lazyTable
+    class="table-panel"
+    [value]="data"
+    [columns]="selectedCols"
+    [scrollable]="false"
+    [paginator]="true"
+    paginatorPosition="bottom"
+    [rowsPerPageOptions]="[10, 20]"
+    dataKey="id"
+    [lazy]="true"
+    (onLazyLoad)="onLazyLoad($event)"
+    [selectionPageOnly]="true"
+    [(selection)]="selectedData"
+    (onSort)="onSort($event)"
+    (onPage)="onPage($event)"
+    [totalRecords]="totalRecords"
+    [resizableColumns]="true"
+    breakpoint="640px"
+    scrollHeight="500px"
+    [first]="tableStatusKeepService.keepInfo.pageEvent.first" 
+    [rows]="tableStatusKeepService.keepInfo.pageEvent.rows"
+  >
+    <ng-template pTemplate="caption">
+      <div class="table-action-block">
+        <div class="table-search ui-inputgroup">
+          <input
+            type="text"
+            pInputText
+            size="30"
+            placeholder="Search keyword"
+            [(ngModel)]="globalFilter"
+            (input)="filterLazy($event.target.value)"
+          />
+          <span class="ui-inputgroup-addon">
+            <i class="pi pi-search"></i>
+          </span>
+        </div>
+
+        <div class="btn-container">
+          <button
+            pButton
+            type="button"
+            icon="pi pi-plus"
+            label="{{ 'Button.Label.Add' | translate }}"
+            class="btn-teal"
+            (click)="addOnClick()"
+            *ngIf="permissions.includes('add')"
+          ></button>
+          <button
+            pButton
+            type="button"
+            [label]="hyperlinkBtnText"
+            class="btn-teal"
+            (click)="linkToSOAForm()"
+          ></button>
+        </div>
+
+        <div class="btn-container right">
+          <!-- <button pButton pRipple label="{{ 'Button.Label.Delete' | translate }}"
+                    icon="pi pi-trash" class="p-button-delete" (click)="onDeleteSelectedData()"
+                    [disabled]="!selectedData || !selectedData.length"   *ngIf="permissions.includes('del')" ></button> -->
+
+          <button
+            pButton
+            type="button"
+            icon="pi pi-sliders-h"
+            label="{{ 'Button.Label.Filter' | translate }}"
+            class="btn-line"
+            (click)="showFilter()"
+          ></button>
+        </div>
+      </div>
+      <!-- end: table-action-block -->
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr style="position: sticky; top: 0; z-index: 1">
+        <ng-container *ngFor="let col of selectedCols">
+          <th
+            [ngClass]="col.css"
+            *ngIf="
+              col.field === 'edit' ||
+              col.field === 'del' ||
+              col.field === 'viewArea' ||
+              col.field === 'viewHistory'
+            "
+            scope="col"
+          >
+            <ng-container *ngIf="col.header.includes('/') && col.css === ''">
+              {{ col.header.substring(0, col.header.indexOf("/") + 1) }}
+              <br />
+              {{ col.header.substring(col.header.indexOf("/") + 1) }}
+            </ng-container>
+
+            <ng-container *ngIf="!col.header.includes('/') || col.css !== ''">
+              {{ col.header }}
+            </ng-container>
+          </th>
+          <th
+            [pSortableColumn]="col.field"
+            [ngClass]="col.css"
+            *ngIf="
+              col.field !== 'edit' &&
+              col.field !== 'del' &&
+              col.field !== 'viewArea' &&
+              col.field !== 'viewHistory'
+            "
+            scope="col"
+          >
+            <ng-container *ngIf="col.header.includes('/') && col.css === ''">
+              {{ col.header.substring(0, col.header.indexOf("/") + 1) }}
+              <br />
+              {{ col.header.substring(col.header.indexOf("/") + 1) }}
+            </ng-container>
+
+            <ng-container *ngIf="!col.header.includes('/') || col.css !== ''">
+              {{ col.header }}
+            </ng-container>
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </ng-container>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td *ngFor="let col of selectedCols" [ngClass]="col.css">
+          <span class="p-column-title">{{ col.header }}</span>
+          <ng-container
+            *ngIf="col.field === 'edit' && permissions.includes('edit')"
+          >
+            <div class="btn-container">
+              <button
+                pButton
+                type="button"
+                class="icon-btn btn-orange"
+                (click)="editDetail(data)"
+              >
+                <img src="./assets/imgs/icon-btn/edit.svg" alt="Detail" />
+              </button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="col.field === 'del'">
+            <div class="btn-container">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-trash"
+                class="icon-btn btn-dark-red"
+                (click)="clickDelete(data)"
+              ></button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="col.field === 'viewArea'">
+            <div class="btn-container">
+              <button
+                pButton
+                type="button"
+                class="icon-btn btn-teal"
+                (click)="viewArea(data['productCode'])"
+              >
+                <img src="./assets/imgs/icon-btn/detail.svg" alt="Detail" />
+              </button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="col.field === 'viewHistory'">
+            <div class="btn-container">
+              <button
+                pButton
+                type="button"
+                class="icon-btn btn-teal"
+                (click)="viewHistory(data)"
+              >
+                <img src="./assets/imgs/icon-btn/detail.svg" alt="Detail" />
+              </button>
+            </div>
+          </ng-container>
+          <ng-container
+            *ngIf="
+              col.field !== 'del' &&
+              col.field !== 'edit' &&
+              col.field !== 'viewArea' &&
+              col.field !== 'viewHistory'
+            "
+          >
+            <!-- <p>{{data[col.field]}}</p> -->
+            <p>{{ processTableData(col.field, data) }}</p>
+          </ng-container>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-container>
+</ng-container>
+
+<p-dialog
+  header="{{ 'Dialog.Header.FilterColumns' | translate }}"
+  [(visible)]="displayFilter"
+  [draggable]="false"
+  [blockScroll]="true"
+  [modal]="true"
+>
+  <form>
+    <div class="form-row grid">
+      <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of cols">
+        <div class="form-checkbox">
+          <p-checkbox
+            name="checkboxGroup"
+            [label]="col.header"
+            [value]="col"
+            [(ngModel)]="selectedCols"
+            [disabled]="col?.isDisabled"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <button
+        pButton
+        type="button"
+        label="{{ 'Button.Label.Reset' | translate }}"
+        class="btn-gray btn-line"
+        (click)="changeFilter()"
+      ></button>
+    </div>
+  </form>
+</p-dialog>
+
+<!--# common v/c selector dialog-->
+<app-common-selector-dialog
+  [settingParams]="selectorDialogParams"
+  (outputResult)="onSelectorDialogCallback($event)"
+>
+</app-common-selector-dialog>
+
+<!-- display area popup -->
+<app-view-area-popup
+  [(visible)]="displayArea"
+  [productCode]="viewAreaProductCode"
+></app-view-area-popup>
+
+<!-- display history popup -->
+<app-view-history-popup
+  [(visible)]="displayHistory"
+  [queryParam]="queryHistoryParam"
+>
+</app-view-history-popup>
+
+<app-am-soa-mtn-dialog
+  *ngIf="showAmDialog"
+  [editObj]="editObj"
+  [showDialog]="showAmDialog"
+  (closeDialog)="amDialogOnClose()"
+  (saveEmitter)="amDialogOnSave($event)"
+>
+</app-am-soa-mtn-dialog>
+
+<p-dialog
+  class="width-sm"
+  [(visible)]="displayDelDialogExp"
+  [draggable]="false"
+  [blockScroll]="true"
+  [modal]="true"
+>
+  <div class="popup-content center">
+    <h2>{{ "ImpExpLicenseMtn.Label.ConfirmDelete" | translate }}</h2>
+  </div>
+
+  <div class="btn-container">
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Cancel' | translate }}"
+      class="btn-gray btn-line"
+      (click)="displayDelDialogExp = false"
+    ></button>
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Delete' | translate }}"
+      class="btn-dark-red"
+      (click)="deleteExp()"
+    ></button>
+  </div>
+</p-dialog>
+
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams" [contentList]="noticeContentList">
+</app-common-notice-check-dialog>

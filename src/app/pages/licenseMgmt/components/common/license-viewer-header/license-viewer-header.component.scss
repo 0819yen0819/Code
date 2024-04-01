@@ -1,0 +1,10 @@
+@import "../../../../../../styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+.btn-container {
+  @apply mb-2 md:mb-0 #{!important};
+  .p-button {
+    @apply mb-2 md:mb-0;
+  }
+}

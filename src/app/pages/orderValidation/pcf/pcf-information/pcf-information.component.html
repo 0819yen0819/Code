@@ -1,0 +1,60 @@
+<!-- 申請資訊 -->
+<div class="application-container">
+    <form class="form-table">
+        <div class="form-container form-table">
+
+            <div class="form-row exp-date grid">
+                <ng-container *ngFor="let col of pcfInfoCols;">
+
+                    <div class="form-col lg:col-6 col-12">
+                        <div class="form-row grid">
+
+                            <div class="form-col col-fixed" *ngIf="col.id">
+                                <div class="form-label">
+                                    <label class="txt"> {{col.label}}</label>
+                                </div>
+                            </div>
+
+                            <!-- 非業務員部門 (一般顯示) -->
+                            <ng-container *ngIf="col.id !== 'h_salesDeptName'">
+                                <div class="grid md:col col-12">
+                                    <div class="form-label"
+                                        style="display: flex; align-items: center; flex-wrap: wrap;">
+                                        <label class="txt">
+                                            {{col.value}}
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </ng-container>
+
+                            <!-- 業務員部門(下拉選單) -->
+                            <ng-container *ngIf="col.id === 'h_salesDeptName'">
+                                <div class="grid md:col col-12">
+                                    <div class="form-col form-select col-12" style="height: unset !important"
+                                        *ngIf="(currentDept && canEditDept && userDeptsOptions.getValue().length > 1)">
+                                        <p-dropdown name="userDept" [options]="userDeptsOptions.getValue()"
+                                            placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}"
+                                            [(ngModel)]="currentDept" (onChange)="userDeptOnChange()">
+                                        </p-dropdown>
+                                    </div>
+
+                                    <div class="form-label" style="display: flex; align-items: center; flex-wrap: wrap;"
+                                        *ngIf="!(currentDept && canEditDept && userDeptsOptions.getValue().length > 1)">
+                                        <label class="txt">
+                                            {{ currentDept?.label }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                        </div>
+                    </div>
+
+                </ng-container>
+            </div>
+
+
+        </div>
+    </form>
+</div>

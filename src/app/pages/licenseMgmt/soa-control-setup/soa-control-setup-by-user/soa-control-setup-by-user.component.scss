@@ -1,0 +1,46 @@
+@import "../../../../../styles/wpg-cus-components/cus_form";
+@include FormBaseOverride;
+
+.sub-title-container {
+    &.item-section {
+        @apply inline-flex justify-start items-center w-full;
+
+        >div {
+            &:not(:first-of-type) {
+                @apply ml-8;
+            }
+        }
+
+        .hint-highlight {
+            @apply mt-2 font-semibold text-sm text-red-600;
+        }
+
+        .add-item {
+            @apply bg-blue-50 bg-opacity-50 border border-blue-500 text-blue-500 min-w-fit;
+
+            &:hover {
+                @apply bg-blue-500 text-white border-blue-500;
+            }
+
+            &:disabled {
+                &:hover {
+                    @apply bg-white border-blue-500 text-blue-500;
+                }
+            }
+        }
+    }
+}
+
+.cv1 {
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 1032px) {
+    .cv1 {
+        margin-right: 0;
+    }
+
+    .cv2 {
+        width: 100%;
+    }
+}

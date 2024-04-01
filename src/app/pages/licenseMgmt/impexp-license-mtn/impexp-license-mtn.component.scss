@@ -1,0 +1,49 @@
+.notice {
+    width: 100%;
+    .form-label { 
+      @apply bg-red-50;
+
+      .txt {
+        @apply text-red-500;
+      }
+    }
+}
+
+.notice-label{
+    display: flex;
+    align-items: center; 
+}
+
+:host ::ng-deep {
+  #autocompleteWithClearAndLoading{
+    .p-autocomplete-loader {
+      margin-right: 25px;
+    }
+  
+    span{
+      input{
+        padding-right:2.508rem !important;
+      }
+    }
+  }  
+}
+ 
+.clean-btn{
+  cursor: pointer;
+}
+
+.form-input{
+  position: relative;
+
+  .clean-btn{
+    position: absolute;  
+    top: 25px;
+    right: 33px;
+  }
+}
+
+:host ::ng-deep {  
+  .large-col{
+    width: 255px !important;
+  }
+}

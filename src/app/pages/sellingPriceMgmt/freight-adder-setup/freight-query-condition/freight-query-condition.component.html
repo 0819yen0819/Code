@@ -1,0 +1,362 @@
+<div class="main-title-container">
+    <p>{{'FreightAdder.Label.title' | translate}}</p>
+</div>
+
+<form class="form-table form-search">
+
+    <!-- Level 1 -->
+    <div class="form-row grid">
+        <div class="form-col md:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">Group</label>
+                    </div>
+                </div>
+                <div class="form-col col">
+                    <div class="form-select">
+                        <p-dropdown name="ouGroup" [(ngModel)]="formValue.ouGroup" [options]="groupOptions"
+                            placeholder="{{ 'Input.PlaceHolder.PleaseKeyIn' | translate }}"
+                            (ngModelChange)="formValue.ou = null">
+                        </p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-col md:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">OU</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-input">
+                        <p-autoComplete [(ngModel)]="formValue.ou" [suggestions]="ouOptions"
+                            (completeMethod)="filterOu($event)" [minLength]="1" field="displayOu"
+                            [style]="{ width: '100%' }"
+                            (onBlur)="formValue.ou && (formValue.ou.ouCode?? (formValue.ou = null))"
+                            [ngModelOptions]="{ standalone: true }"
+                            placeholder="{{'Input.PlaceHolder.PleaseKeyIn' | translate}}"
+                            (ngModelChange)="formValue.endCustomer = null;">
+                        </p-autoComplete>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-col md:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">{{ "ImpExpLicenseMtn.Label.Flag" | translate }}</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-select">
+                        <p-dropdown [options]="statusOptions" appendTo="body"
+                            placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"
+                            [(ngModel)]="formValue.status" name="flag" [ngModelOptions]="{ standalone: true }">
+                        </p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Levle 2 -->
+
+
+    <div class="form-row grid">
+        <div class="form-col lg:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">Customer</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-input">
+                        <p-autoComplete appendTo="body" [(ngModel)]="formValue.customer"
+                            [ngModelOptions]="{standalone: true}" [suggestions]="customerOptions"
+                            (completeMethod)="filterCustomer($event)"
+                            (onBlur)="formValue.customer && (formValue.customer.value ?? (formValue.customer = null))"
+                            [minLength]=3 field="label" [style]="{'width': '100%'}"
+                            placeholder="{{'Input.PlaceHolder.PleaseKeyIn' | translate}}" [showClear]="true"
+                            (onClear)="formValue.customer= null">
+                        </p-autoComplete>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-col lg:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">Vendor</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-input">
+                        <p-autoComplete appendTo="body" [(ngModel)]="formValue.vendor"
+                            [ngModelOptions]="{standalone: true}" [suggestions]="vendorOptions"
+                            (completeMethod)="filterVendor($event)"
+                            (onBlur)="formValue.vendor && (formValue.vendor.value ?? (formValue.vendor = null))"
+                            [minLength]=3 field="label" [style]="{'width': '100%'}"
+                            placeholder="{{'Input.PlaceHolder.PleaseKeyIn' | translate}}" [showClear]="true"
+                            (onClear)="formValue.vendor= null">
+                        </p-autoComplete>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-col lg:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">End Customer</label>
+                    </div>
+                </div>
+                <div class="form-col col">
+                    <div class="form-input">
+                        <p-autoComplete [(ngModel)]="formValue.endCustomer" [suggestions]="endCustomerOptions"
+                            (completeMethod)="filterEndCustomer($event)" [minLength]="1" field="endCustomerName"
+                            [style]="{ width: '100%' }"
+                            (onBlur)="formValue.endCustomer && (formValue.endCustomer.endCustomerName ?? (formValue.endCustomer = null))"
+                            [ngModelOptions]="{ standalone: true }" appendTo="body" [showClear]="true"
+                            [disabled]="!formValue.ouGroup||!formValue.ou||!formValue.brand"
+                            placeholder="{{'Input.PlaceHolder.PleaseKeyIn' | translate}}"
+                            (onClear)="formValue.endCustomer = null">
+                        </p-autoComplete>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Level3 -->
+    <div class="form-row grid">
+        <div class="form-col lg:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">Brand</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-input">
+                        <p-autoComplete [(ngModel)]="formValue.brand" [suggestions]="brandOptions"
+                            (completeMethod)="filterBrand($event)" [minLength]="1" field="label"
+                            [style]="{ width: '100%' }"
+                            (onBlur)="formValue.brand && (formValue.brand.value ?? (formValue.brand = null))"
+                            [ngModelOptions]="{ standalone: true }" (onSelect)="onBrandSelect($event.value)"
+                            (ngModelChange)="formValue.ctg1 = null;formValue.productCode = null;formValue.endCustomer = null;"
+                            placeholder="{{ 'Input.PlaceHolder.PleaseKeyIn' | translate }}" [showClear]="true"
+                            (onClear)="formValue.brand = null">
+                        </p-autoComplete>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-col lg:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">Ctg1</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-select">
+                        <p-dropdown [options]="ctg1Options" appendTo="body"
+                            placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}"
+                            [(ngModel)]="formValue.ctg1" (onBlur)="formValue.ctg1 ?? (formValue.ctg1 = null)"
+                            [disabled]="!formValue.brand" [ngModelOptions]="{ standalone: true }"
+                            [style]="{ width: '100%' }" [filter]="true" [showClear]="true"
+                            (onClear)="formValue.ctg1 = null">
+                        </p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-col lg:col-4 sm:col-12 col-12">
+        </div>
+    </div>
+
+    <!-- Level 4 -->
+    <div class="form-row grid">
+        <div class="form-col md:col-12 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">{{ "ImpExpLicenseMtn.Label.Item" | translate }}</label>
+                    </div>
+                </div>
+                <div class="form-col col-3">
+                    <div class="form-select">
+                        <p-dropdown name="itemFilterType" [(ngModel)]="formValue.itemFilterType"
+                            [options]="itemFilterTypeOptions"
+                            placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate  }}"
+                            (onChange)="formValue.itemFilterType === 'Multi' ? this.formValue.item = '' : this.formValue.items = []"></p-dropdown>
+                    </div>
+                </div>
+                <div class="form-col col pl-2">
+
+                    <div class="form-input" *ngIf="formValue.itemFilterType !== 'Multi'">
+                        <input type="text" pInputText name="item" [(ngModel)]="formValue.item"
+                            (ngModelChange)="formValue.items = null"
+                            placeholder="{{ 'Input.PlaceHolder.PleaseKeyIn' | translate }}"
+                            [ngModelOptions]="{ standalone: true }" autocomplete="off" />
+                    </div>
+                    <div class="form-chip" *ngIf="formValue.itemFilterType === 'Multi'">
+                        <p-chips name="items" [(ngModel)]="formValue.items" (ngModelChange)="formValue.item = null"
+                            placeholder="{{ 'ImpExpLicenseMtn.PlaceHolder.Items' | translate }}">
+                        </p-chips>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- Level 5 -->
+    <div class="form-row grid">
+        <div class="form-col md:col-3 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">NCNR</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-select">
+                        <p-dropdown [options]="normalOptions" [(ngModel)]="formValue.ncnr"
+                            placeholder="{{ 'Input.PlaceHolder.PleaseKeyIn' | translate }}"
+                            [ngModelOptions]="{ standalone: true }"></p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-col md:col-3 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">Customize</label>
+                    </div>
+                </div>
+                <div class="form-col col">
+                    <div class="form-col col">
+                        <div class="form-select">
+                            <p-dropdown [options]="normalOptions" [(ngModel)]="formValue.customize"
+                                placeholder="{{ 'Input.PlaceHolder.PleaseKeyIn' | translate }}"
+                                [ngModelOptions]="{ standalone: true }"></p-dropdown>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-col md:col-3 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">Single</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-select">
+                        <p-dropdown [options]="normalOptions" [(ngModel)]="formValue.single"
+                            placeholder="{{ 'Input.PlaceHolder.PleaseKeyIn' | translate }}"
+                            [ngModelOptions]="{ standalone: true }"></p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-col md:col-3 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">EOL</label>
+                    </div>
+                </div>
+                <div class="form-col col">
+                    <div class="form-col col">
+                        <div class="form-select">
+                            <p-dropdown [options]="normalOptions" [(ngModel)]="formValue.eol"
+                                placeholder="{{ 'Input.PlaceHolder.PleaseKeyIn' | translate }}"
+                                [ngModelOptions]="{ standalone: true }"></p-dropdown>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Level 6 -->
+    <div class="form-row grid">
+        <div class="form-col md:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">{{"ImpExpLicenseMtn.Label.StartDate" | translate}}</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-date">
+                        <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true" appendTo="body"
+                            name="startDate" [(ngModel)]="formValue.startDate" dateFormat="yy/mm/dd"
+                            (onInput)="dateInputHandlerService.concat($event.data)"
+                            (onSelect)="dateInputHandlerService.clean();onCheckDateHandler()"
+                            (onBlur)="dateInputHandlerService.clean()"
+                            (onClose)="onDatePickerClose('startDate');onCheckDateHandler()"
+                            placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101">
+                        </p-calendar>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-col md:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">{{"ImpExpLicenseMtn.Label.EndDate" | translate}}</label>
+                    </div>
+                </div>
+                <div class="form-col col">
+                    <div class="form-date">
+                        <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true" appendTo="body"
+                            name="endDate" [(ngModel)]="formValue.endDate" dateFormat="yy/mm/dd"
+                            (onInput)="dateInputHandlerService.concat($event.data)" [minDate]="formValue.startDate"
+                            (onSelect)="dateInputHandlerService.clean();onCheckDateHandler()"
+                            (onBlur)="dateInputHandlerService.clean()"
+                            (onClose)="onDatePickerClose('endDate');onCheckDateHandler()"
+                            placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101">
+                        </p-calendar>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-col md:col-4 sm:col-12 col-12"> </div> <!-- 避免 Date 過長 -->
+    </div>
+
+    <div class="btn-container">
+        <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-secondary"
+            (click)="reset()"></button>
+        <button pButton type="button" label="{{ 'Button.Label.Query' | translate }}" (click)="queryOnClick()"></button>
+        <button pButton type="button" label="{{ 'Button.Label.Download' | translate }}"
+            (click)="downloadOnClick()"></button>
+    </div>
+</form>

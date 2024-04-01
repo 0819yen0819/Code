@@ -1,0 +1,8 @@
+<p-dropdown
+  name="table-dropdown-selector"
+  [(ngModel)]="value"
+  [options]="options"
+  appendTo="body"
+  (ngModelChange)="onSelectedChange()"
+  [disabled]="isEmpty"
+></p-dropdown>

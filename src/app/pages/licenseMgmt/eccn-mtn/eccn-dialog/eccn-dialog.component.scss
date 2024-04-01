@@ -1,0 +1,71 @@
+@import "src/styles/wpg-cus-components/cus_form";
+@import "src/styles/helpers/variables";
+
+@include FormBaseOverride;
+
+.sub-title-container {
+  &.item-section {
+    @apply inline-flex justify-start items-center w-full;
+
+    > div {
+      &:not(:first-of-type) {
+        @apply ml-8;
+      }
+    }
+
+    .hint-highlight {
+      @apply mt-2 font-semibold text-sm text-red-600;
+    }
+
+    .add-item {
+      @apply bg-blue-50 bg-opacity-50 border border-blue-500 text-blue-500 min-w-fit;
+
+      &:hover {
+        @apply bg-blue-500 text-white border-blue-500;
+      }
+
+      &:disabled {
+        &:hover {
+          @apply bg-white border-blue-500 text-blue-500;
+        }
+      }
+    }
+  }
+}
+
+.hint {
+  position: absolute;
+  top: 15px;
+  right: 60px;
+  color: red;
+  font-weight: bold;
+
+  @media screen and (max-width: 767px) {
+    position: relative;
+    top: 0;
+    right: 0;
+  }
+}
+
+.eccn-setting-kit {
+  @apply inline-block md:inline-flex;
+  .col-fixed {
+    @apply w-full md:w-1/3;
+  }
+  .eccn-setting-container {
+    height: 100%;
+    background-color: #f1f6f9;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 20px 10px 20px !important;
+
+    .form-label {
+      width: auto !important;
+    }
+  }
+}
+
+.require .txt:before {
+  content: "*";
+  color: $error;
+}

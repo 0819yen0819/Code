@@ -1,0 +1,94 @@
+/* Reset */
+@font-face {
+  font-family: "New Microsoft JhengHei";
+  unicode-range: U+7db0, U+78A7, U+7B75;
+  font-style: normal;
+  font-weight: bold;
+  src: local(MS Gothic), local(Yu Gothic);
+}
+@font-face {
+  font-family: "New Microsoft JhengHei";
+  unicode-range: U+7db0, U+78A7, U+7B75;
+  font-style: normal;
+  font-weight: normal;
+  src: local(微軟正黑體), local(Microsoft JhengHei);
+}
+
+html,
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f8f9;
+ 
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html *,
+body * { 
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+  /* scrollbar */
+  ::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+    -webkit-overflow-scrolling: touch;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #dcdcdc;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #87949d;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-button {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 8px 0;
+}
+
+p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.img-block {
+  img {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #b2b2b2;
+  opacity: 1; /* Firefox */
+}
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #b2b2b2;
+}
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #b2b2b2;
+}

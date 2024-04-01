@@ -1,0 +1,636 @@
+<p-dialog [header]="dialogHeader" [(visible)]="showDialog" [draggable]="false" [closeOnEscape]="true" [blockScroll]="true"
+    [modal]="true" (onHide)="onHideDetailDialog()" *ngIf="formGroup">
+    <ng-container>
+
+        <form [formGroup]="formGroup" class="form-table">
+            <div class="form-row grid">
+                <!-- Group -->
+                <div class="form-col lg:col-6 md:col-6 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label" [ngClass]="{'require': isAddMode}">
+                                <label class="txt">Group Code</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-select">
+                                <p-dropdown appendTo="body" [options]="dropdownOptions.group" [filter]="true"
+                                    placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}"
+                                    formControlName="group" (onChange)="onChangeGroup($event)">
+                                </p-dropdown>
+
+                                <p class="error-active"
+                                    *ngIf="isSubmitted && isAddMode && formGroup.controls.group.errors">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Oou Code -->
+                <div class="form-col lg:col-6 md:col-6 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label" [ngClass]="{'require': isAddMode}">
+                                <label class="txt">Orders OU</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-select">
+                                <p-dropdown appendTo="body" [options]="dropdownOptions.oOuList" [filter]="true"
+                                    placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}" field="displayOu"
+                                    formControlName="oOuCode">
+                                </p-dropdown>
+
+                                <p class="error-active"
+                                    *ngIf="isSubmitted && isAddMode && formGroup.controls.oOuCode.errors">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 客戶/廠商 -->
+            <!-- VC Type -->
+            <div class="form-row grid">
+                <div class="form-col col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label" [ngClass]="{'require': isAddMode || isEditMode}">
+                                <label class="txt">VC Type</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-select">
+                                <p-dropdown [options]="dropdownOptions.cv"
+                                    placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}"
+                                    formControlName="vcType" (onChange)="cvTypeOnChange()">
+                                </p-dropdown>
+                                <p class="error-active"
+                                    *ngIf="isSubmitted && (isAddMode || isEditMode) && formGroup.controls.vcType.errors">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- VC Value -->
+            <div class="form-row grid">
+                <div class="form-col col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label" [ngClass]="{'require': isAddMode || isEditMode}">
+                                <label class="txt">Vendor#/Customer#</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText readonly formControlName="vcName"
+                                    placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}}"
+                                    (click)="onOpenSelectorDialogEvent(formGroup.get('vcType').value)" />
+                                <p class="error-active"
+                                    *ngIf="isSubmitted && (isAddMode || isEditMode) && formGroup.controls.vcName.errors">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item -->
+            <div class="form-row grid">
+                <div class="form-col col-12">
+                    <div class="form-row grid">
+                        <!-- Item -->
+                        <div class="form-col lg:col-6 md:col-6 col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label" [ngClass]="{'require': isAddMode || isEditMode}">
+                                        <label class="txt">Item</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <input type="text" pInputText readonly formControlName="item"
+                                            (click)="onOpenSelectorDialogEvent('item')"
+                                            placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}} Item" />
+                                        <p class="error-active"
+                                            *ngIf="isSubmitted && (isAddMode || isEditMode) && formGroup.controls.item.errors">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 特批 -->
+                        <div class="form-col lg:col-6 md:col-6 col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label" [ngClass]="{'require': isAddMode || isEditMode}">
+                                        <label class="txt">{{"SOA.Label.SpecialApproval" | translate}}</label>
+                                    </div>
+                                </div>
+        
+                                <div class="form-col col">
+                                    <div class="form-select">
+                                        <p-dropdown [options]="dropdownOptions.flag" appendTo="body" formControlName="specialApproval"
+                                            placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row grid">
+                <div class="form-col col-12">
+                    <div class="form-row grid">
+
+                        <!-- brand -->
+                        <div class="form-col lg:col-6 md:col-6 col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Brand</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-label" *ngIf="!isAllItem">
+                                        <label class="txt">{{formGroup.get('brand').value}}</label>
+                                    </div>
+
+                                    <div class="form-input" *ngIf="isAllItem">
+                                        <input type="text" pInputText name="brand" readonly
+                                             formControlName="brand" (click)="onOpenSelectorDialogEvent('brand_without_all')"
+                                            placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ctg1 -->
+                        <div class="form-col lg:col-6 md:col-6 col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Ctg1</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-label" *ngIf="!isAllItem">
+                                        <label class="txt">{{formGroup.get('ctg1').value}}</label>
+                                    </div>
+
+                                    <div class="form-label" *ngIf="isAllItem && ctg1Options.length === 0">
+                                        <label class="txt"></label>
+                                    </div>
+
+                                    <div class="form-label" *ngIf="isAllItem && ctg1Options.length === 1">
+                                        <label class="txt">No category</label>
+                                    </div>
+
+                                    <div class="form-select" *ngIf="isAllItem && ctg1Options.length > 1">
+                                        <p-dropdown [options]="ctg1Options" formControlName="ctg1" appendTo="body"
+                                        (ngModelChange)="ctg1OnChange()"  [disabled]="!formGroup.get('brand').value" [filter]="true">
+                                            <ng-template pTemplate="item" let-option>
+                                                <span>{{option.label  || 'PendingApproval.PlaceHolder.PleaseChoose' | translate}}</span>
+                                            </ng-template>
+                                        </p-dropdown>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row grid">
+                <div class="form-col col-12">
+                    <div class="form-row grid">
+
+                        <!-- ctg2 -->
+                        <div class="form-col lg:col-6 md:col-6 col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Ctg2</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-label" *ngIf="!isAllItem">
+                                        <label class="txt">{{formGroup.get('ctg2').value}}</label>
+                                    </div>
+
+                                    <div class="form-label" *ngIf="isAllItem && ctg2Options.length === 0 || !formGroup.get('ctg1').value">
+                                        <label class="txt"></label>
+                                    </div>
+
+                                    <div class="form-label" *ngIf="isAllItem && ctg2Options.length === 1 && formGroup.get('ctg1').value">
+                                        <label class="txt">No category</label>
+                                    </div>
+
+                                    <div  class="form-select" *ngIf="isAllItem && ctg2Options.length > 1">
+                                        <p-dropdown [options]="ctg2Options" formControlName="ctg2" appendTo="body"
+                                        (ngModelChange)="ctg2OnChange()"  [disabled]="!formGroup.get('ctg1').value" [filter]="true">
+                                            <ng-template pTemplate="item" let-option>
+                                                <span>{{option.label  || 'PendingApproval.PlaceHolder.PleaseChoose' | translate}}</span>
+                                            </ng-template>
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ctg3 -->
+                        <div class="form-col lg:col-6 md:col-6 col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Ctg3</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-label" *ngIf="!isAllItem">
+                                        <label class="txt">{{formGroup.get('ctg3').value}}</label>
+                                    </div>
+
+                                    <div class="form-label" *ngIf="isAllItem && ctg3Options.length === 0 || !formGroup.get('ctg2').value">
+                                        <label class="txt"></label>
+                                    </div>
+
+                                    <div class="form-label" *ngIf="isAllItem && ctg3Options.length === 1 && formGroup.get('ctg2').value">
+                                        <label class="txt">No category</label>
+                                    </div>
+
+                                    <div class="form-select" *ngIf="isAllItem && ctg3Options.length > 1">
+                                        <p-dropdown [options]="ctg3Options" formControlName="ctg3" appendTo="body"
+                                        [disabled]="!formGroup.get('ctg3').value" [filter]="true">
+                                            <ng-template pTemplate="item" let-option>
+                                                <span>{{option.label  || 'PendingApproval.PlaceHolder.PleaseChoose' | translate}}</span>
+                                            </ng-template>
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row grid">
+                <div class="form-col col-12">
+                    <div class="form-row grid">
+
+                        <div class="form-col lg:col-6 md:col-6 col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">ECCN</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-col col-12">
+
+                                        <div class="form-label" *ngIf="!isAllItem">
+                                            <label class="txt">{{formGroup.get('eccn').value}}</label>
+                                        </div>
+
+                                        <div class="form-select" *ngIf="isAllItem">
+                                            <p-dropdown [options]="eccnListOptions"  formControlName="eccn" [filter]="true" appendTo="body">
+                                            </p-dropdown>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- License# -->
+                        <div class="form-col lg:col-6 md:col-6 col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label" [ngClass]="{'require': isAddMode}">
+                                        <label class="txt">License#</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input"  *ngIf="isAddMode">
+                                        <input type="text" pInputText
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                            formControlName="license" />
+                                        <p class="error-active"
+                                            *ngIf="isSubmitted && isAddMode && formGroup.controls.license.errors">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+
+                                    <div class="form-label" *ngIf="!isAddMode">
+                                        <label class="txt">{{formGroup.get('license').value}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="form-row grid">
+                <div class="form-col col-12">
+                    <div class="form-row grid">
+
+                        <!-- 扣量 -->
+                        <div class="form-col lg:col-6 md:col-6 col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label" [ngClass]="{'require': isAddMode || isEditMode}">
+                                        <label class="txt">扣量</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-select">
+                                        <p-dropdown appendTo="body" [options]="dropdownOptions.quantity"
+                                            placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}"
+                                            formControlName="quantity">
+                                        </p-dropdown>
+
+                                        <p class="error-active"
+                                            *ngIf="isSubmitted && (isAddMode || isEditMode) && formGroup.controls.quantity.errors">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Apply qty -->
+                        <div class="form-col lg:col-6 md:col-6 col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">Apply Qty</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <p-inputNumber [min]="0" [max]="999999999"
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                            formControlName="applyQty">
+                                        </p-inputNumber>
+                                        <p class="error-active"
+                                            *ngIf="isSubmitted && formGroup.controls.applyQty.errors">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+
+                                        <p class="error-active"
+                                            *ngIf="(formGroup.get('quantity').value === 'Y') && (formGroup.get('applyQty').value < 1)">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Input.PlaceHolder.OnlyBig0' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row grid">
+                <!-- 正本/副本 -->
+                <div class="form-col lg:col-6 md:col-6 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label" [ngClass]="{'require': isAddMode}">
+                                <label class="txt">正本/副本</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-select">
+                                <p-dropdown appendTo="body" [options]="dropdownOptions.origin"
+                                    formControlName="isOrigin"
+                                    placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}"
+                                    (onChange)="originOnChange()">
+                                </p-dropdown>
+
+                                <p class="error-active"
+                                    *ngIf="isSubmitted && (isAddMode || isEditMode) && formGroup.controls.isOrigin.errors">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 有效/無效 -->
+                <div class="form-col lg:col-6 md:col-6 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label" [ngClass]="{'require': isAddMode || isEditMode}">
+                                <label class="txt">Flag</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-select">
+                                <p-dropdown [options]="dropdownOptions.flag" appendTo="body" formControlName="flag"
+                                    placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}">
+                                </p-dropdown>
+                                <p class="error-active"
+                                    *ngIf="isSubmitted && (isAddMode || isEditMode) && formGroup.controls.flag.errors">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-row grid">
+                <!-- Start Date -->
+                <div class="form-col lg:col-6 md:col-6 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label" [ngClass]="{'require': isAddMode || isEditMode}">
+                                <label class="txt">Start Date</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-date">
+                                <p-calendar
+                                  [selectOtherMonths]="true"
+                                  [showButtonBar]="true"
+                                  formControlName="startDate"
+                                  dateFormat="yy/mm/dd"
+                                  (onInput)="onDatePickerInput($event)"
+                                  (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                                  (onBlur)="onDatePickerSelectAndBlur()"
+                                  (onClose)="onDatePickerClose('startDate');onCheckDateHandler()"
+                                  appendTo="body" [showIcon]="true"
+                                  placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                >
+                                </p-calendar>
+                                <p class="error-active"
+                                    *ngIf="isSubmitted && (isAddMode || isEditMode) && formGroup.controls.startDate.errors">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- End Date -->
+                <div class="form-col lg:col-6 md:col-6 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label" [ngClass]="{'require': isAddMode || isEditMode}">
+                                <label class="txt">End Date</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-date">
+                              <p-calendar
+                                [selectOtherMonths]="true"
+                                [showButtonBar]="true"
+                                formControlName="endDate"
+                                dateFormat="yy/mm/dd"
+                                [minDate]="formGroup.controls.startDate.value"
+                                (onInput)="onDatePickerInput($event)"
+                                (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                                (onBlur)="onDatePickerSelectAndBlur()"
+                                (onClose)="onDatePickerClose('endDate');onCheckDateHandler()"
+                                appendTo="body" [showIcon]="true"
+                                placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                              >
+                              </p-calendar>
+
+                                <p class="error-active"
+                                    *ngIf="isSubmitted && (isAddMode || isEditMode) && formGroup.controls.endDate.errors">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row grid">
+                <!-- CCATS -->
+                <div class="form-col lg:col-6 md:col-6 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">CCATs</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col lg:col-6 md:col-6 col-12">
+                            <div>
+                                <div class="txt">{{ formGroup.get('ccats').value }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proviso -->
+                <div class="form-col lg:col-6 md:col-6 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">Proviso</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col lg:col-6 md:col-6 col-12">
+                            <div>
+                                <div class="txt">{{ formGroup.get('proviso').value }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row grid" *ngIf="isAddMode">
+                <!-- remark -->
+                <div class="form-col lg:col-12 md:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">Remark</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText formControlName="remark"
+                                    placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </ng-container>
+
+    <div class="btn-container">
+        <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray"
+            (click)="onHideDetailDialog()"></button>
+        <button pButton type="button" label="{{ 'Button.Label.Save' | translate }}" (click)="saveOnClick()"></button>
+    </div>
+
+</p-dialog>
+
+<app-common-selector-dialog [settingParams]="selectorDialogParams" (outputResult)="onSelectorDialogCallback($event)">
+</app-common-selector-dialog>
+
+<p-progressSpinner *ngIf="showSpinner"></p-progressSpinner>

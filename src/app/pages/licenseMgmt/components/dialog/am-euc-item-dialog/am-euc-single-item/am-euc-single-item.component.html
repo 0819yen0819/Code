@@ -1,0 +1,293 @@
+<!--# common selector dialog-->
+<app-common-selector-dialog
+  [settingParams]="selectorDialogParams"
+  (outputResult)="onSelectorDialogCallback($event)"
+></app-common-selector-dialog>
+
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onFormSubmit()"
+  class="form-container form-table"
+>
+  <!--# Item Selector-->
+  <div class="form-row grid">
+    <div class="form-col col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label require">
+            <label class="txt">Item</label>
+          </div>
+        </div>
+        <div class="md:col col-12">
+          <div class="form-col">
+            <div class="form-input">
+              <input
+                autocomplete="off"
+                type="text"
+                pInputText
+                name="itemID"
+                formControlName="itemID"
+                readonly
+                placeholder="{{
+                  'Input.PlaceHolder.PleaseSelect' | translate
+                }} Item"
+                [value]="
+                  selectedITargetItem.getValue() != null
+                    ? selectedITargetItem.getValue().invItemNo
+                    : ''
+                "
+                (click)="onOpenSelectorDialogEvent()"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="isLoading && mode != 'edit'">
+    <div class="loading-container">
+      <span>Loading...</span>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="targetItemInfo.getValue() != null">
+    <!--# target item info-->
+    <div class="form-row item-info grid">
+      <!--# Brand -->
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Brand</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col form-input col-12">
+              <div class="form-label">
+                <label class="txt">{{
+                  targetItemInfo.getValue().brand || "---"
+                }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--# ECCN -->
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">ECCN</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col form-input col-12">
+              <div class="form-label">
+                <label class="txt">{{
+                  targetItemInfo.getValue().eccn || "---"
+                }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--# CCATs -->
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">CCATs</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col form-input col-12">
+              <div class="form-label">
+                <label class="txt">{{
+                  targetItemInfo.getValue().ccats || "---"
+                }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--# Proviso -->
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Proviso</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col form-input col-12">
+              <div class="form-label">
+                <label class="txt">{{
+                  targetItemInfo.getValue().proviso || "---"
+                }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# date range Selector-->
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">Period Form/To</label>
+            </div>
+          </div>
+          <div class="md:col col-12">
+            <div class="form-col">
+              <div class="form-input form-date-range-select">
+                <div>
+                  <p-calendar [selectOtherMonths]="true" [showButtonBar]="true"
+                    formControlName="startDate"
+                    appendTo="body"
+                    dateFormat="yy/mm/dd"
+                    [showIcon]="true"
+                    inputId="startDate"
+                    placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                    (onInput)="onDatePickerInput($event)"
+                    (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                    (onBlur)="onDatePickerSelectAndBlur()"
+                    (onClose)="onDatePickerClose('startDate');onCheckDateHandler()"
+                  ></p-calendar>
+                </div>
+                <div>
+                  <span>~</span>
+                </div>
+                <div>
+                  <p-calendar [selectOtherMonths]="true" [showButtonBar]="true"
+                    formControlName="endDate"
+                    appendTo="body"
+                    dateFormat="yy/mm/dd"
+                    [minDate]="formGroup.get('startDate').value"
+                    [showIcon]="true"
+                    inputId="endDate"
+                    placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                    (onInput)="onDatePickerInput($event)"
+                    (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                    (onBlur)="onDatePickerSelectAndBlur()"
+                    (onClose)="onDatePickerClose('endDate');onCheckDateHandler()"
+                  ></p-calendar>
+                </div>
+              </div>
+              <div class="form-hint">
+                <span>e.g. 2022/01/01 ( YYYY/MM/DD )</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# Qty-->
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">Qty</label>
+            </div>
+          </div>
+          <div class="md:col col-12">
+            <div class="form-col">
+              <div class="form-input">
+                <input
+                  autocomplete="off"
+                  type="number"
+                  pInputText
+                  name="quantity"
+                  formControlName="quantity"
+                  placeholder="{{
+                    'Input.PlaceHolder.OnlyPosIntAndBig0' | translate
+                  }}"
+                  onwheel="this.blur()"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# Ctm PO-->
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Ctm PO</label>
+            </div>
+          </div>
+          <div class="md:col col-12">
+            <div class="form-col">
+              <div class="form-input">
+                <input
+                  autocomplete="off"
+                  type="text"
+                  pInputText
+                  name="ctmPo"
+                  formControlName="ctmPo"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# Project-->
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Project</label>
+            </div>
+          </div>
+          <div class="md:col col-12">
+            <div class="form-col">
+              <div class="form-input">
+                <input
+                  autocomplete="off"
+                  type="text"
+                  pInputText
+                  name="project"
+                  formControlName="project"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!--# Form Actions -->
+  <div class="btn-container" [class]="isLoading ? 'loading' : ''">
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Cancel' | translate }}"
+      class="btn-gray"
+      (click)="onCloseAddItemDialog()"
+    ></button>
+    <ng-container *ngIf="targetItemInfo.getValue() != null">
+      <button
+        pButton
+        type="submit"
+        [label]="submitBtnLabel"
+        [disabled]="formGroup.invalid"
+      ></button>
+    </ng-container>
+  </div>
+</form>

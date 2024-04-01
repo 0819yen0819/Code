@@ -1,0 +1,49 @@
+<p-dialog
+  [header]="dialogSetting.getValue().title"
+  [(visible)]="dialogSetting.getValue().visiable"
+  [modal]="dialogSetting.getValue().modal"
+  [draggable]="dialogSetting.getValue().draggable"
+  [resizable]="dialogSetting.getValue().resizeable"
+  [blockScroll]="true"
+  (onHide)="onDialogClosed()"
+>
+  <form>
+    <div class="form-row grid">
+      <div
+        class="form-col md:col-4 sm:col-12 col-12"
+        *ngFor="let col of tableCols"
+      >
+        <div class="form-checkbox">
+          <p-checkbox
+            name="checkboxGroup"
+            [label]="col.label"
+            [value]="col.field"
+            name="selectedColumn"
+            [(ngModel)]="seletedCols"
+            (onChange)="onSelectedColChange()"
+            [disabled]="col?.disabled"
+          ></p-checkbox>
+        </div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="btn-container">
+      <button
+        pButton
+        type="button"
+        label="{{ 'Button.Label.Reset' | translate }}"
+        class="btn-gray btn-line"
+        (click)="onResetSelectedCols()"
+      ></button>
+      <!-- <button
+        pButton
+        type="button"
+        label="{{ 'Button.Label.Close' | translate }}"
+        class="btn-line"
+        (click)="onDialogClosed()"
+      ></button> -->
+    </div>
+  </form>
+</p-dialog>

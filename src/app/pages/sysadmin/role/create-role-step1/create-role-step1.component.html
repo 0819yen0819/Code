@@ -1,0 +1,183 @@
+<p-steps [model]="stepItems" [(activeIndex)]="activeIndex"></p-steps>
+
+<div class="sub-title-container">
+  <p>{{ 'Role.Role-Step1.Title1' | translate }}</p>
+</div>
+<!-- end: sub-title-container -->
+
+<form class="form-table">
+  <div class="form-row grid">
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label require">
+            <label class="txt">{{ 'Role.Label.Tenant' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-select">
+            <!-- add class `error-active` in `form-select` when input error  -->
+            <p-dropdown name="tenant" [(ngModel)]="editForm.tenant" [options]="tenantOptions"></p-dropdown>
+            <p *ngIf="submitted && tenantRequired" class="error-active">
+              <em class="pi pi-exclamation-circle"></em>
+              <span *ngIf="submitted && tenantRequired">{{ 'Role.Message.TenantRequired' | translate }}</span>
+            </p>
+          </div>
+          <!-- end: form-select -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label require">
+            <label class="txt">{{ 'Role.Label.RoleName' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-input require">
+            <!-- add class `error-active` in `form-input` when input error  -->
+            <input type="text" name="roleName" [(ngModel)]="editForm.roleName" pInputText value="" placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"  (blur)="validateRoleName()" maxlength="100"/>
+            <p *ngIf="submitted && roleNameRequired" class="error-active">
+              <em class="pi pi-exclamation-circle"></em>
+              <span *ngIf="submitted && roleNameRequired">{{ 'Role.Message.RoleNameRequired' | translate }}</span>
+            </p>
+            <p *ngIf="submitted && roleNameExists" class="error-active">
+              <em class="pi pi-exclamation-circle"></em>
+              <span *ngIf="submitted && roleNameExists">{{ 'Role.Message.RoleNameExists' | translate }}</span>
+            </p>
+            <p *ngIf="submitted && roleNameOverLength" class="error-active">
+              <em class="pi pi-exclamation-circle"></em>
+              <span *ngIf="submitted && roleNameOverLength">{{ 'Role.Message.RoleNameOverLength' | translate
+                }}</span>
+            </p>
+
+            <p class="error-msg">
+              <em class="pi pi-exclamation-circle"></em>
+              <span>錯誤訊息</span>
+            </p>
+          </div>
+          <!-- end: form-input -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+  </div>
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label">
+        <label class="txt">{{ 'Role.Label.RoleDesc' | translate }}</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-input">
+        <!-- add class `error-active` in `form-input` when input error  -->
+        <input type="text" name="roleDesc" [(ngModel)]="editForm.roleDesc" pInputText value="" placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" maxlength="300"/>
+        <p *ngIf="submitted && roleDescOverLength" class="error-active">
+          <em class="pi pi-exclamation-circle"></em>
+          <span *ngIf="submitted && roleDescOverLength">{{ 'Role.Message.RoleDescOverLength' | translate
+            }}</span>
+        </p>
+        <p class="error-msg">
+          <em class="pi pi-exclamation-circle"></em>
+          <span>錯誤訊息</span>
+        </p>
+      </div>
+      <!-- end: form-input -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label require">
+            <label class="txt">{{ 'Role.Label.RoleType' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-radio">
+            <p-radioButton *ngFor="let item of roleTypeOptions.slice(1)" name="radioRoleType"
+                label="{{item.label}}" value="{{item.value}}" [(ngModel)]="editForm.roleType" (click)="changeRoleType()">
+            </p-radioButton>
+            <p *ngIf="submitted && roleTypeRequired" class="error-active">
+              <em class="pi pi-exclamation-circle"></em>
+              <span *ngIf="submitted && roleTypeRequired">{{ 'Role.Message.RoleTypeRequired' | translate }}</span>
+            </p>
+          </div>
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+
+    <div class="form-col col-fixed">
+      <div class="form-label require">
+        <label class="txt">{{ 'Role.Label.RoleStatus' | translate }}</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-radio">
+            <p-radioButton *ngFor="let item of roleStatusOptions.slice(0)" name="radioRoleStatus"
+                label="{{item.label}}" value="{{item.value}}" [(ngModel)]="editForm.status">
+            </p-radioButton>
+            <p *ngIf="submitted && roleStatusRequired" class="error-active">
+              <em class="pi pi-exclamation-circle"></em>
+              <span *ngIf="submitted && roleStatusRequired">{{ 'Role.Message.RoleStatusRequired' | translate }}</span>
+            </p>
+          </div>
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+</form>
+
+<div class="sub-title-container space-bottom-3">
+  <p>{{ 'Role.Role-Step1.Title2' | translate }}</p>
+</div>
+<!-- end: sub-title-container -->
+
+<p-pickList #pickList [source]="editForm.availableGroups" [target]="editForm.roleAuthGroups"
+sourceHeader="Available" targetHeader="Selected" [responsive]="true"
+filterBy="authGroupName,authGroupDesc" sourceFilterPlaceholder="Search" targetFilterPlaceholder="Search"
+[showSourceControls]="false" [showTargetControls]="false"
+[sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}"
+>
+ <ng-template let-item pTemplate="item">
+    <div class="choose-group-item">
+      <h5>{{ item.authGroupName }}{{ getIsDefaultDesc(item.isDefault) }} <em class="pi pi-users"></em> {{ item.tenant }}</h5>
+      <div class="group-type-block">
+        <p-chip label="{{ getAuthGroupTypeDesc(item.authGroupType) }}"></p-chip>
+        <p>{{ item.authGroupDesc }}</p>
+      </div>
+    </div>
+  </ng-template>
+</p-pickList>
+
+<div class="btn-container">
+  <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray" (click)="cancelEdit()"></button>
+  <button pButton type="button" label="{{ 'Button.Label.NextStep' | translate }}" (click)="nextStep();"></button>
+</div>

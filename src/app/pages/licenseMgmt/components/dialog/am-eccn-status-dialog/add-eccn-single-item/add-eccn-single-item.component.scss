@@ -1,0 +1,11 @@
+@import "../../../../../../../styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+:host ::ng-deep {
+  .p-selectbutton {
+    .p-button {
+      @apply w-fit #{!important};
+    }
+  }
+}

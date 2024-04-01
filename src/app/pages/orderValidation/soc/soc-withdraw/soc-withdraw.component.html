@@ -1,0 +1,31 @@
+<p-dialog header="{{ 'SalesOrderChange.button.withdraws' | translate}}" [modal]="true" [draggable]="false" [resizable]="false"
+  [(visible)]="dialogOpen" (onHide)="close()">
+  <form class="form-table">
+    
+    <!-- 意見 -->
+    <div class="form-row grid">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{"LicenseMgmt.Common.Label.Opinion" | translate }}</label>
+        </div>
+      </div>
+
+      <div class="form-col col">
+        <div class="form-textarea">
+          <textarea pInputTextarea [(ngModel)]="comment" [ngModelOptions]="{standalone: true}">
+            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 按鈕區域 -->
+    <div class="btn-container">
+      <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray" (click)="close()"></button>
+      <button pButton type="button" label="{{ 'Button.Label.Submit' | translate }}" (click)="onFormSubmit()"></button>
+    </div>
+  </form>
+</p-dialog>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [closable]="false" acceptLabel="{{ 'DPL_Fail.Label.ConfirmAccept' | translate }}"
+rejectLabel="{{ 'DPL_Fail.Label.ConfirmReject' | translate }}">
+</p-confirmDialog>

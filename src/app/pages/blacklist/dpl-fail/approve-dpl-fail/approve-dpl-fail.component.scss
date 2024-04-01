@@ -1,0 +1,30 @@
+.wait-approving-wrap {
+  @apply mt-6 #{!important};
+  span {
+    @apply cursor-default;
+    @apply text-lg font-semibold text-red-400 text-opacity-90 tracking-wide;
+  }
+  .reminder-send-btn {
+    @apply inline-flex justify-center align-middle items-center;
+    @apply cursor-pointer;
+  }
+}
+
+.extend-form-container{
+  display: flex;
+  flex-direction: column;
+  padding: 3vh 0; 
+  box-sizing: border-box;
+}
+
+:host ::ng-deep{
+  .form-label{
+    color: #333333;
+  }
+  
+  .p-dialog,
+  .ui-dialog {
+    max-width: 80%;
+    width: auto;
+  }
+}

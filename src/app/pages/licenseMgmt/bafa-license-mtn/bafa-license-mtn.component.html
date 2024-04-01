@@ -1,0 +1,199 @@
+<div class="main-title-container">
+    <p>{{ 'BafaLicenseMtn.Label.BafaLicenseMtn' | translate }}</p>
+</div>
+
+<form class="form-table form-search" [formGroup]="formData">
+    <div class="form-row grid">
+        <!-- License -->
+        <div class="form-col md:col-6 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">{{ 'BafaLicenseMtn.Label.LicenseNo' | translate }}</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-input">
+                        <input type="text" pInputText placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                            formControlName="licenseNo" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 有效/無效 -->
+        <div class="form-col md:col-6 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">{{ 'BafaLicenseMtn.Label.Flag' | translate }}</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-select">
+                        <p-dropdown [options]="flagOptions"
+                            placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}" formControlName="flag">
+                        </p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 進出口 License# -->
+    <div class="form-row grid">
+
+        <div class="form-col md:col-12 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">{{ 'BafaLicenseMtn.Label.impExpLicenseNo' | translate }}</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-input">
+                        <input type="text" pInputText placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                            formControlName="impExpLicenseNo" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Item No -->
+    <div class="form-row grid">
+
+        <div class="form-col md:col-12 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">Item</label>
+                    </div>
+                </div>
+
+                <div class="form-col col-3">
+                    <div class="form-select">
+                        <p-dropdown name="itemFilterType" [options]="itemOptions" formControlName="itemSearchType"
+                            placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"
+                            (onChange)="searchTypeOnChange($event)"></p-dropdown>
+                    </div>
+                </div>
+
+                <div class="form-col col" style="margin-left: 1vw;">
+                    <!-- 單選 -->
+                    <div class="form-input" *ngIf="!(formData.get('itemSearchType').value === 'Multi')">
+                        <input type="text" pInputText name="item" autocomplete="off" formControlName="itemValue"
+                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" />
+                    </div>
+                    <!-- 複選 -->
+                    <div class="form-chip" *ngIf="formData.get('itemSearchType').value === 'Multi'">
+                        <p-chips name="items" placeholder="{{ 'ImpExpLicenseMtn.PlaceHolder.Items' | translate }}"
+                            formControlName="itemValue">
+                        </p-chips>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-row grid">
+        <!-- Start Date -->
+        <div class="form-col md:col-6 sm:col-12 xs-12  col-12">
+            <div class="form-row grid" style="margin-top: 0;">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">{{ 'BafaLicenseMtn.Label.StartDate' | translate}}</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-date">
+                        <p-calendar
+                            [selectOtherMonths]="true"
+                            [showButtonBar]="true"
+                            formControlName="startDate"
+                            dateFormat="yy/mm/dd"
+                            (onInput)="onDatePickerInput($event)"
+                            (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                            (onBlur)="onDatePickerSelectAndBlur()"
+                            (onClose)="onDatePickerClose('startDate');onCheckDateHandler()"
+                            appendTo="body" [showIcon]="true"
+                            placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}}"
+                            placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                            >
+                        </p-calendar>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Date -->
+        <div class="form-col md:col-6 sm:col-12 xs-12  col-12">
+            <div class="form-row grid" style="margin-top: 0;">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">{{ 'BafaLicenseMtn.Label.EndDate' | translate}}</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-date">
+                        <p-calendar
+                          [selectOtherMonths]="true"
+                          [showButtonBar]="true"
+                          formControlName="endDate"
+                          dateFormat="yy/mm/dd"
+                          [minDate]="formData.controls.startDate.value"
+                          (onInput)="onDatePickerInput($event)"
+                          (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                          (onBlur)="onDatePickerSelectAndBlur()"
+                          (onClose)="onDatePickerClose('endDate');onCheckDateHandler()"
+                          appendTo="body" [showIcon]="true"
+                          placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}}"
+                          placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                          >
+                        </p-calendar>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 按鈕 -->
+    <div class="btn-container">
+        <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-secondary"
+            (click)="resetOnClick()"></button>
+        <button pButton type="button" label="{{ 'Button.Label.Query' | translate }}" (click)="searchOnClick()"
+            *ngIf="showSearchBtn"></button>
+        <button pButton type="button" label="{{ 'Button.Label.Download' | translate }}" class="btn-teal"
+            (click)="downloadOnClick()"></button>
+    </div>
+</form>
+
+<app-bafa-batch-edit *ngIf="selectedData && showBatchEdit" (closeDialog)="batchOnClose()"
+    (submitData)="getBatchEdit($event)"></app-bafa-batch-edit>
+
+<!-- Table -->
+<app-common-data-table-viewer [data]="itemQueue.getValue()" [tableCols]="tableCols" [tableSettings]="dataTableSettings"
+    (isAddItemActive)="openBafaDialog(null)" (outputTargetData)="openBafaDialog($event)"
+    (detailActive)="detailOnClick($event)" (outputSelectedData)="tableOnSelectedData($event)"
+    [cleanSelected]="cleanTable">
+</app-common-data-table-viewer>
+
+<app-bafa-add-dialog [showDialog]="showAddDialog" (closeDialog)="closeBafaDialog()" (submitData)="getAddData($event)"
+    [editObj]="editObj">
+</app-bafa-add-dialog>
+
+<app-bafa-detail-dialog [visible]="showDetailDialog" [data]="detailObj" (visibleChange)="showDetailDialog = false">
+</app-bafa-detail-dialog>
+
+<p-progressSpinner *ngIf="showSpinner"></p-progressSpinner>
+
+<!-- 訊息dialog -->
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams" [contentList]="noticeContentList">
+</app-common-notice-check-dialog>

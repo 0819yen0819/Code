@@ -1,0 +1,42 @@
+<p-dialog
+  [header]="dialogSetting.getValue().title"
+  [(visible)]="dialogSetting.getValue().visiable"
+  [modal]="dialogSetting.getValue().modal"
+  [draggable]="dialogSetting.getValue().draggable"
+  [resizable]="dialogSetting.getValue().resizeable"
+>
+  <p-tabView>
+    <!--# Single item add event tab-->
+    <p-tabPanel
+      [header]="mode == 'edit' ? singleModifyTabTitle : singleAddTabTitle"
+      leftIcon="pi pi-file"
+    >
+      <app-am-exp-single-item
+        [settingParams]="settingParams"
+        [mode]="mode"
+        [selectedData]="selectedData"
+        (outputResult)="onItembyFileCallback($event)"
+      ></app-am-exp-single-item>
+    </p-tabPanel>
+
+    <!--# Multi item add event tab-->
+    <ng-container
+      *ngIf="
+        mode == 'add' &&
+        settingParams.data &&
+        settingParams.data.country !== 'SG'
+      "
+    >
+      <p-tabPanel
+        [header]="mode == 'edit' ? '' : multiAddTabTitle"
+        [leftIcon]="mode == 'edit' ? '' : 'pi pi-clone'"
+        [disabled]="mode == 'edit' ? true : false"
+      >
+        <app-add-exp-multi-item
+          [closeNotice]="closeNotice"
+          (outputMultiItem)="onItembyFileCallback($event)"
+        ></app-add-exp-multi-item>
+      </p-tabPanel>
+    </ng-container>
+  </p-tabView>
+</p-dialog>

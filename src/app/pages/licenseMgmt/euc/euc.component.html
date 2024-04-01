@@ -1,0 +1,473 @@
+<!--# common notice-check dialog-->
+<app-common-notice-check-dialog
+  [settingParams]="noticeCheckDialogParams"
+  [contentList]="noticeContentList"
+  (closeNotice)="onRedirectHandler()"
+></app-common-notice-check-dialog>
+
+<!--# common selector dialog-->
+<app-common-selector-dialog
+  [settingParams]="selectorDialogParams"
+  (outputResult)="onSelectorDialogCallback($event)"
+></app-common-selector-dialog>
+
+<!--# apply add assignee action dialog -->
+<app-common-apply-action-dialog
+  [settingParams]="applyDialogParams"
+  (outputResult)="onApplyDialogCallback($event)"
+>
+</app-common-apply-action-dialog>
+
+<!--# item add dialog -->
+<app-am-euc-item-dialog
+  [settingParams]="itemAMDialogParams"
+  [mode]="itemAMDialogMode"
+  [selectedData]="selectedItemInfo"
+  (outputResult)="onItemAMDialogCallback($event)"
+  [sampleFileNo]="1180"
+></app-am-euc-item-dialog>
+
+<!--# Main title Section-->
+<div stickyZone>
+  <app-common-license-form-header
+    [formType]="formType"
+    (outputCurFormNo)="onCurFormNoHandler($event);"
+    (outputUserDeptInfo)="onUserDeptHandler($event)"
+    (outputCurFormTypeId)="onFormTypeIdHandler($event)"
+  ></app-common-license-form-header>
+
+  <p-tabView>
+    <p-tabPanel
+      header="{{ 'LicenseMgmt.Common.Tabs.ApplicationInfo' | translate }}"
+    >
+      <ng-container *ngIf="this.curFormStatus.status == 'draft'">
+        <div class="hint-highlight">
+          <span>*{{ "LicenseMgmt.EUC.Hint.EUCFile" | translate }}</span>
+        </div>
+      </ng-container>
+      <div class="euc-rule-info-container">
+        <span
+          >*{{
+            eucRuleInfo
+              ? curLang === "zh-tw"
+                ? eucRuleInfo.rulesCategoryRemarkCn
+                : eucRuleInfo.rulesCategoryRemarkEn
+              : ""
+          }}<a [href]="eucRuleInfo ? eucRuleInfo.ruleVal : '#'" target="_blank">
+            <span>
+              {{
+                eucRuleInfo
+                  ? curLang === "zh-tw"
+                    ? eucRuleInfo.rulesCategoryRuleItemCn
+                    : eucRuleInfo.rulesCategoryRuleItemEn
+                  : ""
+              }}
+            </span>
+          </a></span
+        >
+      </div>
+      <form [formGroup]="formGroup" class="form-container form-table">
+        <!--# Form Section-->
+
+        <!--# Customer or Vendor Selector-->
+        <div class="form-row multi-input-kit grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div
+                  class="form-label require"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: start;
+                  "
+                >
+                  <label class="txt"
+                    >{{ "ImpExpLicenseMtn.Label.Customer" | translate }} /
+                    <label>{{
+                      "ImpExpLicenseMtn.Label.Vendor" | translate
+                    }}</label>
+                  </label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input md:col-4 lg:col-3 col-12">
+                  <div class="form-select">
+                    <p-dropdown
+                      name="curstorType"
+                      [options]="userTypeOptions"
+                      placeholder="{{
+                        'DropDown.PlaceHolder.PleaseChoose' | translate
+                      }}"
+                      formControlName="curstorType"
+                      (onChange)="onUserTypeHandler()"
+                    ></p-dropdown>
+                  </div>
+                </div>
+                <div class="form-col form-input md:col-8 lg:col-9 col-12">
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="curstorId"
+                      readonly
+                      placeholder="{{
+                        'Input.PlaceHolder.PleaseSelect' | translate
+                      }}"
+                      formControlName="curstorId"
+                      [value]="curCVLable"
+                      (click)="onOpenSelectorDialogEvent()"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# End User and End Use-->
+        <div class="form-row end-selector grid">
+          <div class="form-col lg:col-6 col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{
+                    "LicenseMgmt.EUC.Label.EndUser" | translate
+                  }}</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-select-btnkit">
+                    <p-selectButton
+                      [options]="eUserTypeOptions"
+                      optionLabel="label"
+                      optionValue="value"
+                      formControlName="endUserType"
+                    >
+                      <ng-template let-item>
+                        <i
+                          *ngIf="
+                            formGroup.get('endUserType').value == 'Y' &&
+                            item.value === 'Y'
+                          "
+                          class="pi pi-check"
+                        ></i>
+                        <i
+                          *ngIf="
+                            formGroup.get('endUserType').value == 'N' &&
+                            item.value === 'N'
+                          "
+                          class="pi pi-check"
+                        ></i>
+                        <span>{{ item.label }}</span>
+                      </ng-template>
+                    </p-selectButton>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-col lg:col-6 col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{
+                    "LicenseMgmt.EUC.Label.EndUse" | translate
+                  }}</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-select-btnkit">
+                    <p-selectButton
+                      [options]="eUseTypeOptions"
+                      optionLabel="label"
+                      optionValue="value"
+                      formControlName="endUseType"
+                    >
+                      <ng-template let-item>
+                        <i
+                          *ngIf="
+                            formGroup.get('endUseType').value == 'Y' &&
+                            item.value === 'Y'
+                          "
+                          class="pi pi-check"
+                        ></i>
+                        <i
+                          *ngIf="
+                            formGroup.get('endUseType').value == 'N' &&
+                            item.value === 'N'
+                          "
+                          class="pi pi-check"
+                        ></i>
+                        <span>{{ item.label }}</span>
+                      </ng-template>
+                    </p-selectButton>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# OU Group Selector -->
+        <div class="form-row ou-kit-selector grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{
+                    "LicenseMgmt.EUC.Label.Group" | translate
+                  }}</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div
+                  class="form-col form-input col-12"
+                  style="height: unset !important"
+                >
+                  <div class="form-select">
+                    <p-dropdown
+                      name="groupId"
+                      [options]="ouGroupsOptions.getValue()"
+                      placeholder="{{
+                        'DropDown.PlaceHolder.PleaseChoose' | translate
+                      }}"
+                      [filter]="true"
+                      formControlName="groupId"
+                      (onChange)="onOUGroupHandler()"
+                    ></p-dropdown>
+                  </div>
+                </div>
+
+                <ng-container *ngIf="tanentOUsList.getValue().length > 0">
+                  <div class="form-col form-tags col-12">
+                    <div class="form-row grid gap-2">
+                      <ng-container
+                        *ngFor="let ous of tanentOUsList.getValue()"
+                      >
+                        <div class="flex-shrink-1 form-col form-tag">
+                          <span>{{ ous.ouCode }}-{{ ous.ouShortName }}</span>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# Exp Date Range -->
+        <div class="form-row exp-date grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">{{
+                    "LicenseMgmt.EUC.Label.Exp" | translate
+                  }}</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col col-12">
+                  <div class="form-label">
+                    <label class="txt"
+                      >{{ twoYRange[0] | date : "yyyy/MM/dd" }}&nbsp;~&nbsp;{{
+                        twoYRange[1] | date : "yyyy/MM/dd"
+                      }}</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# Remark -->
+        <div class="form-row remark grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">{{
+                    "LicenseMgmt.EUC.Label.Remark" | translate
+                  }}</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-input">
+                    <textarea
+                      autocomplete="off"
+                      type="text"
+                      pInputTextarea
+                      name="remark"
+                      formControlName="remark"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# items Section-->
+        <div class="sub-title-container item-section">
+          <ng-container
+            *ngIf="curFormStatus.status != 'approve' || isTaskStarter"
+          >
+            <div>
+              <button
+                pButton
+                class="add-item"
+                icon="pi pi-plus"
+                type="button"
+                label="{{ 'Button.Label.Add' | translate }} Item"
+                (click)="onOpenAddItemDialogEvent()"
+                [disabled]="curFormStatus.status == 'approve' && !isTaskStarter"
+              ></button>
+            </div>
+          </ng-container>
+        </div>
+
+        <ng-container
+          *ngIf="
+            router.url.includes('approving') &&
+            isTCSUMember &&
+            selectedDataFromTable &&
+            selectedDataFromTable.length > 0
+          "
+        >
+          <app-euc-item-batch-handler
+            [data]="selectedDataFromTable"
+            (onResetSelected)="onCancelSelectedDataHandler()"
+            (outputResult)="onMultiItemBatchEditHandler($event)"
+          ></app-euc-item-batch-handler>
+        </ng-container>
+
+        <!--# item list table-->
+        <app-common-data-table-viewer
+          [data]="itemQueue.getValue()"
+          [tableCols]="itemTableCols"
+          [tableSettings]="dataTableSettings"
+          [cleanSelected]="
+            selectedDataFromTable && selectedDataFromTable.length === 0
+              ? true
+              : false
+          "
+          (outputTargetData)="onEditTargetData($event)"
+          (outputSelectedData)="onSelectedDataHandler($event)"
+          (outputAfterDeletedData)="onAfterDeletedDataCallback($event)"
+        ></app-common-data-table-viewer>
+
+        <ng-container *ngIf="curFormStatus.status != 'approve'">
+          <!--# comment Section-->
+          <div class="sub-title-container comment-section">
+            <p>{{ "LicenseMgmt.Common.Title.Opinion" | translate }}</p>
+          </div>
+
+          <!--# Comment -->
+          <div class="form-row remark grid">
+            <div class="form-col col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label">
+                    <label class="txt">{{
+                      "LicenseMgmt.Common.Label.Opinion" | translate
+                    }}</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div class="form-col form-input col-12">
+                    <div class="form-input no-h-full">
+                      <textarea
+                        autocomplete="off"
+                        type="text"
+                        pInputTextarea
+                        name="comment"
+                        formControlName="comment"
+                      ></textarea>
+                      <div
+                        class="form-hint"
+                        [class]="
+                          formGroup.get('comment').value != null &&
+                          formGroup.get('comment').value.length > 250
+                            ? 'warring'
+                            : ''
+                        "
+                      >
+                        <span
+                          >{{
+                            "LicenseMgmt.Common.Hint.CurWordCount" | translate
+                          }}&nbsp;&nbsp;{{
+                            formGroup.get("comment").value == null
+                              ? 0
+                              : formGroup.get("comment").value.length
+                          }}&nbsp;/&nbsp;250</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <!--# action Section-->
+        <ng-container *ngIf="curFormStatus.status != 'approve'">
+          <div class="btn-container">
+            <button
+              pButton
+              type="button"
+              label="{{ 'Button.Label.Cancel' | translate }}"
+              class="btn-gray"
+              (click)="onFormCancelSubmitHandler()"
+            ></button>
+            <button
+              pButton
+              type="button"
+              class="submit"
+              label="{{ 'Button.Label.Submit' | translate }}"
+              (click)="onFormSubmit('Apply', 'Apply')"
+            ></button>
+            <button
+              pButton
+              type="button"
+              label="{{ 'Button.Label.Draft' | translate }}"
+              class="draft btn-teal"
+              (click)="onFormSubmit('Apply', 'Draft')"
+            ></button>
+            <button
+              pButton
+              type="button"
+              label="{{ 'Button.Label.RedirectApproval' | translate }}"
+              class="btn-outline-blue"
+              (click)="onOpenApplyAddAssigneeEvent()"
+            ></button>
+          </div>
+        </ng-container>
+      </form>
+    </p-tabPanel>
+    <ng-container *ngIf="curFormStatus.status == 'approve'">
+      <p-tabPanel
+        header="{{ 'LicenseMgmt.Common.Tabs.AuditHistoryLog' | translate }}"
+        [disabled]="curFormStatus.status == 'draft'"
+      >
+        <app-common-audit-history-log
+          [formNo]="curFormNo"
+          [formTypeId]="curFormTypeId"
+          *ngIf="reassignDialogService.reAssignHistoryRefreshController"
+        ></app-common-audit-history-log>
+      </p-tabPanel>
+    </ng-container>
+    <p-tabPanel
+      header="{{ 'LicenseMgmt.Common.Tabs.AttachmentLink' | translate }}"
+    >
+      <app-attachment-uploader [formTypeId]="curFormTypeId"  [formNo]="curFormNo"></app-attachment-uploader>
+    </p-tabPanel>
+  </p-tabView>
+</div>

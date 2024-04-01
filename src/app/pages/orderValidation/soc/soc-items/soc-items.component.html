@@ -1,0 +1,409 @@
+<!-- 資料顯示的部分 垂直置上 : 文字資料靠左 / 數字資料靠右 -->
+<!-- 手機板時，Approve與Reject要同一行。 (ex.Approve 按鈕 Reject 按鈕) -->
+
+<!-- 明細 -->
+<div *ngIf="tableData" class="socItemTable">
+
+    <p-table [value]="tableData" #dt responsiveLayout="stack" [breakpoint]="rwdCutOffPointPx"
+        [scrollable]="(innerWidth < scrollPoint) && (innerWidth > rwdCutOffPoint) ">
+        <!-- 表頭 -->
+        <ng-template pTemplate="header">
+
+            <!-- 手機版全選按鈕 -->
+            <div *ngIf="enableEditing && (innerWidth < rwdCutOffPoint)" class="mobile-toggle-all-container">
+                <span>Approve ({{'SalesOrderChange.Label.SelectAll' | translate}}) </span>
+                <input type="radio" name="headerRadioMobile" value="JavaScript" value="A" (click)="toggleAll('A')"
+                    [(ngModel)]="isAll">
+                <span>Reject ({{'SalesOrderChange.Label.SelectAll' | translate}}) </span>
+                <input type="radio" name="headerRadioMobile" value="JavaScript" value="R" (click)="toggleAll('R')"
+                    [(ngModel)]="isAll">
+            </div>
+            <hr *ngIf="enableEditing && (innerWidth < rwdCutOffPoint)">
+
+            <tr class="tr-style">
+
+                <ng-container *ngFor="let item of header;">
+
+                    <!-- 表頭Approve -->
+                    <ng-container *ngIf="(item.line1.label === 'Approve' || item.line1.label === 'Reject'  )">
+                        <th id="header-td" class="th-approving-container" [ngClass]="{
+                            'xs-col' : (innerWidth > scrollPoint),
+                            'sm-col' : !(innerWidth > scrollPoint)
+                        }">
+                            <div class="th-outer-container">
+                                <div class="th-approving-label"> {{item.line1.label}} </div>
+                                <input *ngIf="(item.line1.label === 'Approve') && enableEditing" type="radio"
+                                    name="headerRadio" value="JavaScript" value="A" (click)="toggleAll('A')"
+                                    [(ngModel)]="isAll">
+
+                                <input *ngIf="(item.line1.label === 'Reject') && enableEditing" type="radio"
+                                    name="headerRadio" value="JavaScript" value="R" (click)="toggleAll('R')"
+                                    [(ngModel)]="isAll">
+                            </div>
+                        </th>
+                    </ng-container>
+
+                    <!-- 其他表頭 -->
+                    <ng-container *ngIf="!(item.line1.label === 'Approve' || item.line1.label === 'Reject')">
+                        <th id="header-td" class="th-normal-container" [ngClass]="{
+                            'xs-col' : (innerWidth > scrollPoint),
+                            'sm-col' : !(innerWidth > scrollPoint)
+                            }">
+
+                            <div *ngIf="!item.line2.label">
+                                <div class="only-line1-outer-container">
+                                    <div class="only-line1-text"> {{item.line1.label}} </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="item.line2.label">
+                                <div class="multiple-line-text-line1"> {{item.line1.label}} </div>
+                                <div class="multiple-line-text-line2">{{item.line2.label}} </div>
+                            </div>
+                        </th>
+                    </ng-container>
+                </ng-container>
+
+            </tr>
+        </ng-template>
+
+        <!-- 表身 -->
+        <ng-template pTemplate="body" let-tableData>
+            <tr [ngClass]="{
+                    'xs-col' : (innerWidth > scrollPoint),
+                    'sm-col' : !(innerWidth > scrollPoint)
+                }">
+                <td id="content-td" style="padding: 0; line-height: 1.25; border-top: none;"
+                    *ngFor="let item of header;let i = index ;" #tableBodyElement [ngClass]="{
+                        'xs-col' : smallSizeField.includes(item.line1.label) && (innerWidth > compressionMidSizeFieldPoint),
+                        'md-col' : midSizField.includes(item.line1.label) && (innerWidth > compressionMidSizeFieldPoint),
+                        'sm-col' : !(smallSizeField.includes(item.line1.label) && (innerWidth > compressionMidSizeFieldPoint)) && !(midSizField.includes(item.line1.label) && (innerWidth > compressionMidSizeFieldPoint)) 
+                    }">
+
+                    <!-- 資料內容(非手機板) -->
+                    <div *ngIf="innerWidth > rwdCutOffPoint">
+                        <!-- Approve或Reject是Radio button -->
+                        <div *ngIf="item.line1.label === 'Approve' && (innerWidth > rwdCutOffPoint)"
+                            style="display: flex; align-items: center; justify-content: center;">
+                            <input type="radio" [name]="tableData['radioGroup']" value="A"
+                                [disabled]="!enableEditing || tableData['defaultStatusReject']"
+                                [(ngModel)]="tableData['status']" (ngModelChange)="tableDataChange()">
+                        </div>
+                        <div *ngIf="item.line1.label === 'Reject' && (innerWidth > rwdCutOffPoint)"
+                            style="display: flex; align-items: center; justify-content: center;">
+                            <input type="radio" [name]="tableData['radioGroup']" value="R"
+                                [disabled]="!enableEditing  || tableData['defaultStatusReject']"
+                                [(ngModel)]="tableData['status']" (ngModelChange)="tableDataChange()">
+                        </div>
+
+                        <div *ngIf="!(item.line1.label === 'Approve' || item.line1.label === 'Reject')">
+                            <!-- line1 -->
+                            <div class="data-content"
+                                [ngClass]="{'only-line1' : !item.line2.label,'align-right' : alignRightField.includes(item.line1.field) && innerWidth > rwdCutOffPoint,'single-field-align-right':(item.line1.label === 'Margin%') }"
+                                [style.height.px]="maxColumnsHeightLine1">
+                                <!-- 日期 -->
+                                <span *ngIf="dateHeader.includes(item.line1.label)" class="text-output"
+                                    [ngStyle]="{'white-space' : wrapField.includes(item.line1.label) && (innerWidth > scrollPoint) ? 'nowrap' : 'wrap'}"
+                                    [ngClass]="tableData[item.line1.field +'cssClass'] ? tableData[item.line1.field +'cssClass']: highlightThis(tableData,item.line1.field)"
+                                    >
+                                    {{tableData[item.line1.field] | date: "yyyy/MM/dd"}}
+                                </span>
+
+                                <!-- Margin (Margin%要改為顯示「紅字」，但若<=0就要顯示紅底白字) -->  
+                                <ng-container *ngIf="(item.line1.field === 'salesMargin')">
+                                    <span *ngIf="!dateHeader.includes(item.line1.label)"  class="text-output" style="color: red;"
+                                    [ngClass]="{'red-background-white-text':tableData[item.line1.field] < 0}">
+                                        {{tableData[item.line1.field]}}</span>
+                                </ng-container>
+             
+                                <!-- 一般顯示 -->
+                                <span *ngIf="!dateHeader.includes(item.line1.label) && !(item.line1.field === 'salesMargin')"  
+                                class="text-output"
+                                [ngClass]="tableData[item.line1.field +'cssClass'] ? tableData[item.line1.field +'cssClass']: highlightThis(tableData,item.line1.field)"
+                                >
+                                    {{tableData[item.line1.field]}}</span>
+                                <span
+                                    *ngIf="!dateHeader.includes(item.line1.label) && !tableData[item.line1.field]">&nbsp;</span>
+                            </div>
+
+
+                            <!-- 如果有line2 -->
+                            <ng-container *ngIf="item.line2.label">
+                                <hr class="rwd-data-hr">
+
+                                <div class="data-content" class="data-content"
+                                    [ngClass]="{'align-right' : alignRightField.includes(item.line2.field) && innerWidth > rwdCutOffPoint}"
+                                    [style.height.px]="maxColumnsHeightLine2">
+                                    <!-- Input -->
+                                    <div class="form-input" *ngIf="item.line2.label === 'Comments'">
+                                        <input type="text" pInputText
+                                            style="width: 100%;  max-width: 40vw; font-size: 12px; padding: 6px 8px 8px 0; font-weight: bold;"
+                                            [disabled]="!enableEditing || tableData['defaultStatusReject']" [(ngModel)]="tableData['comments']"
+                                            (ngModelChange)="tableDataChange()" />
+                                    </div>
+
+                                    <!-- 日期 -->
+                                    <span *ngIf="dateHeader.includes(item.line2.label)" class="text-output"
+                                        [ngStyle]="{'white-space' : wrapField.includes(item.line2.label) && (innerWidth > scrollPoint) ? 'nowrap' : 'wrap'}"
+                                        [ngClass]="tableData[item.line2.field +'cssClass'] ? tableData[item.line2.field +'cssClass']: highlightThis(tableData,item.line2.field)">{{tableData[item.line2.field] | date: "yyyy/MM/dd"}}
+                                    </span>
+
+                                    <!-- Item Type -->
+                                    <span *ngIf="item.line2.label === 'Item Type'" [innerHTML]="tableData['itemTypeInnerHTML']"></span>
+
+                                    <!-- 一般顯示 -->
+                                    <span
+                                        *ngIf="!(item.line2.label === 'Comments') && !(dateHeader.includes(item.line2.label)) && !(item.line2.label === 'Item Type')" class="text-output"
+                                        [ngClass]="tableData[item.line2.field +'cssClass'] ? tableData[item.line2.field +'cssClass']: highlightThis(tableData,item.line2.field)">{{tableData[item.line2.field]}}</span>
+                                    <span
+                                        *ngIf="!(item.line2.label === 'Comments') && !(dateHeader.includes(item.line2.label)) && !tableData[item.line2.field]">
+                                        &nbsp;</span>
+                                </div>
+
+                            </ng-container>
+
+                        </div>
+                    </div>
+
+                    <!-- 手機板 -->
+
+                    <!-- 欄位名稱 (手機板only Approve表頭與一般表頭) -->
+                    <div class="p-column-title" *ngIf="(item.line1.label === 'Approve') && innerWidth <= rwdCutOffPoint"
+                        style="display: flex; justify-content: space-around; width: 100%;  font-size: 16px;">
+                        <div>Approve</div>
+                        <input type="radio" [name]="tableData['radioGroup']" value="A"
+                            [disabled]="!enableEditing  || tableData['defaultStatusReject']"
+                            [(ngModel)]="tableData['status']" (ngModelChange)="tableDataChange()">
+                        <div>Reject</div>
+                        <input type="radio" [name]="tableData['radioGroup']" value="R"
+                            [disabled]="!enableEditing  || tableData['defaultStatusReject']"
+                            [(ngModel)]="tableData['status']" (ngModelChange)="tableDataChange()">
+                    </div>
+
+                    <!-- 資料內容(手機板) -->
+                    <div *ngIf="innerWidth <= rwdCutOffPoint">
+
+                        <div *ngIf="!(item.line1.label === 'Approve' || item.line1.label === 'Reject')">
+
+                            <div *ngIf="mobileCoreFields.includes(item.line1.field)"
+                                style="display: flex; justify-content: space-between; align-items: center;width: 90vw; margin-top: 10px;">
+
+
+                                <div class="p-column-title" style="white-space: nowrap; font-size: 16px; "
+                                    *ngIf="!(item.line1.label === 'Approve' || item.line1.label === 'Reject')">
+                                    <div>{{item.line1.label}} </div>
+                                </div>
+
+                                <!-- line1 -->
+                                <div class="data-content"
+                                    [ngClass]="{'only-line1' : !item.line2.label,'align-right' : alignRightField.includes(item.line1.field) && innerWidth > rwdCutOffPoint }"
+                                    [style.height.px]="maxColumnsHeightLine1">
+
+                                    <!-- 日期 -->
+                                    <span *ngIf="dateHeader.includes(item.line1.label)" class="text-output"
+                                        [ngStyle]="{'white-space' : wrapField.includes(item.line1.label) && (innerWidth > scrollPoint) ? 'nowrap' : 'wrap'}"
+                                        [ngClass]="tableData[item.line1.field +'cssClass'] ? tableData[item.line1.field +'cssClass']: highlightThis(tableData,item.line1.field)"
+                                        >{{tableData[item.line1.field] | date: "yyyy/MM/dd"}}
+                                    </span>
+
+                                    <!-- Margin (Margin%要改為顯示「紅字」，但若<=0就要顯示紅底白字) -->  
+                                    <ng-container *ngIf="(item.line1.field === 'salesMargin')">
+                                        <span *ngIf="!dateHeader.includes(item.line1.label)"  class="text-output" style="color: red;"
+                                        [ngClass]="{'red-background-white-text':tableData[item.line1.field] < 0}">
+                                            {{tableData[item.line1.field]}}</span>
+                                    </ng-container>
+
+                                    <!-- 一般顯示 -->
+                                    <span *ngIf="!dateHeader.includes(item.line1.label) && !(item.line1.field === 'salesMargin')" class="text-output"
+                                    [ngClass]="tableData[item.line1.field +'cssClass'] ? tableData[item.line1.field +'cssClass']: highlightThis(tableData,item.line1.field)"
+                                    >{{tableData[item.line1.field]}}</span>
+                                    <span
+                                        *ngIf="!dateHeader.includes(item.line1.label) && !tableData[item.line1.field]">&nbsp;</span>
+                                </div>
+
+                            </div>
+
+                            <div *ngIf="mobileCoreFields.includes(item.line2.field)"
+                                style="display: flex;  justify-content: space-between; align-items: center; width: 90vw; margin-top: 10px;">
+
+                                <div class="p-column-title" style="white-space: nowrap; font-size: 16px; "
+                                    *ngIf="!(item.line1.label === 'Approve' || item.line1.label === 'Reject')">
+                                    <div *ngIf="item.line2.label">{{item.line2.label}}</div>
+                                </div>
+
+                                <!-- 如果有line2 -->
+                                <ng-container *ngIf="item.line2.label">
+                                    <hr class="rwd-data-hr">
+
+                                    <div class="data-content" class="data-content"
+                                        [ngClass]="{'align-right' : alignRightField.includes(item.line2.field) && innerWidth > rwdCutOffPoint}"
+                                        [style.height.px]="maxColumnsHeightLine2">
+                                        <!-- Input -->
+                                        <div class="form-input" *ngIf="item.line2.label === 'Comments'">
+                                            <input type="text" pInputText
+                                                style="height: 6px; width: 100%;  max-width: 40vw; font-size: 16px; padding: 16px 8px 8px 0;"
+                                                [disabled]="!enableEditing || tableData['defaultStatusReject']" [(ngModel)]="tableData['comments']"
+                                                (ngModelChange)="tableDataChange()" />
+                                        </div>
+
+                                        <!-- 日期 -->
+                                        <span *ngIf="dateHeader.includes(item.line2.label)" class="text-output"
+                                            [ngStyle]="{'white-space' : wrapField.includes(item.line2.label) && (innerWidth > scrollPoint) ? 'nowrap' : 'wrap'}"
+                                            [ngClass]="tableData[item.line2.field +'cssClass'] ? tableData[item.line2.field +'cssClass']: highlightThis(tableData,item.line2.field)">{{tableData[item.line2.field] | date: "yyyy/MM/dd"}}
+                                        </span>
+
+                                        <!-- Item Type -->
+                                        <span *ngIf="item.line2.label === 'Item Type'" [innerHTML]="tableData['itemTypeInnerHTML']"></span>
+
+                                        <!-- 一般顯示 -->
+                                        <span
+                                            *ngIf="!(item.line2.label === 'Comments') && !(dateHeader.includes(item.line2.label)) && !(item.line2.label === 'Item Type')" class="text-output"
+                                            [ngClass]="tableData[item.line2.field +'cssClass'] ? tableData[item.line2.field +'cssClass']: highlightThis(tableData,item.line2.field)">{{tableData[item.line2.field]}}</span>
+                                        <span
+                                            *ngIf="!(item.line2.label === 'Comments') && !(dateHeader.includes(item.line2.label)) && !tableData[item.line2.field]">
+                                            &nbsp;</span>
+                                    </div>
+
+                                </ng-container>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+
+                </td>
+
+
+                <td *ngIf="innerWidth <= rwdCutOffPoint" id="content-td" 
+                style="padding: 0; line-height: 1.25; border-top: none; margin: 3px 0 -5px 0;" #tableBodyElement class="sm-col"> 
+
+                    <div class="p-column-title" style="white-space: nowrap; font-size: 16px; ">
+                        <div>More Info</div>
+                    </div>
+
+                    <button class="extend-btn"
+                        (click)="tableData['isExpanded'] = !tableData['isExpanded']; detectChanges();"
+                        [class.expand]="tableData['isExpanded']" [class.collapsed]="!tableData['isExpanded']">
+                        <div class="button-content">
+                            {{ tableData['isExpanded'] ? 'Close' : 'More'}}
+                        </div>
+                    </button>
+
+                </td>
+
+                <!-- 跟上面的 <td> 手機板內容一樣，只是差在是否有 mobileCoreFields.includes -->
+                <ng-container *ngIf="tableData['isExpanded']">
+                    <ng-container *ngFor="let item of header;let i = index ;">
+
+                        <td *ngIf="!mobileCoreFields.includes(item.line1.field) || !mobileCoreFields.includes(item.line2.field)"
+                            id="content-td" style="padding: 0; line-height: 1.25; border-top: none;" #tableBodyElement
+                            [ngClass]="{
+                        'xs-col' : smallSizeField.includes(item.line1.label) && (innerWidth > compressionMidSizeFieldPoint),
+                        'md-col' : midSizField.includes(item.line1.label) && (innerWidth > compressionMidSizeFieldPoint),
+                        'sm-col' : !(smallSizeField.includes(item.line1.label) && (innerWidth > compressionMidSizeFieldPoint)) && !(midSizField.includes(item.line1.label) && (innerWidth > compressionMidSizeFieldPoint)) 
+                    }">
+
+                            <!-- 資料內容(手機板) -->
+                            <div *ngIf="!(item.line1.label === 'Approve' || item.line1.label === 'Reject')">
+
+                                <div *ngIf="!mobileCoreFields.includes(item.line1.field)"
+                                    style="display: flex; justify-content: space-between; align-items: center;width: 90vw; margin-top: 10px;">
+
+
+                                    <div class="p-column-title" style="white-space: nowrap; font-size: 16px; "
+                                        *ngIf="!(item.line1.label === 'Approve' || item.line1.label === 'Reject')">
+                                        <div>{{item.line1.label}} </div>
+                                    </div>
+
+                                    <!-- line1 -->
+                                    <div class="data-content"
+                                        [ngClass]="{'only-line1' : !item.line2.label,'align-right' : alignRightField.includes(item.line1.field) && innerWidth > rwdCutOffPoint }"
+                                        [style.height.px]="maxColumnsHeightLine1">
+
+                                        <!-- 日期 -->
+                                        <span *ngIf="dateHeader.includes(item.line1.label)" class="text-output"
+                                            [ngStyle]="{'white-space' : wrapField.includes(item.line1.label) && (innerWidth > scrollPoint) ? 'nowrap' : 'wrap'}"
+                                            [ngClass]="tableData[item.line1.field +'cssClass'] ? tableData[item.line1.field +'cssClass']: highlightThis(tableData,item.line1.field)"
+                                            >{{tableData[item.line1.field] | date: "yyyy/MM/dd"}}
+                                        </span>
+
+                                        <!-- Margin (Margin%要改為顯示「紅字」，但若<=0就要顯示紅底白字) -->
+                                        <ng-container *ngIf="(item.line1.field === 'salesMargin')">
+                                            <span *ngIf="!dateHeader.includes(item.line1.label)" class="text-output"
+                                                style="color: red;"
+                                                [ngClass]="{'red-background-white-text':tableData[item.line1.field] < 0}">
+                                                {{tableData[item.line1.field]}}</span>
+                                        </ng-container>
+
+                                        <!-- 一般顯示 -->
+                                        <span
+                                            *ngIf="!dateHeader.includes(item.line1.label) && !(item.line1.field === 'salesMargin')"
+                                            class="text-output"
+                                            [ngClass]="tableData[item.line1.field +'cssClass'] ? tableData[item.line1.field +'cssClass']: highlightThis(tableData,item.line1.field)"
+                                            >{{tableData[item.line1.field]}}</span>
+                                        <span
+                                            *ngIf="!dateHeader.includes(item.line1.label) && !tableData[item.line1.field]">&nbsp;</span>
+                                    </div>
+
+                                </div>
+
+                                <div *ngIf="!mobileCoreFields.includes(item.line2.field) && (item.line2.field !== '')"
+                                    style="display: flex;  justify-content: space-between; align-items: center; width: 90vw; margin-top: 10px;">
+
+                                    <div class="p-column-title" style="white-space: nowrap; font-size: 16px; "
+                                        *ngIf="!(item.line1.label === 'Approve' || item.line1.label === 'Reject')">
+                                        <div *ngIf="item.line2.label">{{item.line2.label}}</div>
+                                    </div>
+
+                                    <!-- 如果有line2 -->
+                                    <ng-container *ngIf="item.line2.label">
+                                        <hr class="rwd-data-hr">
+
+                                        <div class="data-content" class="data-content"
+                                            [ngClass]="{'align-right' : alignRightField.includes(item.line2.field) && innerWidth > rwdCutOffPoint}"
+                                            [style.height.px]="maxColumnsHeightLine2">
+                                            <!-- Input -->
+                                            <div class="form-input" *ngIf="item.line2.label === 'Comments'">
+                                                <input type="text" pInputText
+                                                    style="width: 100%;  max-width: 40vw; font-size: 16px; padding: 8px 8px 8px 0;"
+                                                    [disabled]="!enableEditing || tableData['defaultStatusReject']"
+                                                    [(ngModel)]="tableData['comments']"
+                                                    (ngModelChange)="tableDataChange()" />
+                                            </div>
+
+                                            <!-- 日期 -->
+                                            <span *ngIf="dateHeader.includes(item.line2.label)" class="text-output"
+                                                [ngStyle]="{'white-space' : wrapField.includes(item.line2.label) && (innerWidth > scrollPoint) ? 'nowrap' : 'wrap'}"
+                                                [ngClass]="tableData[item.line2.field +'cssClass'] ? tableData[item.line2.field +'cssClass']: highlightThis(tableData,item.line2.field)">{{tableData[item.line2.field] | date: "yyyy/MM/dd"}}
+                                            </span>
+
+                                            <!-- Item Type -->
+                                            <span *ngIf="item.line2.label === 'Item Type'"
+                                                [innerHTML]="tableData['itemTypeInnerHTML']"></span>
+
+                                            <!-- 一般顯示 -->
+                                            <span
+                                                *ngIf="!(item.line2.label === 'Comments') && !(dateHeader.includes(item.line2.label)) && !(item.line2.label === 'Item Type')"
+                                                class="text-output"  [ngClass]="tableData[item.line2.field +'cssClass'] ? tableData[item.line2.field +'cssClass']: highlightThis(tableData,item.line2.field)">{{tableData[item.line2.field]}}</span>
+                                            <span
+                                                *ngIf="!(item.line2.label === 'Comments') && !(dateHeader.includes(item.line2.label)) && !tableData[item.line2.field]">
+                                                &nbsp;</span>
+                                        </div>
+
+                                    </ng-container>
+
+                                </div>
+                            </div>
+                        </td>
+                    </ng-container>
+                </ng-container>
+
+                <hr class="divider">
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

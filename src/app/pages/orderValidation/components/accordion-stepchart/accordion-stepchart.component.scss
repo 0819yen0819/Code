@@ -1,0 +1,270 @@
+#accordion_stepchart {
+    font-family: arial, helvetica, sans-serif;
+    color: #244987;
+    font-size: 10pt;
+    position: relative;
+    padding: 0.4em;
+    z-index: 21;
+
+    #effect {
+        font-family: arial, helvetica, sans-serif;
+        font-size: 10pt;
+        background: #ffffff
+        /*{bgColorContent}*/
+        ;
+        color: #222222
+        /*{fcContent}*/
+        ;
+        border-top-left-radius: 4px
+        /*{cornerRadius}*/
+        ;
+        border-top-right-radius: 4px
+        /*{cornerRadius}*/
+        ;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border: 0px solid #FFFFFF;
+
+        #h_title {
+            font-family: arial, helvetica, sans-serif;
+            border: 1px solid #aaaaaa;
+            background: #cccccc
+            /*{bgColorHeader}*/
+            ;
+            color: #222222
+            /*{fcHeader}*/
+            ;
+            font-weight: bold;
+            border-top-left-radius: 4px
+            /*{cornerRadius}*/
+            ;
+            border-top-right-radius: 4px
+            /*{cornerRadius}*/
+            ;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            margin: 0;
+            padding: 0.4em;
+        }
+
+
+        #sp_icon {
+            font-family: arial, helvetica, sans-serif;
+            color: #222222
+            /*{fcHeader}*/
+            ;
+            font-weight: bold;
+            text-indent: -99999px;
+            overflow: hidden;
+            background-repeat: no-repeat;
+            width: 16px;
+            height: 16px;
+            background-image: url(~/src/assets/imgs/icon-btn/webflow-icon.png);
+            display: inline-block;
+        }
+
+        .ui-icon-triangle-1-s {
+            background-position: -32px -16px;
+        }
+
+        .ui-icon-triangle-1-e {
+            background-position: -64px -16px;
+        }
+    }
+
+
+    #effect>div {
+        font-family: arial, helvetica, sans-serif;
+        font-size: 10pt;
+        color: #222222
+        /*{fcContent}*/
+        ;
+        overflow: hidden;
+        border-radius: 5px;
+        counter-reset: Number;
+        text-align: center;
+        margin: 10px auto 0 0;
+        border: 1px solid #fff;
+        display: block;
+    }
+
+    .steps2 a {
+        text-decoration: none;
+        outline: none;
+        display: block;
+        float: left;
+        font-size: 11px;
+        font-weight: bold;
+        line-height: 36px;
+        color: #77787b;
+        padding: 4px 15px 4px 70px;
+        background: #d9d9d9;
+        position: relative;
+        border: 1px solid #aaabae;
+    }
+
+    #effect>div>a.active {
+        font-family: arial, helvetica, sans-serif;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        display: block;
+        float: left;
+        font-size: 11px;
+        font-weight: bold;
+        line-height: 36px;
+        padding: 4px 15px 4px 70px;
+        position: relative;
+        border: 1px solid #aaabae;
+        border-radius: 5px 0 0 5px;
+        background: #00a4de;
+        color: #fff;
+    }
+
+    .steps2 a:first-child {
+        padding-left: 46px;
+        border-radius: 5px 0 0 5px;
+    }
+
+    .steps2 a:first-child:before {
+        left: 20px;
+    }
+
+    .steps2 a:before {
+        counter-increment: Number;
+        content: counter(Number);
+        border-radius: 100%;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        margin: 8px 0;
+        position: absolute;
+        left: 45px;
+        background: #77787b;
+        font-weight: bold;
+        color: #fff;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .steps2 a:not(:last-child):after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -24px;
+        width: 44px;
+        height: 44px;
+        transform: scale(0.808) rotate(45deg);
+        z-index: 1;
+        background: #d9d9d9;
+        box-shadow: 1px -1px 0 1px rgba(0, 0, 0, 0.1);
+        border-radius: 0 3px 0 50px;
+        text-align: center;
+        border-right: 1px solid #aaabae;
+        border-top: 1px solid #aaabae;
+    }
+
+    .steps2 a.active:after {
+        background: #00a4de;
+    }
+
+    .steps2 a.done {
+        background: #74B78C;
+        color: #fff;
+    }
+
+    .steps2 a.done:after {
+        background: #74B78C;
+        border-color: #9d9d9d;
+    }
+
+
+    .steps2 a.active {
+        background: #00a4de;
+        color: #fff;
+    }
+
+    .steps2 a:last-child {
+        border-radius: 0 5px 5px 0;
+        padding-right: 20px;
+    }
+
+    .steps2 a.active:before {
+        background: #fff;
+        color: #00a4de;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .steps2 a.done:before {
+        background: #fff;
+        color: #74B78C;
+        font-size: 11px;
+        text-align: center;
+    }
+}
+
+
+// 手機板
+@media screen and (max-width: 768px) {
+    .steps2 {
+        display: flex;
+        flex-direction: column;
+
+        a {
+            display: flex;
+            flex-grow: 1;
+
+        }
+    }
+
+    .steps2 a:first-child:before {
+        left: 45px !important;
+    }
+
+    .steps2 a:first-child {
+        padding-left: 70px !important;
+    }
+
+    .steps2 a.inactive:after {
+        background: none !important;
+    }
+
+    // 小箭頭
+    .steps2 a:not(:last-child).active:after,
+    .steps2 a:not(:last-child).done:after {
+        left: 50% !important;
+        top: 50% !important;
+        transform: scale(0.3) rotate(135deg) !important;
+        box-shadow: none !important;
+        border-radius: none !important;
+    }
+
+}
+
+
+
+// 摺疊
+/* styles.css */
+
+.collapsible-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+}
+
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.collapsible-content.show {
+    max-height: 100vh;
+    opacity: 1;
+} 

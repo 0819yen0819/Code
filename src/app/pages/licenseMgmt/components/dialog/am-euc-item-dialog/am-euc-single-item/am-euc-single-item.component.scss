@@ -1,0 +1,35 @@
+@import "../../../../../../../styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+.form-container {
+  &.form-table {
+    .form-row {
+      .form-col {
+        .form-label {
+          &.force-height {
+            @apply h-12 #{!important};
+          }
+        }
+        .form-input {
+          input {
+            @apply cursor-pointer;
+          }
+        }
+      }
+    }
+  }
+}
+
+.loading-container {
+  @apply flex justify-center items-center h-24 w-full;
+  span {
+    @apply text-gray-400 font-semibold;
+  }
+}
+
+.btn-container {
+  &.loading {
+    @apply mt-0;
+  }
+}

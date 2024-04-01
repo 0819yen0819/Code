@@ -1,0 +1,58 @@
+<p-dialog
+  [header]="dialogSetting.title"
+  [(visible)]="dialogSetting.visiable"
+  [modal]="dialogSetting.modal"
+  [draggable]="dialogSetting.draggable"
+  [resizable]="dialogSetting.resizeable"
+  (onHide)="onDialogClosed()"
+>
+  <div class="form-container form-table">
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{
+                "SoaControlSetup.Label.SpecialApproval" | translate
+              }}</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div
+              class="form-col form-input col-12"
+              style="height: unset !important"
+            >
+              <div class="form-select">
+                <p-dropdown
+                  name="groupId"
+                  [options]="statusOptions"
+                  placeholder="{{
+                    'DropDown.PlaceHolder.PleaseChoose' | translate
+                  }}"
+                  [(ngModel)]="statusSelected"
+                  appendTo="body"
+                ></p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-container">
+    <button
+      pButton
+      type="button"
+      class="btn-gray"
+      label="{{ 'Button.Label.Cancel' | translate }}"
+      (click)="onOutputUpdateInfo(true)"
+    ></button>
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Confirm' | translate }}"
+      (click)="onOutputUpdateInfo()"
+    ></button>
+  </div>
+</p-dialog>

@@ -1,0 +1,41 @@
+.wait-approving-container {
+  @apply mt-6 #{!important};
+  span {
+    @apply text-lg font-semibold text-red-400 text-opacity-90 tracking-wide;
+  }
+  .reminder-send-btn {
+    @apply inline-flex justify-center align-middle items-center;
+    @apply cursor-pointer;
+  }
+}
+#title-sticky {
+  @apply flex;
+  @apply sticky z-[20] #{!important};
+  @apply top-0;
+  @apply bg-white;
+  @apply mt-0;
+
+  .override-content-container-padding {
+    @apply absolute;
+    @apply absolute z-[20] -top-5;
+    @apply bg-white;
+    @apply w-full h-5;
+
+    @media screen and (max-width: 767px) {
+      padding: 10px;
+    }
+  }
+}
+
+.extend-form-container{
+  display: flex;
+  flex-direction: column;
+  padding: 3vh 0; 
+  box-sizing: border-box;
+}
+
+:host ::ng-deep{
+  .form-label{
+    color: #333333;
+  }
+}

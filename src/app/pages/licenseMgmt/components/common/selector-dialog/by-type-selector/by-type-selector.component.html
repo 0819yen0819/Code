@@ -1,0 +1,179 @@
+<ng-container *ngIf="!hideHeaderSearchList.includes(this.selectType)">
+  <form
+    [formGroup]="formGroup"
+    (ngSubmit)="onSearchSubmit()"
+    class="form-container form-table"
+  >
+    <!--# Keyword-->
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="grid md:col col-12">
+            <div
+              class="form-col form-input no-h-full flex-grow-1 flex-shrink-1"
+            >
+              <div class="form-input">
+                <span class="p-input-icon-right">
+                  <ng-container *ngIf="formGroup.get('keyword').value != ''">
+                    <i
+                      class="pi pi-times clean-btn"
+                      (click)="onSearchKeywordClean()"
+                    ></i>
+                  </ng-container>
+                  <input
+                    type="text"
+                    pInputText
+                    name="keyword"
+                    placeholder="{{
+                      'Input.PlaceHolder.PleaseEnterKeyword' | translate
+                    }}"
+                    formControlName="keyword"
+                    autocomplete="off"
+                    autofocus
+                  />
+                </span>
+              </div>
+            </div>
+            <div class="form-col flex-shrink-0">
+              <ng-container
+                *ngIf="isLoading; then loadingTemplate; else notloadingTemplate"
+              ></ng-container>
+              <ng-template #loadingTemplate>
+                <div class="form-action">
+                  <button
+                    pButton
+                    type="submit"
+                    label="{{ 'Button.Label.Quering' | translate }}"
+                    class="submit"
+                    disabled
+                    icon="pi pi-spin pi-spinner"
+                    iconPos="right"
+                  ></button>
+                </div>
+              </ng-template>
+              <ng-template #notloadingTemplate>
+                <div class="form-action">
+                  <button
+                    pButton
+                    type="submit"
+                    label="{{ 'Button.Label.Query' | translate }}"
+                    class="submit"
+                    [disabled]="
+                      this.selectType != 'cusShipToAddress' && !formGroup.valid
+                    "
+                    (click)="onSearchSubmit()"
+                  ></button>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>
+
+<ng-container *ngIf="isLoading">
+  <div class="loading-container">
+    <span>Loading...</span>
+  </div>
+  <div class="btn-container">
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Close' | translate }}"
+      class="btn-gray"
+      (click)="onSelectSubmit('cancel')"
+    ></button>
+  </div>
+</ng-container>
+
+<!--# Item List-->
+<ng-container
+  *ngIf="
+    resultList.getValue().length != 0 && !isEmpty;
+    then hasDataTemplate;
+    else noDataTemplate
+  "
+></ng-container>
+<ng-template #hasDataTemplate>
+  <div class="result-list-container">
+    <p-table
+      #selectorTable
+      [value]="resultList.getValue()"
+      selectionMode="single"
+      [scrollable]="true"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="50"
+      [globalFilterFields]="['label']"
+      (onRowSelect)="onSelectResultChange($event.data)"
+    >
+      <ng-template pTemplate="caption">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="
+              selectorTable.filterGlobal($event.target.value, 'contains')
+            "
+            placeholder="{{
+              'LicenseMgmt.Common.Hint.DoubleSearch' | translate
+            }}"
+          />
+        </span>
+      </ng-template>
+      <ng-template pTemplate="body" let-item>
+        <tr [pSelectableRow]="item">
+          <div>{{ item.label }}</div>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <!--# Selector Actions Section-->
+  <div class="btn-container">
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Cancel' | translate }}"
+      class="btn-gray"
+      (click)="onSelectSubmit('cancel')"
+    ></button>
+    <button
+      pButton
+      type="button"
+      [disabled]="!targetSelectData"
+      label="{{ 'Button.Label.Confirm' | translate }}"
+      (click)="onSelectSubmit('submit')"
+    ></button>
+  </div>
+</ng-template>
+
+<ng-template #noDataTemplate>
+  <ng-container *ngIf="isEmpty == true">
+    <div class="no-data-container">
+      <div class="no-data-notice">
+        <span>{{ "LicenseMgmt.Common.Hint.NoMatchResult" | translate }}</span>
+      </div>
+      <!--# Selector Actions Section-->
+      <div class="btn-container">
+        <button
+          pButton
+          type="button"
+          label="{{ 'Button.Label.Close' | translate }}"
+          class="btn-gray"
+          (click)="onSelectSubmit('cancel')"
+        ></button>
+        <ng-container *ngIf="selectType != 'bafaLicense'">
+          <button
+            pButton
+            type="button"
+            label="{{ 'Button.Label.Reset' | translate }}"
+            (click)="onResetHandler()"
+          ></button>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

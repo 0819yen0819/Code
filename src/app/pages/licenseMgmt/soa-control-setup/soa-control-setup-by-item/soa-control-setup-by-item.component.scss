@@ -1,0 +1,53 @@
+@import "../../../../../styles/wpg-cus-components/cus_form";
+@include FormBaseOverride;
+
+.form-table {
+  .form-col {
+    @apply p-0 lg:pr-[10px]  #{!important};
+  }
+}
+
+.item-select-container {
+  @apply inline-block md:flex md:gap-4;
+  @apply h-fit;
+  .form-select {
+    width: 20%;
+    height: 100%;
+  }
+
+  .form-input,
+  .form-chip {
+    width: 100%;
+  }
+  @media screen and (max-width: 768px) {
+    .form-select {
+      width: 100%;
+      height: 100%;
+    }
+
+    .form-input,
+    .form-chip {
+      width: 100%;
+    }
+  }
+}
+
+.form-search {
+  @apply md:p-[10px] lg:p-[20px];
+  .form-row {
+    &:not(:first-of-type) {
+      @apply md:mt-0 lg:mt-[20px] #{!important};
+      .form-col {
+        @apply md:mt-1 lg:mt-0;
+      }
+    }
+
+    &:first-of-type {
+      .form-col {
+        &:not(:first-of-type) {
+          @apply md:mt-1 lg:mt-0;
+        }
+      }
+    }
+  }
+}

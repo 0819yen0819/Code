@@ -1,0 +1,38 @@
+<div class="form-table">
+    <div class="form-row grid">
+        <div class="form-col col-fixed">
+            <div class="form-label">
+                <label class="txt">{{"LicenseMgmt.Common.Label.FileUpload" | translate}}</label>
+            </div>
+        </div>
+
+        <div class="form-col col">
+            <p-fileUpload #fileUploader class="form-file-upload" name="fileUpload[]"
+                [multiple]="fileUploaderSettings.multiple" [auto]="fileUploaderSettings.auto"
+                [chooseIcon]="fileUploaderSettings.chooseIcon" [chooseLabel]="fileUploaderSettings.chooseLabel"
+                [showCancelButton]="fileUploaderSettings.showCancelButton"
+                [showUploadButton]="fileUploaderSettings.showUploadButton"
+                [uploadIcon]="fileUploaderSettings.uploadIcon" [fileLimit]="fileUploaderSettings.fileLimit"
+                [previewWidth]="fileUploaderSettings.previewWidth" [customUpload]="fileUploaderSettings.customUpload"
+                (onSelect)="onFileUploadHandler($event, fileUploader)" dndUploadHandler [files]="selectedFileList"
+                (fileDropped)="onFileUploadHandler($event,fileUploader)" (onFileDroppedError)="onDropError($event)"
+                [acceptDropFileType]="fileUploaderSettings.accept" (onRemove)="onRemove($event)">
+            </p-fileUpload>
+        </div>
+    </div>
+
+    <div class="sample-file-section">
+        <button pButton pRipple type="button" label="Primary" class="p-button-text" label="Download Sample File"
+            (click)="onDownloadSampleFileEvent()"></button>
+    </div>
+
+    <div class="btn-container">
+        <button *ngIf="selectedFileList.length !== 0" pButton type="button" class="submit"
+            (click)="multipleItemUpload()" label="{{ 'Button.Label.Submit' | translate }}"></button>
+    </div>
+</div>
+
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams" [contentList]="noticeContentList">
+</app-common-notice-check-dialog>
+
+<p-progressSpinner *ngIf="showSpinner"></p-progressSpinner>

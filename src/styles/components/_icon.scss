@@ -1,0 +1,21 @@
+.icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-list {
+  background-image: url('~/src/assets/imgs/icon-btn/list.svg');
+}
+.p-tabview-nav-link:hover .icon-list,
+.p-highlight .icon-list {
+  background-image: url('~/src/assets/imgs/icon-btn/list-active.svg');
+}
+
+.icon-track {
+  background-image: url('~/src/assets/imgs/icon-btn/track.svg');
+}
+.p-tabview-nav-link:hover .icon-track,
+.p-highlight .icon-track {
+  background-image: url('~/src/assets/imgs/icon-btn/track-active.svg');
+}

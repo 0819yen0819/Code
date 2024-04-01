@@ -1,0 +1,200 @@
+<form class="form-table form-search">
+  <!-- Level 1 -->
+  <div class="form-row grid">
+    <!-- Group -->
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">Group</label>
+          </div>
+        </div>
+
+        <div class="form-col col">
+          <div class="form-select">
+            <p-dropdown
+              [(ngModel)]="formValue.group"
+              name="corpGroup"
+              appendTo="body"
+              [options]="soaControlSetupByUserService.groupOptions"
+              placeholder="{{
+                'DropDown.PlaceHolder.PleaseChoose' | translate
+              }}"
+              [ngModelOptions]="{ standalone: true }"
+            >
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OU -->
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">OU</label>
+          </div>
+        </div>
+
+        <div class="form-col col">
+          <div class="form-input">
+            <p-autoComplete
+              [(ngModel)]="formValue.selectedOu"
+              name="selectedOu"
+              [suggestions]="soaControlSetupByUserService.filteredOus"
+              (completeMethod)="soaControlSetupByUserService.filterOu($event)"
+              [minLength]="1"
+              field="displayOu"
+              [style]="{ width: '100%' }"
+              (onBlur)="onBlurOu($event)"
+              [ngModelOptions]="{ standalone: true }"
+            >
+            </p-autoComplete>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 有效/無效 -->
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "SoaControlSetup.Label.Flag" | translate
+            }}</label>
+          </div>
+        </div>
+
+        <div class="form-col col">
+          <div class="form-select">
+            <p-dropdown
+              [options]="soaControlSetupByUserService.flagOptionsWithDefault"
+              appendTo="body"
+              placeholder="{{
+                'DropDown.PlaceHolder.PleaseChoose' | translate
+              }}"
+              [(ngModel)]="formValue.flag"
+              name="flag"
+              [ngModelOptions]="{ standalone: true }"
+            >
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Level 2 -->
+  <div class="form-row grid">
+    <!-- 客戶/廠商 -->
+    <div class="form-col md:col-12 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt"
+              >{{ "SoaControlSetup.Label.CV" | translate }}
+            </label>
+          </div>
+        </div>
+
+        <div class="form-col col cv1">
+          <div class="form-select">
+            <p-dropdown
+              appendTo="body"
+              [options]="soaControlSetupByUserService.cvOptions"
+              [(ngModel)]="formValue.vcType"
+              name="vcType"
+              (ngModelChange)="vcTypeChange()"
+              [ngModelOptions]="{ standalone: true }"
+            >
+            </p-dropdown>
+          </div>
+        </div>
+
+        <div class="form-col md:col-8 sm:col-12 col-12 cv2">
+          <div class="form-input">
+            <input
+              type="text"
+              pInputText
+              readonly
+              placeholder="{{ 'Input.PlaceHolder.PleaseSelect' | translate }}"
+              [value]="formValue.cvValue?.label || ''"
+              (click)="cvSelectDialogOnOpen()"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 按鈕 -->
+  <div class="btn-container">
+    <!--重設-->
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Reset' | translate }}"
+      class="btn-secondary"
+      (click)="resetOnClick()"
+    ></button>
+    <!--查詢-->
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Query' | translate }}"
+      (click)="queryOnClick('S');tableStatusKeepService.resetPageEvent()"
+      *ngIf="permissions.includes('view')"
+    ></button>
+    <!--下載-->
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Download' | translate }}"
+      class="btn-teal"
+      (click)="queryOnClick('E')"
+      *ngIf="permissions.includes('view')"
+    ></button>
+  </div>
+</form>
+
+<!-- 客戶/廠商 詳細選擇框 -->
+<app-common-selector-dialog
+  [settingParams]="selectorDialogParams"
+  (outputResult)="onSelectorDialogCallback($event)"
+>
+</app-common-selector-dialog>
+
+<!-- Table -->
+<app-common-data-table-viewer
+  [data]="tableData.getValue()"
+  [tableCols]="tableCols"
+  [tableSettings]="dataTableSettings"
+  [totalRecords]="totalRecords"
+  [deleteKeyBeforeReturn]="false"
+  [cleanSelected]="cleanTable"
+  (isAddItemActive)="soaDialogOpen()"
+  (outputAfterDeletedData)="onAfterModifiedDataCallback($event)"
+  (outputTargetData)="soaDialogOpen($event)"
+  (outputTableStatus)="getTableStatus($event)"
+>
+</app-common-data-table-viewer>
+
+<!-- Dialog -->
+<app-soa-control-by-user-dialog
+  [showDialog]="showDialog"
+  (closeDialog)="soaDialogClose()"
+  [editObj]="editObj"
+  (saveEmitter)="getDialogInfo($event)"
+>
+</app-soa-control-by-user-dialog>
+
+<!-- 訊息dialog -->
+<app-common-notice-check-dialog
+  [settingParams]="noticeCheckDialogParams"
+  [contentList]="noticeContentList"
+>
+</app-common-notice-check-dialog>
+
+<p-progressSpinner *ngIf="showSpinner"></p-progressSpinner>

@@ -1,0 +1,178 @@
+<p-steps [model]="stepItems" [(activeIndex)]="activeIndex" *ngIf="action === 'add' || action === 'edit'"></p-steps>
+
+<div class="sub-title-container">
+  <p>{{ 'Role.Role-Step3.Title' | translate }}</p>
+</div>
+<!-- end: sub-title-container -->
+
+<form class="form-table">
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label require">
+        <label class="txt">{{ 'Role.Label.Tenant' | translate }}</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-label">
+        <label class="txt">{{editForm.tenant}}</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label require">
+        <label class="txt">{{ 'Role.Label.RoleName' | translate }}</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-label">
+        <label class="txt">{{editForm.roleName}}</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label">
+        <label class="txt">{{ 'Role.Label.RoleDesc' | translate }}</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-label">
+        <label class="txt">{{editForm.roleDesc}}</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label require">
+        <label class="txt">{{ 'Role.Label.RoleType' | translate }}</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-label">
+        <label class="txt">{{ getRoleTypeDesc(editForm.roleType) }}</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label require">
+        <label class="txt">{{ 'Role.Label.RoleStatus' | translate }}</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-label">
+        <label class="txt">{{ getRoleStatusDesc(editForm.status) }}</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+</form>
+
+<div class="sub-title-container space-bottom-3">
+  <p>{{ 'Role.Label.SelectGroup' | translate }}</p>
+</div>
+<!-- end: sub-title-container -->
+
+<p-pickList [source]="editForm.availableGroups" [target]="editForm.roleAuthGroups"
+sourceHeader="Available" targetHeader="Selected" [responsive]="true"
+filterBy="authGroupName,authGroupDesc" sourceFilterPlaceholder="Search" targetFilterPlaceholder="Search"
+[showSourceControls]="false" [showTargetControls]="false"  [disabled]="true"
+[sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}"
+>
+ <ng-template let-item pTemplate="item">
+    <div class="choose-group-item">
+      <h5>{{ item.authGroupName }} {{ getIsDefaultDesc(item.isDefault) }} <em class="pi pi-users"></em> {{ item.tenant }}</h5>
+      <div class="group-type-block">
+        <p-chip label="{{ getAuthGroupTypeDesc(item.authGroupType) }}"></p-chip>
+        <p>{{ item.authGroupDesc}}</p>
+      </div>
+    </div>
+  </ng-template>
+</p-pickList>
+
+<div class="sub-title-container space-bottom-3">
+  <p>{{ 'Role.Label.RolePermissionSetting' | translate }}</p>
+</div>
+<!-- end: sub-title-container -->
+
+<form class="collapse-container grid">
+  <div class="form-checkbox col-12">
+    <p-checkbox name="checkboxGroup" label="{{ 'Role.Label.ExpandAll' | translate }}" [(ngModel)]="isExpandAll" binary="true"></p-checkbox>
+  </div>
+
+  <div class="md:col-4 sm:c0l-12 col-12" *ngFor="let item of editForm.availablePermissions">
+    <p-panel class="collapse-item">
+      <p-header>
+        <ng-container *ngIf="translateService.currentLang == 'zh-tw'">
+          <label>{{item.permissionDesc}}</label>
+        </ng-container>
+        <ng-container *ngIf="translateService.currentLang !== 'zh-tw'">
+          <label>{{item.permissionDescEn}}</label>
+        </ng-container>
+        <!-- <label>{{item.permissionDesc}}</label> -->
+        <!--
+        <div class="form-checkbox width-auto">
+          <p-checkbox name="permanent" label="{{item.permissionDesc}}" value="{{item.permissionId}}" [(ngModel)]="selectedPermissions" [disabled]="true"></p-checkbox>
+        </div>
+        -->
+      </p-header>
+
+      <p-panel class="collapse-item" [toggleable]="true" [collapsed]="!isExpandAll" *ngFor="let itemL2 of item.subPermissions; let i2 = index" >
+        <p-header>
+          <div class="form-checkbox width-auto">
+            <p-checkbox name="permanent" label="{{translateService.currentLang == 'zh-tw' ? itemL2.permissionDesc : itemL2.permissionDescEn}}" value="{{itemL2.permissionId}}" [(ngModel)]="selectedPermissions" [disabled]="true"></p-checkbox>
+          </div>
+        </p-header>
+
+        <div class="collapse-content-container" *ngFor="let itemL3 of itemL2.subPermissions; let i3 = index">
+          <div class="form-checkbox width-auto">
+            <p-checkbox name="permanent" label="{{translateService.currentLang == 'zh-tw' ? itemL3.permissionDesc : itemL3.permissionDescEn}}" value="{{itemL3.permissionId}}" [(ngModel)]="selectedPermissions" [disabled]="true"></p-checkbox>
+            <p>&nbsp;</p>
+          </div>
+        </div>
+      </p-panel>
+    </p-panel>
+  </div>
+
+</form>
+
+<div class="btn-container">
+  <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray" (click)="cancelEdit()" *ngIf="action === 'add' || action === 'edit'"></button>
+  <button pButton type="button" label="{{ 'Button.Label.PreviousStep' | translate }} " class="btn-line" (click)="previousStep();" *ngIf="action === 'add' || action === 'edit'"></button>
+  <button pButton type="button" label="{{ 'Button.Label.ConfirmAction' | translate }}" (click)="complete();" *ngIf="action === 'add' || action === 'edit'"></button>
+  <button pButton type="button" label="{{ 'Button.Label.Close' | translate }}" (click)="complete();" *ngIf="action === 'view'"></button>
+</div>

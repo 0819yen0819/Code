@@ -1,0 +1,184 @@
+<p-dialog [header]="title" [(visible)]="showDialog" modal="true"
+    [draggable]="false" [resizable]="false" (onHide)="close()">
+
+    <p-tabView>
+        <!-- 單筆新增 -->
+        <p-tabPanel [header]="tabTitle" leftIcon="pi pi-file">
+            <form class="form-container form-table" [formGroup]="formData">
+                <div class="form-row grid">
+                    <!-- License -->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label require">
+                                    <label class="txt">BAFA License#</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col">
+                                    <div class="form-input">
+                                        <input type="text" pInputText formControlName="license"
+                                            [readonly]="isEditMode" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item -->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label require">
+                                    <label class="txt">Item</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col">
+                                    <div class="form-input">
+                                        <input type="text" pInputText readonly (click)="showItemSelectDialog()"
+                                            formControlName="item"
+                                            placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate }} Item" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Start Date -->
+                    <div class="form-col md:col-6 sm:col-12  col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label require">
+                                    <label class="txt">{{ 'BafaLicenseMtn.Label.ApproveDate' | translate}}</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col ">
+                                <div class="form-date" style="padding: 10px 5px !important;">
+                                    <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true" name="startDate" dateFormat="yy/mm/dd"
+                                        formControlName="startDate" appendTo="body" [disabled]="isEditMode"
+                                        (onInput)="onDatePickerInput($event)"
+                                        (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                                        (onBlur)="onDatePickerSelectAndBlur()"
+                                        (onClose)="onDatePickerClose('startDate');onCheckDateHandler()"
+                                        placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                        >
+                                    </p-calendar>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- End Date -->
+                    <div class="form-col md:col-6 sm:col-12  col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label require">
+                                    <label class="txt">{{ 'BafaLicenseMtn.Label.EffectiveDate' | translate}}</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col">
+                                <div class="form-date" style="padding: 10px 5px !important;">
+                                    <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true" name="endDate" dateFormat="yy/mm/dd"
+                                        formControlName="endDate" appendTo="body"
+                                        [minDate]="formData.get('startDate')?.value"
+                                        (onInput)="onDatePickerInput($event)"
+                                        (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                                        (onBlur)="onDatePickerSelectAndBlur()"
+                                        (onClose)="onDatePickerClose('endDate');onCheckDateHandler()"
+                                        placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                        >
+                                    </p-calendar>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-col col-12">
+                        <div class="form-row grid center">
+                            <!-- Qty -->
+                            <div class="form-col col-fixed">
+                                <div class="form-label require">
+                                    <label class="txt">BAFA License Qty</label>
+                                </div>
+                            </div>
+
+                            <div class="md:col col-12">
+                                <div class="form-col">
+                                    <div class="form-input">
+                                        <p-inputNumber [min]="0" [max]="999999999"
+                                            placeholder="{{'Input.PlaceHolder.OnlyPosIntAndBig0' | translate}}"
+                                            formControlName="qty">
+                                        </p-inputNumber>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Flag -->
+                            <ng-container *ngIf="isEditMode">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">{{ 'BafaLicenseMtn.Label.Flag' | translate }}</label>
+                                    </div>
+                                </div>
+
+                                <div class="md:col col-12">
+                                    <div class="form-col">
+                                        <div class="form-select">
+                                            <p-dropdown [options]="flagOptions"
+                                                placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"
+                                                formControlName="flag">
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                    </div>
+
+                    <!-- Remark -->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Remark</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col">
+                                    <div class="form-input">
+                                        <textarea autocomplete="off" type="text" pInputTextarea name="remark"
+                                            formControlName="remark" [readonly]="isEditMode">
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!--# Form Actions -->
+            <div class="btn-container">
+                <button pButton type="submit" label="{{'SOA.Button.confirm' | translate}}"
+                    (click)="confirmOnClick()"></button>
+            </div>
+        </p-tabPanel>
+
+        <!-- 多筆新增 -->
+        <p-tabPanel *ngIf="isAddMode" header="{{'LicenseMgmt.Common.Tabs.MultiAdd' | translate}}" leftIcon="pi pi-file">
+            <app-multiple-upload sampleFileIndex="2871" [uploadApiUrl]="uploadApiUrl"></app-multiple-upload>
+        </p-tabPanel>
+    </p-tabView>
+</p-dialog>
+
+<app-common-selector-dialog [settingParams]="selectorDialogParams" (outputResult)="onSelectorDialogCallback($event)">
+</app-common-selector-dialog>
+
+<!-- 訊息dialog -->
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams" [contentList]="noticeContentList">
+</app-common-notice-check-dialog>

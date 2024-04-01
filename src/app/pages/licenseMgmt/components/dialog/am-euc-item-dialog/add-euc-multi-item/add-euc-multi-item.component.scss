@@ -1,0 +1,17 @@
+.sample-file-section {
+  @apply flex justify-end;
+  button {
+    &:focus {
+      @apply bg-transparent;
+    }
+    &:hover {
+      @apply bg-transparent;
+    }
+  }
+}
+
+:host ::ng-deep {
+  .btn-container {
+    @apply mt-0;
+  }
+}

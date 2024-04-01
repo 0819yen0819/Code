@@ -1,0 +1,101 @@
+<div stickyZone *ngIf="formValid && initFinish">
+
+    <app-accordion-stepchart [formNo]="formNo" [formTypeId]="formContentRes.formTypeId"></app-accordion-stepchart>
+    
+    <!-- 單號/按鈕 -->
+    <div class="main-title-container">
+        <div class="override-content-container-padding"></div>
+        <p>{{formTitle}} ({{formStatus | translate }})</p>
+        <div class="btn-container">
+
+            <button *ngIf="reassignDialogService.reAssignBtnSetting.visiable"
+                label="{{ reassignDialogService.reAssignBtnSetting.name | translate }}"
+                (click)="reassignDialogService.openAssignDialog()"
+                [ngStyle]="{'background-color': reassignDialogService.reAssignBtnSetting.color}" pButton type="button">
+            </button>
+            <button pButton type="button" *ngIf="showApproveButton && !extendForm"
+                label="{{ 'Button.Label.Action' | translate }}" class="btn-dark-red"
+                (click)="openApproveDialog()"></button>
+            <button pButton type="button" [label]="integrateService.backBtnLabel" class="btn-gray"
+                (click)="integrateService.backBtnOnClick()" *ngIf="!storeBatchEditEntryService.openByBatchEditFromStore"></button>
+
+            <button pButton type="button" [label]="extendBtnLabel" class="btn-gray"
+                (click)="extendFormOnClick()"></button>
+        </div>
+    </div>
+
+    <app-pcf-header [formInfo]="formContentRes" (deptInfo)="getDeptChange($event)"></app-pcf-header>
+
+
+    <ng-container *ngIf="!extendForm; then packTemplate;  else extendTemplate"> </ng-container>
+
+    <!-- 收起 -->
+    <ng-template #packTemplate>
+        <p-tabView *ngIf="formContentRes.code">
+            <!-- 1.申請資訊 -->
+            <p-tabPanel header="{{ 'LicenseMgmt.Common.Tabs.ApplicationInfo' | translate }}">
+                <app-pcf-information *ngIf="!formContentRes.isWSPandIsBatch" [formInfo]="formContentRes" (infoChange)="getApplicationChange($event)"
+                    [canEditDept]="canEditDept"></app-pcf-information>
+                <app-pcf-lines [formInfo]="formContentRes" (linesChange)="getLinesChange($event)"></app-pcf-lines>
+            </p-tabPanel>
+
+            <!-- 2.簽核歷程 -->
+            <p-tabPanel header="{{ 'LicenseMgmt.Common.Tabs.SignOffHistory' | translate }}">
+                <sov-history-log [formNo]="formNo"  [formTypeId]="formContentRes.formTypeId"
+                    *ngIf="reassignDialogService.reAssignHistoryRefreshController && formContentRes.formTypeId"></sov-history-log>
+            </p-tabPanel>
+
+            <!-- 3.附件連結 -->
+            <p-tabPanel header="{{ 'LicenseMgmt.Common.Tabs.AttachmentLink' | translate }}">
+                <sov-app-common-attached-file-log [formNo]="formNo"  [formTypeId]="formContentRes.formTypeId"
+                    [formStatus]="curFlowingStatus"  *ngIf="formContentRes.formTypeId"></sov-app-common-attached-file-log>
+            </p-tabPanel>
+        </p-tabView>
+
+        <sov-approve-dialog *ngIf="showApproveDialog" [dialogOpen]="showApproveDialog"
+            (submitInfo)="getApproveDialogRes($event)" (closeDialog)="closeApproveDialog()"  [hideRejectRadioButton]="hideReject" ></sov-approve-dialog>
+    </ng-template>
+
+
+    <!-- 展開 -->
+    <ng-template #extendTemplate>
+
+        <div class="extend-form-container" *ngIf="formContentRes.code">
+            <!-- 申請資訊 -->
+            <div>
+                <div class="sub-title-container form-section">
+                    <p>{{ 'LicenseMgmt.Common.Tabs.ApplicationInfo' | translate }}</p>
+                </div>
+                <app-pcf-information *ngIf="!formContentRes.isWSPandIsBatch" [formInfo]="formContentRes" (infoChange)="getApplicationChange($event)"
+                    [canEditDept]="canEditDept"></app-pcf-information>
+                <app-pcf-lines [formInfo]="formContentRes" (linesChange)="getLinesChange($event)"></app-pcf-lines>
+            </div>
+
+            <!-- 附件連結 -->
+            <sov-app-common-attached-file-log [formNo]="formNo"  [formTypeId]="formContentRes.formTypeId"
+                [formStatus]="curFlowingStatus" *ngIf="formContentRes.formTypeId"></sov-app-common-attached-file-log>
+
+            <div *ngIf="showApproveButton">
+                <div class="sub-title-container form-section">
+                    <p>{{ 'Button.Label.Action' | translate }}</p>
+                </div>
+                <sov-approve-dialog [isDialogMode]="false" (submitInfo)="getApproveDialogRes($event)"
+                    (closeDialog)="closeApproveDialog()" [hideRejectRadioButton]="hideReject" ></sov-approve-dialog>
+            </div>
+
+            <!-- 簽核歷程 -->
+            <sov-history-log [formNo]="formNo"  [formTypeId]="formContentRes.formTypeId"
+                *ngIf="reassignDialogService.reAssignHistoryRefreshController && formContentRes.formTypeId"></sov-history-log>
+
+        </div>
+
+    </ng-template>
+
+</div>
+
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams" [contentList]="noticeContentList">
+</app-common-notice-check-dialog>
+
+<app-reassign-dialog *ngIf="reassignDialogService.reAssignBtnSetting.formTypeId"></app-reassign-dialog>
+
+<p-confirmDialog></p-confirmDialog>

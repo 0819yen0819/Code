@@ -1,0 +1,1410 @@
+@import "../helpers/variables";
+
+.form-container {
+  &.inline {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .form-col {
+      min-width: 240px;
+
+      & + .form-col {
+        margin-left: $space-2;
+      }
+    }
+  } // end inline
+
+  .form-row + .form-row {
+    margin-top: $space-3;
+  }
+
+  &.ui-g {
+    margin-left: -1 * $space-3;
+    margin-right: -1 * $space-3;
+    margin-bottom: -1 * $space-3;
+
+    .form-col {
+      padding: 0 $space-3 $space-3;
+    }
+  } // end ui-g
+} // end form-container
+
+[class^="form-"] {
+  .error-msg {
+    display: none;
+    margin-top: 5px;
+
+    font-weight: normal;
+    font-size: 12px;
+    color: $error;
+    line-height: 1.3em;
+
+    .pi {
+      margin-right: 3px;
+      font-size: 18px;
+    }
+    span {
+      display: inline-block;
+      vertical-align: top;
+      line-height: 18px;
+    }
+  } // end error-msg
+
+  .error-active {
+    //> Rioton 額外加的
+    margin-top: 4px;
+    span {
+      margin-left: 4px;
+    }
+    .p-inputtext {
+      border-color: $error;
+    }
+    color: $error;
+
+    .error-msg {
+      display: block;
+    } // end error-msg
+  } // end error-active
+
+  .success-active {
+    .p-inputtext {
+      border-color: $success;
+    }
+    color: $success;
+  } // end success-active
+} // end form-
+
+/* Table */
+$col-fixed-w: 175px;
+$search-col-fixed-w: 120px;
+.form-table {
+  border: 2px solid $line-blue;
+
+  .grid {
+    margin: 0;
+
+    > [class*="col"] {
+      padding: 0;
+    }
+    .col-fixed {
+      width: $col-fixed-w;
+
+      @media screen and (max-width: 767px) {
+        width: 100%;
+      } // end < 768
+    }
+  }
+  .form-row:first-child:last-child {
+    height: 100%;
+  }
+
+  .form-label {
+    @apply flex justify-start items-center;
+  }
+  .col-fixed > .form-label {
+    height: 100%;
+    padding: $space-1 $space-2 !important;
+    border-bottom: 1px solid $gray-05;
+
+    background-color: $bg-blue;
+
+    @media screen and (max-width: 767px) {
+      padding: $space-1 !important;
+    } // end < 768
+
+    .txt {
+      min-height: 0;
+    }
+    &.require .txt:before {
+      content: "*";
+      color: $error;
+    }
+
+    * {
+      color: $dark-blue;
+      // font-weight: bold;
+    }
+  } // end form-label
+  .col-fixed + .col {
+    width: calc(100% - #{$col-fixed-w});
+
+    .form-label .txt {
+      min-height: 0;
+    }
+  }
+  .col > * {
+    height: 100%;
+    padding: $space-1 $space-2 !important;
+    border-bottom: 1px solid $gray-05;
+
+    @media screen and (max-width: 767px) {
+      padding: $space-1 !important;
+    } // end < 768
+  }
+  > .form-row:last-child > .col-fixed > .form-label,
+  > .form-row:last-child > .col > *,
+  > .form-row:last-child .form-row:last-child .col-fixed > .form-label,
+  > .form-row:last-child .form-row:last-child .col > * {
+    border: 0;
+  }
+
+  .form-item > [class*="col"] {
+    padding: $space-1 / 2 0;
+    align-self: center;
+  }
+
+  &.form-search {
+    margin-bottom: $space-5;
+    padding: $space-2;
+    background-color: $bg-blue;
+    border-radius: 5px;
+
+    @media screen and (max-width: 767px) {
+      padding: $space-1;
+
+      .form-row {
+        margin-top: $space-1;
+      }
+    } // end < 768
+
+    > .form-row {
+      &:not(:first-of-type) {
+        margin-top: $space-2;
+      }
+
+      @media screen and (max-width: 767px) {
+        &:not(:first-of-type) {
+          margin-top: $space-1;
+        }
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        :first-child .form-row {
+          margin-top: 0;
+        }
+      } // end < 768
+
+      > .form-col {
+        padding: 0 $space-1;
+
+        @media screen and (max-width: 767px) {
+          padding: 0;
+        } // end < 768
+
+        &:first-child {
+          padding-left: 0;
+        }
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+    }
+
+    .col-fixed {
+      width: $search-col-fixed-w;
+    }
+    .col-fixed + .col {
+      width: calc(100% - #{$search-col-fixed-w});
+    }
+
+    .col-fixed > .form-label,
+    .col > * {
+      padding: 0 !important;
+      border-bottom: 0;
+    }
+    .col-fixed > .form-label * {
+      margin-top: $space-1;
+      min-height: 30px;
+    }
+
+    .btn-container {
+      margin-top: $space-3;
+      margin-bottom: -1 * $space-1;
+
+      .p-button {
+        min-width: 120px;
+      }
+    } // end btn-container
+  } // end form-search
+
+  &.form-list {
+    border: 0;
+    border-bottom: 1px solid $gray-03;
+    margin-bottom: $space-1;
+    padding: $space-1;
+
+    .grid .col-fixed {
+      width: 120px;
+    }
+    .col > * {
+      border: 0;
+      padding: $space-1 !important;
+
+      &:not(.form-label) {
+        padding-top: 0 !important;
+        padding-left: 0 !important;
+      }
+    }
+    .col-fixed > .form-label {
+      border: 0;
+      background-color: transparent;
+      padding: $space-1 !important;
+    }
+    .form-label .txt {
+      min-height: 0;
+    }
+  } // end form-list
+
+  &.form-search-for {
+    border: 0;
+    margin-top: $space-2;
+    margin-bottom: $space-3;
+    padding: 0;
+
+    .col > * {
+      border: 0;
+      padding: 0 !important;
+    }
+  } // end form-search-for
+} // end form-table
+
+/* Title */
+.form-title {
+  label {
+    display: block;
+    width: 100%;
+    margin-bottom: $space-1 / 2;
+
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 1.3em;
+    color: $primary;
+  } // end label
+} // end form-title
+.form-subtitle {
+  label {
+    display: block;
+    width: 100%;
+    margin-bottom: $space-1 / 2;
+
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1.3em;
+    color: $gray-01;
+  } // end label
+} // end form-subtitle
+
+.form-group-content {
+  background-color: $gray-05;
+  border-radius: 20px;
+  padding: $space-2;
+
+  & + .form-group-content {
+    margin-top: $space-1;
+  }
+} // end form-group-content
+
+/* Label */
+.form-label {
+  > label {
+    display: block;
+    margin-bottom: 5px;
+
+    font-weight: bold;
+    font-size: 16px;
+    color: $gray-01;
+    line-height: 1.3em;
+  }
+  .txt {
+    min-height: 40px;
+    margin: 0;
+    font-weight: normal;
+    word-break: break-word;
+  }
+
+  &.form-date-between .txt {
+    line-height: 40px;
+    text-align: center;
+  }
+
+  p {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 1.3em;
+    color: $gray-01;
+  }
+} // end form-label
+
+/* Input */
+.form-input {
+  label {
+    display: block;
+    margin-bottom: 5px;
+
+    font-weight: bold;
+    font-size: 16px;
+    color: $gray-01;
+    line-height: 1.3em;
+  }
+
+  .input-icon {
+    @apply cursor-pointer;
+  }
+
+  .p-inputtext {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid $gray-05;
+
+    font-weight: normal;
+    font-size: 16px;
+    color: $gray-01;
+    line-height: 1.3em;
+
+    &::placeholder, /* Chrome, Firefox, Opera, Safari 10.1+ */
+    &:-ms-input-placeholder, /* Internet Explorer 10-11 */
+    &::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: #a4a9ae;
+    }
+
+    &:enabled:hover:not(.ui-state-error) {
+      border-color: $primary;
+    }
+
+    &:enabled:focus:not(.ui-state-error) {
+      border-color: $dark-blue;
+      box-shadow: none;
+    }
+
+    &.ui-state-disabled,
+    &.ui-widget:disabled,
+    &.p-disabled,
+    &.p-component:disabled,
+    &[readonly="true"] {
+      background-color: $gray-05;
+      opacity: 0.5;
+      cursor: not-allowed !important;
+    }
+  } // end ui-inputtext
+
+  .error-msg {
+    display: none;
+  }
+
+  &.error-active {
+    .p-inputtext {
+      border-color: $error;
+    }
+
+    .error-msg {
+      display: block;
+      margin-top: 5px;
+
+      font-weight: normal;
+      font-size: 12px;
+      color: $error;
+      line-height: 1.3em;
+
+      .pi {
+        margin-right: 3px;
+        font-size: 18px;
+      }
+      span {
+        display: inline-block;
+        vertical-align: top;
+        line-height: 18px;
+      }
+    } // end error-msg
+  } // end error-active
+
+  &.form-search-input {
+    width: 100%;
+    .p-inputtext {
+      padding-right: calc(#{$space-1 / 2 * 5} + 16px);
+      border: 0;
+      border-radius: 20px;
+      background-color: $bg;
+    }
+    &.p-input-icon-right > i:last-of-type {
+      right: $space-1 / 2 * 3;
+      color: $gray-03;
+    }
+  } // end form-search-input
+
+  &.p-inputgroup {
+    align-items: center;
+    flex-wrap: wrap;
+
+    > .p-inputtext {
+      flex: 1;
+    }
+
+    .p-button.p-button-icon-only {
+      min-width: 0;
+      width: 40px;
+      margin-left: $space-1;
+      border-radius: 5px;
+    }
+
+    .error-msg {
+      width: 100%;
+    }
+  } // end p-inputgroup
+
+  .p-autocomplete .p-autocomplete-multiple-container .p-autocomplete-token {
+    padding: 0.2145rem 0.429rem;
+    margin-right: 0.5rem;
+    background: #f1f6f9;
+    color: #006deb;
+    border-radius: 3px;
+  }
+} // end form-input
+.form-insert-input-list {
+  width: 100%;
+
+  > .form-label {
+    display: flex;
+    width: 100%;
+    margin-top: $space-1;
+
+    .txt {
+      flex: 1;
+      width: 100%;
+      padding: 0 $space-1;
+    }
+  }
+
+  .p-button.p-button-icon-only {
+    min-width: 0;
+    width: 40px;
+    margin-left: $space-1;
+    border-radius: 5px;
+  }
+} // end form-insert-input-list
+
+.form-action {
+  @apply w-full h-full flex justify-center items-center p-1 pr-2;
+  .p-button {
+    &:disabled {
+      @apply cursor-not-allowed;
+    }
+  }
+}
+
+/* Textarea */
+.form-textarea {
+  label {
+    display: block;
+    margin-bottom: 5px;
+
+    font-weight: bold;
+    font-size: 16px;
+    color: $gray-01;
+    line-height: 1.3em;
+  }
+
+  textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid $gray-05;
+    outline: 0;
+
+    font-weight: normal;
+    font-size: 16px;
+    color: $gray-01;
+    line-height: 1.3em;
+
+    &::placeholder, /* Chrome, Firefox, Opera, Safari 10.1+ */
+    &:-ms-input-placeholder, /* Internet Explorer 10-11 */
+    &::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: $gray-05;
+    }
+
+    &:enabled:hover:not(.ui-state-error) {
+      border-color: $primary;
+    }
+
+    &:enabled:focus:not(.ui-state-error),
+    &:active,
+    &focus {
+      border-color: $dark-blue;
+      box-shadow: none;
+    }
+
+    &.ui-state-disabled,
+    &.ui-widget:disabled,
+    &.p-disabled,
+    &.p-component:disabled,
+    &[readonly="true"] {
+      background-color: $gray-05;
+      opacity: 0.5;
+      cursor: not-allowed !important;
+    }
+  } // end textarea
+
+  .error-msg {
+    display: none;
+  }
+
+  &.error-active {
+    textarea {
+      border-color: $error;
+    }
+
+    .error-msg {
+      display: block;
+      margin-top: 5px;
+
+      font-weight: normal;
+      font-size: 12px;
+      color: $error;
+      line-height: 1.3em;
+
+      .pi {
+        margin-right: 3px;
+        font-size: 18px;
+      }
+      span {
+        display: inline-block;
+        vertical-align: top;
+        line-height: 18px;
+      }
+    } // end error-msg
+  } // end error-active
+} // end form-textarea
+
+/* Date */
+.form-date {
+  label {
+    display: block;
+    margin-bottom: 5px;
+
+    font-weight: bold;
+    font-size: 16px;
+    color: $gray-01;
+    line-height: 1.3em;
+  }
+
+  .p-calendar {
+    width: 100%;
+  }
+
+  .p-inputtext {
+    display: inline-block;
+    width: calc(100% - 40px);
+    padding: $space-1;
+    border-radius: 5px;
+    border: 1px solid $gray-05;
+
+    font-weight: normal;
+    font-size: 16px;
+    color: $gray-01;
+    line-height: 1.3em;
+
+    &::placeholder, /* Chrome, Firefox, Opera, Safari 10.1+ */
+    &:-ms-input-placeholder, /* Internet Explorer 10-11 */
+    &::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: $gray-05;
+    }
+
+    &:enabled:hover:not(.ui-state-error) {
+      border-color: $primary;
+
+      & + .p-datepicker-trigger,
+      & + .p-datepicker-trigger.ui-button {
+        background-color: $white;
+        border-color: $primary;
+        color: $primary;
+      }
+    }
+
+    &:enabled:focus:not(.ui-state-error) {
+      border-color: $dark-blue;
+      box-shadow: none;
+
+      & + .p-datepicker-trigger,
+      & + .p-datepicker-trigger.ui-button {
+        border-color: $dark-blue;
+        box-shadow: none;
+      }
+    }
+
+    &.ui-state-disabled,
+    &.ui-widget:disabled,
+    &[readonly="true"] {
+      background-color: $gray-04;
+      opacity: 0.5;
+      cursor: not-allowed !important;
+    }
+  } // end ui-inputtext
+
+  .p-calendar-w-btn {
+    .p-inputtext {
+      border-right: 0;
+    }
+    .p-datepicker-trigger,
+    .p-datepicker-trigger.ui-button {
+      min-width: 0;
+      width: 40px;
+      height: auto;
+      padding: $space-1;
+      background-color: $white;
+      border-color: $gray-05;
+      border-radius: 0 5px 5px 0;
+      border-left: 0;
+      color: $gray-02;
+
+      &.ui-button-icon-only .ui-button-text {
+        padding: 0;
+      }
+
+      &:enabled:hover {
+        background-color: $white;
+        border-color: $gray-05;
+        color: $primary;
+      }
+    } // end: p-datepicker-trigger
+  } // end p-calendar-w-btn
+
+  .p-datepicker:not(.p-datepicker-inline) {
+    min-width: 0;
+    width: 320px;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+
+    table th {
+      color: $primary;
+    }
+    table td {
+      padding: 0;
+
+      & > a,
+      & > span {
+        padding: $space-1;
+        border-radius: 10px;
+
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 1.3em;
+        color: $gray-01;
+      }
+
+      &.p-datepicker-today > a,
+      &.p-datepicker-today > span {
+        background-color: $gray-05;
+      }
+      & > a.ui-state-active,
+      & > span.ui-state-active,
+      & > span.p-highlight {
+        background-color: $primary;
+        color: $white;
+        border-radius: 10px;
+      }
+    } // end td
+    &:not(.ui-state-disabled)
+      table
+      td
+      a:not(.ui-state-active):not(.ui-state-highlight):hover {
+      background-color: $bg-blue;
+      border-radius: 10px;
+    }
+  } // end .p-datepicker
+
+  .error-msg {
+    display: none;
+  }
+
+  &.error-active {
+    .ui-inputtext {
+      border-color: $error;
+    }
+
+    .error-msg {
+      display: block;
+      margin-top: 5px;
+
+      font-weight: normal;
+      font-size: 12px;
+      color: $error;
+      line-height: 1.3em;
+
+      .pi {
+        margin-right: 3px;
+        font-size: 18px;
+      }
+      span {
+        display: inline-block;
+        vertical-align: top;
+        line-height: 18px;
+      }
+    } // end error-msg
+  } // end error-active
+} // end form-date
+.p-datepicker:not(.p-datepicker-inline) {
+  min-width: 0;
+  width: 320px;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+
+  table th {
+    color: $primary;
+  }
+  table td {
+    padding: 0;
+
+    & > a,
+    & > span {
+      padding: $space-1;
+      border-radius: 10px;
+
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 1.3em;
+      color: $gray-01;
+    }
+
+    &.p-datepicker-today > a,
+    &.p-datepicker-today > span {
+      background-color: $gray-05;
+    }
+    & > a.ui-state-active,
+    & > span.ui-state-active,
+    & > span.p-highlight {
+      background-color: $primary;
+      color: $white;
+      border-radius: 10px;
+    }
+  } // end td
+  &:not(.ui-state-disabled)
+    table
+    td
+    a:not(.ui-state-active):not(.ui-state-highlight):hover {
+    background-color: $bg-blue;
+    border-radius: 10px;
+  }
+
+  .p-timepicker {
+    padding: 0;
+
+    span {
+      font-size: 14px;
+    }
+  } // end timepicker
+} // end .p-datepicker
+
+/* Chip */
+.form-chip {
+  > label {
+    display: block;
+    margin-bottom: 5px;
+
+    font-weight: bold;
+    font-size: 16px;
+    color: $gray-01;
+    line-height: 1.3em;
+  }
+
+  p-chips,
+  .p-chips {
+    // display: inline-block;
+    width: 100%;
+  }
+
+  .p-inputtext {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid $gray-05;
+
+    font-weight: normal;
+    font-size: 16px;
+    color: $gray-01;
+    line-height: 1.3em;
+
+    &::placeholder, /* Chrome, Firefox, Opera, Safari 10.1+ */
+    &:-ms-input-placeholder, /* Internet Explorer 10-11 */
+    &::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: #a4a9ae;
+    }
+
+    &:not(.p-disabled):hover,
+    &:enabled:hover:not(.ui-state-error) {
+      border-color: $primary;
+    }
+
+    &:not(.p-disabled).p-focus,
+    &:enabled:focus:not(.ui-state-error) {
+      border-color: $dark-blue;
+      box-shadow: none;
+    }
+
+    &.ui-state-disabled,
+    &.ui-widget:disabled,
+    &.p-disabled,
+    &.p-component:disabled,
+    &[readonly="true"] {
+      background-color: $gray-05;
+      opacity: 0.5;
+      cursor: not-allowed !important;
+    }
+
+    padding-bottom: 0;
+    .p-chips-input-token {
+      padding: 0 0 $space-1;
+    }
+    .p-chips-token {
+      margin-bottom: $space-1;
+      background-color: $bg-blue;
+      color: $primary;
+    }
+  } // end ui-inputtext
+
+  .error-msg {
+    display: none;
+  }
+
+  &.error-active {
+    .p-inputtext {
+      border-color: $error;
+    }
+
+    .error-msg {
+      display: block;
+      margin-top: 5px;
+
+      font-weight: normal;
+      font-size: 12px;
+      color: $error;
+      line-height: 1.3em;
+
+      .pi {
+        margin-right: 3px;
+        font-size: 18px;
+      }
+      span {
+        display: inline-block;
+        vertical-align: top;
+        line-height: 18px;
+      }
+    } // end error-msg
+  } // end error-active
+} // end form-chip
+
+/* Select */
+.form-select {
+  > label {
+    display: block;
+    margin-bottom: 5px;
+
+    font-weight: bold;
+    font-size: 16px;
+    color: $gray-01;
+    line-height: 1.3em;
+  }
+
+  p-dropdown {
+    display: block;
+  }
+
+  .p-dropdown,
+  .ui-dropdown,
+  .p-multiselect,
+  .ui-multiselect {
+    // display: block;
+    min-width: 0;
+    width: 100%;
+    padding: $space-1;
+    border-radius: 5px;
+    border: 1px solid $gray-05;
+    outline: 0;
+    box-shadow: none;
+
+    font-weight: normal;
+    font-size: 16px;
+    color: $gray-01;
+    line-height: 1.3em;
+
+    &:hover,
+    &:not(.ui-state-disabled):hover {
+      border-color: $primary;
+      outline: 0;
+      box-shadow: none;
+
+      .p-dropdown-trigger-icon {
+        color: $primary;
+      }
+    }
+    &:focus,
+    &:not(.p-disabled).p-focus,
+    &:not(.ui-state-disabled).ui-state-focus,
+    &:active {
+      border-color: $dark-blue;
+      box-shadow: none;
+    }
+    &.ui-state-disabled,
+    &.ui-widget:disabled {
+      background-color: transparent;
+      opacity: 0.5;
+      cursor: not-allowed !important;
+
+      .ui-dropdown-label,
+      .ui-multiselect-label {
+        background-color: transparent;
+        cursor: inherit;
+      }
+      .ui-dropdown-trigger,
+      .ui-multiselect-trigger {
+        background-color: transparent;
+      }
+    }
+
+    .p-dropdown-label,
+    .ui-dropdown-label,
+    .p-multiselect-label,
+    .ui-multiselect-label {
+      margin: 0;
+      padding: 0;
+      padding-right: $space-1;
+      border-radius: inherit;
+      color: inherit;
+    }
+
+    .p-dropdown-trigger,
+    .ui-dropdown-trigger,
+    .p-multiselect-trigger,
+    .ui-multiselect-trigger {
+      width: 20px;
+      border-radius: inherit;
+      background-color: transparent;
+
+      .p-dropdown-trigger-icon,
+      .ui-dropdown-trigger-icon,
+      .p-multiselect-trigger-icon,
+      .ui-multiselect-trigger-icon {
+        // font-size: .5em;
+        // margin-left: -1em;
+      }
+    }
+  } // end ui-dropdown
+
+  .error-msg {
+    display: none;
+  }
+
+  &.error-active {
+    .ui-dropdown {
+      border-color: $error;
+    }
+
+    .error-msg {
+      display: block;
+      margin-top: 5px;
+
+      font-weight: normal;
+      font-size: 12px;
+      color: $error;
+      line-height: 1.3em;
+
+      .pi {
+        margin-right: 3px;
+        font-size: 18px;
+      }
+      span {
+        display: inline-block;
+        vertical-align: top;
+        line-height: 18px;
+      }
+    } // end error-msg
+  } // end error-active
+} // end form-select
+.p-dropdown-panel,
+.p-multiselect-panel {
+  padding: $space-1;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border: 0;
+  border-radius: 5px;
+  color: $gray-01;
+
+  .p-dropdown-header,
+  .p-multiselect-header {
+    margin-bottom: $space-1;
+    padding: 0 $space-1 $space-1 $space-1;
+
+    .p-dropdown-filter,
+    .p-multiselect-filter {
+      border-color: $gray-05;
+      font-size: 16px;
+      color: $gray-01;
+      line-height: 1.3em;
+
+      &:hover,
+      &:not(.ui-state-disabled):hover {
+        border-color: $primary;
+        outline: 0;
+        box-shadow: none;
+
+        .p-dropdown-trigger-icon {
+          color: $primary;
+        }
+      }
+      &:focus,
+      &:not(.p-disabled).p-focus,
+      &:not(.ui-state-disabled).ui-state-focus,
+      &:active {
+        border-color: $dark-blue;
+        box-shadow: none;
+      }
+    } // end dropdown-filter
+  } // end dropdown-header
+
+  p-dropdownitem,
+  p-multiselectitem {
+    display: block;
+
+    &:not(:last-child) {
+      margin-bottom: $space-1 / 2;
+    }
+  }
+
+  .p-dropdown-empty-message,
+  .p-dropdown-items .p-dropdown-item,
+  .p-multiselect-empty-message,
+  .p-multiselect-items .p-multiselect-item {
+    border-radius: 10px;
+
+    font-weight: normal;
+    font-size: 16px;
+    color: inherit;
+    line-height: 1.3em;
+
+    &.p-highlight {
+      border-radius: 10px;
+      background-color: $bg-blue;
+      font-weight: normal;
+      font-size: 16px;
+      color: $primary;
+      line-height: 1.3em;
+    }
+    &:not(.p-highlight):not(.p-disabled):hover {
+      background: transparent;
+      background-color: $gray-05;
+      color: inherit;
+    }
+  } // end item
+} // end .p-multiselect-panel
+
+/* Checkbox */
+.form-checkbox {
+  margin-bottom: $space-1 * -1;
+
+  > label {
+    display: block;
+    margin-bottom: 5px;
+
+    font-weight: bold;
+    font-size: 16px;
+    color: $gray-01;
+    line-height: 1.3em;
+  }
+
+  p-checkbox {
+    margin-right: $space-1;
+    margin-bottom: $space-1;
+  }
+
+  .p-checkbox {
+    .p-checkbox-box {
+      width: 20px;
+      height: 20px;
+
+      border: 1px solid $gray-03;
+      background-color: $white;
+      border-radius: 3px;
+
+      &:not(.ui-state-disabled):hover,
+      &.ui-state-focus {
+        border-color: $primary;
+        outline: 0;
+        box-shadow: none;
+      }
+      &.p-highlight,
+      &.ui-state-active {
+        border-color: $primary;
+        background-color: $primary;
+      } // end ui-state-active
+      &.p-disabled.p-highlight,
+      &.ui-state-disabled {
+        opacity: 1;
+        border-color: $gray-03;
+        background-color: $gray-03;
+        cursor: not-allowed !important;
+      }
+    } // end ui-chkbox-box
+  } // end p-checkbox
+
+  .p-checkbox-label {
+    margin-left: 0.5em;
+    font-weight: normal;
+    font-size: 16px;
+    color: $gray-01;
+    line-height: 1.3em;
+
+    &.p-disabled,
+    &.ui-label-disabled {
+      opacity: 1;
+      cursor: not-allowed !important;
+    }
+  } // end p-checkbox-label
+
+  p {
+    word-break: break-all;
+  }
+
+  & + .form-checkbox {
+    margin-top: $space-1;
+  }
+} // end form-checkbox
+
+/* Radio */
+.form-radio {
+  margin-bottom: $space-1 * -1;
+
+  > label {
+    display: block;
+    margin-bottom: 5px;
+
+    font-weight: bold;
+    font-size: 16px;
+    color: $gray-01;
+    line-height: 1.3em;
+  }
+
+  p-radiobutton {
+    display: inline-block;
+    margin-right: $space-1;
+    margin-bottom: $space-1;
+  }
+
+  .p-radiobutton,
+  .ui-radiobutton {
+    .p-radiobutton-box,
+    .ui-radiobutton-box {
+      border-color: $gray-03;
+
+      .p-radiobutton-icon {
+        width: 10px;
+        height: 10px;
+      }
+
+      &:not(.ui-state-disabled):not(.ui-state-active):hover {
+        border-color: $primary;
+      }
+      &.p-highlight,
+      &.ui-state-active {
+        border-color: $primary;
+        background-color: $primary;
+      }
+      &.p-disabled.p-highlight,
+      &.ui-state-disabled {
+        opacity: 1;
+        border-color: $gray-03;
+        background-color: $gray-03;
+        cursor: not-allowed !important;
+      }
+    } // end ui-radiobutton-box
+
+    &.ui-radiobutton-readonly {
+      opacity: 0.5;
+      cursor: not-allowed !important;
+    }
+    &.ui-radiobutton-readonly + .ui-radiobutton-label {
+      cursor: not-allowed !important;
+    }
+  } // end ui-radiobutton
+
+  .p-radiobutton-label,
+  .ui-radiobutton-label {
+    margin-left: 0.5em;
+    cursor: pointer;
+
+    color: $gray-01;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 1.3em;
+
+    &.p-disabled,
+    &.ui-label-disabled {
+      opacity: 1;
+      cursor: not-allowed !important;
+    }
+  } // end ui-chkbox-label
+} // end form-radio
+
+/* File upload */
+.form-file-upload {
+  display: block;
+  padding: $space-1 $space-2;
+
+  @media screen and (max-width: 767px) {
+    padding: $space-1;
+  } // end < 768
+
+  .p-fileupload,
+  .ui-fileupload {
+    .p-fileupload-buttonbar,
+    .ui-fileupload-buttonbar {
+      display: flex;
+      padding: 0;
+      border: 0;
+      background-color: transparent;
+      text-align: left;
+
+      .p-button,
+      .ui-button {
+        height: 80px;
+        background-color: $dark-blue;
+        color: $white;
+
+        &:enabled:hover,
+        &.ui-fileupload-choose:not(.ui-state-disabled):hover {
+          background-color: $primary;
+          border-color: $primary;
+          color: $white;
+        }
+        &:focus {
+          outline: 0;
+          box-shadow: none;
+        }
+      } // end ui-button
+
+      .p-fileupload-choose {
+        min-width: 0;
+        width: auto;
+        border: 1px dashed $gray-03;
+        background-color: transparent;
+        color: $gray-03;
+        flex: 1;
+
+        &:hover {
+          border-color: $primary;
+          color: $primary;
+        }
+      } // end choose
+    } // end fileupload-buttonbar
+
+    .p-progressbar,
+    .ui-progressbar {
+      display: none;
+      margin: $space-1 0;
+    }
+
+    .p-fileupload-content,
+    .ui-fileupload-content {
+      padding: 0;
+      border: 0;
+      background-color: transparent;
+      color: $gray-01;
+
+      .p-fileupload-row,
+      .ui-fileupload-row {
+        align-items: stretch;
+
+        &:first-child {
+          padding-top: $space-1;
+        }
+
+        > * {
+          padding: $space-1;
+          border-bottom: 1px solid $line;
+        }
+
+        .p-button,
+        .ui-button {
+          min-width: 40px;
+          border-color: $gray-02;
+          background-color: $gray-02;
+
+          &:enabled:hover {
+            background-color: $gray-03;
+            border-color: $gray-03;
+          }
+        }
+      } // end ui-fileupload-row
+    } // end ui-fileupload-content
+  } // end ui-fileupload
+} // end form-file-upload
+
+/* Pick List */
+.p-picklist {
+  justify-content: center;
+
+  @media screen and (max-width: 767px) {
+    flex-wrap: wrap;
+  } // end < 768
+
+  .p-picklist-list-wrapper {
+    min-width: 210px;
+    max-width: 400px;
+  }
+
+  .p-picklist-buttons .p-button {
+    min-width: 0;
+    background-color: transparent;
+    border-color: $primary;
+    color: $primary;
+
+    &:enabled:hover {
+      background-color: $primary;
+      color: $white;
+    }
+    &:enabled:focus,
+    &:enabled:active {
+      background-color: transparent;
+      border-color: $primary;
+      color: $primary;
+    }
+  }
+
+  .p-picklist-header {
+    background: transparent;
+    background-color: $bg;
+    border-color: $gray-05;
+    color: $gray-01;
+  }
+
+  .p-picklist-filter-container {
+    border-color: $gray-05;
+
+    .p-picklist-filter-input {
+      border-color: $gray-05;
+      color: $gray-01;
+    }
+  }
+
+  .p-picklist-list {
+    border-color: $gray-05;
+    color: $gray-01;
+
+    &:not(.cdk-drop-list-dragging) .p-picklist-item:not(.p-highlight):hover,
+    .p-picklist-item:not(.p-highlight):hover {
+      background: $bg-blue;
+    }
+    .p-picklist-item.p-highlight {
+      background: $primary;
+    }
+  }
+} // end p-picklist

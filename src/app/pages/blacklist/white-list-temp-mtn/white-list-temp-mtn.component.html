@@ -1,0 +1,320 @@
+<div class="main-title-container">
+    <p>{{ 'WhiteListTempMtn.Label.TemporaryWhiteListManagement' | translate }}</p>
+</div>
+
+<form class="form-table form-search">
+    <div class="form-row grid">
+
+        <div class="form-col md:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">Customer Eng Name</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-input">
+                        <input type="text" pInputText name="customerNameEg" [(ngModel)]="queryReq.customerNameEg"
+                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-col md:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">End Date</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-date">
+                        <p-calendar
+                          [selectOtherMonths]="true"
+                          [showButtonBar]="true"
+                          [showIcon]="true"
+                          appendTo="body"
+                          name="startDate"
+                          [(ngModel)]="queryReq.startDate"
+                          dateFormat="yy/mm/dd"
+                          (onInput)="onDatePickerInput($event)"
+                          (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                          (onBlur)="onDatePickerSelectAndBlur()"
+                          (onClose)="onDatePickerClose('startDate');onCheckDateHandler()"
+                          placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                        >
+                      </p-calendar>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-col md:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt"> ~ </label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-date">
+                      <p-calendar
+                        [selectOtherMonths]="true"
+                        [showButtonBar]="true"
+                        [showIcon]="true"
+                        name="endDate"
+                        appendTo="body"
+                        [(ngModel)]="queryReq.endDate"
+                        dateFormat="yy/mm/dd"
+                        [minDate]="queryReq.startDate"
+                        (onInput)="onDatePickerInput($event)"
+                        (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                        (onBlur)="onDatePickerSelectAndBlur()"
+                        (onClose)="onDatePickerClose('endDate');onCheckDateHandler()"
+                        placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                        >
+                      </p-calendar>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-row grid">
+        <div class="form-col md:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">{{ 'WhiteListTempMtn.Label.Flag' | translate }}</label>
+                    </div>
+                </div>
+
+                <div class="form-col col">
+                    <div class="form-select">
+                        <p-dropdown name="flag" [(ngModel)]="queryReq.flag" [options]="flagOptions"
+                            placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}">
+                        </p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-container">
+        <button pButton type="button" label="{{'Button.Label.Reset' | translate}}" class="btn-secondary"
+            (click)="resetBtnClick()"></button>
+        <button pButton type="button" label="{{'Button.Label.Query' | translate}}" (click)="searchBtnClick()"
+            *ngIf="permissions.includes('view')"></button>
+        <button pButton type="button" label="{{'Button.Label.Download' | translate}}" class="btn-teal"
+            (click)="downloadBtnClick()"></button>
+    </div>
+</form>
+
+<!--# TK-35854 -->
+<ng-container *ngIf="displayResult">
+    <p-table #lazyTable class="table-panel" [value]="data" [columns]="selectedCols" [scrollable]="true"
+        scrollHeight="500px" [paginator]="true" paginatorPosition="bottom"
+        [rowsPerPageOptions]="[10,20]" [(selection)]="selectedData" dataKey="seq" [lazy]="true"
+        (onLazyLoad)="onLazyLoad($event)" (onSort)="onSort($event)" (onPage)="onPage($event)"
+        [totalRecords]="totalRecords" [first]="tableStatusKeepService.keepInfo.pageEvent.first" [rows]="tableStatusKeepService.keepInfo.pageEvent.rows">
+        <ng-template pTemplate="caption">
+            <div class="table-action-block">
+                <div class="table-search ui-inputgroup">
+                    <input type="text" pInputText size="30" placeholder="Search keyword" [(ngModel)]="globalFilter"
+                        (input)="filterLazy($event.target.value)" />
+                    <span class="ui-inputgroup-addon">
+                        <i class="pi pi-search"></i>
+                    </span>
+                </div>
+
+                <div class="btn-container">
+                    <button pButton type="button" icon="pi pi-plus" label="{{ 'Button.Label.Add' | translate }}"
+                        class="btn-teal" (click)="uploadExcel()" *ngIf="permissions.includes('add')"></button>
+                    <button pButton type="button" icon="pi pi-file" label="{{ 'Button.Label.Edit' | translate }}"
+                        class="btn-teal" (click)="editInTable()" *ngIf="permissions.includes('edit')"></button>
+                </div>
+
+                <div class="btn-container right">
+                    <button pButton type="button" icon="pi pi-sliders-h" label="{{ 'Button.Label.Filter' | translate }}"
+                        class="btn-line" (click)="showFilter()"></button>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <ng-container *ngFor="let col of selectedCols">
+                    <th [ngClass]="col.css" *ngIf="col.field === 'checkbox'" scope="col"
+                        [style]="{'min-width': 'unset !important', 'max-width': col.maxWidth + '', 'text-align': col.textAlign + ''}">
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th [pSortableColumn]="col.field" [ngClass]="col.css" *ngIf="col.field !== 'checkbox'" scope="col"
+                        [style]="{'min-width': 'unset !important', 'max-width': col.maxWidth + '', 'text-align': col.textAlign + ''}">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                </ng-container>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-data>
+            <tr>
+                <td *ngFor="let col of selectedCols" [ngClass]="col.css"
+                    [style]="{'min-width': 'unset !important', 'max-width': col.maxWidth + '', 'text-align': col.textAlign + ''}">
+                    <ng-container *ngIf="col.field === 'checkbox'">
+                        <p-tableCheckbox [value]="data"></p-tableCheckbox>
+                    </ng-container>
+                    <ng-container *ngIf="col.field !== 'checkbox'">
+                        <p>{{data[col.field]}}</p>
+                    </ng-container>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</ng-container>
+
+<ng-container *ngIf="displayEditTable">
+    <p-table #editDt class="table-panel" [value]="editData" [scrollable]="true" scrollHeight="500px" dataKey="seq"
+        responsiveLayout="scroll">
+        <ng-template pTemplate="caption">
+            <div class="table-action-block">
+                <div class="btn-container">
+                    <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray"
+                        (click)="cancelEditTable()"></button>
+                    <button pButton type="button" label="{{ 'Button.Label.Save' | translate }}"
+                        (click)="saveEditTable()"></button>
+                </div>
+                <div class="btn-container right">
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let col of cols" scope="col">
+                    <ng-container *ngIf="col.field !== 'checkbox'">
+                        {{col.header}}
+                    </ng-container>
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-data let-ri="rowIndex">
+            <tr>
+                <td *ngFor="let col of cols">
+                    <ng-container *ngIf="col.field === 'flag' && ri===0">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <select id="select-modify-data" [(ngModel)]="data[col.field]" (ngModelChange)="onChangeFlag($event)"  >
+                                    <option *ngFor="let item of flag2Options" [ngValue]="item.value">{{item.label}}</option>
+                                </select>
+                            </ng-template>
+
+                            <ng-template pTemplate="output">
+                                <select id="select-modify-data" [(ngModel)]="data[col.field]" (ngModelChange)="onChangeFlag($event)" >
+                                    <option *ngFor="let item of flag2Options" [ngValue]="item.value">{{item.label}}</option>
+                                </select>
+                            </ng-template>
+                        </p-cellEditor>
+                    </ng-container>
+                    <ng-container *ngIf="col.field === 'displayEndDate' && ri===0">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <div class="form-date">
+                                    <p-calendar
+                                      [selectOtherMonths]="true"
+                                      [showButtonBar]="true"
+                                      [(ngModel)]="data[col.field]"
+                                      dataType="string"
+                                      dateFormat="yy/mm/dd"
+                                      (onBlur)="onBlur($event)"
+                                      (onInput)="onInputEndDate($event)"
+                                      (onSelect)="onSelectEndDate($event)"
+                                      (onClose)="onCloseEndDate()"
+                                      appendTo="body"
+                                      placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                      >
+                                    </p-calendar>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                <div class="form-date">
+                                  <p-calendar
+                                    [selectOtherMonths]="true"
+                                    [showButtonBar]="true"
+                                    [(ngModel)]="data[col.field]"
+                                    dataType="string"
+                                    dateFormat="yy/mm/dd"
+                                    (onBlur)="onBlur($event)"
+                                    (onInput)="onInputEndDate($event)"
+                                    (onSelect)="onSelectEndDate($event)"
+                                    (onClose)="onCloseEndDate()"
+                                    appendTo="body"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                    >
+                                  </p-calendar>
+                                </div>
+                            </ng-template>
+                        </p-cellEditor>
+                    </ng-container>
+                    <ng-container *ngIf="col.field !== 'flag' && col.field !== 'displayEndDate' && ri===0">
+                        <p>{{data[col.field]}}</p>
+                    </ng-container>
+                    <ng-container *ngIf="ri > 0">
+                        <p>{{data[col.field]}}</p>
+                    </ng-container>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</ng-container>
+
+<p-dialog header="{{ 'Dialog.Header.FilterColumns' | translate }}" [(visible)]="displayFilter" [draggable]="false"
+    [blockScroll]="true" [modal]="true">
+    <form>
+        <div class="form-row grid">
+            <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of cols">
+                <div class="form-checkbox">
+                    <p-checkbox name="checkboxGroup" [label]="col.header" [value]="col" [(ngModel)]="selectedCols"
+                        [disabled]="col?.isDisabled"></p-checkbox>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button pButton type="button" label="{{'Button.Label.Reset' | translate}}" class="btn-gray btn-line"
+                (click)="changeFilter()"></button>
+        </div>
+    </form>
+</p-dialog>
+
+<p-dialog header="{{ 'WhiteListTempMtn.Label.TemporaryWhiteListFileUpload' | translate }}" [(visible)]="displayUpload"
+    [draggable]="false" [closeOnEscape]="true" [blockScroll]="true" [contentStyle]="{'overflow': 'visible'}"
+    [modal]="true" (onHide)="onHideUploadDialog($event)">
+    <p-fileUpload #fileUpload class="form-file-upload" [chooseIcon]="''" [chooseLabel]="'Choose File'" customUpload="true"
+        [showCancelButton]="false" [uploadIcon]="''" (onError)="onUploadError($event)" (uploadHandler)="uploadHandler($event)"
+        dndUploadHandler (onSelect)="onFileSelect($event)" [files]="selectedFileList" (fileDropped)="onDropHandler($event)"
+        (onFileDroppedError)="onDropError($event)" [acceptDropFileType] = "fileTypeLimit"
+        >
+    </p-fileUpload>
+    <form class="form-table form-search">
+        <p><a href="javascript:void()" (click)="downloadSample()">{{ 'NonEARItemMtn.Label.DownloadSampleFile' |
+                translate
+                }}</a></p>
+    </form>
+</p-dialog>
+
+<p-dialog header="{{ 'Dialog.Header.MessagePrompt' | translate }}" [(visible)]="displayDialog" [draggable]="false"
+    [blockScroll]="true" [modal]="true">
+    <form>
+        <div class="form-row grid">
+            <div class="form-label">
+
+                <label [ngClass]="{'success-active': (isSuccess), 'error-active': (!isSuccess) }" style="white-space: pre-wrap;">{{dialogMsg}}</label>
+            </div>
+        </div>
+    </form>
+</p-dialog>

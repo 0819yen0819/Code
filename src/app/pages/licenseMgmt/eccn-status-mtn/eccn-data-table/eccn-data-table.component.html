@@ -1,0 +1,197 @@
+<app-common-data-table-col-selector
+  [tableCols]="cols"
+  [settingParams]="dialogSettingParams"
+  (outputColSelected)="onSelectedColDialogCallback($event)"
+></app-common-data-table-col-selector>
+
+<app-am-eccn-status-dialog
+  [settingParams]="itemAddDialogParams"
+></app-am-eccn-status-dialog>
+
+<!--# TK-35854 -->
+<div class="data-container">
+  <p-table
+    #dt
+    class="table-panel"
+    [value]="data"
+    [columns]="showTableCols"
+    [globalFilterFields]="globalFilterCols"
+    [(selection)]="selectedData"
+    responsiveLayout="stack"
+    [rowHover]="true"
+    [showCurrentPageReport]="true"
+    [paginator]="data && data.length > 0 ? true : false"
+    [rowsPerPageOptions]="[10, 20]"
+    currentPageReportTemplate=""
+    [scrollable]="viewpointWidth > 640"
+    [scrollHeight]="data && data.length > 0 ? 'fit-content' : '0px'"
+    [autoLayout]="true"
+    [resetPageOnSort]="false"
+    breakpoint="640px"
+    [selectionPageOnly]="true"
+    (onPage)="onPage($event)"
+    [first]="tableStatusKeepService.keepInfo.pageEvent.first" 
+    [rows]="tableStatusKeepService.keepInfo.pageEvent.rows"
+  >
+    <ng-template pTemplate="caption">
+      <div class="table-action-block">
+        <div class="status-all-set-section" *ngIf="mode == 'Edit'">
+          <div class="label">
+            <span class="label-text">{{
+              "LicenseMgmt.ECCNStatusMtn.Label.Flag" | translate
+            }}</span>
+          </div>
+          <div class="check-option">
+            <p-selectButton
+              [options]="stateOptions"
+              optionLabel="label"
+              optionValue="value"
+              (onChange)="onStatusChangeEvent($event.value)"
+            ></p-selectButton>
+          </div>
+        </div>
+        <div class="table-search ui-inputgroup" *ngIf="mode == 'View'">
+          <input
+            pInputText
+            type="text"
+            size="30"
+            [(ngModel)]="searchKeyword"
+            (input)="dt.filterGlobal(searchKeyword, 'contains')"
+            placeholder="Search keyword"
+            [disabled]="data.length == 0"
+          />
+          <span class="ui-inputgroup-addon">
+            <i class="pi pi-search"></i>
+          </span>
+        </div>
+        <div class="btn-container">
+          <ng-container *ngIf="permissions.includes('add') && mode == 'View'">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-plus"
+              label="{{ 'Button.Label.Add' | translate }}"
+              class="btn-teal"
+              (click)="onItemAddEvent()"
+            ></button>
+          </ng-container>
+          <ng-container
+            *ngIf="
+              selectedData.length > 0 &&
+              permissions.includes('edit') &&
+              mode == 'View'
+            "
+          >
+            <button
+              pButton
+              type="button"
+              icon="pi pi-file"
+              label="{{ 'Button.Label.Edit' | translate }}"
+              class="btn-teal"
+              (click)="onSelectedOutputEvent()"
+            ></button
+          ></ng-container>
+
+          <ng-container *ngIf="mode == 'Edit'">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-times"
+              label="{{ 'Button.Label.Cancel' | translate }}"
+              class="btn-gray"
+              (click)="onModifyCancelEvent()"
+            ></button>
+            <button
+              pButton
+              type="button"
+              icon="pi pi-arrow-right"
+              label="{{ 'Button.Label.Submit' | translate }}"
+              class="btn-teal"
+              (click)="onModifySubmitEvent()"
+            ></button>
+          </ng-container>
+        </div>
+        <div class="btn-container right" *ngIf="mode == 'View'">
+          <!--# open table cols show selector dialog -->
+          <button
+            pButton
+            type="button"
+            icon="pi pi-sliders-h"
+            label="{{ 'Button.Label.Filter' | translate }}"
+            class="btn-line"
+            (click)="onOpenTableColSeletorDialog()"
+            [disabled]="data.length == 0"
+          ></button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th
+          class="selector-checkbox"
+          scope="col"
+          *ngIf="mode == 'View' && permissions.includes('edit')"
+        >
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <ng-container
+          *ngIf="
+            viewpointWidth > 640;
+            then openSortTemplate;
+            else closeSortTemplate
+          "
+        >
+        </ng-container>
+        <ng-template #openSortTemplate>
+          <th
+            *ngFor="let col of columns"
+            [pSortableColumn]="col.field"
+            scope="col"
+            [ngClass]="viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''"
+          >
+            {{ col.label }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </ng-template>
+        <ng-template #closeSortTemplate>
+          <th
+            *ngFor="let col of columns"
+            scope="col"
+            [ngClass]="viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''"
+          >
+            {{ col.label }}
+          </th>
+        </ng-template>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data let-columns="columns">
+      <tr [class]="data.length != [] ? 'show' : 'hide'">
+        <td
+          class="selector-checkbox"
+          scope="col"
+          *ngIf="mode == 'View' && permissions.includes('edit')"
+        >
+          <p-tableCheckbox [value]="data"></p-tableCheckbox>
+        </td>
+        <ng-container *ngFor="let col of columns">
+          <td
+            scope="col"
+            [ngClass]="viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''"
+          >
+            <span class="p-column-title">{{ col.label }}</span>
+            <span [ngClass]="viewpointWidth < 641 ? 'p-column-content' : ''">{{
+              data[col.field]
+            }}</span>
+          </td>
+        </ng-container>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <ng-container *ngIf="data.length == 0">
+    <div class="no-data">
+      <!--# show content if no data-->
+      <span>{{ "EccnMtn.Label.PleaseSearchOrAdd" | translate }}</span>
+    </div>
+  </ng-container>
+</div>

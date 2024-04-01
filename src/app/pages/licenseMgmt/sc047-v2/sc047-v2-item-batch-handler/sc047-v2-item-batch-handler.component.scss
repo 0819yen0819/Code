@@ -1,0 +1,47 @@
+@import "../../../../../styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+
+
+.form-container{
+  @apply mt-2;
+  @apply lg:w-5/6 xl:w-8/12;
+}
+
+@media screen and (max-width: 768px) {
+  .form-container{
+    @apply w-full;
+  }
+}
+
+.batch-handler-kit {
+  @apply mt-2;
+}
+
+.output-item-list {
+  @apply flex xxs:justify-start md:justify-center items-start;
+  @apply xxs:pl-2.5 md:p-0 mt-2.5;
+  .p-button {
+    @apply h-20;
+  }
+  @media screen and (max-width: 768px) {
+    .p-button {
+      @apply h-10 w-full mr-4;
+    }
+  }
+}
+
+.form-file-upload {
+  @apply p-2.5;
+}
+
+:host ::ng-deep {
+  @media screen and (max-width: 768px) {
+    .p-fileupload-buttonbar {
+      .p-button {
+        min-width: fit-content;
+      }
+    }
+  }
+}

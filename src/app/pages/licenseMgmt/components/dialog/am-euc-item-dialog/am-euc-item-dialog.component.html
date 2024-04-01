@@ -1,0 +1,33 @@
+<p-dialog
+  [header]="dialogSetting.getValue().title"
+  [(visible)]="dialogSetting.getValue().visiable"
+  [modal]="dialogSetting.getValue().modal"
+  [draggable]="dialogSetting.getValue().draggable"
+  [resizable]="dialogSetting.getValue().resizeable"
+>
+  <p-tabView>
+    <!--# Single item add event tab-->
+    <p-tabPanel
+      [header]="mode == 'edit' ? singleModifyTabTitle : singleAddTabTitle"
+      leftIcon="pi pi-file"
+    >
+      <app-am-euc-single-item [selectedData]="selectedData" [mode]="mode"
+        [isParentDialogClose]="dialogSetting.getValue().visiable"
+        [isTCSUMember]="dialogSetting.getValue().data?dialogSetting.getValue().data.isTCSUMember:false"
+        (outputSingleItem)="onSingleItemCallback($event)"></app-am-euc-single-item>
+    </p-tabPanel>
+
+    <!--# Multi item add event tab-->
+    <ng-container *ngIf="mode == 'add'">
+      <p-tabPanel
+        [header]="mode == 'edit' ? '' : multiAddTabTitle"
+        [leftIcon]="mode == 'edit' ? '' : 'pi pi-clone'"
+        [disabled]="mode == 'edit' ? true : false"
+      >
+        <app-add-euc-multi-item
+          (outputMultiItem)="onMultiItemCallback($event)"
+        ></app-add-euc-multi-item>
+      </p-tabPanel>
+    </ng-container>
+  </p-tabView>
+</p-dialog>

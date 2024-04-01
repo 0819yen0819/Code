@@ -1,0 +1,188 @@
+<div stickyZone>
+  <!-- 單號/按鈕 -->
+  <div class="main-title-container">
+    <div class="override-content-container-padding"></div>
+    <p>{{ formSetting.title }}</p>
+    <div class="btn-container">
+      <!-- 重新分派按鈕 -->
+      <button *ngIf="reassignDialogService.reAssignBtnSetting.visiable"
+        label="{{ reassignDialogService.reAssignBtnSetting.name | translate }}"
+        (click)="reassignDialogService.openAssignDialog()" [ngStyle]="{
+          'background-color': reassignDialogService.reAssignBtnSetting.color
+        }" pButton type="button"></button>
+      <button *ngIf="lehUtilService.getMode === 'approving'" pButton type="button"
+        label="{{ 'Button.Label.Action' | translate }}" class="btn-dark-red"
+        (click)="onAuditActionDialogHandler()"></button>
+      <button pButton type="button" [label]="integrateService.backBtnLabel" class="btn-gray"
+        (click)="integrateService.backBtnOnClick()"></button>
+    </div>
+  </div>
+
+  <!-- 申請人資訊 -->
+  <div class="form-table form-list">
+    <div class="form-row grid">
+      <div class="form-col md:col-6 sm:col-12 col-12" *ngFor="let headerItem of headerSetting">
+        <div class="form-row grid">
+          <div class="form-col col-fixed" style="white-space: nowrap">
+            <div class="form-label">
+              <label class="txt">{{ headerItem.col | translate }}</label>
+            </div>
+          </div>
+          <div class="form-col col">
+            <div class="form-label">
+              <label class="txt">{{ headerItem.content }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 主要內容(申請資訊、簽核歷程、附件連結) -->
+  <p-tabView>
+    <!-- 1.申請資訊 -->
+    <p-tabPanel header="{{ 'LicenseMgmt.Common.Tabs.ApplicationInfo' | translate }}">
+      <!-- 欄位資訊 -->
+      <form class="form-table">
+        <div class="form-row grid">
+          <div class="form-col md:col-6 sm:col-12 col-12" *ngFor="let tabPanelItem of tabPanelSetting">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">{{ tabPanelItem.col | translate }}</label>
+                </div>
+              </div>
+              <div class="form-col col">
+                <div class="form-label">
+                  <label class="txt">{{ tabPanelItem.content }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Table資訊 -->
+      <ng-container *ngIf="eucExtendOpen.length !== 0">
+        <p-table [value]="tableData" [columns]="tableCols" responsiveLayout="stack" breakpoint="640px"
+          [scrollable]="viewpointWidth > 640">
+          <!-- Table表頭 -->
+          <ng-template pTemplate="header">
+            <tr>
+              <th *ngFor="let col of tableCols" [id]="col.field" [class]="
+                  ['billTo', 'shipTo', 'deliverTo'].includes(col.field)
+                    ? 'col-address'
+                    : ''
+                ">
+                {{ col.header | translate }}
+              </th>
+            </tr>
+          </ng-template>
+
+          <!-- Table表身 -->
+          <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+            <tr [ngStyle]="
+                eucExtendOpen[rowIndex] ? { 'background-color': '#e5e5e5' } : ''
+              ">
+              <td *ngFor="let col of tableCols" [class]="
+                  ['billTo', 'shipTo', 'deliverTo'].includes(col.field)
+                    ? 'col-address'
+                    : ''
+                ">
+                <!-- <span class="p-column-title" style="width:22%;">{{col.header | translate}}</span> -->
+                <span class="p-column-title" style="width: 22%">{{
+                  col.header | translate
+                  }}</span>
+
+                <!-- 一般欄位 -->
+
+                <ng-container *ngIf="col.field !== 'euc'">
+                  <!-- <p style="width: 60%;">{{data[col.field]}}</p> -->
+                  <p>{{ data[col.field] }}</p>
+                </ng-container>
+
+                <!-- EUC按鈕欄位 -->
+                <ng-container *ngIf="col.field === 'euc'">
+                  <button *ngIf="data[col.field] > 0" class="euc-button" (click)="eucBtnOnClick(rowIndex)">
+                    {{ eucExtendOpen[rowIndex] ? "Close" : "Open" }}
+                  </button>
+                  <button *ngIf="!(data[col.field] > 0)" class="euc-button" style="opacity: 0.3" disable>
+                    No Data
+                  </button>
+                  <!-- style="width: 20%" -->
+                  <div></div>
+                </ng-container>
+              </td>
+
+            </tr>
+            <div [attr.id]="'mainArea' + rowIndex"></div>
+
+            <!-- 展開區域 -->
+            <div htmlCollapse [collapseController]="eucExtendOpen[rowIndex]">
+              <p-table [value]="eucData[rowIndex]" [columns]="eucCols" *ngIf="eucExtendOpen" responsiveLayout="stack"
+                breakpoint="640px" [scrollable]="viewpointWidth > 640">
+                <!-- Euc Table表頭 -->
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th *ngFor="let eucCol of eucCols" [id]="eucCol.field">
+                      {{ eucCol.header | translate }}
+                    </th>
+                  </tr>
+                </ng-template>
+                <!-- Euc Table表身 -->
+                <ng-template pTemplate="body" let-data let-rowIndex="eucIndex">
+                  <tr>
+                    <ng-container *ngFor="let eucCol of eucCols; let eucColIndex = index">
+                      <td *ngIf="eucColIndex != 0 || viewpointWidth > 640">
+                        <!-- style="width: 22%" -->
+                        <span class="p-column-title">{{
+                          eucCol.header | translate
+                          }}</span>
+                        <!-- style="width: 60%" -->
+                        <div>
+                          <p *ngIf="!eucCheckBoxList.includes(eucCol.field)">
+                            {{ data[eucCol.field] }}
+                          </p>
+                          <p-checkbox *ngIf="eucCheckBoxList.includes(eucCol.field)" [(ngModel)]="data[eucCol.field]"
+                            disabled="true" binary="true" readonly="true">
+                          </p-checkbox>
+                        </div>
+                      </td>
+                    </ng-container>
+
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+            <div [attr.id]="'eucExtendArea' + rowIndex"></div>
+          </ng-template>
+        </p-table>
+      </ng-container>
+    </p-tabPanel>
+
+
+    <ng-container *ngIf="formTypeId">
+      <!-- 2.簽核歷程 -->
+      <p-tabPanel header="{{ 'LicenseMgmt.Common.Tabs.SignOffHistory' | translate }}">
+        <app-history-log *ngIf="reassignDialogService.reAssignHistoryRefreshController" [formNo]="formSetting.formNo" [formTypeId]="formTypeId">
+        </app-history-log>
+      </p-tabPanel>
+
+      <!-- 3.附件連結 -->
+      <p-tabPanel header="{{ 'LicenseMgmt.Common.Tabs.AttachmentLink' | translate }}">
+          <app-attachment-uploader [formTypeId]="formTypeId"  [formNo]="formSetting.formNo"></app-attachment-uploader>
+      </p-tabPanel>
+    </ng-container>
+  </p-tabView>
+
+  <app-approve-dialog *ngIf="openApproveDialog" [dialogOpen]="openApproveDialog"
+    (submitInfo)="getApproveDialogResult($event)" (closeDialog)="updateDialog()"></app-approve-dialog>
+</div>
+
+<p-progressSpinner *ngIf="showSpinner"></p-progressSpinner>
+
+<!-- 轉派Dialog -->
+<app-reassign-dialog *ngIf="formTypeId"></app-reassign-dialog>
+
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams" [contentList]="noticeContentList">
+</app-common-notice-check-dialog>

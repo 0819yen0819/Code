@@ -1,0 +1,14 @@
+<p-dialog
+  [header]="dialogSetting.getValue().title"
+  [(visible)]="dialogSetting.getValue().visiable"
+  [modal]="dialogSetting.getValue().modal"
+  [draggable]="dialogSetting.getValue().draggable"
+  [resizable]="dialogSetting.getValue().resizeable"
+>
+  <app-common-by-type-selector
+    [selectType]="dialogSetting.getValue().type"
+    [data]="dialogSetting.getValue().data"
+    (outputResult)="onSubComponentResultCallback($event)"
+    [isDialogOpen]="dialogSetting.getValue().visiable"
+  ></app-common-by-type-selector>
+</p-dialog>

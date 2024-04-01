@@ -1,0 +1,44 @@
+.title {
+    margin: 10px 0;
+}
+
+.pcf-lines-readonly-table { 
+    border: 0.5px solid #e5e5e5;
+
+    width: auto !important; 
+    max-width:760px !important; // td的欄位每格90，總格數6格。2格110
+    min-width: 0 !important;
+    
+}
+
+:host ::ng-deep {
+    
+    .p-datatable-wrapper {
+        overflow: hidden !important;
+    }
+
+    .pcf-lines-readonly-table {
+        margin-top: 0px !important;
+        margin-bottom: 10px !important;
+
+        .pcf-lines-readonly-table-th,
+        .pcf-lines-readonly-table-td {
+            font-size: 12px !important;
+
+            &:not(:last-child){
+                border-right: 1px solid #e5e5e5 !important;
+            }
+ 
+            max-width: 90px !important; 
+            min-width: 90px !important; 
+
+            &:nth-child(5),&:nth-child(6){
+                max-width: 110px !important; 
+                min-width: 110px !important; 
+            } 
+        }
+ 
+ 
+
+    }
+}

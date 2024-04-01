@@ -1,0 +1,133 @@
+@import '../helpers/variables';
+
+.p-tabview,
+.tab-container {
+  .p-tabview-nav li,
+  .ui-tabview.ui-tabview-top .ui-tabview-nav li {
+    margin: 0;
+    padding: 0;
+
+    background-color: transparent;
+    border: 0;
+    border-radius: 5px 5px 0 0;
+
+    &:not(.ui-state-active):not(.ui-state-disabled):hover,
+    &.ui-state-active:hover {
+      background-color: $bg-blue;
+      // border: 0;
+      color: $primary;
+
+      .p-tabview-nav-link,
+      .p-tabview-title,
+      .ui-tabview-title {
+        background-color: inherit;
+        color: inherit;
+      }
+    }
+    &.p-highlight,
+    &.ui-state-active {
+      background-color: transparent;
+      border: 0;
+      border-bottom: 2px solid $primary;
+      color: $primary;
+
+      &:hover {
+        border-bottom: 2px solid $primary;
+      }
+
+      .p-tabview-nav-link,
+      .p-tabview-title,
+      .ui-tabview-title {
+        background-color: inherit;
+        color: inherit;
+      }
+    }
+    &.ui-state-disabled,
+    &.ui-state-disabled > a {
+      opacity: .5;
+      cursor: not-allowed !important;
+    } // end ui-state-disabled
+    & + li {
+      // margin-left: $space-1;
+    }
+
+    .p-tabview-nav-link,
+    a {
+      padding: $space-1;
+      border: 0;
+      border-bottom: 1px solid $line;
+      background-color: transparent;
+      color: $gray-03;
+
+      &:not(.p-disabled):focus {
+        outline: 0;
+        box-shadow: none;
+      }
+    }
+
+    .p-tabview-title,
+    .ui-tabview-title {
+      font-size: 16px;
+      color: inherit;
+      line-height: 1.3em;
+    }
+  } // end .ui-tabview-nav li
+
+  .p-tabview-panels,
+  .ui-tabview .ui-tabview-panels {
+    padding: $space-2 0 0;
+    border: 0;
+    // border-top: 1px solid $gray-02;
+    background-color: transparent;
+  } // end ui-tabview-panels
+
+  &.btn-style {
+    .ui-tabview.ui-tabview-top .ui-tabview-nav li {
+      border: 1px solid $primary;
+      border-radius: 50px;
+
+      &:not(.ui-state-active):not(.ui-state-disabled):hover,
+      &.ui-state-active:hover {
+        background-color: $light-blue;
+        border: 1px solid $light-blue;
+
+        .ui-tabview-title {
+          color: $white;
+        }
+      }
+      &.ui-state-active {
+        background-color: $primary;
+        border: 1px solid $primary;
+
+        &:hover {
+          background-color: $light-blue;
+          border: 1px solid $light-blue;
+
+          .ui-tabview-title {
+            color: $white;
+          }
+        }
+
+        .ui-tabview-title {
+          color: $white;
+        }
+      }
+
+      a {
+        padding: $space-1 $space-1 / 2 * 3;
+      }
+
+      .ui-tabview-title {
+        font-weight: normal;
+        font-size: 14px;
+        color: $primary;
+        line-height: 1.3em;
+      }
+    } // end ui-tabview-nav li
+
+    .ui-tabview .ui-tabview-panels {
+      border: 0;
+    } // end ui-tabview-panels
+  } // end btn-style
+
+} // end tab-container

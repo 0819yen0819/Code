@@ -1,0 +1,28 @@
+.p-listbox {
+  @apply mt-2 ml-2 mr-2;
+  @apply border border-gray-50 #{!important};
+
+  .p-inputtext {
+    @apply border border-gray-200 #{!important};
+  }
+
+  .p-listbox-list-wrapper {
+    height: calc(
+      80vh - 40px - 100px - 40px - 16px - 60px - 52px - 30px - 30px - 16px
+    );
+
+    @apply overflow-x-auto;
+    .p-listbox-list {
+      .p-listbox-item {
+        @apply text-sm;
+
+        &.p-highlight {
+          @apply bg-blue-500 text-gray-50 font-semibold;
+        }
+      }
+    }
+    .p-listbox-empty-message {
+      @apply text-gray-400 text-center p-4 font-semibold;
+    }
+  }
+}

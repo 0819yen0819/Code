@@ -1,0 +1,245 @@
+<div class="main-title-container">
+  <p>{{ 'FormFileQuery.PageTitle' | translate }}</p>
+</div>
+
+<form class="form-table form-search">
+  <div class="form-row grid">
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'FormFileQuery.Label.FormTypeName' | translate }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-select">
+            <p-dropdown name="formName" [(ngModel)]="queryReq.formTypeId" [filter]="true" [options]="formNameOptions"
+              placeholder="{{ 'FormFileQuery.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'FormFileQuery.Label.FormNo' | translate }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-input">
+            <input type="text" name="formNo" [(ngModel)]="queryReq.formNo" pInputText value=""
+              placeholder="{{ 'FormFileQuery.Label.FormNo' | translate }}" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'FormFileQuery.Label.Subject' | translate }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-input">
+            <input type="text" name="subject" [(ngModel)]="queryReq.subject" pInputText value=""
+              placeholder="{{ 'FormFileQuery.Label.Subject' | translate }}" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row grid">
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'FormFileQuery.Label.Remark' | translate }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-chip">
+            <p-chips name="remark" [(ngModel)]="queryReq.remarks"
+              placeholder="{{ 'FormFileQuery.PlaceHolder.Remark' | translate }}">
+            </p-chips>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'FormFileQuery.Label.FileName' | translate }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-input">
+            <input type="text" name="fileName" [(ngModel)]="queryReq.fileName" pInputText value=""
+              placeholder="{{ 'FormFileQuery.Label.FileName' | translate }}" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'FormFileQuery.Label.UploadBy' | translate }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-input">
+            <p-autoComplete [(ngModel)]="selectedEmp" [ngModelOptions]="{standalone: true}" [suggestions]="filteredEmps"
+              (completeMethod)="filterEmp($event)" [virtualScroll]="true" [itemSize]="30" (onBlur)="onBlurEmp($event)"
+              [minLength]=3 field="displayName" [style]="{'width': '100%'}">
+            </p-autoComplete>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row grid">
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'FormFileQuery.Label.UploadDate' | translate }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-date">
+            <p-calendar
+              [selectOtherMonths]="true"
+              [showButtonBar]="true"
+              [showIcon]="true"
+              appendTo="body"
+              name="startDate"
+              [(ngModel)]="queryReq.startDate"
+              dateFormat="yy/mm/dd"
+              (onInput)="onDatePickerInput($event)"
+              (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+              (onBlur)="onDatePickerSelectAndBlur()"
+              (onClose)="onDatePickerClose('startDate');onCheckDateHandler()"
+              placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+              >
+            </p-calendar>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt"> ~ </label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-date">
+            <p-calendar
+              [selectOtherMonths]="true"
+              [showButtonBar]="true"
+              [showIcon]="true"
+              name="endDate"
+              appendTo="body"
+              [(ngModel)]="queryReq.endDate"
+              dateFormat="yy/mm/dd"
+              [minDate]="queryReq.startDate"
+              (onInput)="onDatePickerInput($event)"
+              (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+              (onBlur)="onDatePickerSelectAndBlur()"
+              (onClose)="onDatePickerClose('endDate');onCheckDateHandler()"
+              placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+              >
+            </p-calendar>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="btn-container">
+    <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-secondary"
+      (click)="resetBtnClick();"></button>
+    <button pButton type="button" label="{{ 'Button.Label.Query' | translate }}" (click)="searchBtnClick();"
+      *ngIf="permissions.includes('view')"></button>
+  </div>
+</form>
+
+<!--# TK-35854 -->
+<ng-container *ngIf="displayResult">
+  <p-table #lazyTable class="table-panel" [value]="data" [columns]="selectedCols" [scrollable]="true"
+    scrollHeight="500px" [paginator]="true" [rows]="10" paginatorPosition="bottom"
+    [rowsPerPageOptions]="[10,20]" dataKey="id" [lazy]="true" (onLazyLoad)="onLazyLoad($event)"
+    (onSort)="onSort($event)" (onPage)="onPage($event)" [totalRecords]="totalRecords">
+    <ng-template pTemplate="caption">
+      <div class="table-action-block">
+        <div class="table-search ui-inputgroup">
+          <input pInputText type="text" size="30" (input)="filterLazy($event.target.value)" [(ngModel)]="globalFilter"
+            placeholder="Search keyword" />
+          <span class="ui-inputgroup-addon">
+            <em class="pi pi-search"></em>
+          </span>
+        </div>
+
+        <div class="btn-container right">
+          <button pButton type="button" icon="pi pi-sliders-h" label="{{ 'Button.Label.Filter' | translate }}"
+            class="btn-line" (click)="showFilter()"></button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let col of selectedCols" [pSortableColumn]="col.field" [ngClass]="" scope="col">
+          <ng-container>
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </ng-container>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td *ngFor="let col of selectedCols" [ngClass]="">
+          <ng-container *ngIf="col.field === 'formNo'">
+            <p><a href="#" (click)="viewPage(data['viewUrl'] , data[col.field])">{{data[col.field]}}</a></p>
+          </ng-container>
+          <ng-container *ngIf="col.field === 'fileName'">
+            <p><a class="txt" href="#" (click)="downloadFile(data['seq'])">{{data[col.field]}}</a></p>
+          </ng-container>
+          <ng-container *ngIf="col.field !== 'formNo' && col.field !== 'fileName'">
+            <p>{{data[col.field]}}</p>
+          </ng-container>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-container>
+<p-dialog header="{{ 'Dialog.Header.FilterColumns' | translate }}" [(visible)]="displayFilter" [draggable]="false"
+  [blockScroll]="true" [modal]="true">
+  <form>
+    <div class="form-row grid">
+      <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of cols">
+        <div class="form-checkbox">
+          <p-checkbox name="checkboxGroup" [label]="col.header" [value]="col" [(ngModel)]="selectedCols"
+            [disabled]="col?.isDisabled"></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-gray btn-line"
+        (click)="changeFilter()"></button>
+    </div>
+  </form>
+</p-dialog>

@@ -1,0 +1,13 @@
+<div class="login-container">
+  <div class="login-block">
+    <div class="logo-block img-block">
+      <img src="./assets/imgs/logo.svg" alt="WPG">
+    </div>
+
+    <div class="btn-container">
+      <!-- <button pButton type="button" label="{{ 'Button.Label.Login' | translate }}" [routerLink]="'/redirect'" [queryParams]="{url: '/blacklistMgmt/sample-out-dpl'}"></button> -->
+      <button pButton type="button" label="{{ 'Button.Label.Login' | translate }}" [routerLink]="'/redirect'" [queryParams]="{url: '/home'}"></button>
+      <button pButton type="button" label="{{ 'Login.Label.DevLogin' | translate }}" (click)="devLogin()" *ngIf="devLoginDisplay === 'true'"></button>
+    </div>
+  </div>
+</div>

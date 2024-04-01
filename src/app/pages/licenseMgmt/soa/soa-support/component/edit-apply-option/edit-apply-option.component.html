@@ -1,0 +1,371 @@
+<!-- 欄位資訊 -->
+<form class="form-table">
+    <div class="form-container form-table">
+        <div class="form-row end-selector grid">
+            <!-- 正本歸檔區域 -->
+            <div class="form-col lg:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">{{"SOA.Label.FillingArea" | translate}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="grid md:col col-12">
+                        <div class="form-label" style="display: flex; align-items: center; flex-wrap: wrap;">
+                            <ng-container *ngIf="!docAreaDisabled">
+                                <div *ngFor="let opt of applyInfo.docAreaMap;" class="soa-doc-area-radio">
+                                    <label class="txt"
+                                        style="height: 100%; display: flex; align-items: center; gap:0.5vw;  ">
+                                        <p-radioButton name="docAreaGroup" [label]="opt.label" [value]="opt.value"
+                                            [(ngModel)]="applyInfo.docAreaValue" (ngModelChange)="emitApplyInfo()">
+                                        </p-radioButton>
+                                    </label>
+                                </div>
+                            </ng-container>
+
+                            <ng-container *ngIf="docAreaDisabled">
+                                <label class="txt">
+                                    {{applyInfo.docAreaLabel}}
+                                </label>
+                            </ng-container>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 客戶/廠商 -->
+        <div class="form-row multi-input-kit grid">
+            <div class="form-col col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require" style="display: flex; flex-direction: column; align-items: start;">
+                            <label class="txt">{{'ImpExpLicenseMtn.Label.Customer' | translate}} /
+                              <label>{{'ImpExpLicenseMtn.Label.Vendor' | translate}}</label>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="grid md:col col-12" style="margin: auto;">
+
+                        <div class="form-col form-input md:col-4 lg:col-3 col-12">
+                            <div class="form-select">
+                                <p-dropdown name="curstorType" [options]="applyInfo.cvMap"
+                                    placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}"
+                                    [(ngModel)]="applyInfo.cvValue.type" (onChange)="cvTypeOnChange()"
+                                    (ngModelChange)="emitApplyInfo()"
+                                    [disabled]="soaCommonService.currentRole !== 'Applyer'">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                        <div class="form-col form-input md:col-8 lg:col-9 col-12">
+                            <div class="form-input">
+                                <input type="text" pInputText name="curstorId" readonly
+                                    placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}}"
+                                    [value]="applyInfo.cvValue.data?.label || ''" (click)="cvSelectDialogOnOpen()"
+                                    [disabled]="soaCommonService.currentRole !== 'Applyer'" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Import OU 正/副本-->
+        <div class="form-row remark grid">
+            <div class="form-col col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">{{'SOA.Label.Origin' | translate}}</label>
+                        </div>
+                    </div>
+                    <div class="grid md:col col-12">
+                        <div class="form-col form-input col-12">
+                            <div class="form-input no-h-full">
+                                <p-selectButton [options]="ouInfo.docMap" optionLabel="label" optionValue="value"
+                                    [(ngModel)]="ouInfo.docValue" [ngModelOptions]="{standalone: true}"
+                                    (ngModelChange)="emitOuInfo()"
+                                    [disabled]="soaCommonService.currentRole !== 'Applyer'">
+                                    <ng-template let-item>
+                                        <i *ngIf="ouInfo.docValue === 'Y' && item.value ==='Y'" class="pi pi-check"></i>
+                                        <i *ngIf="ouInfo.docValue === 'N' && item.value ==='N'" class="pi pi-check"></i>
+                                        <span>{{item.label}}</span>
+                                    </ng-template>
+                                </p-selectButton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 有效日期 -->
+        <div class="form-row exp-date grid">
+            <div class="form-col lg:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">{{ "LicenseMgmt.EUC.Label.Exp" | translate}}</label>
+                        </div>
+                    </div>
+                    <div class="grid md:col col-12">
+                        <div class="form-col col-12" style="height: unset !important">
+                            <div class="form-label" style="display: flex; align-items:center ;width: 100%; ">
+                                <ng-container
+                                    *ngIf="(soaCommonService.currentState !== 'Readonly' && soaCommonService.currentRole !== 'Readonly' && soaCommonService.currentRole !== 'Applyer'); then editDuring ; else viewDuring">
+                                </ng-container>
+                                <ng-template #editDuring>
+                                    <div class="calendar-container">
+                                        <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [(ngModel)]="applyInfo.startDate" name="applyInfo.startDate"
+                                          [showIcon]="true" dateFormat="yy/mm/dd" appendTo="body"
+                                          (ngModelChange)="emitApplyInfo()"
+                                          (onInput)="onDatePickerInput($event)"
+                                          (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                                          (onBlur)="onDatePickerSelectAndBlur()"
+                                          (onClose)="onDatePickerClose('startDate');onCheckDateHandler()"
+                                          placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                        >
+                                        </p-calendar>
+                                        &nbsp;~&nbsp;
+                                        <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [(ngModel)]="applyInfo.endDate" name="applyInfo.endDate"
+                                          [showIcon]="true" dateFormat="yy/mm/dd" appendTo="body"
+                                          [minDate]="applyInfo.startDate"
+                                          (ngModelChange)="emitApplyInfo()"
+                                          (onInput)="onDatePickerInput($event)"
+                                          (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                                          (onBlur)="onDatePickerSelectAndBlur()"
+                                          (onClose)="onDatePickerClose('endDate');onCheckDateHandler()"
+                                          placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                        >
+                                        </p-calendar>
+                                    </div>
+                                </ng-template>
+
+                                <ng-template #viewDuring>
+                                    <label class="txt" *ngIf="applyInfo.startDate && applyInfo.endDate">
+                                        {{applyInfo.startDate | date : 'yyyy/MM/dd'}}
+                                        &nbsp;~&nbsp;
+                                        {{applyInfo.endDate | date :'yyyy/MM/dd'}}
+                                    </label>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- I/E Type -->
+            <div class="form-col lg:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">I/E TYPE
+                            </label>
+                        </div>
+                    </div>
+                    <div class="grid md:col col-12">
+                        <div class="form-col form-input col-12" style="height: unset !important">
+
+                            <div class="form-label" style="display: flex; align-items: center;">
+                                <label class="txt">
+                                    {{applyInfo.IEtypeValue}}
+                                </label>
+                            </div>
+
+                            <!-- <div class="form-select" *ngIf="soaCommonService.currentRole === 'Applyer'">
+                                <p-dropdown name="IEtype" [(ngModel)]="applyInfo.IEtypeValue"
+                                    [options]="applyInfo.IEtypeMap" (ngModelChange)="emitApplyInfo()">
+                                </p-dropdown>
+                            </div>
+
+                            <ng-container *ngIf="soaCommonService.currentRole !== 'Applyer'">
+                                <div class="form-label" style="display: flex; align-items: center;">
+                                    <label class="txt">
+                                        {{applyInfo.IEtypeValue}}
+                                    </label>
+                                </div>
+                            </ng-container> -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Import OU Group Type -->
+        <div class="form-row ou-kit-selector grid">
+            <!-- Group Type -->
+            <div class="form-col col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">Group Type
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="grid md:col col-12">
+                        <div class="form-col col-12">
+                            <div class="form-label" style="display: flex; align-items: center; ">
+                                <label class="txt" *ngFor="let opt of ouInfo.groupTypeMap;"
+                                    style="height: 100%; display: flex; align-items: center;">
+                                    <p-radioButton name="groupTypeGroup" [label]="opt" [value]="opt"
+                                        [(ngModel)]="ouInfo.groupTypeValue" (ngModelChange)="emitOuInfo()"
+                                        [disabled]="groupSelectDisabled">
+                                    </p-radioButton>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 特批 -->
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">{{"SOA.Label.SpecialApproval" | translate}}</label>
+                        </div>
+                    </div>
+                    <div class="grid md:col col-12">
+                        <div class="form-col form-input col-12">
+                            <div class="form-input no-h-full">
+                                <p-selectButton [options]="applyInfo.specialApprovalMap" optionLabel="label" optionValue="value"
+                                    [(ngModel)]="applyInfo.specialApprovalValue" [ngModelOptions]="{standalone: true}"
+                                    (ngModelChange)="emitApplyInfo()"
+                                    [disabled]="specialApprovalDisabled">
+                                    <ng-template let-item>
+                                        <i *ngIf="applyInfo.specialApprovalValue === 'Y' && item.value ==='Y'" class="pi pi-check"></i>
+                                        <i *ngIf="applyInfo.specialApprovalValue === 'N' && item.value ==='N'" class="pi pi-check"></i>
+                                        <span>{{item.label}}</span>
+                                    </ng-template>
+                                </p-selectButton>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+ 
+            <!-- Group Extend -->
+            <div class="form-col col-12" *ngIf="ouInfo.groupTypeValue !== 'ALL Group'">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                        </div>
+                    </div>
+
+                    <div class="grid md:col col-12">
+                        <div class="form-col col-12">
+                            <div class="form-label" style="display: flex; align-items: center;  ">
+                                <!-- Group OU -->
+                                <ng-container *ngIf="ouInfo.groupTypeValue === 'Group OU'">
+                                    <div style="display: flex; flex-direction:column; width: 100%; ">
+                                        <span class="ou-label">Group OU</span>
+
+                                        <div class="group-container all-checkbox">
+                                            <p-checkbox label="Select All" name="groupOUAllCheckbox"
+                                                [(ngModel)]="groupOUAll" (ngModelChange)="typeGroupOUAllOnClick()"
+                                                [value]="true" [disabled]="groupSelectDisabled">
+                                            </p-checkbox>
+                                        </div>
+
+                                        <div class="group-container light-area">
+                                            <label class="txt" *ngFor="let group of ouInfo.ouMainList;">
+                                                <p-checkbox name="groupCheckbox" [label]="group.groupName"
+                                                    [value]="group.groupCode"
+                                                    [(ngModel)]="ouInfo.ouSelectedValueCheckbox"
+                                                    (ngModelChange)="emitOuInfo()" [disabled]="groupSelectDisabled">
+                                                </p-checkbox>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                                <!-- OU -->
+                                <ng-container *ngIf="ouInfo.groupTypeValue === 'OU'">
+                                    <div style="display: flex; flex-direction:column;width: 100%;">
+                                        <span class="ou-label">Group OU</span>
+                                        <!-- OU - GroupOu -->
+                                        <div class="group-container" style="padding: 0 5px; margin-bottom: 2px;">
+                                            <label class="txt" *ngFor="let group of ouInfo.ouMainList;">
+                                                <p-radioButton name="groupRadio" [label]="group.groupName"
+                                                    [value]="group.groupCode" [(ngModel)]="ouInfo.ouSelectedValueRadio"
+                                                    (onClick)="getOUbyGroup()" (ngModelChange)="typeOUGroupOUChange()"
+                                                    [disabled]="groupSelectDisabled">
+                                                </p-radioButton>
+                                            </label>
+                                        </div>
+
+                                        <!-- OU - OU  -->
+                                        <ng-container *ngIf="ouInfo.ouSubList.length > 0">
+                                            <span class="ou-label">OU</span>
+
+                                            <div class="group-container all-checkbox">
+                                                <p-checkbox label="Select All" name="OUAllCheckbox" [(ngModel)]="OUAll"
+                                                    (ngModelChange)="typeOUAllOnClick()" [value]="true"
+                                                    [disabled]="groupSelectDisabled">
+                                                </p-checkbox>
+                                            </div>
+
+                                            <div class="group-container light-area">
+                                                <label class="txt" *ngFor="let ou of ouInfo.ouSubList;">
+                                                    <div class="ouCheckbox-container">
+                                                        <p-checkbox name="ouRadio"
+                                                            [label]="ou.ouCode + '-' + ou.ouShortName" [value]="ou.ouCode"
+                                                            [(ngModel)]="ouInfo.ouSubSelectedValue"
+                                                            (ngModelChange)="emitOuInfo()" [disabled]="groupSelectDisabled">
+                                                        </p-checkbox>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 備註 -->
+        <div class="form-row remark grid">
+            <div class="form-col col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">{{ "LicenseMgmt.EUC.Label.Remark" | translate }}</label>
+                        </div>
+                    </div>
+                    <div class="grid md:col col-12">
+                        <div class="form-col form-input col-12" style="height: unset !important">
+                            <ng-container *ngIf="soaCommonService.currentRole === 'Applyer'">
+                                <div class="form-input">
+                                    <textarea type="text" pInputTextarea name="remark"
+                                        [(ngModel)]="applyInfo.remarkInfo" (ngModelChange)="emitApplyInfo()"></textarea>
+                                </div>
+                            </ng-container>
+
+                            <ng-container *ngIf="soaCommonService.currentRole !== 'Applyer'">
+                                <div class="form-label" style="display: flex; align-items: center;">
+                                    <label class="txt">
+                                        {{applyInfo.remarkInfo}}
+                                    </label>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- 客戶/廠商 詳細選擇框 -->
+<app-common-selector-dialog [settingParams]="selectorDialogParams" (outputResult)="onSelectorDialogCallback($event)">
+</app-common-selector-dialog>

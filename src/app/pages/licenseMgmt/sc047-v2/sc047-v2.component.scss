@@ -1,0 +1,35 @@
+@import "../../../../styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+.sub-title-container {
+  &.item-section {
+    @apply inline-flex justify-start items-center w-full;
+    @apply mt-5 #{!important};
+    > div {
+      &:not(:first-of-type) {
+        @apply ml-8;
+      }
+    }
+  }
+}
+.add-item {
+  @apply bg-blue-50 bg-opacity-50 border border-blue-500 text-blue-500 min-w-fit;
+  &:not(:disabled) {
+    &:hover {
+      @apply bg-blue-500 text-white border-blue-500;
+    }
+    &:disabled {
+      &:hover {
+        @apply bg-white border-blue-500 text-blue-500;
+      }
+    }
+  }
+  &:not(:first-of-type) {
+    @apply xxs:mt-2 md:mt-0 md:ml-2;
+  }
+}
+
+.hint-highlight {
+  @apply mt-2 mb-2 font-semibold text-sm text-red-600;
+}

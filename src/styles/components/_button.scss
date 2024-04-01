@@ -1,0 +1,348 @@
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  > * {
+    margin-bottom: $space-1;
+  }
+  &:not(:first-child) {
+    margin-top: $space-3;
+  }
+  &:last-child {
+    margin-bottom: $space-2;
+  }
+
+  &.btn-auto button.p-button {
+    min-width: auto !important;
+    height: 30px;
+  }
+
+  button.p-button {
+    margin-right: $space-1;
+
+
+    &:enabled:focus {
+      box-shadow: 0 0 0 0.1rem $dark-blue;
+    }
+    &.btn-secondary:enabled:focus {
+      box-shadow: 0 0 0 0.1rem $secondary-dark;
+    }
+    &.btn-gray:enabled:focus {
+      box-shadow: 0 0 0 0.1rem $black;
+    }
+  }
+
+  &.right {
+    justify-content: flex-end;
+  }
+  &.left {
+    justify-content: flex-start;
+  }
+}
+
+button.p-button {
+  display: inline-flex;
+
+  &.img-block {
+
+    &.p-button {
+      min-width: 0;
+    } // end p-button
+
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    padding: 8px;
+    border-radius: 50%;
+
+    &:hover {
+      background-color: $bg-blue;
+    }
+  } // end img-block
+} // end p-button
+
+body .p-button {
+  min-width: 140px; // 90px;
+  height: 40px;
+  padding: $space-1 $space-2;
+
+  background-color: $primary;
+  border: 1px solid transparent;
+  border-radius: 5px;
+
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+  color: $white;
+
+  &:enabled:hover {
+    background-color: $dark-blue;
+    border-color: transparent;
+  }
+  &:enabled:active,
+  &:enabled:focus {
+    outline: 0;
+    box-shadow: none;
+    background-color: $primary;
+  }
+  &.ui-state-disabled,
+  &.ui-widget:disabled {
+    opacity: .5;
+    cursor: not-allowed !important;
+  }
+
+  .p-button-label,
+  &.p-button-label-only .p-button-label,
+  &.p-button-label-icon-right .p-button-label {
+    padding: 0;
+  } // end p-button-label
+  &.p-button-label-icon-right .p-button-label {
+    padding-right: $space-1;
+  }
+} // end p-button
+
+.p-button {
+  &.p-button-delete{
+     background-color: white;
+     color: $error;
+     border: 1px solid $error; 
+
+     &:hover:enabled{
+      background-color: $error;
+      color: white;
+     } 
+
+     &:hover:disabled{
+      cursor: not-allowed;
+     } 
+
+     &:enabled:active,
+     &:enabled:focus { 
+      color: $error !important;
+      background-color: unset !important;
+      outline:none;
+      box-shadow: none;
+      border: 1px solid $error;
+     } 
+  } 
+}
+
+body .btn-secondary.p-button {
+  background-color: $secondary;
+  color: $white;
+
+  &:enabled:hover {
+    background-color: $secondary-dark;
+  }
+  &:enabled:active,
+  &:enabled:focus {
+    background-color: $secondary;
+  }
+} // end btn-secondary
+
+body .btn-gray.p-button {
+  background-color: $gray-02;
+  border-color: $gray-02;
+  color: $white;
+
+  &:enabled:focus,
+  &:enabled:active {
+    background-color: $gray-02;
+  }
+  &:enabled:hover {
+    background-color: $gray-03;
+    border-color: $gray-03;
+  }
+
+  .p-button-label {
+    font-weight: normal;
+    color: inherit;
+  }
+} // end btn-gray
+
+$dark-red: #B45561;
+$dark-red-hover: #E66C7B;
+body .btn-dark-red.p-button {
+  background-color: $dark-red;
+  border-color: $dark-red;
+  color: $white;
+
+  &:enabled:focus,
+  &:enabled:active {
+    background-color: $dark-red;
+  }
+  &:enabled:hover {
+    background-color: $dark-red-hover;
+    border-color: $dark-red-hover;
+  }
+
+  .p-button-label {
+    font-weight: normal;
+    color: inherit;
+  }
+} // end btn-dark-red
+
+$orange: #F99D16;
+$orange-hover: #D48511;
+body .btn-orange.p-button {
+  background-color: $orange;
+  border-color: $orange;
+  color: $white;
+
+  &:enabled:focus,
+  &:enabled:active {
+    background-color: $orange;
+  }
+  &:enabled:hover {
+    background-color: $orange-hover;
+    border-color: $orange-hover;
+  }
+
+  .p-button-label {
+    font-weight: normal;
+    color: inherit;
+  }
+} // end btn-orange
+
+$teal: #47B8DB;
+$teal-hover: #3192B0;
+body .btn-teal.p-button {
+  background-color: $teal;
+  border-color: $teal;
+  color: $white;
+
+  &:enabled:focus,
+  &:enabled:active {
+    background-color: $teal;
+  }
+  &:enabled:hover {
+    background-color: $teal-hover;
+    border-color: $teal-hover;
+  }
+
+  .p-button-label {
+    font-weight: normal;
+    color: inherit;
+  }
+} // end btn-teal
+
+$blue: #006deb;
+body .btn-outline-blue.p-button {
+  background-color: $white;
+  border-color: $blue;
+  color: $blue;
+
+  &:enabled:focus,
+  &:enabled:active {
+    background-color: $white;
+    border-color: $blue;
+    color: $blue;
+    box-shadow: none;
+  }
+  &:enabled:hover {
+    background-color: #f1f1f1;
+    border-color: $blue;
+    color: $blue;
+  }
+
+  .p-button-label {
+    font-weight: normal;
+    color: inherit;
+  }
+} // end btn-teal
+
+body .btn-link {
+  &.p-button {
+    background-color: transparent;
+    color: $primary;
+
+    &:enabled:hover {
+      background-color: transparent;
+      border-color: transparent;
+      color: $light-blue;
+
+      .p-button-label {
+        // text-decoration: underline;
+      }
+    }
+    &:enabled:active,
+    &:enabled:focus {
+      outline: 0;
+      box-shadow: none;
+      background-color: transparent;
+    }
+  } // end p-button
+
+  &.btn-gray.p-button {
+    background-color: transparent;
+    border-color: transparent;
+    color: $gray-02;
+
+    &:enabled:hover {
+      background-color: transparent;
+      border-color: transparent;
+      color: $gray-02;
+
+      .p-button-label {
+        text-decoration: underline;
+      }
+    }
+    &:enabled:active,
+    &:enabled:focus {
+      outline: 0;
+      box-shadow: none;
+      background-color: transparent;
+      border-color: transparent;
+    }
+  } // end btn-gray
+} // end btn-link
+
+body .btn-line {
+  background-color: $white;
+  border-color: $primary;
+  color: $primary;
+
+  &:enabled:active,
+  &:enabled:focus {
+    background-color: $white;
+    border-color: $primary;
+    color: $primary;
+  }
+
+  &.btn-gray {
+    background-color: $white;
+    border-color: $gray-02;
+    color: $gray-02;
+
+    &:enabled:focus,
+    &:enabled:active {
+      background-color: $white;
+      border-color: $gray-02;
+      color: $gray-02;
+    }
+  } // end btn-gray
+} // end btn-line
+
+$coffee: #B87070;
+$coffee-hover: #C48888;
+body .btn-coffee.p-button {
+  background-color: $coffee;
+  border-color: $coffee;
+  color: $white;
+
+  &:enabled:focus,
+  &:enabled:active {
+    background-color: $coffee;
+  }
+  &:enabled:hover {
+    background-color: $coffee-hover;
+    border-color: $coffee-hover;
+  }
+
+  .p-button-label {
+    font-weight: normal;
+    color: inherit;
+  }
+} // end btn-coffee

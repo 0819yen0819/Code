@@ -1,0 +1,369 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~primeicons/primeicons.css";
+@import "~primeflex/primeflex.min.css";
+@import "~primeng/resources/themes/nova-accent/theme.css";
+@import "~primeng/resources/primeng.min.css";
+
+@import "./base/reset";
+
+@import "./helpers/variables";
+
+@import "./components/loading";
+@import "./components/breadcrumb";
+@import "./components/table";
+@import "./components/tab";
+@import "./components/panel";
+@import "./components/popup";
+@import "./components/step";
+
+@import "./components/button";
+@import "./components/form";
+@import "./components/icon";
+@import "./components/listbox";
+
+@import "./wpg-cus-components/cus_datepicker";
+@import "./wpg-cus-components/cus_dialog";
+@import "./wpg-cus-components/cus_dropdown";
+
+.content-container {
+  position: relative;
+}
+
+// .content-container > * > *:not(:last-child):not(.main-title-container):not(.main-breadcrumb) {
+//   margin-bottom: $space-5;
+// }
+
+/* Space */
+.space-top-1 {
+  margin-top: $space-1 !important;
+}
+
+.space-right-1 {
+  margin-right: $space-1 !important;
+}
+
+.space-bottom-1 {
+  margin-bottom: $space-1 !important;
+}
+
+.space-left-1 {
+  margin-left: $space-1 !important;
+}
+
+.space-top-2 {
+  margin-top: $space-2 !important;
+}
+
+.space-right-2 {
+  margin-right: $space-2 !important;
+}
+
+.space-bottom-2 {
+  margin-bottom: $space-2 !important;
+}
+
+.space-left-2 {
+  margin-left: $space-2 !important;
+}
+
+.space-top-3 {
+  margin-top: $space-3 !important;
+}
+
+.space-right-3 {
+  margin-right: $space-3 !important;
+}
+
+.space-bottom-3 {
+  margin-bottom: $space-3 !important;
+}
+
+.space-left-3 {
+  margin-left: $space-3 !important;
+}
+
+.space-top-5 {
+  margin-top: $space-5 !important;
+}
+
+.space-right-5 {
+  margin-right: $space-5 !important;
+}
+
+.space-bottom-5 {
+  margin-bottom: $space-5 !important;
+}
+
+.space-left-5 {
+  margin-left: $space-5 !important;
+}
+
+/* Title */
+.main-title-container,
+.sub-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 0;
+  padding-bottom: $space-1;
+
+  &:not(:first-child) {
+    margin-top: $space-3;
+  }
+
+  & + * {
+    margin-top: 0 !important;
+  }
+
+  position: relative;
+
+  &:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: $primary;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+
+  .btn-container {
+    margin: 0;
+  }
+
+  @media screen and (max-width: 1023px) {
+    display: block;
+
+    .btn-container {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: $space-1;
+    }
+  }
+
+  // end media <= 1023
+
+  p {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 1.3em;
+    color: $primary;
+  }
+}
+
+// end main-title-container
+.sub-title-container p {
+  font-size: 18px;
+}
+
+.user-info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .img-block {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    margin-right: $space-1 / 2;
+    border-radius: 50%;
+  }
+
+  // end img-block
+
+  p {
+    margin: 0;
+    padding: 0;
+
+    font-size: 16px;
+  }
+}
+
+/* Chip */
+.p-chip {
+  background-color: $bg-blue;
+  color: $gray-01;
+  font-size: 1em;
+
+  margin-right: $space-1;
+  margin-bottom: $space-1;
+}
+
+// end p-chip
+
+/* Choose Group Item */
+.choose-group-item {
+  padding-bottom: 10px;
+  border-bottom: 1px solid $line;
+  color: inherit;
+
+  h5 {
+    font-size: 18px;
+    color: inherit;
+  }
+
+  h6 {
+    font-size: 16px;
+    font-weight: normal;
+    color: inherit;
+  }
+
+  .group-type-block {
+    display: flex;
+    align-items: center;
+
+    .p-chip {
+      margin-bottom: 0;
+      font-size: 14px;
+      background-color: $gray-05;
+    }
+
+    p {
+      flex: 1 1 auto;
+      width: 1%;
+      max-width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      font-size: 14px;
+      // color: $gray-03;
+    }
+  }
+}
+
+// end choose-group-item
+
+/* Collapse */
+.collapse-container {
+  .p-panel,
+  .p-panel.p-panel-toggleable {
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: transparent;
+  }
+
+  .p-panel .p-panel-header,
+  .p-panel.p-panel-toggleable .p-panel-header {
+    justify-content: space-between;
+    width: 100%;
+    padding: $space-1;
+    border: 1px solid $primary;
+    border-radius: 10px;
+    background-color: $white;
+    color: $gray-01;
+
+    label {
+      line-height: 30px;
+      color: inherit;
+    }
+
+    .p-panel-header-icon {
+      width: 40px;
+      line-height: 40px;
+      text-align: center;
+      outline: 0;
+
+      .pi-plus:before {
+        content: "\e902";
+      }
+
+      .pi-minus:before {
+        content: "\e903";
+      }
+    }
+  }
+
+  // end p-panel-header
+  .collapse-item + .collapse-item {
+    display: block;
+    margin-top: $space-3;
+  }
+
+  .p-panel .p-panel-content,
+  .p-panel .p-panel-content .p-panel-content {
+    margin: 0;
+    // border: 0;
+    padding: $space-2;
+    background-color: $bg-blue;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid $line;
+
+    .collapse-item + .collapse-item {
+      margin-top: $space-2;
+    }
+
+    .p-panel-content {
+      background-color: $bg;
+      border-color: $gray-05;
+
+      .form-checkbox + .form-checkbox {
+        margin-top: $space-2;
+      }
+    }
+  }
+}
+
+// end collapse-container
+
+/* Scroll Top */
+.p-scrolltop {
+  &.p-link {
+    background: $white;
+    border: 1px solid $primary;
+    color: $primary;
+
+    &:hover {
+      background: $bg-blue;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .p-scrolltop-icon {
+    color: inherit;
+  }
+}
+
+// end scrolltop
+
+.collapse:not(.show) {
+  display: none;
+}
+
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.35s ease;
+} // end scrolltop
+
+@media screen and (max-width: 960px) {
+  .license-mtn-td-container {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+  }
+  
+  .p-datatable-tbody > tr > td:last-child {
+    border: 0 none !important;
+  }
+  .p-datatable-tbody > tr {
+    border-bottom: 1px solid #c8c8c8 !important;
+  }
+}
+
+.p-datatable .p-datatable-tbody>tr>td>.license-mtn-td-container>.p-column-title {
+  display: none;
+  @media screen and (max-width: 960px) {
+    display: block;
+  }
+}

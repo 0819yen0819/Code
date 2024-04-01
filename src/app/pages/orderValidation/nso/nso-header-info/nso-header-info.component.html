@@ -1,0 +1,19 @@
+<!-- 表頭申請人資訊 -->
+<div class="form-table form-list">
+    <div class="form-row grid">
+        <div class="form-col md:col-6 sm:col-12 col-12" *ngFor="let headerItem of headerSetting">
+            <div class="form-row grid">
+                <div class="form-col col-fixed" style="white-space: nowrap">
+                    <div class="form-label">
+                        <label class="txt">{{ headerItem.col }}</label>
+                    </div>
+                </div>
+                <div class="form-col col">
+                    <div class="form-label">
+                        <label class="txt">{{ headerItem.content }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

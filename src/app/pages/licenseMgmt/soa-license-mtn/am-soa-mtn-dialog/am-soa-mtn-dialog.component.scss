@@ -1,0 +1,23 @@
+div {
+    &.txt {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+}
+
+:host ::ng-deep {
+    .p-autocomplete {
+        &.p-component {
+            width: 100%
+        }
+    }
+
+    p-inputnumber {
+        width: 100%;
+
+        span {
+            width: 100%;
+        }
+    }
+}

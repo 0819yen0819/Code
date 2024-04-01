@@ -1,0 +1,41 @@
+<ng-container *ngIf="inputData.length > 0 then hasDataTemplate; else noDataTemplate"></ng-container>
+
+
+<ng-template #hasDataTemplate>
+    <p-dialog header="{{'SOA.ApprovingLicense.Title' | translate}}" [(visible)]="showDialog" modal="true"
+        [draggable]="false" [resizable]="false" (onHide)="close()" [style]="{'width':'80vw'}">
+
+        <p-table #history class="table-panel" [value]="inputData" [columns]="inputColumns" scrollHeight="480px"
+            [paginator]="true" [rows]="10" paginatorPosition="bottom" [rowsPerPageOptions]="[10,20,{showAll:'All'}]"
+            dataKey="id" responsiveLayout="stack" [autoLayout]="true" [responsive]="true" breakpoint="640px">
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let col of inputColumns" [pSortableColumn]="col.field" scope="col"
+                        [ngStyle]="{ 'min-width': col.minWidth ? col.minWidth + 'px' : '0' }">
+                        <ng-container>
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                        </ng-container>
+                    </th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-history>
+                <tr>
+                    <td *ngFor="let col of inputColumns" style="min-height: 30px;">
+                        <span class="p-column-title">{{col.header}}</span>
+                        <p>{{history[col.field]}}</p>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-dialog>
+</ng-template>
+
+<ng-template #noDataTemplate>
+    <p-dialog header="{{'SOA.ApprovingLicense.Title' | translate}}" [(visible)]="showDialog" modal="true"
+        [draggable]="false" [resizable]="false" (onHide)="close()" [style]="{'width':'40vw'}">
+        <span>{{'SOA.ApprovingLicense.Label.NotFound' | translate}}</span>
+    </p-dialog>
+</ng-template>

@@ -1,0 +1,17 @@
+@import "src/styles/components/plugin";
+
+.form-table {
+  .form-row {
+    .form-col {
+      .form-label {
+        @apply w-full h-full p-2;
+        .txt {
+          @apply flex justify-start items-center p-1 pl-2;
+        }
+      }
+      .form-select {
+        @apply p-0 #{!important};
+      }
+    }
+  }
+}

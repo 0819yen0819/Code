@@ -1,0 +1,12 @@
+:host ::ng-deep {
+    p-table {
+        @apply m-0 pb-4 #{!important};
+
+        .p-datatable-wrapper {
+        max-height: 600px;
+        .p-datatable-thead{
+            @apply sticky top-0 z-50;
+        }
+        }
+    }
+}

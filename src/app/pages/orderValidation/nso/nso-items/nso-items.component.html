@@ -1,0 +1,221 @@
+<div style="margin-top: 5vh;"></div>
+
+<div class="nsoItemTable">
+
+    <p-table #dt [value]="tableData" responsiveLayout="stack" [breakpoint]="rwdCutOffPointPx"
+        [scrollable]="(innerWidth < compressionSizeFieldPoint) && (innerWidth > rwdCutOffPoint) ">
+
+        <ng-template pTemplate="header">
+
+            <!-- 手機版全選按鈕 -->
+            <div *ngIf="enableEditing && (innerWidth < rwdCutOffPoint)" class="mobile-toggle-all-container">
+                <span>Approve ({{'SalesOrderChange.Label.SelectAll' | translate}}) </span>
+                <input type="radio" name="approveAllAMobile" value="A" (click)="toggleAll('A')" [(ngModel)]="isAll">
+                <span>Reject ({{'SalesOrderChange.Label.SelectAll' | translate}}) </span>
+                <input type="radio" name="approveAllRMobile" value="R" (click)="toggleAll('R')" [(ngModel)]="isAll">
+            </div>
+            <hr *ngIf="enableEditing && (innerWidth < rwdCutOffPoint)">
+
+            <tr>
+
+                <th *ngFor="let col of cols" id="nso-header-td"
+                    [ngClass]="{'xxs-col' : innerWidth > compressionSizeFieldPoint}">
+                    <!-- 簽核表頭 -->
+                    <ng-container *ngIf="col.isApproveField">
+                        <div class="th-approving-container">
+                            <div class="th-approving-label"> {{col.label}} </div>
+                            <input *ngIf="enableEditing && (col.label === 'Approve')" type="radio" name="approveAllA"
+                                value="A" (click)="toggleAll('A')" [(ngModel)]="isAll">
+                            <input *ngIf="enableEditing && (col.label === 'Reject')" type="radio" name="approveAllR"
+                                value="R" (click)="toggleAll('R')" [(ngModel)]="isAll">
+                        </div>
+                    </ng-container>
+
+                    <!-- 一般表頭 -->
+                    <ng-container *ngIf="!(col.isApproveField)">
+                        <div class="th-normal-label">{{col.label}}</div>
+                    </ng-container>
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-data>
+            <tr class="xxs-col">
+
+                <!-- 電腦版 -->
+                <ng-container *ngIf="innerWidth > rwdCutOffPoint">
+                    <ng-container *ngFor="let col of cols ; let i = index;">
+                        <td id="nso-content-td" [ngClass]="col.colSize">
+                            <div class="p-column-title normal" *ngIf="!col.isApproveField">
+                                <div>{{col.label}} </div>
+                            </div>
+        
+                            <!-- Approve / Reject -->
+                            <div *ngIf="col.isApproveField && (innerWidth > rwdCutOffPoint)" class="td-approving-container">
+                                <input *ngIf="(col.label === 'Approve')" type="radio" value="A" [name]="data['radioGroup']"
+                                    [(ngModel)]="data['status']" [disabled]="!enableEditing  || data['defaultStatusReject']"
+                                    (ngModelChange)="tableDataChange()">
+                                <input *ngIf="(col.label === 'Reject')" type="radio" value="R" [name]="data['radioGroup']"
+                                    [(ngModel)]="data['status']" [disabled]="!enableEditing  || data['defaultStatusReject']"
+                                    (ngModelChange)="tableDataChange()">
+                            </div>
+        
+                            <!-- 一般顯示 -->
+                            <div *ngIf="!(col.isApproveField)" [ngClass]="{'width-limit' : innerWidth < rwdCutOffPoint}">
+                                <!-- line1 -->
+                                <div class="data-content" *ngIf="!(col.label === 'Comments') && !(col.field === 'salesMargin')"
+                                    [ngClass]="{'align-right' : alignRightCols.includes(col.field) && innerWidth > rwdCutOffPoint}">
+                                    <!-- 一般顯示 -->
+                                    <span class="td-normal-container"
+                                        [ngStyle]="{'white-space' : data.wrapCols.includes(col.field) ? 'wrap' : 'nowrap'}">
+                                        {{data[col.field]}}</span>
+                                </div>
+        
+                                <!-- Input -->
+                                <div class="form-input" *ngIf="col.label === 'Comments'">
+                                    <input type="text" pInputText class="nso-comments" [(ngModel)]="data['comments']"
+                                        [disabled]="!enableEditing || data['defaultStatusReject']" />
+                                </div>
+        
+                                <!-- salesMargin -->
+                                <div class="data-content" *ngIf="col.field === 'salesMargin'"
+                                    [ngClass]="{'align-right' : alignRightCols.includes(col.field) && innerWidth > rwdCutOffPoint}">
+                                    <span class="td-normal-container" style="color: red;"
+                                        [ngStyle]="{'white-space' : data.wrapCols.includes(col.field) ? 'wrap' : 'nowrap'}"
+                                        [ngClass]="{'red-background-white-text':data[col.field].includes('-')}">
+                                        {{data[col.field]}}</span>
+                                </div>
+        
+                            </div>
+        
+                        </td>
+                    </ng-container>
+                </ng-container>
+
+                <!-- 手機板 -->
+                <ng-container *ngIf="innerWidth <= rwdCutOffPoint">
+                    <ng-container *ngFor="let col of cols ; let i = index;">
+
+                        <td id="nso-content-td" [ngClass]="col.colSize" *ngIf="(col.label === 'Approve')">
+                            <!-- 欄位名稱 (小尺寸only) -->
+                            <div class="p-column-title approve"
+                            *ngIf="(col.label === 'Approve') && innerWidth <= rwdCutOffPoint">
+                            <div>Approve</div>
+                            <input type="radio" [name]="data['radioGroup']" value="A" [(ngModel)]="data['status']"
+                                [disabled]="!enableEditing  || data['defaultStatusReject']" style="height: 16px;">
+                            <div>Reject</div>
+                            <input type="radio" [name]="data['radioGroup']" value="R" [(ngModel)]="data['status']"
+                                [disabled]="!enableEditing  || data['defaultStatusReject']" style="height: 16px;">
+                            </div> 
+                        </td>
+
+                        <td id="nso-content-td" [ngClass]="col.colSize" *ngIf="mobileCoreFields.includes(col.field)"> 
+
+                            <!-- 標題 -->
+                            <div class="p-column-title normal" *ngIf="!col.isApproveField">
+                                <div>{{col.label}} </div>
+                            </div>
+
+                            <!-- 一般顯示 -->
+                            <div *ngIf="!(col.isApproveField)" [ngClass]="{'width-limit' : innerWidth < rwdCutOffPoint}">
+                                <!-- line1 -->
+                                <div class="data-content" *ngIf="!(col.label === 'Comments') && !(col.field === 'salesMargin')"
+                                    [ngClass]="{'align-right' : alignRightCols.includes(col.field) && innerWidth > rwdCutOffPoint}">
+                                    <!-- 一般顯示 -->
+                                    <span class="td-normal-container"
+                                        [ngStyle]="{'white-space' : data.wrapCols.includes(col.field) ? 'wrap' : 'nowrap'}">
+                                        {{data[col.field]}}</span>
+                                </div>
+        
+                                <!-- Input -->
+                                <div class="form-input" *ngIf="col.label === 'Comments'">
+                                    <input type="text" pInputText class="nso-comments" [(ngModel)]="data['comments']"
+                                        [disabled]="!enableEditing || data['defaultStatusReject']" />
+                                </div>
+        
+                                <!-- salesMargin -->
+                                <div class="data-content" *ngIf="col.field === 'salesMargin'"
+                                    [ngClass]="{'align-right' : alignRightCols.includes(col.field) && innerWidth > rwdCutOffPoint}">
+                                    <span class="td-normal-container" style="color: red;"
+                                        [ngStyle]="{'white-space' : data.wrapCols.includes(col.field) ? 'wrap' : 'nowrap'}"
+                                        [ngClass]="{'red-background-white-text':data[col.field].includes('-')}">
+                                        {{data[col.field]}}</span>
+                                </div>
+        
+                            </div>
+        
+                        </td>
+ 
+                    </ng-container>
+
+                    <!-- 展開按鈕 -->
+                    <td *ngIf="innerWidth <= rwdCutOffPoint" id="nso-content-td"  class="sm-col"> 
+
+                        <div class="p-column-title" style="white-space: nowrap; font-size: 16px; ">
+                            <div>More Info</div>
+                        </div>
+    
+                        <button class="extend-btn"
+                            (click)="data['isExpanded'] = !data['isExpanded'];"
+                            [class.expand]="data['isExpanded']" [class.collapsed]="!data['isExpanded']">
+                            <div class="button-content">
+                                {{ data['isExpanded'] ? 'Close' : 'More'}}
+                            </div>
+                        </button>
+                    </td>
+ 
+                    <!-- 展開內容 -->
+                    <ng-container *ngIf="data['isExpanded']">
+                        <ng-container *ngFor="let col of cols ; let i = index;"> 
+                            <ng-container *ngIf="!mobileCoreFields.includes(col.field) && !col.isApproveField"> 
+                                <td id="nso-content-td" [ngClass]="col.colSize">
+                
+                                    <div class="p-column-title normal" *ngIf="!col.isApproveField">
+                                        <div>{{col.label}} </div>
+                                    </div> 
+                
+                                    <!-- 一般顯示 -->
+                                    <div *ngIf="!(col.isApproveField)" [ngClass]="{'width-limit' : innerWidth < rwdCutOffPoint}">
+                                        <!-- line1 -->
+                                        <div class="data-content" *ngIf="!(col.label === 'Comments') && !(col.field === 'salesMargin')"
+                                            [ngClass]="{'align-right' : alignRightCols.includes(col.field) && innerWidth > rwdCutOffPoint}">
+                                            <!-- 一般顯示 -->
+                                            <span class="td-normal-container"
+                                                [ngStyle]="{'white-space' : data.wrapCols.includes(col.field) ? 'wrap' : 'nowrap'}">
+                                                {{data[col.field]}}</span>
+                                        </div>
+                
+                                        <!-- Input -->
+                                        <div class="form-input" *ngIf="col.label === 'Comments'">
+                                            <input type="text" pInputText class="nso-comments" [(ngModel)]="data['comments']"
+                                                [disabled]="!enableEditing || data['defaultStatusReject']" />
+                                        </div>
+                
+                                        <!-- salesMargin -->
+                                        <div class="data-content" *ngIf="col.field === 'salesMargin'"
+                                            [ngClass]="{'align-right' : alignRightCols.includes(col.field) && innerWidth > rwdCutOffPoint}">
+                                            <span class="td-normal-container" style="color: red;"
+                                                [ngStyle]="{'white-space' : data.wrapCols.includes(col.field) ? 'wrap' : 'nowrap'}"
+                                                [ngClass]="{'red-background-white-text':data[col.field].includes('-')}">
+                                                {{data[col.field]}}</span>
+                                        </div>
+                
+                                    </div>
+                
+                                </td>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+
+
+                </ng-container>
+
+
+
+                <hr class="divider">
+            </tr>
+        </ng-template>
+
+    </p-table>
+
+</div>

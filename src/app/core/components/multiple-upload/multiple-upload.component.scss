@@ -1,0 +1,17 @@
+@import "src/styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+.sample-file-section {
+    @apply flex justify-end;
+
+    button {
+        &:focus {
+            @apply bg-transparent;
+        }
+
+        &:hover {
+            @apply bg-transparent;
+        }
+    }
+}

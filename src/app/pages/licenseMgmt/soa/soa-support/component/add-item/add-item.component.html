@@ -1,0 +1,31 @@
+<!-- 新增按鈕 -->
+<div class="sub-title-container item-section" style="margin-top: 30px;"
+    *ngIf="soaCommonService.currentRole === 'Applyer'">
+    <div>
+        <button pButton class="add-item" icon="pi pi-plus" type="button"
+            label="{{ 'Button.Label.Add' | translate }} Item" (click)="onOpenAddItemDialogEvent()"></button>
+    </div>
+</div>
+
+<app-soa-item-batch-edit *ngIf="batchSelectData.length && enableSelection" (batchOnSave)="batchOnSave($event)" (batchOnCancel)="resetBatchData()">
+</app-soa-item-batch-edit>
+
+<app-common-data-table-viewer [data]="itemQueue.getValue()" [tableCols]="itemTableCols" [itemFieldShowButton]="true" (itemFieldOnClick)="itemFieldOnClick($event)"
+    [tableSettings]="dataTableSettings" (outputSelectedData)="onSelectedDataHandler($event)"  [cleanSelected]="clearSelection"
+    (outputAfterDeletedData)="onAfterModifiedDataCallback($event)" (outputTargetData)="onEditSelectedDataCallback($event)">
+</app-common-data-table-viewer>
+
+<!--# common notice-check dialog-->
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams" [contentList]="noticeContentList">
+</app-common-notice-check-dialog>
+
+<app-soa-modify-item-dialog [showDialog]="showModifyItemDialog" (closeDialog)="modifyItemOnClose()"
+    [itemInfo]="editItem" (modifyResult)="getModifyRes($event)"></app-soa-modify-item-dialog>
+
+<app-am-soa-item-dialog [showDialog]="showAddItemDialog" (closeDialog)="addItemOnClose()"
+    (itemInfoEmitter)="getItemInfo($event)" (mulitpleItemEmitter)="getMulitpleItemUpload($event)">
+</app-am-soa-item-dialog>
+
+<app-soa-approving-license-dialog  [showDialog]="showApprovingLicense" [inputData]="approvingLicenseData" (closeDialog)="closeApprovingLicenseDialog()">
+
+</app-soa-approving-license-dialog>

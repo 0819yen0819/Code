@@ -1,0 +1,69 @@
+<ng-container *ngIf="userInfoArr.length> 0 ">
+
+    <div>{{ 'AgentInfoHint.DeputyStaffInformation' | translate }}:</div>
+    <div>{{userInfoArr[0]['userName']}}</div>
+    <!-- Table內容 -->
+    <table style="border-collapse: collapse; width: 100%; margin-top: 10px;" aria-describedby="agentInfoTable">
+
+        <!-- 標題 -->
+        <tr class="pending-space-header">
+            <th id="pending-subject" style="width: 10%;" class="col-title pending-space-header-th">{{
+                'AgentInfoHint.Type' | translate }}</th>
+            <th id="pending-expired" style="width: 20%;" class="col-title pending-space-header-th">{{
+                'AgentInfoHint.AgentUser' | translate }}</th>
+            <th id="pending-skip" style="width: 20%;" class="col-title pending-space-header-th">{{
+                'AgentInfoHint.StartDate' | translate }}</th>
+            <th id="pending-skip" style="width: 20%;" class="col-title pending-space-header-th">{{
+                'AgentInfoHint.EndDate' | translate }}</th>
+            <th id="pending-skip" style="width: 30%;" class="col-title pending-space-header-th">{{
+                'AgentInfoHint.ApplicationForm' | translate }}</th>
+        </tr>
+
+
+        <!-- 表身 -->
+        <tr *ngFor="let item of userInfoArr;">
+            <!-- Type -->
+            <td class="pending-space-td td1">
+                <div class="inner-box">
+                    <span class="mobile-only col-title">{{ 'AgentInfoHint.Type' | translate }}</span>
+                    <span class="title-content">{{item['agentType']}}</span>
+                </div>
+            </td>
+
+            <!-- Agent User -->
+            <td class="pending-space-td td2">
+                <div class="inner-box">
+                    <span class="mobile-only col-title">{{ 'AgentInfoHint.AgentUser' | translate }}</span>
+                    <span class="title-content">{{item['agentUser']}}</span>
+                </div>
+            </td>
+
+            <!-- Agent User -->
+            <td class="pending-space-td td2">
+                <div class="inner-box">
+                    <span class="mobile-only col-title">{{ 'AgentInfoHint.StartDate' | translate }}</span>
+                    <span class="title-content">{{item['startDate'] | date : 'yyyy/MM/dd HH:mm:ss'}}</span>
+                </div>
+            </td>
+
+            <!-- Agent User -->
+            <td class="pending-space-td td2">
+                <div class="inner-box">
+                    <span class="mobile-only col-title">{{ 'AgentInfoHint.EndDate' | translate }}</span>
+                    <span class="title-content">{{item['endDate'] | date : 'yyyy/MM/dd HH:mm:ss'}}</span>
+                </div>
+            </td>
+
+            <!-- Agent User -->
+            <td class="pending-space-td td2">
+                <div class="inner-box">
+                    <span class="mobile-only col-title">{{ 'AgentInfoHint.ApplicationForm' | translate }}</span>
+                    <span class="title-content">{{item['formTypeNameOutput']}}</span>
+                </div>
+            </td>
+
+
+        </tr>
+    </table>
+
+</ng-container>

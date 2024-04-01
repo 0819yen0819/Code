@@ -1,0 +1,32 @@
+<p-dialog
+  [header]="dialogSetting.getValue().title"
+  [(visible)]="dialogSetting.getValue().visiable"
+  [modal]="dialogSetting.getValue().modal"
+  [draggable]="dialogSetting.getValue().draggable"
+  [resizable]="dialogSetting.getValue().resizeable"
+  (onHide)="onDialogClosed()"
+>
+  <div class="cotent-container">
+    <ul>
+      <ng-container *ngFor="let content of contentList">
+        <li
+          class="content"
+          [class]="
+            settingParams && settingParams.mode ? settingParams.mode : 'success'
+          "
+        >
+          {{ content }}
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+
+  <div class="btn-container">
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Close' | translate }}"
+      (click)="onDialogClosed()"
+    ></button>
+  </div>
+</p-dialog>

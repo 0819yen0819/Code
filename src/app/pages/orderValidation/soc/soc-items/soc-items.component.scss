@@ -1,0 +1,278 @@
+:host ::ng-deep {
+
+  p-table {
+    .table-panel {
+
+      .p-datatable .p-datatable-thead>tr>th,
+      .ui-table .ui-table-thead>tr>th {
+        min-width: none !important;
+        width: auto !important;
+      }
+
+
+      .p-datatable .p-datatable-tbody>tr,
+      .ui-table .ui-table-tbody>tr {
+        >td {
+          min-width: none !important;
+          width: auto !important;
+        }
+      }
+    }
+  }
+}
+
+.data-content {
+  padding: 5px 3px 5px 0px;
+  box-sizing: border-box;
+
+  @media screen and (min-width: 768px) {
+    &.only-line1 {
+      vertical-align: middle; 
+      display: table-cell; 
+    }
+  }
+
+}
+
+.rwd-data-hr {
+  margin: 0;
+  opacity: 0.2;
+}
+
+@media screen and (max-width: 1120px) and (min-width: 768px) {
+
+  #content-td {
+    border-bottom: 1px solid rgba(0, 0, 0, .4) !important;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  #content-td {
+    border: none;
+    min-height: 0 !important;
+  }
+
+  .data-content {
+    height: auto;
+    display: flex;
+    justify-content: end;
+    padding: 0px;
+  }
+
+  .rwd-data-hr {
+    display: none;
+  }
+
+  .text-output,
+  .date-output {
+    height: 24px !important;
+    font-size: 12px;
+    width: 40vw;
+  }
+
+}
+
+.align-right {
+  text-align: end;
+}
+
+
+.text-output {
+  height: 16px;
+  overflow: hidden;
+  max-width: 45vw;
+  font-size: 12px;
+}
+
+
+:host ::ng-deep {
+  .p-radiobutton .p-radiobutton-box {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.sm-cols {
+  min-width: 0 !important;
+  max-width: 50px !important;
+}
+
+.text-red-bold {
+  color: red;
+}
+
+:host ::ng-deep {
+  .socItemTable {
+    .p-datatable table {
+      border-collapse: separate !important;
+    }
+  }
+}
+
+
+:host ::ng-deep {
+
+  .th-approving-container {
+    padding: 0 !important;
+    line-height: 1.2 !important;
+
+    .th-outer-container {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      font-size: 12px !important;
+
+      .th-approving-label {
+        height: 4vh !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+    }
+  }
+
+  .th-normal-container {
+    padding: 0 !important;
+    line-height: 1.2 !important;
+
+    .only-line1-outer-container {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: start !important; 
+      font-size: 12px !important;
+
+      .only-line1-text {
+        height: 4vh !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+    }
+
+    .multiple-line-text-line1 {
+      height: 4vh !important;
+      min-height: 60px !important;
+      display: flex !important;
+      align-items: center !important;
+      border-bottom: solid 1px !important;
+      justify-content: start !important;
+      font-size: 12px !important;
+    }
+
+    .multiple-line-text-line2 {
+      height: 4vh !important;
+      min-height: 60px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: start !important;
+      font-size: 12px !important;
+
+    }
+  }
+
+}
+
+
+:host ::ng-deep {
+
+  @media screen and (max-width: 1120px)  and (min-width: 768px){
+    .tr-style {
+      height: 120px !important;
+      display: flex !important;
+      align-items: center !important;
+      background-color: #f1f6f9;
+    }
+
+    .multiple-line-text-line1,
+    .data-content {
+      width: 65px !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .tr-style {
+      height: auto !important;
+      background-color: #f1f6f9; 
+    }
+
+    .multiple-line-text-line1,
+    .data-content,
+    .text-output {
+      width: auto !important;
+      text-align: right;
+      height: auto !important; 
+    }
+
+    .p-column-title{
+      font-weight: bold;
+    }
+  }
+
+}
+ 
+@media screen and (min-width: 768px){
+  td{
+    border-bottom: 1px solid !important;
+  }
+} 
+
+// Sales Cost Type,Margin%,Ship Term,End customer 四個欄位如果給flex，因為SOC會根據內容更新高度的關係，這四個欄位會沒辦法完全顯示
+// 但是只有單欄位如果套用上面四個原先的規則，會沒辦法置右
+.single-field-align-right{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: end !important;
+}
+
+.mobile-toggle-all-container{
+  display: flex;
+  justify-content: space-around;
+}
+
+.divider {
+  display: none;
+}
+
+
+@media screen and (max-width: 768px) {
+  .divider {
+      display: block;
+  }
+}
+
+.red-background-white-text {
+  background-color: red;
+  color: white !important;
+}
+
+
+// 明細展開 & 收起
+.extend-btn {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: #87949d 0.3s ease, #fff 0.3s ease; /* 平滑的背景和文字顏色過渡效果 */
+}
+
+.extend-btn.expand {
+  background-color: #87949d; /* 收起時的背景顏色 */
+  color: #fff; /* 收起時的文字顏色 */
+}
+
+.extend-btn.collapsed {
+  background-color: #87949d; /* 展開時的背景顏色 */
+  color: #fff; /* 展開時的文字顏色 */
+}
+ 
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+} 

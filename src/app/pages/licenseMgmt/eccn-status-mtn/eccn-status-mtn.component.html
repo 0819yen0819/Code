@@ -1,0 +1,19 @@
+<!--# common notice-check dialog-->
+<app-common-notice-check-dialog
+  [settingParams]="noticeCheckDialogParams"
+  [contentList]="noticeContentList"
+  (closeNotice)="onCloseNoticeHandler()"
+></app-common-notice-check-dialog>
+
+<app-common-license-viewer-header
+  [formType]="formType"
+  (outputResult)="onSearchSecionsResult($event)"
+></app-common-license-viewer-header>
+
+<app-eccn-data-table
+  [mode]="tableMode"
+  [data]="ECCNList"
+  [cols]="itemCols"
+  (outputTargetData)="onModifySelectedData($event)"
+  (outputModifyData)="onSubmitModifySelectedData($event)"
+></app-eccn-data-table>

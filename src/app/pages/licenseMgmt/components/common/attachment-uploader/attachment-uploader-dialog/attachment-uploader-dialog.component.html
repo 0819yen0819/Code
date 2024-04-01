@@ -1,0 +1,102 @@
+<p-dialog header="{{ 'LicenseMgmt.Common.Title.Notification' | translate }}" modal="true" draggable="false"
+    resizable="true" (onHide)="onDialogHided()" [(visible)]="showDialog">
+    <form [formGroup]="formGroup" class="form-container form-table">
+        <div class="form-row grid">
+            <div class="form-row grid col-12">
+                <!-- 檔案上傳 -->
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">{{ "LicenseMgmt.Common.Label.FileUpload" | translate }}</label>
+                    </div>
+                </div>
+
+                <!-- 上傳區塊 -->
+                <div class="form-col col">
+                    <div class="form-item grid">
+                        <div class="form-file-upload-container">
+                            <p class="error-active">
+                                <i class="pi pi-exclamation-circle"></i>
+                                <span>{{ 'DPL_Hold.Label.MaxFileSize' | translate }}</span>
+                            </p>
+                            <p-fileUpload #fileUploader class="form-file-upload" name="fileUpload[]"
+                                [multiple]="fileUploaderSettings.multiple"
+                                [maxFileSize]="fileUploaderSettings.maxFileSize" [auto]="fileUploaderSettings.auto"
+                                [chooseIcon]="fileUploaderSettings.chooseIcon"
+                                [chooseLabel]="fileUploaderSettings.chooseLabel"
+                                [showCancelButton]="fileUploaderSettings.showCancelButton"
+                                [showUploadButton]="fileUploaderSettings.showUploadButton"
+                                [uploadIcon]="fileUploaderSettings.uploadIcon"
+                                [previewWidth]="fileUploaderSettings.previewWidth"
+                                [customUpload]="fileUploaderSettings.customUpload"
+                                (onSelect)="onFileUploader($event, fileUploader)"
+                                (uploadHandler)="onSaveAttachedFileEvent($event, fileUploader)"
+                                [files]="fileUploadTempList" appDndUploadPure (fileDropped)="onFileUploader($event,fileUploader)">
+                                <ng-template pTemplate="content">
+                                    <div class="form-insert-input-list inside-uploader"
+                                        *ngIf="fileUploadTempList.length > 0">
+                                        <div class="form-label link-list-item"
+                                            *ngFor="let file of fileUploadTempList; let i = index">
+                                            <ng-container [ngSwitch]="file.size">
+                                                <ng-container *ngSwitchCase="file.size < 1024">
+                                                    <label class="txt">{{ i + 1 }}.&nbsp;{{ file.name }} - {{file.size}}
+                                                        Bytes</label>
+                                                </ng-container>
+                                                <ng-container *ngSwitchCase="file.size > 1024 * 1024">
+                                                    <label class="txt">{{ i + 1 }}.&nbsp;{{ file.name }} - {{(file.size/
+                                                        1024 / 1024).toFixed(2) }} MBs</label>
+                                                </ng-container>
+                                                <ng-container *ngSwitchDefault>
+                                                    <label class="txt">{{ i + 1 }}.&nbsp;{{ file.name }} - {{(file.size/
+                                                        1024).toFixed(2) }} KBs</label>
+                                                </ng-container>
+                                            </ng-container>
+                                            <button type="button" pButton icon="pi pi-times" class="btn-gray"
+                                                (click)="onTempFileDeleteHandler(file, fileUploader)"></button>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 附加連結 -->
+            <div class="form-row grid col-12">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">{{"LicenseMgmt.Common.Label.AttachedLink" | translate}}</label>
+                    </div>
+                </div>
+                <div class="form-col col">
+                    <div class="form-item grid">
+                        <div class="form-input p-inputgroup no-h-full">
+                            <!-- 輸入框 -->
+                            <input type="text" pInputText
+                                placeholder="{{'Input.PlaceHolder.PleaseEnter' | translate}} URL" name="link"
+                                formControlName="url" />
+                            <!-- 錯誤訊息(若有) -->
+                            <p class="error-active"
+                                *ngIf="!attachUploadDialogService.URLisValid(formGroup.get('url').value)">
+                                <i class="pi pi-exclamation-circle"></i>
+                                <span>{{ 'Span.Label.InvalidURL' | translate }}</span>
+                            </p>
+                            <!-- 清除按鈕 -->
+                            <button *ngIf="formGroup.get('url').value" type="button" pButton icon="pi pi-times"
+                                (click)="formGroup.reset()" class="btn-dark-red"></button>
+                            <!-- 添加按鈕 -->
+                            <button type="submit" pButton icon="pi pi-plus"
+                                [disabled]="!attachUploadDialogService.URLisValid(formGroup.get('url').value)"
+                                (click)="onSaveAttachedURLLogEvent()"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</p-dialog>
+
+<p-confirmDialog [baseZIndex]="10000" key="approveAddAttachedDialog"></p-confirmDialog>
+
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams"
+    [contentList]="noticeContentList"></app-common-notice-check-dialog>

@@ -1,0 +1,513 @@
+<!--# item delete confirm dialog -->
+<p-confirmDialog [baseZIndex]="10000" key="dataTableViewer"></p-confirmDialog>
+
+<app-common-data-table-col-selector
+  [tableCols]="tableCols"
+  [settingParams]="dialogSettingParams"
+  (outputColSelected)="onSelectedColDialogCallback($event)"
+></app-common-data-table-col-selector>
+
+<div class="data-container">
+  <!--# change table view by had data or not -->
+
+  <ng-container
+    *ngIf="
+      data.length != [] || tableSettings.isForceShowTable;
+      then hasDataTemplate;
+      else noDataTemplate
+    "
+  ></ng-container>
+
+  <!--# has data template-->
+  <ng-template #hasDataTemplate>
+    <div class="has-data">
+      <!--# table container -->
+
+      <!--# TK-35854 -->
+      <p-table
+        #dt
+        [lazy]="tableSettings.lazyMode"
+        [columns]="showTableCols"
+        [value]="data"
+        [globalFilterFields]="globalFilterCols"
+        [(selection)]="selectedData"
+        [rowHover]="true"
+        [showCurrentPageReport]="tableSettings.isPaginationMode"
+        [paginator]="data && tableSettings.isPaginationMode"
+        paginatorPosition="bottom"
+        [totalRecords]="totalRecords"
+        [rows]="curTableRows"
+        [first]="curFirst"
+        [rowsPerPageOptions]="[10, 20, 50, 100]"
+        [dataKey]="lineId"
+        class="table-panel"
+        currentPageReportTemplate=""
+        [scrollable]="viewpointWidth < 641 ? false : true"
+        [resetPageOnSort]="false"
+        breakpoint="640px"
+        [responsive]="true"
+        responsiveLayout="stack"
+        [selectionPageOnly]="true"
+        paginatorDropdownAppendTo="body"
+        (onHeaderCheckboxToggle)="onRowSelectEvent()"
+        (onRowSelect)="onRowSelectEvent()"
+        (onRowUnselect)="onRowSelectEvent()"
+        (onLazyLoad)="onTableLazyload($event)"
+        (onPage)="onTablePageChange($event)"
+      >
+        <!--# table caption container-->
+        <ng-template pTemplate="caption">
+          <div
+            class="table-action-block"
+            [class]="
+              (tableSettings.isFuzzySearchMode == false &&
+                tableSettings.isAddMode == false &&
+                tableSettings.isColSelectorMode == false) ||
+              tableSettings.isForceShowTable
+                ? 'clear-all'
+                : ''
+            "
+          >
+            <!--# data fuzzy search field -->
+            <ng-container *ngIf="tableSettings.isFuzzySearchMode">
+              <div class="table-search ui-inputgroup">
+                <input
+                  pInputText
+                  type="text"
+                  size="30"
+                  [(ngModel)]="searchKeyword"
+                  (input)="dt.filterGlobal(searchKeyword, 'contains')"
+                  placeholder="Search keyword"
+                  [disabled]="data.length == 0"
+                />
+                <span class="ui-inputgroup-addon">
+                  <i class="pi pi-search"></i>
+                </span>
+              </div>
+            </ng-container>
+
+            <!--# show if isAddMode is true -->
+            <ng-container *ngIf="tableSettings.isAddMode">
+              <!--# add item action section -->
+              <div class="btn-container">
+                <button
+                  pButton
+                  type="button"
+                  icon="pi pi-plus"
+                  label="{{ 'Button.Label.Add' | translate }}"
+                  class="btn-teal"
+                  (click)="onActiveItemAddEvent()"
+                ></button>
+              </div>
+            </ng-container>
+
+            <div class="btn-container right">
+              <ng-container
+                *ngIf="selectedData.length > 0 && tableSettings.isUpdateMode"
+              >
+                <button
+                  pButton
+                  pRipple
+                  label="{{ 'Button.Label.Modify' | translate }}"
+                  icon="pi pi-pencil"
+                  class="btn-line"
+                  (click)="onUpdateBtnClick()"
+                  [disabled]="!selectedData || !selectedData.length"
+                ></button>
+              </ng-container>
+
+              <!--# show if isDeleteMode is true and selectedData length > 0-->
+              <ng-container
+                *ngIf="selectedData.length > 0 && tableSettings.isDeleteMode"
+              >
+                <button
+                  pButton
+                  pRipple
+                  label="{{ 'Button.Label.Delete' | translate }}"
+                  icon="pi pi-trash"
+                  class="p-button-danger"
+                  (click)="onDeleteSelectedData()"
+                  [disabled]="!selectedData || !selectedData.length"
+                ></button>
+              </ng-container>
+
+              <!--# open table cols show selector dialog -->
+              <ng-container *ngIf="tableSettings.isColSelectorMode">
+                <button
+                  pButton
+                  type="button"
+                  icon="pi pi-sliders-h"
+                  label="{{ 'Button.Label.Filter' | translate }}"
+                  class="btn-line"
+                  (click)="onOpenTableColSeletorDialog()"
+                  [disabled]="data.length == 0"
+                ></button>
+              </ng-container>
+            </div>
+          </div>
+        </ng-template>
+
+        <!--# table header container-->
+        <ng-template pTemplate="header" let-columns>
+          <tr [class]="data.length != [] ? 'show' : 'hide'">
+            <!--# show if isDeleteMode is true -->
+            <ng-container
+              *ngIf="tableSettings.isSelectMode || tableSettings.isDeleteMode"
+            >
+              <th class="selector-checkbox" scope="col">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+            </ng-container>
+
+            <ng-container *ngFor="let col of columns">
+              <ng-container *ngIf="col.field === 'viewHistory'">
+                <th
+                  [ngClass]="viewpointWidth < 641 ? '' : 'p-column-edit'"
+                  scope="col"
+                >
+                  {{
+                    "Common.TableView.Default.Columns.ViewHistory" | translate
+                  }}
+                </th>
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="tableSettings.isEditedMode">
+              <th
+                [ngClass]="viewpointWidth < 641 ? '' : 'p-column-edit'"
+                scope="col"
+              >
+                {{ "Common.TableView.Default.Columns.Edit" | translate }}
+              </th>
+            </ng-container>
+
+            <ng-container
+              *ngIf="
+                viewpointWidth > 640 && tableSettings.isSortMode;
+                then openSortTemplate;
+                else closeSortTemplate
+              "
+            ></ng-container>
+            <ng-template #openSortTemplate>
+              <ng-container *ngFor="let col of columns">
+                <th
+                  *ngIf="col.field !== 'viewHistory'"
+                  [pSortableColumn]="col.field"
+                  scope="col"
+                  [ngClass]="
+                    viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''
+                  "
+                  [ngClass]="col.field === 'key' ? 'seq-col' : ''"
+                >
+                  {{ col.label }}
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+              </ng-container>
+            </ng-template>
+            <ng-template #closeSortTemplate>
+              <ng-container *ngFor="let col of columns">
+                <th
+                  *ngIf="col.field !== 'viewHistory'"
+                  scope="col"
+                  [ngClass]="
+                    viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''
+                  "
+                  [ngClass]="col.field === 'key' ? 'seq-col' : ''"
+                >
+                  {{ col.label }}
+                </th>
+              </ng-container>
+            </ng-template>
+          </tr>
+        </ng-template>
+
+        <!--# table body container-->
+        <ng-template pTemplate="body" let-data let-columns="columns">
+          <tr [class]="data.length != [] ? 'show' : 'hide'">
+            <!--# show if isDeleteMode is true -->
+            <ng-container
+              *ngIf="tableSettings.isSelectMode || tableSettings.isDeleteMode"
+            >
+              <td class="selector-checkbox" scope="col">
+                <p-tableCheckbox [value]="data"></p-tableCheckbox>
+              </td>
+            </ng-container>
+
+            <ng-container *ngFor="let col of columns">
+              <ng-container *ngIf="col.field === 'viewHistory'">
+                <td
+                  scope="col"
+                  [ngClass]="viewpointWidth < 641 ? '' : 'p-column-edit'"
+                >
+                  <span class="p-column-title">{{
+                    "Common.TableView.Default.Columns.Detail" | translate
+                  }}</span>
+                  <button
+                    pButton
+                    type="button"
+                    class="icon-btn btn-teal"
+                    (click)="detailOnClick(data)"
+                  >
+                    <img src="./assets/imgs/icon-btn/detail.svg" alt="Detail" />
+                  </button>
+                </td>
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="tableSettings.isEditedMode">
+              <td
+                [ngClass]="viewpointWidth < 641 ? '' : 'p-column-edit'"
+                scope="col"
+              >
+                <span class="p-column-title">{{
+                  "Common.TableView.Default.Columns.Edit" | translate
+                }}</span>
+
+                <button
+                  pButton
+                  type="button"
+                  class="icon-btn btn-orange"
+                  (click)="onDataSelectedEvent(data)"
+                >
+                  <img src="./assets/imgs/icon-btn/edit.svg" alt="Detail" />
+                </button>
+              </td>
+            </ng-container>
+
+            <ng-container *ngFor="let col of columns">
+              <ng-container
+                *ngIf="
+                  col.field === 'url' || col.field === 'fileName';
+                  then actionTemplate;
+                  else noActionTemplate
+                "
+              ></ng-container>
+              <ng-template #actionTemplate>
+                <ng-container *ngIf="col.field === 'url'">
+                  <td
+                    scope="col"
+                    [ngClass]="
+                      viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''
+                    "
+                    (click)="onExtranetEvent(data[col.field])"
+                    class="extranet"
+                  >
+                    <span class="p-column-title">{{ col.label }}</span>
+                    <span
+                      [ngClass]="viewpointWidth < 641 ? 'p-column-content' : ''"
+                      >{{ data[col.field] }}</span
+                    >
+                  </td>
+                </ng-container>
+                <ng-container *ngIf="col.field === 'fileName'">
+                  <td
+                    scope="col"
+                    [ngClass]="
+                      viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''
+                    "
+                    class="file-download"
+                    (click)="onTargetFileDownloadEvent(data)"
+                  >
+                    <span class="p-column-title">{{ col.label }}</span>
+                    <span
+                      [ngClass]="viewpointWidth < 641 ? 'p-column-content' : ''"
+                      >{{ data[col.field] }}</span
+                    >
+                  </td>
+                </ng-container>
+              </ng-template>
+              <ng-template #noActionTemplate>
+                <ng-container *ngIf="col.field === 'detail'">
+                  <td
+                    scope="col"
+                    [ngClass]="
+                      viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''
+                    "
+                  >
+                    <span class="p-column-title">{{
+                      "Common.TableView.Default.Columns.Detail" | translate
+                    }}</span>
+                    <button
+                      pButton
+                      type="button"
+                      class="icon-btn btn-teal"
+                      (click)="detailOnClick(data)"
+                    >
+                      <img
+                        src="./assets/imgs/icon-btn/detail.svg"
+                        alt="Detail"
+                      />
+                    </button>
+                  </td>
+                </ng-container>
+                <ng-container *ngIf="col.field === 'delete'">
+                  <td
+                    scope="col"
+                    [ngClass]="
+                      viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''
+                    "
+                  >
+                    <span class="p-column-title">{{ col.label }}</span>
+                    <ng-container
+                      *ngIf="
+                        data['uploadBy'] === curUserInfo.userEmail &&
+                        data['canDelete'] === 'Y' &&
+                        (curFormStatus === 'draft' ||
+                          router.url.includes('approving'))
+                      "
+                    >
+                      <button
+                        pButton
+                        type="button"
+                        icon="pi pi-trash"
+                        class="icon-btn btn-dark-red"
+                        (click)="onDeleteItemEvent(data['seq'])"
+                      ></button>
+                    </ng-container>
+                  </td>
+                </ng-container>
+
+                <ng-container
+                  *ngIf="
+                    col.field !== 'delete' &&
+                    col.field !== 'detail' &&
+                    col.field !== 'viewHistory'
+                  "
+                >
+                  <!--# 非一般文字顯示 -->
+                  <ng-container *ngIf="col.useTemplateType">
+                    <td
+                      scope="col"
+                      [ngClass]="
+                        viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''
+                      "
+                    >
+                      <span class="p-column-title">{{ col.label }}</span>
+                      <ng-container *ngIf="col.useTemplateType === 'dropdown'">
+                        <app-dt-viewer-dropdown
+                          [tag]="tableSettings.templateBelongTo"
+                          [data]="data"
+                          [supportData]="tableSettings.data"
+                          (outputValue)="
+                            data[col.field] = $event; onRowSelectEvent($event)
+                          "
+                        ></app-dt-viewer-dropdown>
+                      </ng-container>
+                      <ng-container *ngIf="col.useTemplateType === 'input'">
+                        <input
+                          pInputText
+                          [type]="
+                            tableSettings.templateBelongTo ===
+                            'sc-item-pick-by-ref'
+                              ? 'number'
+                              : 'text'
+                          "
+                          [(ngModel)]="data[col.field]"
+                          (ngModelChange)="onRowSelectEvent()"
+                          onwheel="this.blur()"
+                        />
+                      </ng-container>
+                    </td>
+                  </ng-container>
+
+                  <ng-container *ngIf="!col.useTemplateType">
+
+                    <!-- PBI-33295 Item 欄位 增加按鈕 -->
+                    <ng-container *ngIf="col.field === 'item' && itemFieldShowButton">
+                      <td
+                        scope="col"
+                        [ngClass]="
+                          viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''
+                        "
+                        [ngClass]="col.field === 'key' ? 'seq-col' : ''"
+                      >
+                        <span class="p-column-title">{{ col.label }}</span>
+                        <!-- 電腦版 -->
+                        <span
+                          *ngIf="viewpointWidth > 640"
+                          style="display: flex; align-items: center; justify-content: space-between;"
+                        >
+                          <span style="display: block; width: 60px;">
+                            {{ data[col.field] }}
+                          </span>
+                          <button
+                            pButton
+                            type="button"
+                            label="{{'SOA.ApprovingLicense.Title' | translate}}"
+                            class="btn-teal item-field-btn"
+                            (click)="itemFieldClick(data)"
+                          ></button>
+                        </span>
+
+                        <!-- 手機板 -->
+                          <span
+                            *ngIf="viewpointWidth < 641"
+                            class="p-column-content"
+                            style="display: flex; align-items: center; justify-content: space-between; width: 100%;"
+                          >
+                            <span >
+                              {{ data[col.field] }}
+                            </span>
+                            <button
+                              pButton
+                              type="button"
+                              label="{{'SOA.ApprovingLicense.Title' | translate}}"
+                              class="btn-teal item-field-btn"
+                              (click)="itemFieldClick(data)"
+                              style="width: 110px; "
+                            ></button>
+                          </span>
+                      </td>
+                    </ng-container>
+                    <ng-container *ngIf="!(col.field === 'item' && itemFieldShowButton)">
+                      <!--# 一般 context 顯示 -->
+                      <td
+                        scope="col"
+                        [ngClass]="
+                          viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''
+                        "
+                        [ngClass]="col.field === 'key' ? 'seq-col' : ''"
+                      >
+                        <span class="p-column-title">{{ col.label }}</span>
+                        <span
+                          [ngClass]="
+                            viewpointWidth < 641 ? 'p-column-content' : ''
+                          "
+                        >
+                          {{ data[col.field] }}
+                        </span>
+                      </td>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </ng-template>
+            </ng-container>
+          </tr>
+        </ng-template>
+      </p-table>
+
+      <ng-container *ngIf="data.length == 0">
+        <div class="no-data">
+          <!--# show content if no data-->
+          <span *ngIf="!tableSettings.isShowNoDataInfo">{{
+            "Common.TableView.Message.PlzAdd" | translate
+          }}</span>
+          <span *ngIf="tableSettings.isShowNoDataInfo">{{
+            tableSettings.noDataConText || "No Result"
+          }}</span>
+        </div>
+      </ng-container>
+    </div>
+  </ng-template>
+
+  <!--# no data template-->
+  <ng-template #noDataTemplate>
+    <!--# show if isShowNoDataInfo is true -->
+    <ng-container *ngIf="tableSettings.isShowNoDataInfo">
+      <div class="no-data">
+        <!--# show content if no data-->
+        <span>{{ tableSettings.noDataConText || "No Result" }}</span>
+      </div>
+    </ng-container>
+  </ng-template>
+</div>

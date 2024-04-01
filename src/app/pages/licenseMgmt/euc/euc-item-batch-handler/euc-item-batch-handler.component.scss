@@ -1,0 +1,13 @@
+@import "../../../../../styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+.form-container {
+  @apply mt-2;
+}
+
+.btn-container {
+  @apply w-full h-full;
+  @apply mt-2 lg:m-0 lg:ml-4;
+  @apply justify-start;
+}

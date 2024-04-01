@@ -1,0 +1,105 @@
+<div stickyZone>
+
+    <app-accordion-stepchart [formNo]="formNo" [formTypeId]="formContentRes.formTypeId"></app-accordion-stepchart>
+    
+    <!-- 單號/按鈕 -->
+    <div class="main-title-container">
+        <div class="override-content-container-padding"></div>
+        <p class="form-title">{{formTitle}} ({{formStatus | translate }})</p>
+        <div class="btn-container">
+
+            <button pButton type="button" *ngIf="showWithdrawButton"
+                label="{{ 'SalesOrderChange.button.withdraws' | translate}}" class="btn-coffee"
+                (click)="openWithdrawDialog()"></button>
+            <!-- 重新分派按鈕 -->
+            <button *ngIf="reassignDialogService.reAssignBtnSetting.visiable"
+                label="{{ reassignDialogService.reAssignBtnSetting.name | translate }}"
+                (click)="reassignDialogService.openAssignDialog()"
+                [ngStyle]="{'background-color': reassignDialogService.reAssignBtnSetting.color}" pButton type="button">
+            </button>
+            <button pButton type="button" *ngIf="showApproveButton  && !extendForm"
+                label="{{ 'Button.Label.Action' | translate }}" class="btn-dark-red"
+                (click)="openApproveDialog()"></button>
+            <button pButton type="button" [label]="integrateService.backBtnLabel" class="btn-gray"
+                (click)="integrateService.backBtnOnClick()" *ngIf="!storeBatchEditEntryService.openByBatchEditFromStore"></button>
+            <button pButton type="button" [label]="extendBtnLabel" class="btn-gray"
+                (click)="extendFormOnClick()"></button>
+        </div>
+    </div>
+
+    <!-- 申請人資訊 -->
+    <app-soc-applier-info [formInfo]="formContentRes"></app-soc-applier-info>
+
+    <ng-container *ngIf="!extendForm; then packTemplate;  else extendTemplate"> </ng-container>
+
+    <ng-template #packTemplate>
+
+        <p-tabView *ngIf="formContentRes.code">
+            <!-- 1.申請資訊 -->
+            <p-tabPanel header="{{ 'LicenseMgmt.Common.Tabs.ApplicationInfo' | translate }}">
+                <app-soc-application [formInfo]="formContentRes" (deptInfo)="getApplicationChange($event)"
+                    [canEditDept]="canEditDept"></app-soc-application>
+                <app-soc-items [formInfo]="formContentRes" (lineInfo)="getLineChange($event)"
+                    [pendingListIncludeMe]="pendingListIncludeMe" [docType]="formContentRes.docType"></app-soc-items>
+            </p-tabPanel>
+
+            <!-- 2.簽核歷程 -->
+            <p-tabPanel header="{{ 'LicenseMgmt.Common.Tabs.SignOffHistory' | translate }}">
+                <sov-history-log [formNo]="formNo" [formTypeId]="formContentRes.formTypeId"
+                    *ngIf="reassignDialogService.reAssignHistoryRefreshController && formContentRes.formTypeId"></sov-history-log>
+            </p-tabPanel>
+
+            <!-- 3.附件連結 -->
+            <p-tabPanel header="{{ 'LicenseMgmt.Common.Tabs.AttachmentLink' | translate }}">
+                <sov-app-common-attached-file-log [formNo]="formNo" [formTypeId]="formContentRes.formTypeId" *ngIf="formContentRes.formTypeId"
+                    [formStatus]="curFlowingStatus"></sov-app-common-attached-file-log>
+            </p-tabPanel>
+        </p-tabView>
+
+        <app-soc-withdraw [dialogOpen]="showWithdrawDialog" (dialogClose)="getWithdrawClose()"
+            (dialogSubmit)="getWithdrawSubmit($event)"></app-soc-withdraw>
+        <sov-approve-dialog *ngIf="showApproveDialog" [dialogOpen]="showApproveDialog"
+            (submitInfo)="getApproveDialogRes($event)" (closeDialog)="closeApproveDialog()" 
+            [hideRejectRadioButton]="true"></sov-approve-dialog>
+
+    </ng-template>
+
+    <ng-template #extendTemplate>
+
+        <div class="extend-form-container" *ngIf="formContentRes.code">
+
+            <div>
+                <div class="sub-title-container form-section">
+                    <p>{{ 'LicenseMgmt.Common.Tabs.ApplicationInfo' | translate }}</p>
+                </div>
+                <app-soc-application [formInfo]="formContentRes" (deptInfo)="getApplicationChange($event)"
+                    [canEditDept]="canEditDept"></app-soc-application>
+                <app-soc-items [formInfo]="formContentRes" (lineInfo)="getLineChange($event)"
+                    [pendingListIncludeMe]="pendingListIncludeMe" [docType]="formContentRes.docType"></app-soc-items>
+            </div>
+
+            <sov-app-common-attached-file-log [formNo]="formNo" [formTypeId]="formContentRes.formTypeId"  *ngIf="formContentRes.formTypeId"
+                [formStatus]="curFlowingStatus"></sov-app-common-attached-file-log>
+
+            <div *ngIf="showApproveButton">
+                <div class="sub-title-container form-section">
+                    <p>{{ 'Button.Label.Action' | translate }}</p>
+                </div>
+                <sov-approve-dialog [isDialogMode]="false" (submitInfo)="getApproveDialogRes($event)"
+                    (closeDialog)="closeApproveDialog()" [hideRejectRadioButton]="true"  ></sov-approve-dialog>
+            </div>
+
+            <sov-history-log [formNo]="formNo" [formTypeId]="formContentRes.formTypeId"
+                *ngIf="reassignDialogService.reAssignHistoryRefreshController && formContentRes.formTypeId"></sov-history-log>
+
+            <app-soc-withdraw [dialogOpen]="showWithdrawDialog" (dialogClose)="getWithdrawClose()"
+                (dialogSubmit)="getWithdrawSubmit($event)"></app-soc-withdraw>
+        </div>
+    </ng-template>
+</div>
+
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams" [contentList]="noticeContentList">
+</app-common-notice-check-dialog>
+
+<app-reassign-dialog *ngIf="reassignDialogService.reAssignBtnSetting.formTypeId"></app-reassign-dialog>
+

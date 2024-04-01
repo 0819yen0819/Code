@@ -1,0 +1,82 @@
+<!-- Menu -->
+<ng-container *ngIf="isShowNavBar">
+  <div class="menu-container" [ngClass]="{ close: !displayMenu }">
+    <button
+      pButton
+      type="button"
+      class="menu-btn"
+      [ngClass]="{ active: displayMenu }"
+      (click)="displayMenu = !displayMenu"
+    ></button>
+
+
+
+    <!--
+  <button pButton type="button" class="login-btn" label="{{'MainLayout.Label.Login' | translate}}" [routerLink]="'/login'"></button>
+  <button pButton type="button" class="login-btn" label="Redirect" [routerLink]="'/redirect'"></button>
+ -->
+
+    <p-panelMenu class="list-block" [model]="menuItems"></p-panelMenu>
+
+    <button
+      pButton
+      type="button"
+      class="logout-btn"
+      label="{{ 'Button.Label.Logout' | translate }}"
+      (click)="logout()"
+    ></button>
+  </div>
+  <!-- end: menu -->
+</ng-container>
+<!-- Main -->
+<div class="main-container" [ngClass]="{ 'no-nav': !isShowNavBar }">
+  <!-- Header -->
+  <div class="header" [ngClass]="{ 'menu-open': displayMenu }" *ngIf="!storeBatchEditEntryService.openByBatchEditFromStore">
+    <div class="logo-block img-block">
+      <img src="./assets/imgs/logo.svg" alt="WPG">
+      <div class="env-block" *ngIf="isShowEnv">
+        <span class="env-text"> {{ 'MainLayout.Label.testEnv' | translate }}({{ envName }}) </span>
+      </div>
+    </div>
+
+
+
+    <div class="btn-container">
+      <button
+        pButton
+        type="button"
+        class="btn-link user-info-btn"
+        label="{{
+          currentUser?.userCode +
+            ' ' +
+            currentUser?.userName +
+            ' ' +
+            currentUser?.userNameE
+        }}"
+      >
+        <!-- <div class="img-block">
+          <img src="./assets/imgs/user.svg" alt="">
+        </div> -->
+      </button>
+
+      <!--
+      <button pButton type="button" class="login-btn" label="{{'LANG.zh-tw' | translate}}" (click)="changeLang('zh-tw')"></button>
+      <button pButton type="button" class="login-btn" label="{{'LANG.en-us' | translate}}" (click)="changeLang('en-us')"></button>
+      -->
+      <p-dropdown
+        [options]="langOptions"
+        [(ngModel)]="selectedLang"
+        class="language-btn"
+        (onChange)="changeLanguage()"
+      ></p-dropdown>
+    </div>
+  </div>
+  <!-- end: header -->
+
+  <div class="content-container">
+    <router-outlet></router-outlet>
+    <!-- <p-progressSpinner></p-progressSpinner> -->
+    <p-scrollTop target="parent" [threshold]="50"></p-scrollTop>
+  </div>
+</div>
+<!-- end: main -->

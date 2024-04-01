@@ -1,0 +1,1161 @@
+<div id="dplhold-approving-full-content">
+<app-accordion-stepchart [formNo]="queryData.formNo" [formTypeId]="formTypeId"></app-accordion-stepchart>
+<div class="main-title-container" id="title-sticky" style="margin-top: 0;">
+  <p>{{ 'DPL_Hold.Label.FormNo' | translate }} / {{queryData.formNo}} ({{statusDesc(queryData.status)}})</p>
+  <div class="btn-container">
+    <button pButton type="button" label="{{ 'Button.Label.Action' | translate }}" class="btn-dark-red"
+      (click)="displaySubmitDetail = true;" *ngIf="!extendForm"></button>
+    <button pButton type="button" [label]="integrateService.backBtnLabel" class="btn-gray"
+    (click)="integrateService.backBtnOnClick()" *ngIf="!storeBatchEditEntryService.openByBatchEditFromStore"></button>
+
+    <button pButton type="button" [label]="extendBtnLabel" class="btn-gray"
+    (click)="extendFormOnClick()"></button>
+
+    <button pButton type="button" label="{{ 'Button.Label.ExportPdf' | translate }}" class="btn-gray"
+    (click)="exportPdf()"></button>
+  </div>
+</div>
+<!-- end: main-title-container -->
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [closable]="false" acceptLabel="{{ 'DPL_Hold.Label.ConfirmAccept' | translate }}"
+  rejectLabel="{{ 'DPL_Hold.Label.ConfirmReject' | translate }}">
+</p-confirmDialog>
+
+<div class="form-table form-list">
+  <div class="form-row grid">
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'DPL_Hold.Label.Applicant' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-label">
+            <label class="txt">{{queryData.owner}}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'DPL_Hold.Label.Department' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-label">
+            <label class="txt">{{queryData.ownerDept}}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'DPL_Hold.Label.ApplicantDate' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-label">
+            <label class="txt">{{queryData.submitDate | date: "yyyy/MM/dd HH:mm:ss"}}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+</div>
+
+<ng-container *ngIf="!extendForm; then packTemplate; else extendTemplate"> </ng-container>
+
+<!-- 收起 -->
+<ng-template #packTemplate>
+  <p-tabView>
+    <p-tabPanel header="{{ 'DPL_Hold.Label.ApplicationInformation' | translate }}">
+      <div class="main-title-container">
+        <p style="font-size: 18px;">DPL Hold</p>
+      </div>
+      <!-- end: main-title-container -->
+
+      <ng-container *ngTemplateOutlet="mainContentTemplate"></ng-container>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{ 'DPL_Hold.Label.ApprovalHistory' | translate }}">
+      <div class="main-title-container">
+        <p style="font-size: 18px;">{{ 'DPL_Hold.Label.ApprovalHistory' | translate }}</p>
+      </div>
+      <!-- end: main-title-container -->
+
+      <ng-container *ngTemplateOutlet="historyTemplate"></ng-container>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{ 'DPL_Hold.Label.AttachFileAndURL' | translate }}">
+      <app-attachment-uploader [formTypeId]="formTypeId"  [formNo]="queryData.formNo"></app-attachment-uploader>
+    </p-tabPanel>
+  </p-tabView>
+  <p-dialog header="{{ 'DPL_Hold.Label.Censor' | translate }}" [(visible)]="displaySubmitDetail" [draggable]="false"
+  [blockScroll]="true" [modal]="true">
+  <form class="form-table">
+    <div class="form-row grid">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.CensorAction' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-radio" *ngIf="!isAssigneeTask">
+          <p-radioButton name="radioGroup" label="{{ 'DPL_Hold.Label.Approve' | translate }}" value="approve"
+            [(ngModel)]="action" *ngIf="actionList.includes('Approve')" (ngModelChange)="actionOnChange()"></p-radioButton>
+          <p-radioButton name="radioGroup" label="{{ 'DPL_Hold.Label.Reject' | translate }}" value="reject"
+            [(ngModel)]="action" *ngIf="actionList.includes('Reject')" (ngModelChange)="actionOnChange()"></p-radioButton>
+          <p-radioButton name="radioGroup" label="{{ 'DPL_Hold.Label.Return' | translate }}" value="rollback"
+            [(ngModel)]="action" *ngIf="actionList.includes('Rollback')" (ngModelChange)="actionOnChange()"></p-radioButton>
+          <p-radioButton name="radioGroup" label="{{ 'DPL_Hold.Label.AddCosigner' | translate }}" value="addCosigner"
+            [(ngModel)]="action" *ngIf="actionList.includes('addCosigner')" (ngModelChange)="actionOnChange()"></p-radioButton>
+          <p-radioButton name="radioGroup" label="{{ 'DPL_Hold.Label.AddAssignee' | translate }}" value="addAssignee"
+            [(ngModel)]="action" *ngIf="actionList.includes('addAssignee')" (ngModelChange)="actionOnChange()"></p-radioButton>
+        </div>
+        <div class="form-radio" *ngIf="isAssigneeTask">
+          <p-radioButton name="radioGroup" label="{{ 'DPL_Hold.Label.Approve' | translate }}" value="resolve"
+            [(ngModel)]="action" *ngIf="actionList.includes('Approve')" (ngModelChange)="actionOnChange()"></p-radioButton>
+          <p-radioButton name="radioGroup" label="{{ 'DPL_Hold.Label.AddAssignee' | translate }}" value="addAssignee"
+            [(ngModel)]="action" *ngIf="actionList.includes('addAssignee')" (ngModelChange)="actionOnChange()"></p-radioButton>
+        </div>
+        <!-- end: form-radio -->
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid" *ngIf="action === 'addCosigner'">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Fail.Label.Endorser' | translate }}</label>
+        </div>
+      </div>
+
+      <div class="form-col col">
+        <div class="form-input">
+          <p-autoComplete name="cosigner" [(ngModel)]="signer" [suggestions]="filteredSigners"
+            (onBlur)="onBlurSigner($event)" (completeMethod)="filterSigner($event)" [virtualScroll]="true"
+            [itemSize]="30" [minLength]=1 field="displaySigner" [style]="{'width': '100%'}" [multiple]="false"
+            (keydown)="onCosignerKeyDownHandler($event, 'cosigners')"
+            (onSelect)="onFieldSelectAlready()">
+          </p-autoComplete>
+          <p class="error-active" *ngIf="requiredSigner">
+            <i class="pi pi-exclamation-circle"></i>
+            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="form-row grid" *ngIf="action === 'addAssignee'">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Fail.Label.Endorser' | translate }}</label>
+        </div>
+      </div>
+
+      <div class="form-col col">
+        <div class="form-input">
+          <p-autoComplete name="cosigners" [(ngModel)]="signers" [suggestions]="filteredSigners"
+            (completeMethod)="filterSigner($event)" [virtualScroll]="true" [itemSize]="30" [minLength]=1
+            field="displaySigner" [style]="{'width': '100%'}" [multiple]="true"
+            (onSelect)="addAssigneeOnSelect()" (keydown)="onAssigneeFieldKeyDown($event, 'cosigners')"
+            (onUnselect)="addAssigneeOnSelect()">
+          </p-autoComplete>
+          <p class="error-active" *ngIf="requiredSigner">
+            <i class="pi pi-exclamation-circle"></i>
+            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid" *ngIf="action === 'rollback'">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.ReturnTo' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-select">
+          <p-dropdown name="rollbackStep" [(ngModel)]="rollbackStep" [filter]="true" [options]="rollbackStepOptions"
+            placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+        </div>
+        <!-- end: form-radio -->
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.Opinion' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-textarea">
+          <!-- add class `error-active` in `form-textarea` when textarea error  -->
+          <textarea pInputTextarea name="comment" [(ngModel)]="comment" placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+            [ngModelOptions]="{standalone: true}"></textarea>
+          <p class="error-msg">
+            <i class="pi pi-exclamation-circle"></i>
+            <span>錯誤訊息</span>
+          </p>
+        </div>
+        <!-- end: form-textarea -->
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+  </form>
+  
+  <ng-container *ngFor="let agentInfo of agentInfoArr">
+    <app-agent-info-table [userCode]="agentInfo"></app-agent-info-table>
+   </ng-container>
+
+  <div class="btn-container">
+    <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray"
+      (click)="cancelBtnClick()"></button>
+    <button pButton type="button" label="{{ 'Button.Label.Submit' | translate }}" (click)="submitBtnClick()"></button>
+  </div>
+  </p-dialog>
+</ng-template>
+
+<!-- 展開 -->
+<ng-template #extendTemplate>
+  <div class="extend-form-container">  
+      <div class="main-title-container">
+        <p style="font-size: 18px;">DPL Hold</p>
+      </div>
+      <!-- end: main-title-container -->
+
+      <ng-container *ngTemplateOutlet="mainContentTemplate"></ng-container>
+      
+      <app-attachment-uploader [formTypeId]="formTypeId"  [formNo]="queryData.formNo" style="margin: 30px 0;"></app-attachment-uploader>
+      <!-- end: main-title-container -->
+
+      <!-- 審核 -->
+      <div class="main-title-container">
+        <p style="font-size: 18px;">{{ 'Button.Label.Action' | translate }}</p>
+      </div>
+
+      <form class="form-table">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Hold.Label.CensorAction' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+    
+          <div class="form-col col">
+            <div class="form-radio" *ngIf="!isAssigneeTask">
+              <p-radioButton name="radioGroup" label="{{ 'DPL_Hold.Label.Approve' | translate }}" value="approve"
+                [(ngModel)]="action" *ngIf="actionList.includes('Approve')"></p-radioButton>
+              <p-radioButton name="radioGroup" label="{{ 'DPL_Hold.Label.Reject' | translate }}" value="reject"
+                [(ngModel)]="action" *ngIf="actionList.includes('Reject')"></p-radioButton>
+              <p-radioButton name="radioGroup" label="{{ 'DPL_Hold.Label.Return' | translate }}" value="rollback"
+                [(ngModel)]="action" *ngIf="actionList.includes('Rollback')"></p-radioButton>
+              <p-radioButton name="radioGroup" label="{{ 'DPL_Hold.Label.AddCosigner' | translate }}" value="addCosigner"
+                [(ngModel)]="action" *ngIf="actionList.includes('addCosigner')"></p-radioButton>
+              <p-radioButton name="radioGroup" label="{{ 'DPL_Hold.Label.AddAssignee' | translate }}" value="addAssignee"
+                [(ngModel)]="action" *ngIf="actionList.includes('addAssignee')"></p-radioButton>
+            </div>
+            <div class="form-radio" *ngIf="isAssigneeTask">
+              <p-radioButton name="radioGroup" label="{{ 'DPL_Hold.Label.Approve' | translate }}" value="resolve"
+                [(ngModel)]="action" *ngIf="actionList.includes('Approve')"></p-radioButton>
+              <p-radioButton name="radioGroup" label="{{ 'DPL_Hold.Label.AddAssignee' | translate }}" value="addAssignee"
+                [(ngModel)]="action" *ngIf="actionList.includes('addAssignee')"></p-radioButton>
+            </div>
+            <!-- end: form-radio -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+    
+        <div class="form-row grid" *ngIf="action === 'addCosigner'">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Fail.Label.Endorser' | translate }}</label>
+            </div>
+          </div>
+    
+          <div class="form-col col">
+            <div class="form-input">
+              <p-autoComplete name="cosigner" [(ngModel)]="signer" [suggestions]="filteredSigners"
+                (onBlur)="onBlurSigner($event)" (completeMethod)="filterSigner($event)" [virtualScroll]="true"
+                [itemSize]="30" [minLength]=1 field="displaySigner" [style]="{'width': '100%'}" [multiple]="false"
+                (onSelect)="onFieldSelectAlready()">
+              </p-autoComplete>
+              <p class="error-active" *ngIf="requiredSigner">
+                <i class="pi pi-exclamation-circle"></i>
+                <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="form-row grid" *ngIf="action === 'addAssignee'">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Fail.Label.Endorser' | translate }}</label>
+            </div>
+          </div>
+    
+          <div class="form-col col">
+            <div class="form-input">
+              <p-autoComplete name="cosigners" [(ngModel)]="signers" [suggestions]="filteredSigners"
+                (completeMethod)="filterSigner($event)" [virtualScroll]="true" [itemSize]="30" [minLength]=1
+                field="displaySigner" [style]="{'width': '100%'}" [multiple]="true"
+                (onSelect)="addAssigneeOnSelect()" (keydown)="onAssigneeFieldKeyDown($event, 'cosigners')"
+                (onUnselect)="addAssigneeOnSelect()">
+              </p-autoComplete>
+              <p class="error-active" *ngIf="requiredSigner">
+                <i class="pi pi-exclamation-circle"></i>
+                <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- end: form-row -->
+    
+        <div class="form-row grid" *ngIf="action === 'rollback'">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Hold.Label.ReturnTo' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+    
+          <div class="form-col col">
+            <div class="form-select">
+              <p-dropdown name="rollbackStep" [(ngModel)]="rollbackStep" [filter]="true" [options]="rollbackStepOptions"
+                placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+            </div>
+            <!-- end: form-radio -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+    
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Hold.Label.Opinion' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+    
+          <div class="form-col col">
+            <div class="form-textarea">
+              <!-- add class `error-active` in `form-textarea` when textarea error  -->
+              <textarea pInputTextarea name="comment" [(ngModel)]="comment" placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                [ngModelOptions]="{standalone: true}"></textarea>
+              <p class="error-msg">
+                <i class="pi pi-exclamation-circle"></i>
+                <span>錯誤訊息</span>
+              </p>
+            </div>
+            <!-- end: form-textarea -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </form>
+    
+      <ng-container *ngFor="let agentInfo of agentInfoArr">
+        <app-agent-info-table [userCode]="agentInfo"></app-agent-info-table>
+       </ng-container>
+
+      <div class="btn-container">
+        <button pButton type="button" label="{{ 'Button.Label.Submit' | translate }}" (click)="submitBtnClick()"></button>
+      </div>
+      
+      <!-- 審核 ^^^^^^^^^^^^^^^^^^ -->
+
+      <!-- 歷程 -->
+      <div class="main-title-container">
+        <p style="font-size: 18px;">{{ 'DPL_Hold.Label.ApprovalHistory' | translate }}</p>
+      </div>
+      <!-- end: main-title-container -->
+
+      <ng-container *ngTemplateOutlet="historyTemplate"></ng-container>
+  </div>
+</ng-template>
+
+
+</div>
+
+<ng-template #mainContentTemplate>
+  <form class="form-table">
+    <div class="form-row grid">
+      <div class="form-col md:col-6 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Type</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+            <div class="form-label">{{queryData.trxType}}</div>
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Hold.Label.ReferenceNumber' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+            <div class="form-label">{{queryData.referenceNo}}</div>
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.Date' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-label">{{queryData.trxDate | date: "yyyy/MM/dd HH:mm:ss"}}</div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid">
+      <div class="form-col md:col-6 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Group</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+            <div class="form-label">{{queryData.corpGroup}}</div>
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col md:col-6 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">OU</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+            <div class="form-label">{{'(' + queryData.ouCode + ')' + queryData.ouName}}</div>
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid">
+      <div class="form-col md:col-6 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Hold.Label.Sales' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+            <div class="form-item grid">
+              <div class="form-label">{{queryData.salesName}}</div>
+            </div>
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.SalesDept' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col" *ngIf="stepNumber === 1">
+        <div class="form-label">
+          <p-dropdown name="formName" [(ngModel)]="salesDept" [filter]="true" [options]="salesDepts"
+            placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+        </div>
+      </div>
+      <div class="form-col col" *ngIf="stepNumber !== 1">
+        <div class="form-label">{{queryData.salesDeptName}}</div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid">
+      <div class="form-col md:col-6 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Hold.Label.CreatedByLastUpdateBy' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+            <div class="form-item grid">
+              <div class="form-label">{{queryData.owner}}</div>
+            </div>
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.Facility' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-label">{{queryData.facility}}</div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid">
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.CustomerCode' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-label">{{queryData.custNumber}}</div>
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col md:col-6 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Hold.Label.CustomerChineseName' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+            <div class="form-label">{{queryData.custNameC}}</div>
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Hold.Label.CustomerEnglishName' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+            <div class="form-label">{{queryData.custNameE}}</div>
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+    <div class="form-row grid">
+      <div class="form-col md:col-6 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Source</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+            <div class="form-label">{{queryData.source}}</div>
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col md:col-6 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Remark</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+            <div class="form-label">{{queryData.remark}}</div>
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </div>
+      <!-- end: form-col -->
+    </div>
+  </form>
+
+  <div class="main-title-container" *ngIf="displayBillTo">
+    <p style="font-size: 18px;">Bill To</p>
+  </div>
+  <!-- end: main-title-container -->
+
+  <form class="form-table" *ngIf="displayBillTo">
+    <div class="form-row grid">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">Address (ENG)</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-label">{{queryData.addressline1}}</div>
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.CustNameE' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-label">{{queryData.custNameE1}}</div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.City' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+      <div class="form-col col">
+        <div class="form-label">{{queryData.city1}}</div>
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.Country' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+      <div class="form-col col">
+        <div class="form-label">{{queryData.country1}}</div>
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.PostalCode' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+      <div class="form-col col">
+        <div class="form-label">{{queryData.postalcode1}}</div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid">
+
+      <div class="form-col md:col-6 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Hold.Label.ResultURL' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+            <div class="form-label">
+              <a class="txt" href="{{queryData.resultsUrl1}}" target="_blank" rel="noopener">{{queryData.resultsUrl1}}</a>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.ResultStatus' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-label">{{queryData.resultsStatus1}}</div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid" *ngIf="stepNumber === 2 && displayBillToAddToWhiteList && !this.isAssigneeTask ">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt"></label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-checkbox">
+          <p-checkbox name="whiteListFlag" inputId="whiteListFlag" [label]="queryData.addToWhiteListMsg"
+            [(ngModel)]="whiteListFlag" binary="true"></p-checkbox>
+        </div>
+        <!-- end: form-checkbox -->
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+  </form>
+
+  <div class="main-title-container" *ngIf="displayShipTo">
+    <p style="font-size: 18px;">{{ 'DPL_Hold.Label.ShipTo' | translate }}</p>
+  </div>
+  <!-- end: main-title-container -->
+
+  <form class="form-table" *ngIf="displayShipTo">
+    <div class="form-row grid">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">Address (ENG)</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-label">{{queryData.addressline2}}</div>
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.CustNameE' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-label">{{queryData.custNameE2}}</div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid">
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.City' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+      <div class="form-col col">
+        <div class="form-label">{{queryData.city2}}</div>
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.Country' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+      <div class="form-col col">
+        <div class="form-label">{{queryData.country2}}</div>
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.PostalCode' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+      <div class="form-col col">
+        <div class="form-label">{{queryData.postalcode2}}</div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid">
+      <div class="form-col md:col-6 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Hold.Label.ResultURL' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+            <div class="form-label">
+              <a class="txt" href="{{queryData.resultsUrl2}}" target="_blank" rel="noopener">{{queryData.resultsUrl2}}</a>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.ResultStatus' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-label">{{queryData.resultsStatus2}}</div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid" *ngIf="stepNumber === 2 && displayShipToAddToWhiteList  && !this.isAssigneeTask">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt"></label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-checkbox">
+          <p-checkbox name="whiteListFlag2" inputId="whiteListFlag2" [label]="queryData.addToWhiteList2Msg"
+            [(ngModel)]="whiteListFlag2" binary="true"></p-checkbox>
+        </div>
+        <!-- end: form-checkbox -->
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+  </form>
+
+  <div class="main-title-container" *ngIf="displayDeliverTo">
+    <p style="font-size: 18px;">{{ 'DPL_Hold.Label.DeliverTo' | translate }}</p>
+  </div>
+  <!-- end: main-title-container -->
+
+  <form class="form-table" *ngIf="displayDeliverTo">
+    <div class="form-row grid">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">Address (ENG)</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-label">{{queryData.addressline3}}</div>
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.CustNameE' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-label">{{queryData.custNameE3}}</div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid">
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.City' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+      <div class="form-col col">
+        <div class="form-label">{{queryData.city3}}</div>
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.Country' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+      <div class="form-col col">
+        <div class="form-label">{{queryData.country3}}</div>
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.PostalCode' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+      <div class="form-col col">
+        <div class="form-label">{{queryData.postalcode3}}</div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid">
+      <div class="form-col md:col-6 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Hold.Label.ResultURL' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+            <div class="form-label">
+              <a class="txt" href="{{queryData.resultsUrl3}}" target="_blank" rel="noopener">{{queryData.resultsUrl3}}</a>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{ 'DPL_Hold.Label.ResultStatus' | translate }}</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-label">{{queryData.resultsStatus3}}</div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid" *ngIf="stepNumber === 2 && displayDeliverToAddToWhiteList && !this.isAssigneeTask ">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt"></label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-checkbox">
+          <p-checkbox name="whiteListFlag3" inputId="whiteListFlag3" [label]="queryData.addToWhiteList3Msg"
+            [(ngModel)]="whiteListFlag3" binary="true"></p-checkbox>
+        </div>
+        <!-- end: form-checkbox -->
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+  </form>
+</ng-template>
+
+<ng-template #historyTemplate>
+  <form class="form-table">
+    <p-table #dt class="table-panel upload" [value]="historyData" [columns]="historyCols" [scrollable]="true"
+      dataKey="id">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of historyCols" [pSortableColumn]="col.field" scope="col">
+            <ng-container>
+              {{col.header}}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            </ng-container>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-data>
+        <tr>
+          <td *ngFor="let col of historyCols">
+            <ng-container *ngIf="col.field === 'signerCode'">
+              <div class="user-info">
+                <p>{{data[col.field] + ' ' + data['signerNameEn'] + ' ' + data['signerNameCn']}}</p>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="col.field === 'completeTime'">
+              <div class="user-info">
+                <p>{{data[col.field] | date : 'yyyy/MM/dd HH:mm:ss'}}</p>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="col.field !== 'signerCode' && col.field !== 'completeTime'">
+              <p>{{data[col.field]}}</p>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </form>
+
+  <div class="wait-approving-wrap">
+    <ng-container *ngIf="waitApproveList.length > 0">
+      <span>
+        {{ "LicenseMgmt.Common.Hint.AuditApprovingPrefix" | translate }}&nbsp;{{
+          this.waitApproveList.toString()
+        }}
+        <ng-container *ngIf="waitAssigneeList.length > 0"
+          >,{{ this.waitAssigneeList.toString() }}</ng-container
+        >
+        &nbsp;{{ "LicenseMgmt.Common.Hint.AuditApprovingSuffix" | translate }}
+      </span>
+    </ng-container>
+
+    <ng-container
+      *ngIf="waitApproveList.length === 0 && waitAssigneeList.length > 0"
+    >
+      <span>
+        {{ "LicenseMgmt.Common.Hint.AuditApprovingPrefix" | translate }}&nbsp;{{
+          this.waitApproveList.toString()
+        }}
+        {{ this.waitAssigneeList.toString() }}
+        &nbsp;{{ "LicenseMgmt.Common.Hint.AuditApprovingSuffix" | translate }}
+      </span>
+    </ng-container>
+    <span
+      class="reminder-send-btn"
+      *ngIf="waitApproveList.length > 0 || waitAssigneeList.length > 0"
+      (click)="onReminderSend()"
+      ><img src="./assets/imgs/mail.jpg" alt="mail" />
+    </span>
+  </div>
+</ng-template>
+
+<p-confirmDialog [baseZIndex]="10000" key="agentCheckConfirmDialog"  [style]="{ width: '40%' }"></p-confirmDialog>

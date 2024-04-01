@@ -1,0 +1,24 @@
+@import "src/styles/helpers/variables";
+
+// ***sticky-header-source***
+.main-title-container {
+  display: flex;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  z-index: 9;
+
+  .override-content-container-padding {
+    position: absolute;
+    top: -$space-2;
+    background-color: #ffffff;
+    z-index: 9;
+    width: 100%;
+    height: $space-2;
+
+    @media screen and (max-width: 767px) {
+      padding: $space-1;
+    }
+  }
+}

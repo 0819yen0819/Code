@@ -1,0 +1,22 @@
+<div class="ui-fluid ng-main" [ngClass]="theme">
+  <p-toast position="bottom-right">
+    <ng-template let-message pTemplate="message">
+      <span class="ui-toast-icon pi"
+        [ngClass]="{'pi-info-circle': message.severity == 'info', 'pi-exclamation-triangle': message.severity == 'warn',
+                            'pi-times-circle': message.severity == 'error', 'pi-check' :message.severity == 'success'}"></span>
+      <div class="ui-toast-message-text-content">
+        <div class="ui-toast-summary">{{ message.summary | translate }}</div>
+        <div class="ui-toast-detail">{{ message.detail | translate }}</div>
+      </div>
+    </ng-template>
+  </p-toast>
+  <p-progressSpinner *ngIf="showLoader"></p-progressSpinner>
+</div>
+<router-outlet></router-outlet>
+<app-common-notice-check-dialog
+  [settingParams]="noticeCheckDialogParams"
+  [contentList]="noticeContentList"
+  (closeNotice)="closeNoticeDialog()"
+>
+</app-common-notice-check-dialog>
+

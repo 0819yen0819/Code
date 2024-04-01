@@ -1,0 +1,268 @@
+<!--# common notice-check dialog-->
+<app-common-notice-check-dialog
+  [settingParams]="noticeCheckDialogParams"
+  [contentList]="noticeContentList"
+></app-common-notice-check-dialog>
+
+<p-dialog
+  [header]="dialogSetting.getValue().title"
+  [(visible)]="dialogSetting.getValue().visiable"
+  [modal]="dialogSetting.getValue().modal"
+  [draggable]="dialogSetting.getValue().draggable"
+  [resizable]="dialogSetting.getValue().resizeable"
+>
+  <div class="form-container form-table">
+    <!--# ECCN / Flag -->
+    <div class="form-row grid">
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">ECCN</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col form-input col-12">
+              <div class="form-select" *ngIf="!(mode == 'edit')">
+                <p-dropdown
+                  name="eccn"
+                  [options]="eccnListOptions.getValue()"
+                  placeholder="{{
+                    'DropDown.PlaceHolder.PleaseChoose' | translate
+                  }}"
+                  [filter]="true"
+                  [showClear]="true"
+                  appendTo="body"
+                  [(ngModel)]="eccn"
+                ></p-dropdown>
+              </div>
+
+              <div
+                class="form-label"
+                *ngIf="mode == 'edit'"
+                style="justify-content: center"
+              >
+                <label class="txt">{{ eccn }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">{{
+                "LEHRuleManager.Label.Flag" | translate
+              }}</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-toggle">
+                <p-selectButton
+                  [options]="boolOptions"
+                  optionLabel="label"
+                  optionValue="value"
+                  class="fit-button"
+                  [(ngModel)]="flag"
+                ></p-selectButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# license exception rules CIV / GBS -->
+    <div class="form-row grid">
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">CIV</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-toggle">
+                <p-selectButton
+                  [options]="boolOptions"
+                  optionLabel="label"
+                  optionValue="value"
+                  class="fit-button"
+                  [(ngModel)]="civ"
+                ></p-selectButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">GBS</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-toggle">
+                <p-selectButton
+                  [options]="boolOptions"
+                  optionLabel="label"
+                  optionValue="value"
+                  class="fit-button"
+                  [(ngModel)]="gbs"
+                ></p-selectButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# license exception rules ENC / LVS -->
+    <div class="form-row grid">
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">ENC</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-toggle">
+                <p-selectButton
+                  [options]="boolOptions"
+                  optionLabel="label"
+                  optionValue="value"
+                  class="fit-button"
+                  [(ngModel)]="enc"
+                ></p-selectButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">LVS</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-toggle">
+                <p-selectButton
+                  [options]="boolOptions"
+                  optionLabel="label"
+                  optionValue="value"
+                  class="fit-button"
+                  [(ngModel)]="lvs"
+                ></p-selectButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# LVS:AMT (Single Order_USD) / LVS LimitAMT (YearItem Cust/End Cust_USD) -->
+    <ng-container *ngIf="lvs === 'Y'">
+      <div class="form-row grid">
+        <div class="form-col lg:col-6 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt"
+                  >LVS:AMT<br />
+                  <span>(Single Order_USD)</span>
+                </label>
+              </div>
+            </div>
+            <div class="grid md:col col-12">
+              <div class="form-col form-input col-12">
+                <div class="form-input">
+                  <input
+                    type="text"
+                    pInputText
+                    name="orderAmt "
+                    [(ngModel)]="orderAmt"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-col lg:col-6 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt"
+                  >LVS LimitAMT<br />
+                  <span>(YearItem Cust/End Cust_USD)</span></label
+                >
+              </div>
+            </div>
+            <div class="grid md:col col-12">
+              <div class="form-col form-input col-12">
+                <div class="form-input">
+                  <input
+                    type="text"
+                    pInputText
+                    name="yearAmt "
+                    [(ngModel)]="yearAmt"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!--# Remark -->
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Remark</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col form-input col-12">
+              <div class="form-input">
+                <textarea
+                  type="text"
+                  pInputText
+                  name="remark"
+                  [(ngModel)]="remark"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <button
+        pButton
+        type="button"
+        label="{{ 'Button.Label.Cancel' | translate }}"
+        class="btn-gray"
+        (click)="onDialogClosed()"
+      ></button>
+      <button
+        pButton
+        type="button"
+        label="{{ 'Button.Label.Save' | translate }}"
+        (click)="onFormSubmit()"
+      ></button>
+    </div>
+  </div>
+</p-dialog>

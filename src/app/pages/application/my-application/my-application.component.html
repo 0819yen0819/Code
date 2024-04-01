@@ -1,0 +1,622 @@
+<p-tabView>
+  <p-tabPanel header="{{ 'MyApplication.Label.MyForm' | translate }}" leftIcon="icon icon-list">
+    <form class="form-table form-search">
+      <div class="form-row grid">
+        <div class="form-col md:col-4 sm:col-12 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'MyApplication.Label.FormName' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-select">
+                <!-- add class `error-active` in `form-select` when input error  -->
+                <p-dropdown name="formName" [(ngModel)]="formName" [filter]="true" [options]="formNameOptions"
+                  placeholder="{{ 'PendingApproval.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+                <p class="error-msg">
+                  <i class="pi pi-exclamation-circle"></i>
+                  <span>錯誤訊息</span>
+                </p>
+              </div>
+              <!-- end: form-select -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col md:col-4 sm:col-12 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'MyApplication.Label.FormNo' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-input">
+                <!-- add class `error-active` in `form-input` when input error  -->
+                <input type="text" pInputText name="formNo" [(ngModel)]="formNo"
+                  placeholder="{{ 'PendingApproval.PlaceHolder.PleaseEnter' | translate }}" />
+                <p class="error-msg">
+                  <i class="pi pi-exclamation-circle"></i>
+                  <span>錯誤訊息</span>
+                </p>
+              </div>
+              <!-- end: form-input -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col md:col-4 sm:col-12 col-12"></div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+        <div class="form-col md:col-4 sm:col-12 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'MyApplication.Label.StartDate' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-date">
+                <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [(ngModel)]="startDate" name="startDate" [showIcon]="true" dateFormat="yy/mm/dd"
+                  appendTo="body"></p-calendar>
+              </div>
+              <!-- end: form-date -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col md:col-4 sm:col-12 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'MyApplication.Label.EndDate' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-date">
+                <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true" name="endDate" [(ngModel)]="endDate" dateFormat="yy/mm/dd"
+                  appendTo="body"></p-calendar>
+              </div>
+              <!-- end: form-date -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col md:col-4 sm:col-12 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'MyApplication.Label.Status' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-select">
+                <!-- add class `error-active` in `form-select` when input error  -->
+                <p-dropdown name="status" [(ngModel)]="status" [options]="statusOptions"
+                  placeholder="{{ 'PendingApproval.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+                <p class="error-msg">
+                  <i class="pi pi-exclamation-circle"></i>
+                  <span>錯誤訊息</span>
+                </p>
+              </div>
+              <!-- end: form-select -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="btn-container">
+        <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-secondary"
+          (click)="resetBtnClick()"></button>
+        <button pButton type="button" label="{{ 'Button.Label.Query' | translate }}" (click)="searchBtnClick()"
+          *ngIf="permissions.includes('view')"></button>
+        <button pButton type="button" label="{{ 'Button.Label.Download' | translate }}"
+          (click)="downloadBtnClick()"></button>
+      </div>
+    </form>
+    <ng-container *ngIf="displayResult">
+      <!-- <p-table #dt class="table-panel" [value]="data" [columns]="selectedCols"
+      [scrollable]="true" scrollHeight="500px"
+      [paginator]="true" [rows]="10"
+      paginatorPosition="bottom" [rowsPerPageOptions]="[10,20,{showAll:'All'}]"
+      dataKey="id" [globalFilterFields]="['submitDate','formNo','formName','subject','requesterName','lastUpdatedDate','owner','status','desc']"> -->
+
+      <p-table #lazyTable class="table-panel" [value]="data" [columns]="selectedCols" [scrollable]="true"
+        scrollHeight="500px" [paginator]="true" [rows]="10" paginatorPosition="bottom"
+        [rowsPerPageOptions]="[10,20,{showAll:'All'}]" [(selection)]="selectedData" dataKey="id" [lazy]="true"
+        (onLazyLoad)="onLazyLoad($event)" (onSort)="onSort($event)" (onPage)="onPage($event)"
+        [totalRecords]="totalRecords">
+        <ng-template pTemplate="caption">
+          <div class="table-action-block">
+            <div class="table-search ui-inputgroup">
+              <input pInputText type="text" size="30" (input)="filterLazy($event.target.value)"
+                placeholder="Search keyword" [(ngModel)]="globalFilter" />
+              <span class="ui-inputgroup-addon">
+                <i class="pi pi-search"></i>
+              </span>
+            </div>
+
+            <div class="btn-container right">
+              <button pButton type="button" icon="pi pi-sliders-h" label="{{ 'Button.Label.Filter' | translate }}"
+                class="btn-line" (click)="showFilter()"></button>
+            </div>
+          </div>
+          <!-- end: table-action-block -->
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th *ngFor="let col of selectedCols" [pSortableColumn]="col.field" [ngClass]="{
+              'icon-col': (col.field == 'checkbox' || col.field === 'edit' || col.field === 'del')
+            }" scope="col">
+              <ng-container *ngIf="col.field == 'checkbox'">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </ng-container>
+              <ng-container *ngIf="col.field === 'edit' || col.field === 'del'">
+                {{col.header}}
+              </ng-container>
+              <ng-container *ngIf="col.field != 'checkbox' && col.field !== 'edit' && col.field !== 'del'">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </ng-container>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data>
+          <tr>
+            <td *ngFor="let col of selectedCols" [ngClass]="{
+              'icon-col': (col.field == 'checkbox' || col.field === 'edit' || col.field === 'del')
+            }">
+              <ng-container *ngIf="col.field ==='status'">
+                <p>{{statusDesc[data[col.field]]}}</p>
+              </ng-container>
+              <ng-container *ngIf="col.field === 'submitDate' || col.field === 'lastUpdatedDate'">
+                <p>{{data[col.field] | date : 'yyyy/MM/dd HH:mm:ss'}}</p>
+              </ng-container>
+              <ng-container
+                *ngIf="col.field !== 'submitDate' && col.field !== 'lastUpdatedDate' && col.field !== 'formNo' && col.field !== 'edit' && col.field !=='status'">
+                <p>{{data[col.field]}}</p>
+              </ng-container>
+              <ng-container *ngIf="col.field ==='edit' && data['status'] === 'Draft'">
+                <button pButton type="button" class="icon-btn btn-orange" [routerLink]="''" (click)="editPage(data)">
+                  <img src="/assets/imgs/icon-btn/edit.svg" alt="Edit">
+                </button>
+              </ng-container>
+              <ng-container *ngIf="col.field === 'del' && data['status'] === 'Draft'">
+                <button pButton type="button" icon="pi pi-trash" class="icon-btn btn-dark-red"
+                  (click)="clickDeleteForm(data);"></button>
+              </ng-container>
+              <ng-container *ngIf="col.field ==='formNo'">
+                <p><a href="#" (click)="viewPage(data['viewUrl'] , data[col.field])">{{data[col.field]}}</a></p>
+              </ng-container>
+
+
+            </td>
+
+          </tr>
+        </ng-template>
+      </p-table>
+    </ng-container>
+  </p-tabPanel>
+
+  <p-tabPanel header="{{ 'MyApplication.Label.TrackForm' | translate }}" leftIcon="icon icon-track">
+    <form class="form-table form-search">
+
+      <div class="form-row grid">
+
+        <div class="form-col md:col-4 sm:col-12 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'MyApplication.Label.SearchType' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-select">
+                <!-- add class `error-active` in `form-select` when input error  -->
+                <p-dropdown name="searchType" [(ngModel)]="searchType" [filter]="false" [options]="searchTypeOptions"
+                  placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"
+                  (onChange)="onChangeSearchType($event)"></p-dropdown>
+                <p class="error-msg">
+                  <i class="pi pi-exclamation-circle"></i>
+                  <span>錯誤訊息</span>
+                </p>
+              </div>
+              <!-- end: form-select -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col md:col-4 sm:col-12 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'MyApplication.Label.FormName' | translate }}</label>
+              </div>
+            </div>
+            <div class="form-col col">
+              <div class="form-select">
+                <p-dropdown name="formName" [(ngModel)]="trackFormFormTypeId" [filter]="true"
+                  [options]="trackFormFormNameOptions"
+                  placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-col md:col-4 sm:col-12 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'MyApplication.Label.FormNo' | translate }}</label>
+              </div>
+            </div>
+            <div class="form-col col">
+              <div class="form-input">
+                <input type="text" name="trackFormFormNo" [(ngModel)]="trackFormFormNo" pInputText value=""
+                  placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-row grid">
+
+        <ng-container *ngIf="searchType === 'General'">
+          <div class="form-col md:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">{{ 'MyApplication.Label.Applicant' | translate }}</label>
+                </div>
+              </div>
+              <div class="form-col col">
+                <div class="form-input">
+                  <p-autoComplete [(ngModel)]="trackFormSelectedApplicant" [ngModelOptions]="{standalone: true}"
+                    [suggestions]="trackFormFilteredApplicants" (completeMethod)="filterTrackFormApplicant($event)"
+                    [virtualScroll]="true" [itemSize]="30" (onBlur)="onBlurTrackFormApplicant($event)" [minLength]=3
+                    field="displayName" [style]="{'width': '100%'}">
+                  </p-autoComplete>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="searchType === 'SupervisorApplicant' || searchType === 'AssistantApplicant' || searchType === 'ResignApplicant'">
+          <div class="form-col md:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">{{ 'MyApplication.Label.Applicant' | translate }}</label>
+                </div>
+              </div>
+              <div class="form-col col">
+                <div class="form-select">
+                  <p-dropdown name="trackFormApplicant" [(ngModel)]="trackFormApplicant" [filter]="false"
+                    [options]="trackFormApplicantOptions"
+                    placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"
+                    *ngIf="trackFormApplicant !== ''"></p-dropdown>
+                  <p class="error-active" *ngIf="trackFormApplicantRequired">
+                    <i class="pi pi-exclamation-circle"></i>
+                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="searchType === 'SupervisorOwner' || searchType === 'AssistantOwner' || searchType === 'ResignOwner'">
+          <div class="form-col md:col-4 sm:col-12 col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">{{ 'MyApplication.Label.Owner' | translate }}</label>
+                </div>
+              </div>
+              <div class="form-col col">
+                <div class="form-select">
+                  <p-dropdown name="trackFormOwner" [(ngModel)]="trackFormOwner" [filter]="false"
+                    [options]="trackFormOwnerOptions"
+                    placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}" *ngIf="trackFormOwner !== ''">
+                  </p-dropdown>
+                  <p class="error-active" *ngIf="trackFormOwnerRequired">
+                    <i class="pi pi-exclamation-circle"></i>
+                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="form-col md:col-4 sm:col-12 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'MyApplication.Label.StartDate' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-date">
+                <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [(ngModel)]="trackFormStartDate" name="trackFormStartDate" [showIcon]="true"
+                  dateFormat="yy/mm/dd" appendTo="body"></p-calendar>
+              </div>
+              <!-- end: form-date -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col md:col-4 sm:col-12 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'MyApplication.Label.EndDate' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-date">
+                <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true" name="trackFormEndDate" [(ngModel)]="trackFormEndDate"
+                  dateFormat="yy/mm/dd" appendTo="body"></p-calendar>
+              </div>
+              <!-- end: form-date -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+
+      <div class="form-row grid">
+
+        <div class="form-col md:col-4 sm:col-12 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'MyApplication.Label.Status' | translate }}</label>
+              </div>
+            </div>
+            <div class="form-col col">
+              <div class="form-select">
+                <p-dropdown name="trackFormStatus" [(ngModel)]="trackFormStatus" [filter]="false"
+                  [options]="trackFormStatusOptions"
+                  placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-col md:col-8 sm:col-12 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'MyApplication.Label.Keyword' | translate }}</label>
+              </div>
+            </div>
+            <div class="form-col col">
+              <div class="form-chip">
+                <!-- <input type="text" name="trackFormSubject" [(ngModel)]="trackFormSubject" pInputText value=""
+                  placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" /> -->
+                <p-chips name="remark" [(ngModel)]="trackFormKeywords"
+                  placeholder="{{ 'MyApplication.PlaceHolder.Keyword' | translate }}">
+                </p-chips>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-row grid">
+
+        <div class="form-col md:col-12 sm:col-12 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'MyApplication.Label.Corp' | translate }}</label>
+              </div>
+            </div>
+            <div class="form-col col">
+              <div class="form-input">
+                <p-autoComplete [(ngModel)]="trackFormSelectCorps" [ngModelOptions]="{standalone: true}"
+                  [suggestions]="trackFormFilteredCorps" (completeMethod)="filterTrackFormCorp($event)"
+                  [virtualScroll]="true" [itemSize]="30" [minLength]=1 field="displayOu" [style]="{'width': '100%'}"
+                  [multiple]="true">
+                </p-autoComplete>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="btn-container">
+        <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-secondary"
+          (click)="resetBtnClick()"></button>
+        <button pButton type="button" label="{{ 'Button.Label.Query' | translate }}" (click)="searchBtnClickTrackForm()"
+          *ngIf="permissions.includes('view')"></button>
+        <button pButton type="button" label="{{ 'Button.Label.Download' | translate }}"
+          (click)="downloadBtnClickTrackForm()"></button>
+      </div>
+
+    </form>
+
+    <ng-container *ngIf="trackFormDisplayResult">
+      <p-table #lazyTableTrackForm class="table-panel" [value]="trackFormData" [columns]="selectedTrackFormCols"
+        [scrollable]="true" scrollHeight="500px" [paginator]="true" [rows]="10" paginatorPosition="bottom"
+        [rowsPerPageOptions]="[10,20,{showAll:'All'}]" [(selection)]="trackFormSelectedData" dataKey="id" [lazy]="true"
+        (onLazyLoad)="onLazyLoadTrackForm($event)" (onSort)="onSortTrackForm($event)" (onPage)="onPageTrackForm($event)"
+        [totalRecords]="trackFormTotalRecords">
+        <ng-template pTemplate="caption">
+          <div class="table-action-block">
+            <div class="table-search ui-inputgroup">
+              <input pInputText type="text" size="30" (input)="filterLazyTrackForm($event.target.value)"
+                placeholder="Search keyword" [(ngModel)]="trackFormGlobalFilter" />
+              <span class="ui-inputgroup-addon">
+                <i class="pi pi-search"></i>
+              </span>
+            </div>
+
+            <div class="btn-container right">
+              <button pButton type="button" icon="pi pi-sliders-h" label="{{ 'Button.Label.Filter' | translate }}"
+                class="btn-line" (click)="showFilterTrackForm()"></button>
+            </div>
+          </div>
+          <!-- end: table-action-block -->
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th *ngFor="let col of selectedTrackFormCols" [pSortableColumn]="col.field" [ngClass]="{
+              'icon-col': (col.field == 'checkbox' || col.field === 'edit' || col.field === 'del')
+            }" scope="col">
+              <ng-container *ngIf="col.field == 'checkbox'">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </ng-container>
+              <ng-container *ngIf="col.field === 'edit' || col.field === 'del'">
+                {{col.header}}
+              </ng-container>
+              <ng-container *ngIf="col.field != 'checkbox' && col.field !== 'edit' && col.field !== 'del'">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </ng-container>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data>
+          <tr>
+            <td *ngFor="let col of selectedTrackFormCols" [ngClass]="{
+              'icon-col': (col.field == 'checkbox' || col.field === 'edit' || col.field === 'del')
+            }">
+              <ng-container *ngIf="col.field ==='status'">
+                <p>{{statusDesc[data[col.field]]}}</p>
+              </ng-container>
+              <ng-container *ngIf="col.field === 'createdDate'">
+                <p>{{data[col.field] | date : 'yyyy/MM/dd\nHH:mm:ss'}}</p>
+              </ng-container>
+              <ng-container *ngIf="col.field === 'formTypeNameE'">
+                <p>{{translateFormType(data)}}</p>
+              </ng-container>
+              <ng-container
+                *ngIf="col.field !== 'createdDate' && col.field !== 'formNo' && col.field !== 'edit' && col.field !=='status' && col.field !== 'formTypeNameE'">
+                <p>{{data[col.field]}}</p>
+              </ng-container>
+              <ng-container *ngIf="col.field ==='formNo'">
+                <p><a href="#" (click)="viewPage(data['viewUrl'] , data[col.field])">{{data[col.field]}}</a></p>
+              </ng-container>
+            </td>
+
+          </tr>
+        </ng-template>
+      </p-table>
+    </ng-container>
+
+  </p-tabPanel>
+</p-tabView>
+
+<p-dialog header="{{ 'Dialog.Header.FilterColumns' | translate }}" [(visible)]="displayFilterDetail" [draggable]="false"
+  [blockScroll]="true" [modal]="true">
+  <form>
+    <div class="form-row grid">
+      <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of cols">
+        <div class="form-checkbox">
+          <p-checkbox name="checkboxGroup" [label]="col.header" [value]="col" name="selectedColumn"
+            [(ngModel)]="selectedCols" [disabled]="col?.isDisabled"></p-checkbox>
+        </div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="btn-container">
+      <button pButton type="button" label="{{'Button.Label.Reset' | translate}}" class="btn-gray btn-line"
+        (click)="resetFilterDetail()"></button>
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog class="width-sm" [(visible)]="displayDelDialog" [draggable]="false" [blockScroll]="true" [modal]="true">
+  <div class="popup-content center">
+    <h2>{{ 'MyApplication.Label.ConfirmDelete' | translate }}</h2>
+  </div>
+
+  <div class="btn-container">
+    <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray btn-line"
+      (click)="displayDelDialog = false;"></button>
+    <button pButton type="button" label="{{ 'Button.Label.Delete' | translate }}" class="btn-dark-red"
+      (click)="deleteForm()"></button>
+  </div>
+</p-dialog>
+
+<p-dialog header="{{ 'Dialog.Header.FilterColumns' | translate }}" [(visible)]="displayFilterDetailTrackForm"
+  [draggable]="false" [blockScroll]="true" [modal]="true">
+  <form>
+    <div class="form-row grid">
+      <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of trackFormCols">
+        <div class="form-checkbox">
+          <p-checkbox name="checkboxGroup" [label]="col.header" [value]="col" name="selectedColumn"
+            [(ngModel)]="selectedTrackFormCols" [disabled]="col?.isDisabled"></p-checkbox>
+        </div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="btn-container">
+      <button pButton type="button" label="{{'Button.Label.Reset' | translate}}" class="btn-gray btn-line"
+        (click)="resetFilterDetailTrackForm()"></button>
+    </div>
+  </form>
+</p-dialog>

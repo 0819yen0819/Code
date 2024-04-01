@@ -1,0 +1,123 @@
+<form class="form-container form-table" style="margin-top: 30px;">
+
+    <!--# comment Section-->
+    <div class="sub-title-container comment-section">
+        <p>Import OU</p>
+    </div>
+
+    <!-- 正本 -->
+    <div class="form-row remark grid">
+        <div class="form-col col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label require">
+                        <label class="txt">{{'SOA.Label.Origin' | translate}}</label>
+                    </div>
+                </div>
+                <div class="grid md:col col-12">
+                    <div class="form-col form-input col-12">
+                        <div class="form-input no-h-full">
+                            <p-selectButton [options]="ouInfo.docMap" optionLabel="label" optionValue="value"
+                                [(ngModel)]="ouInfo.docValue" [ngModelOptions]="{standalone: true}"
+                                (ngModelChange)="emitOuInfo()" [disabled]="soaCommonService.currentState !== 'Apply'">
+                            </p-selectButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row ou-kit-selector grid">
+        <!-- Group Type -->
+        <div class="form-col col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label require">
+                        <label class="txt">Group Type
+                        </label>
+                    </div>
+                </div>
+
+                <div class="grid md:col col-12">
+                    <div class="form-col col-12">
+                        <div class="form-label" style="display: flex; align-items: center; ">
+                            <label class="txt" *ngFor="let opt of ouInfo.groupTypeMap;"
+                                style="height: 100%; display: flex; align-items: center;">
+                                <p-radioButton name="radioGroup" [label]="opt" [value]="opt"
+                                    [(ngModel)]="ouInfo.groupTypeValue" (ngModelChange)="emitOuInfo()"
+                                    [disabled]="soaCommonService.currentRole === 'Group1' || soaCommonService.currentRole === 'Readonly'">
+                                </p-radioButton>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Group Extend -->
+        <div class="form-col col-12" *ngIf="ouInfo.groupTypeValue !== 'ALL Group'">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                    </div>
+                </div>
+
+                <div class="grid md:col col-12">
+                    <div class="form-col col-12">
+                        <div class="form-label" style="display: flex; align-items: center;  ">
+                            <!-- Group OU -->
+                            <ng-container *ngIf="ouInfo.groupTypeValue === 'Group OU'">
+                                <div style="display: flex; flex-direction:column;">
+                                    <span class="ou-label">Group OU</span>
+                                    <div class="group-container">
+                                        <label class="txt" *ngFor="let group of ouInfo.ouMainList;">
+                                            <p-checkbox name="groupCheckbox" [label]="group.groupName"
+                                                [value]="group.groupCode" [(ngModel)]="ouInfo.ouSelectedValueCheckbox"
+                                                (ngModelChange)="emitOuInfo()"
+                                                [disabled]="soaCommonService.currentRole === 'Group1' || soaCommonService.currentRole === 'Readonly'">
+                                            </p-checkbox>
+                                        </label>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                            <!-- OU -->
+                            <ng-container *ngIf="ouInfo.groupTypeValue === 'OU'">
+                                <div style="display: flex; flex-direction:column;">
+                                    <span class="ou-label">Group OU</span>
+                                    <!-- OU - GroupOu -->
+                                    <div class="group-container">
+                                        <label class="txt" *ngFor="let group of ouInfo.ouMainList;">
+                                            <p-radioButton name="groupRadio" [label]="group.groupName"
+                                                [value]="group.groupCode" [(ngModel)]="ouInfo.ouSelectedValueRadio"
+                                                (onClick)="getOUbyGroup()" (ngModelChange)="emitOuInfo()"
+                                                [disabled]="soaCommonService.currentRole === 'Group1' || soaCommonService.currentRole === 'Readonly'">
+                                            </p-radioButton>
+                                        </label>
+                                    </div>
+
+                                    <!-- OU - OU  -->
+                                    <span *ngIf="ouInfo.ouSubList.length > 0" class="ou-label"
+                                        style="margin-top: 2vh;">OU</span>
+                                    <div class="group-container">
+                                        <label class="txt" *ngFor="let ou of ouInfo.ouSubList;">
+                                            <p-checkbox name="ouRadio" [label]="ou.ouCode + '-' + ou.ouShortName"
+                                                [value]="ou.ouCode" [(ngModel)]="ouInfo.ouSubSelectedValue"
+                                                (ngModelChange)="emitOuInfo()"
+                                                [disabled]="soaCommonService.currentRole === 'Group1' || soaCommonService.currentRole === 'Readonly'">
+                                            </p-checkbox>
+                                        </label>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</form>

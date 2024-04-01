@@ -1,0 +1,30 @@
+@import "../../../../../../styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+.no-data-container {
+  .no-data-notice {
+    @apply h-24 flex justify-center items-center;
+    span {
+      @apply font-semibold text-base text-gray-400;
+    }
+  }
+  .btn-container {
+    @apply mt-0;
+  }
+}
+
+.loading-container {
+  @apply flex justify-center items-center h-24 w-full;
+  span {
+    @apply text-gray-400 font-semibold;
+  }
+
+  ~ .btn-container {
+    @apply mt-0;
+  }
+}
+
+.result-container {
+  @apply ml-2 mr-2 mt-4;
+}

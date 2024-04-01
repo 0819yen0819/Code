@@ -1,0 +1,126 @@
+// WSP
+export const pcfLinesCols_WorstPrice = [
+    { label: 'Approve', field: '', colSize: 'pcf-s-col', type: 'approve', columnId: 'a_status' },
+    { label: 'Reject', field: '', colSize: 'pcf-s-col', type: 'approve', columnId: 'r_status' },
+    { label: 'Apply Remark', field: 'apRemark', colSize: 'pcf-xl-col', type: 'input', columnId: 'l_apRemark' },
+    { label: 'PM Remark', field: 'pmRemark', colSize: 'pcf-xl-col', type: 'input', columnId: 'l_pmRemark' },
+    { label: 'SM Remark', field: 'smRemark', colSize: 'pcf-xl-col', type: 'input', columnId: 'l_smRemark' },
+    { label: 'Hold Reason', field: 'holdRemark', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_holdReason' },
+    { label: 'Control Type', field: 'holdCommandString', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_holdCommand' },
+    { label: 'Max Selling Price', field: 'maxSellingPrice', colSize: 'pcf-l-col', type: 'normal', columnId: 'l_maxSellingPrice' },
+    { label: 'Min Selling Price', field: 'minSellingPrice', colSize: 'pcf-l-col', type: 'normal', columnId: 'l_minSellingPrice' },
+    { label: 'Worst Selling Price', field: 'minSellingPrice', colSize: 'pcf-l-col', type: 'normal', columnId: 'l_worstSellingPrice' },
+    { label: 'Selling Price', field: 'sellingPrice', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_sellingPrice' },
+    { label: 'UC Without Tax', field: 'ucWithoutTax', colSize: 'pcf-m-col', type: 'normal', columnId: 'l_ucWithoutTax' },
+    { label: 'Tax Code', field: 'taxCode', colSize: 'pcf-m-col', type: 'normal', columnId: 'l_taxCode' },
+    { label: 'Sales Cost', field: 'salesCost', colSize: 'pcf-m-col', type: 'normal' , columnId: 'l_salesCost'},
+    { label: 'Sales GP%', field: 'salesGp', colSize: 'pcf-s-col', type: 'normal' , columnId: 'l_salesMargin'},
+    { label: 'Quantity', field: 'newQuantity', colSize: 'pcf-m-col', type: 'normal' , columnId: 'l_newQuantity'},
+    { label: 'Amount (SO Currency)', field: 'newAmount', colSize: 'pcf-m-col', type: 'normal' , columnId: 'l_newAmount'},
+    { label: 'Amount Usd', field: 'newAmountUsd', colSize: 'pcf-m-col', type: 'normal' , columnId: 'l_newAmountUsd'},
+    { label: 'End Customer', field: 'endCustomer', colSize: 'pcf-l-col', type: 'normal', columnId: 'l_endCustomer' },
+    { label: 'Brand', field: 'brand', colSize: 'pcf-s-col', type: 'normal' , columnId: 'l_brand'},
+    { label: 'Ctg1', field: 'category', colSize: 'pcf-s-col', type: 'normal' , columnId: 'l_category'},
+    { label: 'Item', field: 'productCode', colSize: 'pcf-item-col', type: 'normal', columnId: 'l_productCode' },
+    { label: 'Sales Person', field: 'salesPersonString', colSize: 'pcf-m-col', type: 'normal' , columnId: 'l_sales'},
+    { label: 'Profit Dept', field: 'profitDeptString', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_salesDeptCode' },
+    { label: 'Request Date', field: 'requestDate', colSize: 'pcf-xl-col', type: 'normal', columnId: 'l_requestDate' },
+    { label: 'Schedule Date', field: 'scheduleDate', colSize: 'pcf-xl-col', type: 'normal', columnId: 'l_scheduleDate' },
+    { label: 'Customer PO No.', field: 'custPo', colSize: 'pcf-m-col', type: 'normal', columnId: 'l_custPo' },
+    { label: 'Line No.', field: 'lineNumber', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_lineNumber' },
+    { label: 'Exchange rate', field: 'exchangeRate', colSize: 'pcf-m-col', type: 'normal', columnId: 'l_exchangRate' },
+    { label: 'INV. Org', field: 'invOrgCode', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_invOrgCode' },
+    { label: 'INV. Org Name', field: 'invOrgName', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_invOrgName' },
+
+    { label: 'Org Num', field: 'ouCode', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_ouCode' },
+    { label: 'OU Name', field: 'ouName', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_ouName' },
+    { label: 'SO No.', field: 'orderNumber', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_orderNumber' },
+    { label: 'Sales Cost Type', field: 'salesCostType', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_salesCostType' },
+    { label: 'Cancelled Quantity', field: 'cancelledQty', colSize: 'pcf-m-col', type: 'normal', columnId: 'l_cancelledQty' },
+    { label: 'Shipped Quantity', field: 'shippedQty', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_shippedQty' },
+    { label: 'Sales Cost Ref.', field: 'salesCostNo', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_salesCostNo' },
+    { label: 'SO Cur.', field: 'currency', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_currency' },
+    { label: 'Unship Quantity', field: 'unshipQty', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_unshipQty' },
+    { label: 'Actual Price', field: 'newUc', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_newUc' },
+    { label: 'Customer', field: 'customerString', colSize: 'pcf-m-col', type: 'normal', columnId: 'l_customer' },
+    { label: 'Order Date', field: 'orderDate', colSize: 'pcf-xl-col', type: 'normal', columnId: 'l_orderDate' },
+    { label: 'Customer Project', field: 'custProject', colSize: 'pcf-xl-col', type: 'normal', columnId: 'l_custProject' },
+    { label: 'Applicant', field: 'applicantString', colSize: 'pcf-m-col', type: 'normal', columnId: 'l_userCode' },
+]
+
+// 0-0
+export const pcfLinesCols_MC = [
+    { label: 'Approve', field: '', colSize: 'pcf-s-col', type: 'approve', columnId: 'a_status' },
+    { label: 'Reject', field: '', colSize: 'pcf-s-col', type: 'approve', columnId: 'r_status' },
+    { label: 'Apply Remark', field: 'apRemark', colSize: 'pcf-xl-col', type: 'input', columnId: 'l_apRemark' },
+    { label: 'PM Remark', field: 'pmRemark', colSize: 'pcf-xl-col', type: 'input', columnId: 'l_pmRemark' },
+    { label: 'SM Remark', field: 'smRemark', colSize: 'pcf-xl-col', type: 'input', columnId: 'l_smRemark' },
+    { label: 'Hold Reason', field: 'holdRemark', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_holdReason' },
+    { label: 'Control Type', field: 'holdCommandString', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_holdCommand' },
+    { label: 'Max Selling Price', field: 'maxSellingPrice', colSize: 'pcf-l-col', type: 'normal', columnId: 'l_maxSellingPrice' },
+    { label: 'Min Selling Price', field: 'minSellingPrice', colSize: 'pcf-l-col', type: 'normal', columnId: 'l_minSellingPrice' },
+    { label: 'Worst Selling Price', field: 'minSellingPrice', colSize: 'pcf-l-col', type: 'normal', columnId: 'l_worstSellingPrice' },
+    { label: 'Selling Price', field: 'sellingPrice', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_sellingPrice' },
+    { label: 'UC Without Tax', field: 'ucWithoutTax', colSize: 'pcf-m-col', type: 'normal', columnId: 'l_ucWithoutTax' },
+    { label: 'Exchange rate', field: 'exchangeRate', colSize: 'pcf-m-col', type: 'normal', columnId: 'l_exchangRate' },
+    { label: 'Tax Code', field: 'taxCode', colSize: 'pcf-m-col', type: 'normal', columnId: 'l_taxCode' },
+    { label: 'Sales Cost', field: 'salesCost', colSize: 'pcf-m-col', type: 'normal' , columnId: 'l_salesCost'},
+    { label: 'Sales GP%', field: 'salesGp', colSize: 'pcf-s-col', type: 'normal' , columnId: 'l_salesMargin'},
+    { label: 'Ordered Quantity', field: 'newQuantity', colSize: 'pcf-m-col', type: 'normal' , columnId: 'l_orderedQuantity'},
+    { label: 'Amount (SO Currency)', field: 'newAmount', colSize: 'pcf-m-col', type: 'normal' , columnId: 'l_newAmount'},
+    { label: 'Amount Usd', field: 'newAmountUsd', colSize: 'pcf-m-col', type: 'normal' , columnId: 'l_newAmountUsd'},
+    { label: 'End Customer', field: 'endCustomer', colSize: 'pcf-l-col', type: 'normal', columnId: 'l_endCustomer' },
+    { label: 'Brand', field: 'brand', colSize: 'pcf-s-col', type: 'normal' , columnId: 'l_brand'},
+    { label: 'Ctg1', field: 'category', colSize: 'pcf-s-col', type: 'normal' , columnId: 'l_category'},
+    { label: 'Item', field: 'productCode', colSize: 'pcf-item-col', type: 'normal', columnId: 'l_productCode' },
+    { label: 'Sales Person', field: 'salesPersonString', colSize: 'pcf-m-col', type: 'normal' , columnId: 'l_sales'},
+    { label: 'Profit Dept', field: 'profitDeptString', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_salesDeptCode' },
+    { label: 'Request Date', field: 'requestDate', colSize: 'pcf-xl-col', type: 'normal', columnId: 'l_requestDate' },
+    { label: 'Schedule Date', field: 'scheduleDate', colSize: 'pcf-xl-col', type: 'normal' , columnId: 'l_scheduleDate'},
+    { label: 'Customer PO No.', field: 'custPo', colSize: 'pcf-m-col', type: 'normal' , columnId: 'l_custPo'},
+    { label: 'Line No.', field: 'lineNumber', colSize: 'pcf-s-col', type: 'normal' , columnId: 'l_lineNumber'},
+    { label: 'INV. Org', field: 'invOrgCode', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_invOrgCode' },
+    { label: 'INV. Org Name', field: 'invOrgName', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_invOrgName' },
+
+    { label: 'Org Num', field: 'ouCode', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_ouCode' },
+    { label: 'OU Name', field: 'ouName', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_ouName' },
+    { label: 'Order Number', field: 'orderNumber', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_orderNumber' },
+    { label: 'Sales Cost Type', field: 'salesCostType', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_salesCostType' },
+    { label: 'Cancelled Quantity', field: 'cancelledQty', colSize: 'pcf-m-col', type: 'normal', columnId: 'l_cancelledQty' },
+    { label: 'Shipped Quantity', field: 'shippedQty', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_shippedQty' },
+    { label: 'Sales Cost Ref.', field: 'salesCostNo', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_salesCostNo' },
+    { label: 'Currency Code', field: 'currency', colSize: 'pcf-m-col', type: 'normal', columnId: 'l_currencyCode' },
+    { label: 'Unship Quantity', field: 'unshipQty', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_unshipQty' },
+    { label: 'Actual Price', field: 'newUc', colSize: 'pcf-s-col', type: 'normal', columnId: 'l_newUc' },
+    { label: 'Customer', field: 'customerString', colSize: 'pcf-m-col', type: 'normal', columnId: 'l_customer' },
+    { label: 'Date Ordered', field: 'orderDate', colSize: 'pcf-xl-col', type: 'normal', columnId: 'l_dateOrdered' },
+    { label: 'Customer Project', field: 'custProject', colSize: 'pcf-xl-col', type: 'normal', columnId: 'l_custProject' },
+    { label: 'Applicant', field: 'applicantString', colSize: 'pcf-m-col', type: 'normal', columnId: 'l_userCode' },
+]
+
+
+export const pcfMtnCols = [
+    { label: 'Currency', field: 'currency', type: 'currency', colSize: 'xs-col', columnId: 'p_currency' },
+    { label: 'Worst Selling Price', field: 'minSellingPrice', type: 'number', colSize: 'sm-col', columnId: 'p_minSelling' },
+    { label: 'Sales Cost', field: 'salesCost', type: 'number', colSize: 'sm-col', columnId: 'p_salesCost' },
+    { label: 'Control Flag', field: 'controlFlag', type: 'input', colSize: 'sm-col', columnId: 'p_controlFlag' },
+    { label: 'Max Selling Price', field: 'maxSellingPrice', type: 'number', colSize: 'sm-col', columnId: 'p_maxSelling' },
+    { label: 'Worst Sales GP%', field: 'worstSalesGP', type: 'number', colSize: 'sm-col', columnId: 'p_salesGp' },
+    { label: 'Effective From', field: 'startDate', type: 'datePick', colSize: 'md-col', columnId: 'p_start' },
+    { label: 'Effective To', field: 'endDate', type: 'datePick', colSize: 'md-col', columnId: 'p_end' },
+    { label: 'End Customer', field: 'endCustomer', type: 'input', colSize: 'lg-col', columnId: 'p_endCust' },
+]
+
+// 價格欄位變數
+export const PCF_CONFIG_PRICE_LABEL = ['Max Selling Price', 'Min Selling Price',
+    'Selling Price', 'Sales Cost', 'Sales GP%', 'Quantity', 'Cancelled Quantity', 'Shipped Quantity', 'Unship Quantity', 'Amount(SO Currency)'
+    , 'Amount Usd', 'Actual Price'];
+
+export const PCF_CONFIG_ALIGN_RIGHT = [
+    'orderDate', 'salesCost', 'maxSellingPrice', 'minSellingPrice', 'sellingPrice', 'quotaPrice', 'newUc'
+    , 'newQuantity', 'newAmount', 'newAmountUsd', 'newCrd', 'newSsd', 'cancelledQty', 'shippedQty', 'unshipQty',
+    'requestDate', 'scheduleDate', 'exchangeRate', 'exchangeRateUsd'];
+
+// 手機板縮放的欄位 (不被隱藏的，''表示Approve與Reject)
+export const MOBILE_CORE_COLS = ['', 'productCode', 'lineNumber', 'holdRemark', 'maxSellingPrice',
+    'minSellingPrice', 'sellingPrice', 'salesCost', 'salesGp']

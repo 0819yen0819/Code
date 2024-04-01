@@ -1,0 +1,23 @@
+<p-dialog
+  [header]="dialogSetting.getValue().title"
+  [(visible)]="dialogSetting.getValue().visiable"
+  [modal]="dialogSetting.getValue().modal"
+  [draggable]="dialogSetting.getValue().draggable"
+  [resizable]="dialogSetting.getValue().resizeable"
+  (onHide)="onCloseAddItemDialogEvent()"
+>
+  <p-tabView>
+    <!--# Single item add event tab-->
+    <p-tabPanel [header]="singleAddTabTitle" leftIcon="pi pi-file">
+      <app-add-eccn-single-item
+        (isUploadDone)="onCloseAddItemDialogEvent()"
+      ></app-add-eccn-single-item>
+    </p-tabPanel>
+    <p-tabPanel [header]="multiAddTabTitle" leftIcon="pi pi-clone">
+      <app-add-eccn-multi-item
+        [isDialogClose]="isDialogClose"
+        (isUploadDone)="onCloseAddItemDialogEvent()"
+      ></app-add-eccn-multi-item>
+    </p-tabPanel>
+  </p-tabView>
+</p-dialog>

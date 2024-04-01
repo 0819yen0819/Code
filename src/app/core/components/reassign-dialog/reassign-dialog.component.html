@@ -1,0 +1,68 @@
+<p-dialog header="" [(visible)]="reassignDialogService.showDialog" [draggable]="false" [closeOnEscape]="true"
+    [modal]="true" [resizable]="false" (onHide)="onHideReAssignDialog($event)">
+    <ng-container>
+        <div class="form-table">
+            <!-- 需重新分配人員 -->
+            <div class="form-row grid">
+                <div class="form-col col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label" style="display: flex; align-items: center;">
+                                <label class="txt">{{ 'ReAssignDialog.Label.RedirectFrom' | translate }}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-select">
+                                <p-dropdown [options]="OriginAssignerOptions" appendTo="body"
+                                    [(ngModel)]="originAssigner"></p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 指派人員 -->
+            <div class="form-row grid">
+                <div class="form-col col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label" style="display: flex; align-items: center;">
+                                <label class="txt">{{ 'ReAssignDialog.Label.RedirectEmp' | translate }}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+
+                                <p-autoComplete [(ngModel)]="targetAssigner"
+                                    (completeMethod)="onCosignersFilterHandler($event)"
+                                    [suggestions]="fuzzyEmpInfosOptions.getValue()" [virtualScroll]="true"
+                                    [itemSize]="30" [minLength]="1" [multiple]="false" [style]="{ width: '100%' }"
+                                    field="label" appendTo="body" dataKey="value" (onBlur)="onBlur($event)"
+                                    placeholder="{{ 'ReAssignDialog.Label.SelectReAssginer' | translate }}">
+                                </p-autoComplete>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </ng-container>
+
+    <!-- 送出 / 取消 -->
+    <div class="btn-container">
+        <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray"
+            (click)="reassignDialogService.closeAssignDialog()"></button>
+        <button pButton type="button" label="{{ 'Button.Label.Submit' | translate }}" (click)="saveOnClick()"></button>
+    </div>
+</p-dialog>
+
+<!-- MSG DIALOG -->
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams" [contentList]="noticeContentList"
+    (closeNotice)="msgDialogOnClose()">
+</app-common-notice-check-dialog>
+
+<p-progressSpinner *ngIf="showSpinner"></p-progressSpinner>

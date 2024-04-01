@@ -1,0 +1,48 @@
+<p-steps [model]="stepItems" [(activeIndex)]="activeIndex"></p-steps>
+
+<form class="collapse-container grid">
+  <div class="form-checkbox col-12">
+    <p-checkbox name="checkboxGroup" label="{{ 'Role.Label.ExpandAll' | translate }}" [(ngModel)]="isExpandAll" binary="true"></p-checkbox>
+  </div>
+
+  <div class="md:col-4 sm:c0l-12 col-12" *ngFor="let item of editForm.availablePermissions; let i = index" [attr.data-index]="i">
+    <p-panel class="collapse-item">
+      <p-header>
+        <ng-container *ngIf="translateService.currentLang == 'zh-tw'">
+          <label>{{item.permissionDesc}}</label>
+        </ng-container>
+        <ng-container *ngIf="translateService.currentLang !== 'zh-tw'">
+          <label>{{item.permissionDescEn}}</label>
+        </ng-container>
+		    <!-- <label>{{item.permissionDesc }}</label> -->
+		<!--
+        <div class="form-checkbox width-auto">
+          <p-checkbox name="permanent" label="{{item.permissionDesc}}" value="{{item.permissionId}}" [(ngModel)]="editForm.rolePermissions"></p-checkbox>
+        </div>
+		-->
+      </p-header>
+
+      <p-panel class="collapse-item" [toggleable]="true" [collapsed]="!isExpandAll" *ngFor="let itemL2 of item.subPermissions; let i2 = index">
+        <p-header>
+          <div class="form-checkbox width-auto">
+            <p-checkbox name="permanent" label="{{translateService.currentLang == 'zh-tw' ? itemL2.permissionDesc : itemL2.permissionDescEn}} {{getSubscribedDesc(itemL2.subscribed)}}" value="{{itemL2.permissionId}}" [(ngModel)]="editForm.rolePermissions" (onChange)="onChangeCheckBox([itemL2.permissionId], $event)"></p-checkbox>
+          </div>
+        </p-header>
+
+        <div class="collapse-content-container" *ngFor="let itemL3 of itemL2.subPermissions; let i3 = index">
+          <div class="form-checkbox width-auto">
+            <p-checkbox name="permanent" label="{{translateService.currentLang == 'zh-tw' ? itemL3.permissionDesc : itemL3.permissionDescEn}}" value="{{itemL3.permissionId}}" [(ngModel)]="editForm.rolePermissions" (onChange)="onChangeCheckBox([itemL2.permissionId, itemL3.permissionId], $event)"></p-checkbox>
+            <p>&nbsp;</p>
+          </div>
+        </div>
+      </p-panel>
+    </p-panel>
+  </div>
+
+</form>
+
+<div class="btn-container">
+  <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray" (click)="cancelEdit()"></button>
+  <button pButton type="button" label="{{ 'Button.Label.PreviousStep' | translate }}" class="btn-line" (click)="previousStep();"></button>
+  <button pButton type="button" label="{{ 'Button.Label.NextStep' | translate }}" (click)="nextStep();"></button>
+</div>

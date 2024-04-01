@@ -1,0 +1,56 @@
+<p-dialog *ngIf="data" header="History" [(visible)]="visible" [draggable]="false" [blockScroll]="true" [modal]="true"
+    (onHide)="closeHistory()" (onClose)="closeHistory()" [style]="{width: '1200px'}">
+
+    <form class="form-table">
+        <div class="form-row grid">
+            <div class="form-col md:col-4 sm:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Item</label>
+                        </div>
+                    </div>
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <label class="txt">{{data.productCode}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-col md:col-4 sm:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">BAFA License#</label>
+                        </div>
+                    </div>
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <label class="txt">{{data.bafaLicense}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-col md:col-4 sm:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Balance Qty</label>
+                        </div>
+                    </div>
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <label class="txt">{{data.balanceQuantity}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+
+        <app-simple-table  [inputColumns]="importColumns" [inputData]="importLicenseData"></app-simple-table>
+        <app-simple-table  [inputColumns]="exportColumns" [inputData]="exportLicenseData"></app-simple-table>
+
+    </form>
+</p-dialog>

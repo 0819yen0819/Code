@@ -1,0 +1,47 @@
+@import "src/styles/components/_plugin.scss";
+
+.euc-button {
+  width: 80px;
+  background-color: #006deb;
+  border: none;
+  color: #ffffff;
+  border-radius: 5px;
+  height: 40px;
+  cursor: pointer;
+
+  @media screen and (max-width: 640px) {
+    margin-left: 40%;
+    width: 40%;
+  }
+}
+
+:host {
+  p-table {
+
+    th,
+    td {
+      height: auto;
+      min-width: 120px;
+      width: 120px;
+
+      &.col-address {
+        @media screen and (min-width: 640px) {
+          min-width: 400px;
+          width: 400px;
+        }
+      }
+    }
+
+    td {
+      @media screen and (max-width: 640px) {
+        p {
+          @apply ml-2;
+        }
+
+        span {
+          min-width: 60px;
+        }
+      }
+    }
+  }
+}

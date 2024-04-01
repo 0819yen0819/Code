@@ -1,0 +1,530 @@
+<div class="main-title-container">
+  <p>{{ 'FormType.Label.FormTypeAuth' | translate }}</p>
+</div>
+<!-- end: main-title-container -->
+
+<form class="form-table form-search">
+  <div class="form-row grid">
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'FormType.Label.Category' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-select">
+            <!-- add class `error-active` in `form-select` when input error  -->
+            <p-dropdown name="selectedCategories" [(ngModel)]="selectedCategories" [options]="categoriesOptions"
+              placeholder="{{ 'FormType.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+            <p class="error-msg">
+              <em class="pi pi-exclamation-circle"></em>
+              <span>錯誤訊息</span>
+            </p>
+          </div>
+          <!-- end: form-select -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'FormType.Label.FormType' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-input">
+            <!-- add class `error-active` in `form-select` when input error  -->
+            <input type="text" name="formType" [(ngModel)]="formType" pInputText value=""
+              placeholder="{{ 'FormType.Label.FormType' | translate }}" />
+            <p class="error-msg">
+              <em class="pi pi-exclamation-circle"></em>
+              <span>錯誤訊息</span>
+            </p>
+          </div>
+          <!-- end: form-select -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'FormType.Label.FormTypeNameC' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-input">
+            <!-- add class `error-active` in `form-input` when input error  -->
+            <input type="text" name="formTypeNameC" [(ngModel)]="formTypeNameC" pInputText value=""
+              placeholder="{{ 'FormType.Label.FormTypeNameC' | translate }}" />
+            <p class="error-msg">
+              <em class="pi pi-exclamation-circle"></em>
+              <span>錯誤訊息</span>
+            </p>
+          </div>
+          <!-- end: form-input -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'FormType.Label.FormTypeNameE' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-input">
+            <!-- add class `error-active` in `form-select` when input error  -->
+            <input type="text" name="formTypeNameE" [(ngModel)]="formTypeNameE" pInputText value=""
+              placeholder="{{ 'FormType.Label.FormTypeNameE' | translate }}" />
+            <p class="error-msg">
+              <em class="pi pi-exclamation-circle"></em>
+              <span>錯誤訊息</span>
+            </p>
+          </div>
+          <!-- end: form-select -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+    </div>
+
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'FormType.Label.Status' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-select">
+            <!-- add class `error-active` in `form-select` when input error  -->
+            <p-dropdown name="selectStatus" [(ngModel)]="selectStatus" [options]="statusOptions" placeholder="{{ 'FormType.PlaceHolder.PleaseChoose' | translate }}">
+            </p-dropdown>
+            <p class="error-msg">
+              <em class="pi pi-exclamation-circle"></em>
+              <span>錯誤訊息</span>
+            </p>
+          </div>
+          <!-- end: form-select -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+
+  </div>
+
+
+
+  <div class="btn-container">
+    <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-secondary"
+      (click)="resetCondition();"></button>
+    <button pButton type="button" label="{{ 'Button.Label.Query' | translate }}" (click)="getFormTypes();" *ngIf="permissions.includes('view')"></button>
+  </div>
+</form>
+
+<!--# TK-35854 -->
+<p-table #dt class="table-panel" [value]="data" [columns]="selectedCols" [scrollable]="true" scrollHeight="500px"
+  [paginator]="true" [rows]="10" paginatorPosition="bottom" [rowsPerPageOptions]="[10,20]" dataKey="id"
+  [globalFilterFields]="['category','formType','formTypeNameC','formTypeNameE']">
+  <ng-template pTemplate="caption">
+    <div class="table-action-block">
+      <div class="table-search ui-inputgroup">
+        <input type="text" pInputText size="30" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search" />
+        <span class="ui-inputgroup-addon">
+          <em class="pi pi-search"></em>
+        </span>
+      </div>
+
+      <div class="btn-container">
+        <button pButton type="button" icon="pi pi-plus" label="{{ 'Button.Label.Add' | translate }}" class="btn-teal"
+          (click)="showEdit('new','')" *ngIf="permissions.includes('add')"></button>
+      </div>
+
+      <div class="btn-container right">
+        <button pButton type="button" icon="pi pi-sliders-h" label="{{ 'Button.Label.Filter' | translate }}"
+          class="btn-line" (click)="showFilter()"></button>
+      </div>
+    </div>
+    <!-- end: table-action-block -->
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngFor="let col of selectedCols" [pSortableColumn]="col.field" [ngClass]="{
+          'icon-col': (col.field === 'edit' || col.field === 'del')
+        }" scope="col">
+        <ng-container *ngIf="col.field === 'edit' || col.field === 'del'">
+          {{col.header}}
+        </ng-container>
+        <ng-container *ngIf="col.field !== 'edit' && col.field !== 'del'">
+          {{col.header}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </ng-container>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-data>
+    <tr>
+      <td *ngFor="let col of selectedCols" [ngClass]="{
+          'icon-col': (col.field == 'checkbox' || col.field === 'seq' || col.field === 'edit' || col.field === 'del' || col.field === 'detail')
+        }">
+        <ng-container *ngIf="col.field === 'checkbox'">
+          <p-tableCheckbox [value]="data"></p-tableCheckbox>
+        </ng-container>
+        <ng-container *ngIf="col.field === 'edit'">
+          <div class="btn-container">
+            <button pButton type="button" class="icon-btn btn-orange" (click)="showEdit('edit',data)">
+              <img src="./assets/imgs/icon-btn/edit.svg" alt="Edit">
+            </button>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="col.field === 'del'">
+          <div class="btn-container">
+            <button pButton type="button" icon="pi pi-trash" class="icon-btn btn-dark-red"
+              (click)="displayDelDetail = true;"></button>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="col.field === 'detail'">
+          <div class="btn-container">
+            <button pButton type="button" class="icon-btn btn-teal" (click)="showEdit('detail','')">
+              <img src="./assets/imgs/icon-btn/detail.svg" alt="Detail">
+            </button>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="col.field === 'id'">
+          <a [routerLink]="'./detail'">{{data[col.field]}}</a>
+        </ng-container>
+        <ng-container *ngIf="col.field === 'category'">
+          <p>{{categoryDesc[data[col.field]]}}</p>
+        </ng-container>
+        <ng-container *ngIf="col.field === 'isWithdraw'">
+          <p>{{isWithdrawDesc[data[col.field]]}}</p>
+        </ng-container>
+        <ng-container *ngIf="col.field === 'status'">
+          <p>{{statusDesc[data[col.field]]}}</p>
+        </ng-container>
+        <ng-container *ngIf="col.field === 'display'">
+          <p>{{displayDesc[data[col.field]]}}</p>
+        </ng-container>
+        <ng-container
+          *ngIf="col.field !== 'checkbox' && col.field !== 'id'
+          && col.field !== 'edit' && col.field !== 'del' && col.field !== 'detail' && col.field !== 'category' && col.field !== 'isWithdraw' && col.field !== 'status' && col.field !== 'display'">
+          <p>{{data[col.field]}}</p>
+        </ng-container>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog header="{{ 'Dialog.Header.FilterColumns' | translate }}" [(visible)]="displayFilterDetail"
+  [draggable]="false" [blockScroll]="true" [modal]="true">
+  <form>
+    <div class="form-row grid">
+      <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of cols">
+        <div class="form-checkbox">
+          <p-checkbox name="checkboxGroup" [label]="col.header" [value]="col" [(ngModel)]="selectedCols"
+            [disabled]="col?.isDisabled"></p-checkbox>
+        </div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="btn-container">
+      <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-gray btn-line"
+        (click)="changeFilterDetail()"></button>
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog [header]="editForm.title" [(visible)]="displayEditDetail" [draggable]="false" [blockScroll]="true"
+  [modal]="true" (onHide)="closeEdit()">
+  <ng-container *ngIf="editForm.type === 'new' || editForm.type === 'edit'">
+    <form class="form-table">
+      <div class="form-row grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'FormType.Label.Category' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-select">
+                <!-- add class `error-active` in `form-select` when input error  -->
+                <p-dropdown name="selectedCategories" [(ngModel)]="editForm.category" [options]="categoriesOptions">
+                </p-dropdown>
+                <p class="error-msg">
+                  <em class="pi pi-exclamation-circle"></em>
+                  <span>錯誤訊息</span>
+                </p>
+              </div>
+              <!-- end: form-select -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label require">
+                <label class="txt">{{ 'FormType.Label.FormType' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-input">
+                <!-- add class `error-active` in `form-input` when input error  -->
+                <input type="text" pInputText value="" placeholder="{{ 'FormType.PlaceHolder.PleaseEnter' | translate }}" name="formType" [(ngModel)]="editForm.formType"
+                  required />
+                <p *ngIf="formTypeRequired" class="error-active">
+                  <em class="pi pi-exclamation-circle"></em>
+                  <span *ngIf="formTypeRequired">{{ 'FormType.Message.formTypeRequired' | translate }}</span>
+                </p>
+              </div>
+              <!-- end: form-input -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label require">
+                <label class="txt">{{ 'FormType.Label.FormTypeNameC' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-input">
+                <input type="text" pInputText value="" placeholder="{{ 'FormType.PlaceHolder.PleaseEnter' | translate }}" name="formTypeNameC"
+                  [(ngModel)]="editForm.formTypeNameC" required />
+                <p *ngIf="formTypeNameCRequired" class="error-active">
+                  <em class="pi pi-exclamation-circle"></em>
+                  <span *ngIf="formTypeNameCRequired">{{ 'FormType.Message.formTypeNameCRequired' | translate }}</span>
+                </p>
+              </div>
+              <!-- end: form-radio -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label require">
+                <label class="txt">{{ 'FormType.Label.FormTypeNameE' | translate }} </label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-input">
+                <input type="text" pInputText value="" placeholder="{{ 'FormType.PlaceHolder.PleaseEnter' | translate }}" name="formTypeNameE"
+                  [(ngModel)]="editForm.formTypeNameE" />
+                <p *ngIf="formTypeNameERequired" class="error-active">
+                  <em class="pi pi-exclamation-circle"></em>
+                  <span *ngIf="formTypeNameERequired">{{ 'FormType.Message.formTypeNameERequired' | translate }}</span>
+                </p>
+              </div>
+              <!-- end: form-radio -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'FormType.Label.Status' | translate }} </label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-select">
+                <p-dropdown name="status" [(ngModel)]="editForm.status" [options]="statusOptions"
+                  placeholder="{{ 'FormType.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+              </div>
+              <!-- end: form-radio -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'FormType.Label.Display' | translate }} </label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-select">
+                <p-dropdown name="display" [(ngModel)]="editForm.display" [options]="displayOptions"
+                  placeholder="{{ 'FormType.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+              </div>
+              <!-- end: form-radio -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'FormType.Label.AddUrl' | translate }} </label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-input">
+                <input type="text" pInputText value="" placeholder="{{ 'FormType.PlaceHolder.PleaseEnter' | translate }}" name="addUrl"
+                  [(ngModel)]="editForm.addUrl" />
+                <p *ngIf="addUrlRequired" class="error-active">
+                  <em class="pi pi-exclamation-circle"></em>
+                  <span *ngIf="addUrlRequired">{{ 'FormType.Message.addUrlRequired' | translate }}</span>
+                </p>
+              </div>
+              <!-- end: form-radio -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'FormType.Label.ProcessKey' | translate }} </label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-input">
+                <input type="text" pInputText value="" placeholder="{{ 'FormType.PlaceHolder.PleaseEnter' | translate }}" name="processKey"
+                  [(ngModel)]="editForm.processKey" />
+              </div>
+              <!-- end: form-radio -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+    </form>
+
+    <div class="btn-container">
+      <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray"
+        (click)="closeEdit()"></button>
+      <button pButton type="button" label="{{ 'Button.Label.Save' | translate }}"
+        (click)="validateAndSaveData()"></button>
+    </div>
+  </ng-container>
+</p-dialog>
+
+<p-dialog class="width-sm" [(visible)]="displayDelDetail" [draggable]="false" [blockScroll]="true" [modal]="true">
+  <div class="popup-content center">
+    <h2>{{ 'FormType.Label.ConfirmDelete' | translate }}？</h2>
+  </div>
+
+  <div class="btn-container">
+    <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray btn-line"
+      (click)="displayDelDetail = false;"></button>
+    <button pButton type="button" label="{{ 'Button.Label.Delete' | translate }}" class="btn-dark-red"
+      (click)="displayDelDetail = false;"></button>
+  </div>
+</p-dialog>

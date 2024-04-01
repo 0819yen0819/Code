@@ -1,0 +1,125 @@
+<!-- 單號/按鈕 -->
+<div class="main-title-container">
+  <div class="override-content-container-padding"></div>
+  <p>{{ headerSetting.colData.title }}</p>
+  <div class="btn-container">
+    <!-- 重新分派按鈕 -->
+    <button *ngIf="reassignDialogService.reAssignBtnSetting.visiable"
+      label="{{ reassignDialogService.reAssignBtnSetting.name | translate }}"
+      (click)="reassignDialogService.openAssignDialog()"
+      [ngStyle]="{'background-color': reassignDialogService.reAssignBtnSetting.color}" pButton type="button">
+    </button>
+    <button *ngIf="showApproveBtn" pButton type="button" label="{{ 'Button.Label.Action' | translate }}"
+      class="btn-dark-red" (click)="onAuditActionDialogHandler()"></button>
+    <button *ngIf="soaCommonService.currentState !== 'Apply' && soaCommonService.currentState !== 'Draft'" pButton
+      type="button" [label]="integrateService.backBtnLabel" class="btn-gray"
+      (click)="integrateService.backBtnOnClick()"></button>
+  </div>
+</div>
+
+<!-- 申請人資訊 -->
+<div class="form-table form-list">
+  <div class="form-row grid">
+    <!-- 單號 -->
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{"LicenseMgmt.Common.Label.ReferenceNo" | translate}}</label>
+          </div>
+        </div>
+        <div class="form-col md:col col-12">
+          <div class="form-label">
+            <label class="txt">{{ headerSetting.colData.no }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 申請日期 -->
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{"APPROVING_LEH.Label.ApplicantDate" | translate}}</label>
+          </div>
+        </div>
+        <div class="form-col md:col col-12">
+          <div class="form-label">
+            <label class="txt">{{ headerSetting.colData.applyDate | date: "yyyy/MM/dd"}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 申請人 -->
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ "APPROVING_LEH.Label.Applicant" | translate}}</label>
+          </div>
+        </div>
+        <div class="form-col md:col col-12">
+          <div class="form-label">
+            <label class="txt">{{ headerSetting.colData.applyer }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 申請人部門 -->
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ "LicenseMgmt.Common.Label.Department" | translate}}</label>
+          </div>
+        </div>
+
+        <ng-container
+          *ngIf="soaCommonService.currentState === 'Apply' || soaCommonService.currentState === 'Draft' || this.soaCommonService.role === 'Applyer'">
+          <div class="form-col md:col col-12">
+            <ng-container *ngIf="userDeptsOptions.getValue().length > 1; then dropDownLayout; else textLayout">
+            </ng-container>
+
+            <ng-template #dropDownLayout>
+              <div class="form-select">
+                <p-dropdown name="userDept" [options]="userDeptsOptions.getValue()"
+                  placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}" (onChange)="userDeptOnChange()"
+                  [(ngModel)]="currentDept">
+                </p-dropdown>
+              </div>
+            </ng-template>
+
+            <ng-template #textLayout>
+              <div class="form-label">
+                <label class="txt">{{ currentDept?.value?.label || currentDept?.label }}</label>
+              </div>
+            </ng-template>
+          </div>
+        </ng-container>
+
+        <ng-container
+          *ngIf="!(soaCommonService.currentState === 'Apply' || soaCommonService.currentState === 'Draft' || this.soaCommonService.role === 'Applyer')">
+          <div class="form-col md:col col-12">
+            <div class="form-col md:col col-12">
+              <div class="form-label">
+                <label class="txt"> {{ currentDept }}</label>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-content select="[stickyZone]"></ng-content>
+
+<app-approve-dialog *ngIf="openApproveDialog" [dialogOpen]="openApproveDialog"
+  (submitInfo)="getApproveDialogResult($event)" (closeDialog)="updateDialog()"></app-approve-dialog>
+
+
+<!-- 轉派Dialog -->
+<app-reassign-dialog *ngIf="this.reassignDialogService.formTypeId"></app-reassign-dialog>

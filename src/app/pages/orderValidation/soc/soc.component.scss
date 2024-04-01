@@ -1,0 +1,20 @@
+// Header
+@import "src/styles/components/_plugin.scss"; 
+ 
+.extend-form-container{
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    padding: 3vh 0; 
+    box-sizing: border-box;
+ }
+
+ 
+ .main-title-container{
+    padding-bottom: 0 !important;
+ }
+ 
+ .form-title{
+    margin-bottom: 10px;
+ }
+ 

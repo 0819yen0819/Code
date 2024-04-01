@@ -1,0 +1,97 @@
+<div
+  class="data-container"
+  [class]="!data || (data && data.length === 0) ? 'no-data' : ''"
+>
+  <p-table
+    #dt
+    class="table-panel"
+    [value]="data"
+    [columns]="cols"
+    [(selection)]="selectedData"
+    responsiveLayout="stack"
+    [rowHover]="true"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate=""
+    [scrollable]="viewpointWidth > 640"
+    [scrollHeight]="data && data.length > 0 ? 'fit-content' : '0px'"
+    [autoLayout]="true"
+    [resetPageOnSort]="false"
+    (selectionChange)="onSelectedOutputEvent()"
+    breakpoint="640px"
+  >
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th class="selector-checkbox" scope="col">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <ng-container
+          *ngIf="
+            viewpointWidth > 640;
+            then openSortTemplate;
+            else closeSortTemplate
+          "
+        >
+        </ng-container>
+        <ng-template #openSortTemplate>
+          <th
+            *ngFor="let col of columns"
+            [pSortableColumn]="col.field"
+            scope="col"
+            [ngClass]="viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''"
+          >
+            {{ col.label }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </ng-template>
+        <ng-template #closeSortTemplate>
+          <th
+            *ngFor="let col of columns"
+            scope="col"
+            [ngClass]="viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''"
+          >
+            {{ col.label }}
+          </th>
+        </ng-template>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data let-columns="columns">
+      <tr [class]="data.length != [] ? 'show' : 'hide'">
+        <td class="selector-checkbox" scope="col">
+          <p-tableCheckbox [value]="data"></p-tableCheckbox>
+        </td>
+        <ng-container *ngFor="let col of columns">
+          <td
+            scope="col"
+            [ngClass]="viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''"
+            *ngIf="col.field === 'eccn1'"
+          >
+            <span class="p-column-title">{{ col.label }}</span>
+            <span [ngClass]="viewpointWidth < 641 ? 'p-column-content' : ''">
+              {{ data["eccn"] ? data["eccn"] : "---" }}
+            </span>
+          </td>
+          <td
+            scope="col"
+            [ngClass]="viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''"
+            *ngIf="col.field === 'target_no'"
+          >
+            <span class="p-column-title">{{ col.label }}</span>
+            <span [ngClass]="viewpointWidth < 641 ? 'p-column-content' : ''">
+              {{ data["target_no"] }}-{{ data["cvname"] }}
+            </span>
+          </td>
+          <td
+            scope="col"
+            [ngClass]="viewpointWidth > 640 && col.isFittedCol ? 'fit-col' : ''"
+            *ngIf="col.field !== 'eccn1' && col.field !== 'target_no'"
+          >
+            <span class="p-column-title">{{ col.label }}</span>
+            <span [ngClass]="viewpointWidth < 641 ? 'p-column-content' : ''">{{
+              data[col.field]
+            }}</span>
+          </td>
+        </ng-container>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

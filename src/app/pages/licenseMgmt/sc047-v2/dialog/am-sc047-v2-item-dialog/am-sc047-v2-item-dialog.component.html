@@ -1,0 +1,237 @@
+<!--# common selector dialog-->
+<app-common-selector-dialog
+  [settingParams]="selectorDialogParams"
+  (outputResult)="onSelectorDialogCallback($event)"
+></app-common-selector-dialog>
+
+<p-dialog
+  [header]="dialogSetting.getValue().title"
+  [(visible)]="dialogSetting.getValue().visiable"
+  [modal]="dialogSetting.getValue().modal"
+  [draggable]="dialogSetting.getValue().draggable"
+  [resizable]="dialogSetting.getValue().resizeable"
+  (onHide)="onCloseAMItemDialogEvent()"
+>
+  <form [formGroup]="formGroup" class="form-container form-table">
+    <!--# Item Selector-->
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">Item</label>
+            </div>
+          </div>
+          <div class="md:col col-12">
+            <div class="form-col">
+              <div class="form-input">
+                <span class="p-input-icon-right">
+                  <input
+                    autocomplete="off"
+                    type="text"
+                    pInputText
+                    name="productCode"
+                    formControlName="productCode"
+                    readonly
+                    placeholder="{{
+                      'Input.PlaceHolder.PleaseSelect' | translate
+                    }} Item"
+                    (click)="onOpenSelectorDialogEvent('item')"
+                  />
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# CCATs Free Key In-->
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">CCATs</label>
+            </div>
+          </div>
+          <div class="md:col col-12">
+            <div class="form-col">
+              <div class="form-label">
+                <label class="txt">{{ itemInfo ? itemInfo.ccats : "" }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# Ref Imp License-->
+    <div class="form-row remark grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">Import License No.</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-select">
+                <p-dropdown
+                  name="licenseKit"
+                  [options]="licenseOptions"
+                  formControlName="licenseKit"
+                  [disabled]="
+                    !formGroup.get('productCode').value ||
+                    licenseLoading ||
+                    formGroup.get('licenseKit').disabled
+                  "
+                  [placeholder]="licenseNoPlaceHolder"
+                  (onChange)="onImportLicenseKitChange()"
+                ></p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# Applied QTY-->
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">Applied QTY</label>
+            </div>
+          </div>
+          <div class="md:col col-12">
+            <div class="form-col">
+              <div class="form-input">
+                <input
+                  autocomplete="off"
+                  type="number"
+                  pInputText
+                  name="quantity"
+                  formControlName="quantity"
+                  placeholder="{{
+                    'Input.PlaceHolder.PleaseKeyIn' | translate
+                  }} Applied QTY"
+                  onwheel="this.blur()"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-container *ngIf="formGroup.get('quantity').value > licenseControlNum">
+      <div class="form-row notice grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">Notice</label>
+              </div>
+            </div>
+            <div class="grid md:col col-12">
+              <div class="form-col col-12">
+                <div class="form-label">
+                  <label class="txt">{{
+                    "LicenseMgmt.SC047.Hint.ApplyNumOverControlNum" | translate
+                  }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!--# Receipt -->
+    <div class="form-row remark grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Receipt</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-input">
+                <input
+                  autocomplete="off"
+                  type="text"
+                  pInputText
+                  name="receipt"
+                  formControlName="receipt"
+                  placeholder="{{
+                    'Input.PlaceHolder.PleaseKeyIn' | translate
+                  }} Receipt"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# Remark -->
+    <div class="form-row remark grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Remark</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-input">
+                <textarea
+                  autocomplete="off"
+                  type="text"
+                  pInputTextarea
+                  name="remark"
+                  formControlName="remark"
+                  placeholder="{{
+                    'Input.PlaceHolder.PleaseKeyIn' | translate
+                  }} Remark"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# Form Actions -->
+    <div class="btn-container">
+      <button
+        pButton
+        type="button"
+        label="{{ 'Button.Label.Cancel' | translate }}"
+        class="btn-gray"
+        (click)="onCloseAMItemDialogEvent()"
+      ></button>
+
+      <button
+        pButton
+        type="submit"
+        [label]="submitBtnLabel"
+        [disabled]="
+          !(
+            formGroup.get('productCode').value || formGroup.get('ccats').value
+          ) ||
+          !formGroup.get('quantity').value ||
+          formGroup.get('quantity').value > licenseControlNum ||
+          !formGroup.get('licenseKit').value
+        "
+        (click)="onFormSubmit()"
+      ></button>
+    </div>
+  </form>
+</p-dialog>

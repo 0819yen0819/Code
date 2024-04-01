@@ -1,0 +1,16 @@
+@import "../../../../../styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+.form-input {
+  &.no-h-full {
+    @media screen and (min-width: 768px) {
+      @apply mt-2;
+    }
+  }
+}
+
+.form-select-btnkit {
+  @apply ml-1;
+  @apply justify-start #{!important};
+}

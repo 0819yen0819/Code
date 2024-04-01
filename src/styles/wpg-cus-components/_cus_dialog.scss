@@ -1,0 +1,17 @@
+//> 取消固寬 ( IBM 850px )
+//> 需對 Dialog 下指定 Class Name
+
+.p-dialog {
+  &.add-exp-item-by-ref-dialog,
+  &.add-sc047-v2-item-by-ref-dialog {
+    min-width: 70%;
+    max-width: 100%;
+    width: unset !important;
+  }
+
+  &.approve-dialog{ // "license" 審核對話框寬度調整如下
+    min-width: 50%;
+    max-width: 100%;
+    width: unset !important
+  }
+}

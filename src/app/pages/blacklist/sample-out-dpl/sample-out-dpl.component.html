@@ -1,0 +1,292 @@
+<div class="main-title-container">
+  <p>{{ 'SampleOutDPL.Label.SampleOutDPLCheck' | translate }}</p>
+</div>
+
+<p-tabView>
+  <p-tabPanel header="{{'SampleOutDPL.Label.SingleQuery' | translate}}" leftIcon="pi pi-home">
+    <form [formGroup]="singleForm" class="form-table form-search" (ngSubmit)="onSingleFormSubmit()">
+      <div class=" form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'SampleOutDPL.Label.CustomerName' | translate }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-input">
+            <input type="text" formControlName="custNameE" pInputText
+              placeholder="{{'Input.PlaceHolder.PleaseEnter' | translate}}" />
+            <p class="error-active" style="color: #006DEB;">{{ 'SampleOutDPL.Label.PleaseFillCompany' | translate }}</p>
+            <p class="error-active" style="color: #006DEB;">{{ 'SampleOutDPL.Label.RequiredCustomerName' | translate }}</p>
+            <p class="error-active" *ngIf="formSubmitted && singleF.custNameE.errors?.required">
+              <i class="pi pi-exclamation-circle"></i>
+              <span>{{ 'SampleOutDPL.Label.RequiredField' | translate }}</span>
+            </p>
+            <p class="error-active" *ngIf="formSubmitted && singleF.custNameE.errors?.ascii">
+              <i class="pi pi-exclamation-circle"></i>
+              <span>{{ 'SampleOutDPL.Label.PleaseFillCustomerName' | translate }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'SampleOutDPL.Label.AreaOrCountry' | translate }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-select">
+            <p-dropdown [options]="countryOptions" formControlName="country" [filter]="true" [virtualScroll]="true"
+              itemSize="30"></p-dropdown>
+            <p class="error-active" *ngIf="formSubmitted && singleF.country.errors?.required">
+              <i class="pi pi-exclamation-circle"></i>
+              <span>{{ 'SampleOutDPL.Label.RequiredField' | translate }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'SampleOutDPL.Label.CustomerAddress' | translate }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-textarea">
+            <textarea pInputTextarea placeholder="{{'Input.PlaceHolder.PleaseEnter' | translate}}"
+              formControlName="addressLine"></textarea>
+            <p class="error-active" style="color: #006DEB;">{{ 'SampleOutDPL.Label.PleaseFillCompanyAddress' | translate }}</p>
+            <p class="error-active" style="color: #006DEB;">{{ 'SampleOutDPL.Label.RequiredCustomerAddress' | translate }}</p>
+            <p class="error-active" *ngIf="formSubmitted && singleF.addressLine.errors?.required">
+              <i class="pi pi-exclamation-circle"></i>
+              <span>{{ 'SampleOutDPL.Label.RequiredField' | translate }}</span>
+            </p>
+            <p class="error-active" *ngIf="formSubmitted && singleF.addressLine.errors?.ascii">
+              <i class="pi pi-exclamation-circle"></i>
+              <span>{{ 'SampleOutDPL.Label.PleaseFillCustomerAddress' | translate }}</span>
+            </p>
+            <label
+              [ngClass]="{'success-active':isPrecisionSuccess, 'error-active':!isPrecisionSuccess}">{{precisionDisplayMsg}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">ECCN Code</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-input">
+            <input type="text" pInputText placeholder="{{'Input.PlaceHolder.PleaseEnter' | translate}}"
+              formControlName="eccn" />
+            <p class="error-active" *ngIf="formSubmitted && singleF.eccn.errors?.required">
+              <i class="pi pi-exclamation-circle"></i>
+              <span>{{ 'SampleOutDPL.Label.RequiredField' | translate }}</span>
+            </p>
+            <label
+              [ngClass]="{'success-active':isEccnSuccess, 'error-active':!isEccnSuccess}">{{eccnDisplayMsg}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-container">
+        <button pButton type="button" label="{{'Button.Label.Reset' | translate}}" class="btn-secondary"
+          (click)="onSingleFormReset()"></button>
+        <!--重設-->
+        <button pButton type="submit" label="{{'Button.Label.Query' | translate}}"></button>
+        <!--查詢-->
+      </div>
+    </form>
+  </p-tabPanel>
+
+  <p-tabPanel header="{{'SampleOutDPL.Label.BatchQuery' | translate}}" leftIcon="pi pi-calendar">
+    <form class="form-table form-search">
+      <p class="error-active">{{ 'SampleOutDPL.Label.RequiredCustomerName' | translate }}</p>
+      <p class="error-active">{{ 'SampleOutDPL.Label.RequiredCustomerAddress' | translate }}</p>
+      <p class="error-active">{{ 'SampleOutDPL.Label.AcceptsUploadFileType' | translate }}</p>
+      <p-fileUpload #fileUpload class="form-file-upload"
+        [chooseIcon]="''" [chooseLabel]="'Choose File'" customUpload="true" [showCancelButton]="false" [uploadIcon]="''"
+        (onError)="onUploadError($event)" (uploadHandler)="uploadHandler($event)"
+
+        (onSelect)="onFileSelect($event)"
+        [files]="selectedFileList"
+        dndUploadHandler
+        (fileDropped)="onDropHandler($event)"
+        (onFileDroppedError)="onDropError($event)"
+        [acceptDropFileType] = "fileTypeLimit"
+      >
+
+      </p-fileUpload>
+      <p><a href="javascript:void()" (click)="downloadSample()">{{ 'SampleOutDPL.Label.DownloadSampleFile' | translate
+          }}</a></p>
+    </form>
+  </p-tabPanel>
+
+  <p-tabPanel header="{{'SampleOutDPL.Label.DPLLog' | translate}}" leftIcon="pi pi-book">
+    <form class="form-table form-search">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'SampleOutDPL.Label.Range' | translate }}</label>
+          </div>
+        </div>
+
+        <div class="form-col col">
+          <div class="form-date">
+            <p-calendar
+                [selectOtherMonths]="true"
+                [showButtonBar]="true"
+                [showIcon]="true"
+                appendTo="body"
+                name="startDate"
+                [(ngModel)]="startDate"
+                dateFormat="yy/mm/dd"
+                (onInput)="onDatePickerInput($event)"
+                (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                (onBlur)="onDatePickerSelectAndBlur()"
+                (onClose)="onDatePickerClose('startDate');onCheckDateHandler()"
+                placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+              >
+            </p-calendar>
+          </div>
+        </div>
+
+        <div class="form-col col col-1">
+          <div class="form-label form-date-between">
+            <label class="txt">~</label>
+          </div>
+        </div>
+
+        <div class="form-col col">
+          <div class="form-date">
+            <p-calendar
+                [selectOtherMonths]="true"
+                [showButtonBar]="true"
+                [showIcon]="true"
+                appendTo="body"
+                name="endDate"
+                [(ngModel)]="endDate"
+                [minDate]="startDate"
+                dateFormat="yy/mm/dd"
+                (onInput)="onDatePickerInput($event)"
+                (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                (onBlur)="onDatePickerSelectAndBlur()"
+                (onClose)="onDatePickerClose('endDate');onCheckDateHandler()"
+                placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+              >
+            </p-calendar>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row grid">
+        <div class="form-col md:col-6 sm:col-12 col-12">
+          <div class="btn-container btn-auto left">
+            <button pButton type="button" label="{{'SampleOutDPL.Label.Today' | translate}}" class="btn-gray btn-line"
+              (click)="changeQueryDate(1)"></button>
+            <button pButton type="button" label="{{'SampleOutDPL.Label.LastWeek' | translate}}"
+              class="btn-gray btn-line" (click)="changeQueryDate(2)"></button>
+            <button pButton type="button" label="{{'SampleOutDPL.Label.ThisMonth' | translate}}"
+              class="btn-gray btn-line" (click)="changeQueryDate(3)"></button>
+            <button pButton type="button" label="{{'SampleOutDPL.Label.LastMonth' | translate}}"
+              class="btn-gray btn-line" (click)="changeQueryDate(4)"></button>
+          </div>
+        </div>
+
+        <div class="form-col md:col-6 sm:col-12 col-12">
+          <div class="btn-container right">
+            <button pButton type="button" label="{{'Button.Label.Reset' | translate}}" class="btn-secondary"
+              (click)="onLogFormReset()"></button>
+            <!--重設-->
+            <button pButton type="button" label="{{'Button.Label.Query' | translate}}"
+              (click)="onLogFormSubmit()"></button>
+            <!--查詢-->
+            <button pButton type="button" label="{{'Button.Label.Download' | translate}}" class="btn-teal"
+              (click)="downloadBtnClick()"></button>
+            <!--下載-->
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!--# TK-35854 -->
+    <ng-container *ngIf="displayResult">
+      <p-table #lazyTable class="table-panel" [value]="data" [columns]="selectedCols" [scrollable]="true"
+        scrollHeight="500px" [paginator]="true" [rows]="10" paginatorPosition="bottom"
+        [rowsPerPageOptions]="[10,20]" dataKey="seq" [lazy]="true" (onLazyLoad)="onLazyLoad($event)"
+        (onSort)="onSort($event)" (onPage)="onPage($event)" [totalRecords]="totalRecords">
+        <ng-template pTemplate="caption">
+          <div class="table-action-block">
+            <div class="table-search ui-inputgroup">
+              <input pInputText type="text" size="30" (input)="filterLazy($event.target.value)"
+                [(ngModel)]="globalFilter" placeholder="Search keyword" />
+              <span class="ui-inputgroup-addon">
+                <i class="pi pi-search"></i>
+              </span>
+            </div>
+            <div class="btn-container right">
+              <button pButton type="button" icon="pi pi-sliders-h" label="{{'Button.Label.Filter' | translate}}"
+                class="btn-line" (click)="showFilter()"></button>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <ng-container *ngFor="let col of selectedCols">
+              <th [pSortableColumn]="col.field" [ngClass]="col.css" scope="col">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </ng-container>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data>
+          <tr>
+            <td *ngFor="let col of selectedCols" [ngClass]="col.css">
+              <p>{{data[col.field]}}</p>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </ng-container>
+  </p-tabPanel>
+</p-tabView>
+
+<p-dialog header="{{'Dialog.Header.FilterColumns' | translate}}" [(visible)]="displayFilter" [draggable]="false"
+  [blockScroll]="true" [modal]="true">
+  <form>
+    <div class="form-row grid">
+      <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of cols">
+        <div class="form-checkbox">
+          <p-checkbox name="checkboxGroup" [label]="col.header" [value]="col" [(ngModel)]="selectedCols"
+            [disabled]="col?.isDisabled"></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <button pButton type="button" label="{{'Button.Label.Reset' | translate}}" class="btn-gray btn-line"
+        (click)="changeFilter()"></button>
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog header="{{'Dialog.Header.MessagePrompt' | translate}}" [(visible)]="displayDialog" [draggable]="false"
+  [blockScroll]="true" [modal]="true">
+  <form>
+    <div class="form-row grid">
+      <div class="form-label">
+
+        <label [ngClass]="{'success-active': (isSuccess), 'error-active': (!isSuccess) }">{{dialogMsg}}</label>
+      </div>
+    </div>
+
+    <!-- <div class="btn-container">
+      <button pButton type="button" label="重置" class="btn-gray btn-line"></button>
+    </div> -->
+  </form>
+</p-dialog>

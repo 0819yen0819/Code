@@ -1,0 +1,41 @@
+<div class="sub-title-container form-section">
+  <p>{{ "LicenseMgmt.Common.Title.AuditHistoryLog" | translate }}</p>
+</div>
+
+<app-common-data-table-viewer
+  [data]="auditHistoryLog"
+  [tableCols]="itemTableCols"
+  [tableSettings]="dataTableSettings"
+></app-common-data-table-viewer>
+
+<div class="wait-approving-wrap">
+  <ng-container *ngIf="waitApproveList.length > 0">
+    <span>
+      {{ "LicenseMgmt.Common.Hint.AuditApprovingPrefix" | translate }}&nbsp;{{
+        this.waitApproveList.toString()
+      }}
+      <ng-container *ngIf="waitAssigneeList.length > 0"
+        >,{{ this.waitAssigneeList.toString() }}</ng-container
+      >
+      &nbsp;{{ "LicenseMgmt.Common.Hint.AuditApprovingSuffix" | translate }}
+    </span>
+  </ng-container>
+
+  <ng-container
+    *ngIf="waitApproveList.length === 0 && waitAssigneeList.length > 0"
+  >
+    <span>
+      {{ "LicenseMgmt.Common.Hint.AuditApprovingPrefix" | translate }}&nbsp;{{
+        this.waitApproveList.toString()
+      }}
+      {{ this.waitAssigneeList.toString() }}
+      &nbsp;{{ "LicenseMgmt.Common.Hint.AuditApprovingSuffix" | translate }}
+    </span>
+  </ng-container>
+  <span
+    class="reminder-send-btn"
+    *ngIf="waitApproveList.length > 0 || waitAssigneeList.length > 0"
+    (click)="onReminderSend()"
+    ><img src="./assets/imgs/mail.jpg" alt="mail" />
+  </span>
+</div>

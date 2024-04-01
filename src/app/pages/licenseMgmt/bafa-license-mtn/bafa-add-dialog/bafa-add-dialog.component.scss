@@ -1,0 +1,8 @@
+@import "src/styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+.center{
+    display: flex;
+    align-items: center;
+}

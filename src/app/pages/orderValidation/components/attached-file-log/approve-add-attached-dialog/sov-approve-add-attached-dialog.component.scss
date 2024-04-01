@@ -1,0 +1,43 @@
+@import "src/styles/wpg-cus-components/cus_form";
+@include FormBaseOverride;
+
+.form-insert-input-list {
+  @apply mt-4 pr-4;
+
+  &.inside-uploader {
+    .form-label {
+      .txt {
+        @apply border-none;
+        &:hover {
+          @apply bg-transparent;
+        }
+      }
+    }
+  }
+
+  .form-label {
+    &:hover {
+      @apply bg-blue-50;
+    }
+    .txt {
+      @apply font-semibold text-gray-500 text-opacity-80 flex justify-start items-center;
+      @apply border-t-0 border-l-0 border-r-0 border-b-2 border-gray-100 border-solid;
+    }
+  }
+}
+
+.form-file-upload-container {
+  @apply w-full;
+  .form-file-upload {
+    @apply p-0 #{!important};
+  }
+}
+
+:host ::ng-deep {
+  .p-fileupload-content {
+    @apply xxs:max-h-64 md:max-h-96 overflow-y-auto;
+  }
+  .p-fileupload-files {
+    @apply hidden;
+  }
+}

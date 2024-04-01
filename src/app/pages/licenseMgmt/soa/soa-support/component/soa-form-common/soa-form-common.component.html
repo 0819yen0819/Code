@@ -1,0 +1,92 @@
+<ng-container
+  *ngIf="
+    soaCommonService.currentRole === 'Applyer' &&
+    soaCommonService.currentState != 'Approving'
+  "
+>
+  <!-- 意見 -->
+  <div class="sub-title-container comment-section" style="margin-top: 30px">
+    <p>{{ "LicenseMgmt.Common.Title.Opinion" | translate }}</p>
+  </div>
+  <form [formGroup]="formGroup" class="form-container form-table">
+    <div class="form-row remark grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{
+                "LicenseMgmt.Common.Label.Opinion" | translate
+              }}</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col form-input col-12">
+              <div class="form-input no-h-full">
+                <textarea
+                  type="text"
+                  pInputTextarea
+                  name="comment"
+                  formControlName="comment"
+                  [(ngModel)]="opinionData"
+                  (ngModelChange)="textAreaChange()"
+                ></textarea>
+                <div
+                  class="form-hint"
+                  [class]="
+                    formGroup.get('comment').value != null &&
+                    formGroup.get('comment').value.length > 250
+                      ? 'warring'
+                      : ''
+                  "
+                >
+                  <span>
+                    {{
+                      "LicenseMgmt.Common.Hint.CurWordCount" | translate
+                    }}&nbsp;&nbsp;
+                    {{
+                      formGroup.get("comment").value == null
+                        ? 0
+                        : formGroup.get("comment").value.length
+                    }}&nbsp;/&nbsp;250
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!--# action Section-->
+  <div class="btn-container">
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Cancel' | translate }}"
+      class="btn-gray"
+      (click)="integrateService.cancelOnClick()"
+    ></button>
+    <button
+      pButton
+      type="button"
+      class="submit"
+      label="{{ 'Button.Label.Submit' | translate }}"
+      (click)="onFormSubmit('apply')"
+    ></button>
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Draft' | translate }}"
+      class="draft btn-teal"
+      (click)="onFormSubmit('draft')"
+    ></button>
+    <button
+      pButton
+      type="button"
+      class="btn-outline-blue"
+      label="{{ 'Button.Label.RedirectApproval' | translate }}"
+      (click)="onFormSubmit('addAssignee')"
+    ></button>
+  </div>
+</ng-container>

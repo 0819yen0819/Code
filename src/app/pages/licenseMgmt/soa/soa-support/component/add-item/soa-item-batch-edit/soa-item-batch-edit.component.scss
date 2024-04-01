@@ -1,0 +1,23 @@
+@import "src/styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+.form-container {
+    @apply mt-2;
+}
+
+.gray-line {
+    border: 0;
+    border-bottom: 1px solid #b6b6b6;
+    width: 100%;
+    margin: 10px 0;
+}
+
+@media screen and (max-width: 1024px) {
+    .btn-container {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        margin: 0.5rem 0;
+    }
+}

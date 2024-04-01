@@ -1,0 +1,232 @@
+<div class="main-title-container">
+  <p>{{ 'RuleSetup.Label.RuleSetting' | translate }}</p>
+</div>
+<!-- end: main-title-container -->
+
+<form class="form-table form-search">
+  <div class="form-row grid">
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'RuleSetup.Label.Tenant' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-select">
+            <!-- add class `error-active` in `form-select` when input error  -->
+            <p-dropdown name="tenant" [(ngModel)]="selectedTenants" [options]="tenantOptions"></p-dropdown>
+            <p class="error-msg">
+              <em class="pi pi-exclamation-circle"></em>
+              <span>錯誤訊息</span>
+            </p>
+          </div>
+          <!-- end: form-select -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+
+  </div>
+
+  <div class="btn-container">
+    <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-secondary"
+      (click)="resetCondition();"></button>
+    <button pButton type="button" label="{{ 'Button.Label.Query' | translate }}" (click)="initData();"
+      *ngIf="permissions.includes('view') || permissions.includes('view.all')"></button>
+  </div>
+
+</form>
+
+<!--# TK-35854 -->
+<ng-container *ngIf="displayResult">
+  <p-table #dt class="table-panel" [value]="data" [columns]="selectedCols" [scrollable]="true" scrollHeight="500px"
+    [paginator]="true" [rows]="10" paginatorPosition="bottom" [rowsPerPageOptions]="[10,20]"
+    dataKey="id" [globalFilterFields]="['rulesTenant', 'rulesCategoryRemarkCn', 'ruleVal']"
+    (sortFunction)="customSort($event)" [customSort]="true">
+    <ng-template pTemplate="caption">
+      <div class="table-action-block">
+        <div class="table-search ui-inputgroup">
+          <input type="text" pInputText size="30" placeholder="{{'Input.PlaceHolder.SearchTableByKeyword' | translate}}"
+            (input)="dt.filterGlobal($event.target.value, 'contains')" />
+          <span class="ui-inputgroup-addon">
+            <em class="pi pi-search"></em>
+          </span>
+        </div>
+
+        <div class="btn-container right">
+          <button pButton type="button" icon="pi pi-sliders-h" label="{{ 'Button.Label.Filter' | translate }}"
+            class="btn-line" (click)="showFilter()"></button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let col of selectedCols" [pSortableColumn]="col.field" [ngClass]="{
+          'icon-col': (col.field === 'checkbox' || col.field === 'edit' || col.field === 'del' || col.field === 'view')
+        }" scope="col">
+          <ng-container *ngIf="col.field === 'checkbox'">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </ng-container>
+          <ng-container *ngIf="col.field === 'edit' || col.field === 'del' || col.field === 'view'">
+            {{col.header}}
+          </ng-container>
+          <ng-container
+            *ngIf="col.field !== 'checkbox' && col.field !== 'edit' && col.field !== 'del' && col.field !== 'view'">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </ng-container>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td *ngFor="let col of selectedCols" [ngClass]="{
+        'icon-col': (col.field == 'checkbox' || col.field === 'seq' || col.field === 'edit' || col.field === 'del' || col.field === 'view')
+      }">
+          <ng-container *ngIf="col.field === 'edit'">
+            <div class="btn-container">
+              <button pButton type="button" class="icon-btn btn-orange" (click)="clickEditRuleSetup(data)">
+                <img src="./assets/imgs/icon-btn/edit.svg" alt="Edit">
+              </button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="col.field !== 'edit' ">
+            <p>{{data[col.field]}}</p>
+          </ng-container>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-container>
+<p-dialog header="{{ 'Dialog.Header.FilterColumns' | translate }}" [(visible)]="displayFilterDetail" [draggable]="false"
+  [blockScroll]="true" [modal]="true">
+  <form>
+    <div class="form-row grid">
+      <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of cols">
+        <div class="form-checkbox">
+          <p-checkbox name="checkboxGroup" [label]="col.header" [value]="col" [(ngModel)]="selectedCols"
+            [disabled]="col?.isDisabled"></p-checkbox>
+        </div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="btn-container">
+      <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-gray btn-line"
+        (click)="changeFilterDetail()"></button>
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog [header]="editDialogTitle" [(visible)]="displayEditDialog" [draggable]="false" [blockScroll]="true"
+  [modal]="true" (onHide)="closeEditDialog()">
+  <ng-container>
+    <form class="form-table">
+      <div class="form-row grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'RuleSetup.Label.Tenant' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-select">
+                <p>{{ruleSetupViewResponse.tenant}}</p>
+              </div>
+              <!-- end: form-select -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'RuleSetup.Label.RuleItem' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-select">
+                <ng-container *ngIf="translateService.currentLang == 'zh-tw'">
+                  <p>{{ruleSetupViewResponse.ruleNameCn}}</p>
+                </ng-container>
+                <ng-container *ngIf="translateService.currentLang !== 'zh-tw'">
+                  <p>{{ruleSetupViewResponse.ruleNameEn}}</p>
+                </ng-container>
+              </div>
+              <!-- end: form-select -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">{{ 'RuleSetup.Label.RuleVal' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+            </div>
+            <!-- end: form-col -->
+
+            <div class="form-col col">
+              <div class="form-input">
+                <!-- add class `error-active` in `form-input` when input error  -->
+                <input type="text" pInputText value="" placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                  name="editRuleValue" [(ngModel)]="editRuleValue" maxlength="300" />
+                <p class="error-active">
+                  <em class="pi pi-exclamation-circle"></em>
+                  <ng-container *ngIf="translateService.currentLang == 'zh-tw'">
+                    <span>{{ruleSetupViewResponse.remarkCn}}</span>
+                  </ng-container>
+                  <ng-container *ngIf="translateService.currentLang !== 'zh-tw'">
+                    <span>{{ruleSetupViewResponse.remarkEn}}</span>
+                  </ng-container>
+                </p>
+              </div>
+              <!-- end: form-input -->
+            </div>
+            <!-- end: form-col -->
+          </div>
+          <!-- end: form-row -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+    </form>
+
+    <div class="btn-container">
+      <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray"
+        (click)="displayEditDialog = false;"></button>
+      <button pButton type="button" label="{{ 'Button.Label.Save' | translate }}" (click)="saveData()"></button>
+    </div>
+
+  </ng-container>
+</p-dialog>

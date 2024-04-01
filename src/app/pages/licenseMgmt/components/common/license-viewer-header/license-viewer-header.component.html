@@ -1,0 +1,89 @@
+<!--# License Viewer Main title component-->
+<div class="main-title-container">
+  <p>{{ mainTitle }}</p>
+</div>
+
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onFormSubmit()"
+  class="form-container form-table form-search"
+>
+  <ng-container *ngIf="formType === 'LEH' || formType === 'ECCN_STATUS_MTN'">
+    <div class="form-row grid xxs:gap-2 md:gap-4">
+      <div class="form-col md:col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">ECCN</label>
+            </div>
+          </div>
+          <div class="md:col col-12">
+            <div class="form-col">
+              <div class="form-input">
+                <input
+                  type="text"
+                  pInputText
+                  name="eccn"
+                  placeholder="{{
+                    'Input.PlaceHolder.PleaseEnter' | translate
+                  }}"
+                  formControlName="eccn"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-col md:col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{
+                "LEHRuleManager.Label.Flag" | translate
+              }}</label>
+            </div>
+          </div>
+          <div class="md:col col-12">
+            <div class="flex-grow-1 form-col form-input">
+              <div class="form-select">
+                <p-dropdown
+                  name="flag"
+                  [options]="boolOptions"
+                  placeholder="{{
+                    'DropDown.PlaceHolder.PleaseChoose' | translate
+                  }}"
+                  formControlName="flag"
+                ></p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="btn-container">
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Reset' | translate }}"
+      class="btn-secondary"
+      (click)="onFormReset()"
+    ></button>
+    <button
+      *ngIf="permissions.includes('view')"
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Query' | translate }}"
+      (click)="onFormSubmit()"
+    ></button>
+    <button
+      *ngIf="permissions.includes('view')"
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Download' | translate }}"
+      class="btn-teal"
+      (click)="onFormDownload()"
+    ></button>
+  </div>
+</form>

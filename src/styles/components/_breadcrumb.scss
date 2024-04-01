@@ -1,0 +1,23 @@
+.main-breadcrumb {
+  display: block;
+  margin-bottom: $space-1;
+
+  .ui-breadcrumb {
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+
+    ul li .ui-menuitem-link {
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 1.3em;
+      color: $gray-02;
+    } // end ui-menuitem-link
+
+    ul li.ui-breadcrumb-chevron {
+      margin: 0;
+      color: $gray-02;
+      font-size: 1em;
+    } // end ui-breadcrumb-chevron
+  } // end ui-breadcrumb
+} // end main-breadcrumb

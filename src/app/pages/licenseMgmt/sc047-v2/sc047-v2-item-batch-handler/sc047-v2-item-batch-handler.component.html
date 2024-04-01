@@ -1,0 +1,61 @@
+<!--# common notice-check dialog-->
+<app-common-notice-check-dialog
+  [settingParams]="noticeCheckDialogParams"
+  [contentList]="noticeContentList"
+></app-common-notice-check-dialog>
+
+<form class="form-container form-table">
+  <div class="form-row grid">
+    <div class="form-col col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "LicenseMgmt.Common.Label.BatchEdit" | translate
+            }}</label>
+          </div>
+        </div>
+
+        <div class="form-col col">
+          <div class="block md:flex">
+            <div class="flex-none output-item-list">
+              <button
+                pButton
+                type="button"
+                label="{{ 'Button.Label.ExportList' | translate }}"
+                class="draft btn-teal"
+                (click)="onExportFormItemEvent()"
+              ></button>
+            </div>
+            <div class="flex-grow-1">
+              <p-fileUpload
+                #fileUploader
+                class="form-file-upload"
+                name="fileUploader[]"
+                [multiple]="fileUploaderSettings.multiple"
+                [auto]="fileUploaderSettings.auto"
+                [chooseIcon]="fileUploaderSettings.chooseIcon"
+                [chooseLabel]="fileUploaderSettings.chooseLabel"
+                [showCancelButton]="fileUploaderSettings.showCancelButton"
+                [showUploadButton]="fileUploaderSettings.showUploadButton"
+                [uploadIcon]="fileUploaderSettings.uploadIcon"
+                [fileLimit]="fileUploaderSettings.fileLimit"
+                [previewWidth]="fileUploaderSettings.previewWidth"
+                [customUpload]="fileUploaderSettings.customUpload"
+                (onSelect)="onFileUploadHandler($event, fileUploader)"
+                (onRemove)="onFileRemoveHandler()"
+                dndUploadHandler
+                [files]="selectedFileList"
+                (fileDropped)="onDropHandler($event)"
+                (onFileDroppedError)="onDropError($event)"
+                [acceptDropFileType]="fileUploaderSettings.accept"
+                (uploadHandler)="onRenewItemListbyFile(fileUploader)"
+              >
+              </p-fileUpload>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

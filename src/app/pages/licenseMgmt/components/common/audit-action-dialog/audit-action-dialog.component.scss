@@ -1,0 +1,17 @@
+@import "../../../../../../styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+.multi-select-field {
+  max-height: 200px;
+  @apply overflow-y-auto z-50;
+}
+
+:host ::ng-deep{
+  .p-dialog,
+  .ui-dialog {
+    max-width: 80%;
+    width: auto;
+  }
+}
+ 

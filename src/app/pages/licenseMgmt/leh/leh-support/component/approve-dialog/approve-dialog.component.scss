@@ -1,0 +1,12 @@
+textarea {
+    resize: none;
+}
+
+:host ::ng-deep{
+    .p-dialog,
+    .ui-dialog {
+      max-width: 80%;
+      width: auto;
+    }
+  }
+   

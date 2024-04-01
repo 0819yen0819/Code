@@ -1,0 +1,315 @@
+<!-- 訊息對話框 -->
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams"
+    [contentList]="noticeContentList"></app-common-notice-check-dialog>
+
+
+<div style="margin-top: 10px;"></div>
+
+<!-- 批次修改 -->
+<form class="form-container form-table" *ngIf="showBatch">
+    <div class="form-row grid">
+        <div class="form-col col-12">
+            <div class="form-row grid">
+                <div class="form-col col-fixed">
+                    <div class="form-label">
+                        <label class="txt">{{'LicenseMgmt.Common.Label.BatchEdit' | translate}}</label>
+                    </div>
+                </div>
+                <div class="md:col col-12" style="display: flex; align-items: center; ">
+                    <div class="form-col" style=" width: 100%;">
+                        <div class="form-select batch-container">
+
+                            <button class="field-btn export" (click)="exportListOnClick()">{{ 'Button.Label.ExportList'
+                                | translate }}</button>
+
+                            <p-fileUpload id="pcf-fileUpload" #fileUploader class="form-file-upload" name="fileUpload[]"
+                                [multiple]="fileUploaderSettings.multiple"
+                                [maxFileSize]="fileUploaderSettings.maxFileSize" [auto]="fileUploaderSettings.auto"
+                                [chooseIcon]="fileUploaderSettings.chooseIcon"
+                                [chooseLabel]="fileUploaderSettings.chooseLabel"
+                                [showCancelButton]="fileUploaderSettings.showCancelButton"
+                                [uploadIcon]="fileUploaderSettings.uploadIcon"
+                                [previewWidth]="fileUploaderSettings.previewWidth"
+                                [customUpload]="fileUploaderSettings.customUpload"
+                                (uploadHandler)="uploadAttachedFileOnClick($event, fileUploader)"
+                                [files]="selectedFileList.getValue()" [accept]="fileUploaderSettings.accept"
+                                dndUploadHandler (fileDropped)="onDropHandler($event)"
+                                (onFileDroppedError)="onDropError($event)"
+                                [acceptDropFileType]="fileUploaderSettings.accept" [allowMulitUpload]="false">
+                            </p-fileUpload>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<!-- Table -->
+<p-table #dt [value]="tableData" [scrollable]="innerWidth > rwdBreakPoints" responsiveLayout="stack"
+    [breakpoint]="rwdBreakPointsString">
+
+    <ng-template pTemplate="header">
+
+        <!-- 手機版全選按鈕 -->
+        <div *ngIf="!disabledLineApproveBtn && (innerWidth < rwdBreakPoints)" class="mobile-toggle-all-container">
+            <span>Approve ({{'SalesOrderChange.Label.SelectAll' | translate}}) </span>
+            <input type="radio" name="approveAllAMobile" style="margin-left: 0.8vw;" value="A" (click)="toggleAll('A')"
+                [(ngModel)]="toggleAllValue">
+            <span>Reject ({{'SalesOrderChange.Label.SelectAll' | translate}}) </span>
+            <input type="radio" name="approveAllRMobile" style="margin-left: 0.8vw;" value="R" (click)="toggleAll('R')"
+                [(ngModel)]="toggleAllValue">
+        </div>
+        <hr *ngIf="!disabledLineApproveBtn && (innerWidth < rwdBreakPoints)">
+
+        <tr class="pcf-table-header">
+
+            <th *ngFor="let col of tableCols" [ngClass]="{'xs-col' : innerWidth > compressionSizeFieldPoint}"
+                class="pcf-header-th" [ngClass]="col.colSize" id="pcf_lines_content_th">
+                <!-- 表頭：Approve / Reject -->
+                <ng-container *ngIf="(col.label === 'Approve' || col.label === 'Reject')">
+                    <div class="th-approving-container">
+                        <div class="th-approving-label"> {{col.label}} </div>
+                        <input *ngIf="(col.label === 'Approve') && !disabledLineApproveBtn" type="radio"
+                            style="margin-left: 0.8vw;" name="headerRadio" value="A" (click)="toggleAll(col.label)"
+                            [(ngModel)]="toggleAllValue">
+                        <input *ngIf="(col.label === 'Reject') && !disabledLineApproveBtn" type="radio"
+                            style="margin-left: 0.8vw;" name="headerRadio" value="R" (click)="toggleAll(col.label)"
+                            [(ngModel)]="toggleAllValue">
+                    </div>
+                </ng-container>
+
+                <!-- 表頭:一般 -->
+                <ng-container *ngIf="!(col.label === 'Approve' || col.label === 'Reject')">
+                    <div class="th-normal-label">{{col.label}}</div>
+                </ng-container>
+
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-data let-rowIndex="rowIndex">
+        <tr class="pcf-content-tr xs-col">
+            <ng-container *ngFor="let col of tableCols ; let i = index;">
+
+                <!-- 電腦版 -->
+                <ng-container *ngIf="innerWidth >= rwdBreakPoints">
+
+                    <td class="pcf-header-td" [ngClass]="col.colSize" id="pcf-td">
+                        <!-- 表身 -->
+
+                        <!-- Approve / Reject (電腦版) -->
+                        <div *ngIf="(innerWidth > rwdBreakPoints)" class="td-approving-container">
+                            <ng-container *ngIf="col.label === 'Approve'">
+                                <input type="radio" value="A" [(ngModel)]="data['status']" [name]="data['radioGroup']"
+                                    (ngModelChange)="lineStatusChange()"
+                                    [disabled]="disabledLineApproveBtn  || data['defaultStatusReject']"
+                                    style="margin-left: 0.8vw;">
+
+                                <!-- 電腦版 簽核頁面 -->
+                                <div (click)="mtnOnClick(data,rowIndex)"
+                                    *ngIf="(data['status'] === 'A') && formInfo.initFormInfo.urlIncludeApproving && data['canEditPriceMtn'] && !formInfo.initFormInfo.iAmAssignee && !formInfo.initFormInfo.isFirstStep"
+                                    class="maintain-price"> {{'PriceControlForm.Label.Maintain' | translate}} <br/> {{data['salesCostTypeDash'] }} {{'PriceControlForm.Label.Price' | translate}}
+                                </div>
+                            </ng-container>
+
+                            <ng-container *ngIf="col.label === 'Reject'">
+                                <div style="display: flex; align-items: center; justify-content: center;">
+                                    <input type="radio" value="R" [(ngModel)]="data['status']"
+                                        [name]="data['radioGroup']" (ngModelChange)="lineStatusChange()"
+                                        [disabled]="disabledLineApproveBtn  || data['defaultStatusReject']"
+                                        style="margin-left: 0.8vw;">
+                                </div>
+                            </ng-container>
+                        </div>
+
+
+                        <!-- 一般顯示 -->
+                        <!-- line1 -->
+                        <div class="data-content" *ngIf="(col.type === 'normal')"
+                            [ngClass]="{'align-right' : alignRightCols.includes(col.field)}">
+                            <!-- 一般顯示 -->
+                            <span class="td-normal-container-pcf">
+                                {{data[col.field]}}</span>
+                        </div>
+
+                        <!-- Input -->
+                        <div class="form-input" *ngIf="(col.type === 'input')">
+
+                            <ng-container *ngIf="col.label === 'Apply Remark'">
+                                <input *ngIf="remarkRule.ap" type="text" pInputText class="pcf-comments"
+                                    [(ngModel)]="data['apRemark']" />
+                                <span *ngIf="!remarkRule.ap">{{data['apRemark']}}</span>
+                            </ng-container>
+
+                            <ng-container *ngIf="col.label === 'SM Remark'">
+                                <input *ngIf="remarkRule.sm" type="text" pInputText class="pcf-comments"
+                                    [(ngModel)]="data['smRemark']" />
+                                <span *ngIf="!remarkRule.sm">{{data['smRemark']}}</span>
+                            </ng-container>
+
+                            <ng-container *ngIf="col.label === 'PM Remark'">
+                                <input *ngIf="remarkRule.pm" type="text" pInputText class="pcf-comments"
+                                    [(ngModel)]="data['pmRemark']" />
+                                <span *ngIf="!remarkRule.pm">{{data['pmRemark']}}</span>
+                            </ng-container>
+
+                        </div>
+                    </td>
+
+                </ng-container>
+
+
+                <!-- 手機版 -->
+                <ng-container *ngIf="innerWidth < rwdBreakPoints">
+                    <!-- 核心內容 -->
+                    <ng-container *ngIf="mobileCoreFields.includes(col.field) && (col.label !== 'Reject')">
+                        <td class="pcf-header-td" [ngClass]="col.colSize" id="pcf-td">
+                            <!-- 欄位名稱 (手機板) -->
+                            <div class="p-column-title approve"
+                                *ngIf="(col.label === 'Approve') && innerWidth < rwdBreakPoints">
+
+                                <div style="display: flex; flex-direction: column;">
+                                    <div style="display: flex; justify-content: space-around; width: 90vw;">
+                                        <div>Approve</div>
+                                        <input type="radio" [name]="data['radioGroup']" value="A"
+                                            [(ngModel)]="data['status']"
+                                            [disabled]="disabledLineApproveBtn || data['defaultStatusReject']">
+                                        <div>Reject</div>
+                                        <input type="radio" [name]="data['radioGroup']" value="R"
+                                            [(ngModel)]="data['status']"
+                                            [disabled]="disabledLineApproveBtn || data['defaultStatusReject']">
+                                    </div>
+                                    <!-- 手機板不管簽核或查詢頁面都是顯示mtn按鈕 -->
+                                    <div (click)="mtnOnClick(data,rowIndex)" *ngIf="(data['status'] === 'A') && data['canEditPriceMtn']"
+                                        style="color: #0000EE; text-decoration:underline; cursor: pointer; text-align: left; margin-top: 15px; ">
+                                        {{'PriceControlForm.Label.Maintain' | translate}} {{data['salesCostTypeDash'] }} {{'PriceControlForm.Label.Price' | translate}}</div>
+                                </div>
+                            </div>
+
+                            <!-- 表頭：一般 -->
+                            <div class="p-column-title normal" style="white-space: nowrap;"
+                                *ngIf="!(col.label === 'Approve' || col.label === 'Reject')">
+                                <div>{{col.label}} </div>
+                            </div>
+
+                            <!-- 表身 -->
+
+                            <!-- 一般顯示 -->
+                            <!-- line1 -->
+                            <div class="data-content" *ngIf="(col.type === 'normal')"
+                                [ngClass]="{'align-right' : alignRightCols.includes(col.field)}">
+                                <!-- 一般顯示 -->
+                                <span class="td-normal-container-pcf">
+                                    {{data[col.field]}}</span>
+                            </div>
+
+                            <!-- Input -->
+                            <div class="form-input" *ngIf="(col.type === 'input')">
+
+                                <ng-container *ngIf="col.label === 'Apply Remark'">
+                                    <input *ngIf="remarkRule.ap" type="text" pInputText class="pcf-comments"
+                                        [(ngModel)]="data['apRemark']" />
+                                    <span *ngIf="!remarkRule.ap">{{data['apRemark']}}</span>
+                                </ng-container>
+
+                                <ng-container *ngIf="col.label === 'SM Remark'">
+                                    <input *ngIf="remarkRule.sm" type="text" pInputText class="pcf-comments"
+                                        [(ngModel)]="data['smRemark']" />
+                                    <span *ngIf="!remarkRule.sm">{{data['smRemark']}}</span>
+                                </ng-container>
+
+                                <ng-container *ngIf="col.label === 'PM Remark'">
+                                    <input *ngIf="remarkRule.pm" type="text" pInputText class="pcf-comments"
+                                        [(ngModel)]="data['pmRemark']" />
+                                    <span *ngIf="!remarkRule.pm">{{data['pmRemark']}}</span>
+                                </ng-container>
+
+                            </div>
+                        </td>
+                    </ng-container>
+                </ng-container>
+
+            </ng-container>
+
+            <!-- More 按鈕 -->
+            <td *ngIf="innerWidth <= rwdBreakPoints" class="pcf-header-td pcf-s-col" id="pcf-td">
+                <div class="p-column-title normal" style="white-space: nowrap;">
+                    <div>More Info</div>
+                </div>
+
+                <div class="data-content">
+                    <!-- 一般顯示 -->
+                    <button class="extend-btn" (click)="data['isExpanded'] = !data['isExpanded'];"
+                        [class.expand]="data['isExpanded']" [class.collapsed]="!data['isExpanded']">
+                        <div class="button-content">
+                            {{ data['isExpanded'] ? 'Close' : 'More'}}
+                        </div>
+                    </button>
+                </div>
+
+            </td>
+
+            <!-- 手機板縮放內容 -->
+            <ng-container *ngIf="(innerWidth < rwdBreakPoints) && data['isExpanded']">
+                <ng-container *ngFor="let col of tableCols ; let i = index;">
+                    <ng-container *ngIf="!mobileCoreFields.includes(col.field)">
+                        <ng-container *ngIf="!(col.label === 'Approve' || col.label === 'Reject')">
+                            <td class="pcf-header-td" [ngClass]="col.colSize" id="pcf-td">
+                                <!-- 表頭：一般 -->
+                                <div class="p-column-title normal" style="white-space: nowrap;">
+                                    <div>{{col.label}} </div>
+                                </div>
+
+                                <div class="data-content" *ngIf="(col.type === 'normal')"
+                                    [ngClass]="{'align-right' : alignRightCols.includes(col.field)}">
+                                    <!-- 一般顯示 -->
+                                    <span class="td-normal-container-pcf">
+                                        {{data[col.field]}}</span>
+                                </div>
+
+                                <!-- Input -->
+                                <div class="form-input" *ngIf="(col.type === 'input')">
+
+                                    <ng-container *ngIf="col.label === 'Apply Remark'">
+                                        <input *ngIf="remarkRule.ap" type="text" pInputText class="pcf-comments"
+                                            [(ngModel)]="data['apRemark']" />
+                                        <span *ngIf="!remarkRule.ap">{{data['apRemark']}}</span>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="col.label === 'SM Remark'">
+                                        <input *ngIf="remarkRule.sm" type="text" pInputText class="pcf-comments"
+                                            [(ngModel)]="data['smRemark']" />
+                                        <span *ngIf="!remarkRule.sm">{{data['smRemark']}}</span>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="col.label === 'PM Remark'">
+                                        <input *ngIf="remarkRule.pm" type="text" pInputText class="pcf-comments"
+                                            [(ngModel)]="data['pmRemark']" />
+                                        <span *ngIf="!remarkRule.pm">{{data['pmRemark']}}</span>
+                                    </ng-container>
+
+                                </div>
+                            </td>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+
+
+        </tr>
+
+        <!-- 電腦版 查詢頁面 且 canEditPriceMtn 為false(不符合相關條件) 且有資料 -->
+        <app-pcf-lines-readonly-table
+            *ngIf="!((data['status'] === 'A') && formInfo.initFormInfo.urlIncludeApproving && data['canEditPriceMtn'] && !formInfo.initFormInfo.iAmAssignee && !formInfo.initFormInfo.isFirstStep) && (innerWidth > rwdBreakPoints) && data['maintain']"
+            [inputColumns]="mtnColumn" [inputData]="data['maintain']" [salesCostTypeDash]="data['salesCostTypeDash']"></app-pcf-lines-readonly-table>
+
+
+    </ng-template>
+
+</p-table>
+
+<app-pcf-lines-mtn [data]="linesMtn" (linesMtnEvent)="getLinesMtnEvent($event)"></app-pcf-lines-mtn>

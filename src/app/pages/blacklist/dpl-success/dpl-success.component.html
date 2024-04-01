@@ -1,0 +1,29 @@
+<div>
+  {{ completeTime }}
+</div>
+<ng-container *ngIf="!isFlowDone; else done">
+  <span>{{ 'BlackMtn.DplSuccess.waitFor' | translate }}</span>
+  <span *ngFor="let approveCol of approveData.getValue()">
+    {{ approveCol.signerNameCn }}{{ approveCol.signerNameEn }}({{ approveCol.signerCode }});
+  </span>
+  <span *ngFor="let assigneeCol of assigneeData.getValue()">
+    {{ assigneeCol.signerNameCn }}{{ assigneeCol.signerNameEn }}({{ assigneeCol.signerCode }})({{ 'BlackMtn.DplSuccess.assignee' | translate }});
+  </span>
+  <span>{{ 'BlackMtn.DplSuccess.approve' | translate }}</span>
+</ng-container>
+
+<ng-template #done>
+  <span>{{ 'BlackMtn.DplSuccess.flowEnd' | translate }}</span>
+</ng-template>
+
+<p-progressSpinner *ngIf="isLoading"></p-progressSpinner>
+
+<div>
+  <button
+    pButton
+    type="button"
+    label="{{ 'Button.Label.BackToPendingList' | translate }}"
+    class="btn-gray"
+    (click)="backToPendingListBtnClick()"
+  ></button>
+</div>

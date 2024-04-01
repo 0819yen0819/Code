@@ -1,0 +1,10 @@
+@import "../../../../../../styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+.loading-container {
+  @apply flex justify-center items-center h-24 w-full;
+  span {
+    @apply text-gray-400 font-semibold;
+  }
+}

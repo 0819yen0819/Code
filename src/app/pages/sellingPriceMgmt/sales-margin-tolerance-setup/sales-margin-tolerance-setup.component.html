@@ -1,0 +1,364 @@
+<div class="main-title-container">
+  <p>{{ "SalesMarginToleranceSetup.PageTitle" | translate }}</p>
+</div>
+
+<form class="form-table form-search">
+  <div class="form-row grid">
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">Group</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-select">
+            <p-dropdown name="ouGroup" [(ngModel)]="formValue.ouGroup" [options]="groupOptions"
+              placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}" (ngModelChange)="formValue.ou = null">
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">OU</label>
+          </div>
+        </div>
+
+        <div class="form-col col">
+          <div class="form-input">
+            <p-autoComplete [(ngModel)]="formValue.ou" [suggestions]="ouOptions" (completeMethod)="filterOu($event)"
+              [minLength]="1" field="displayOu" [style]="{ width: '100%' }"
+              (onBlur)="formValue.ou && (formValue.ou.ouCode?? (formValue.ou = null))"
+              [ngModelOptions]="{ standalone: true }"
+              placeholder="{{'Input.PlaceHolder.PleaseKeyIn' | translate}}"
+              (ngModelChange)="formValue.endCustomer = null;">
+            </p-autoComplete>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">Customer</label>
+          </div>
+        </div>
+
+        <div class="form-col col">
+          <div class="form-input">
+            <p-autoComplete appendTo="body" [(ngModel)]="formValue.customer" [ngModelOptions]="{standalone: true}"
+              [suggestions]="customerOptions" (completeMethod)="filterCustomer($event)"
+              (onBlur)="formValue.customer && (formValue.customer.value ?? (formValue.customer = null))" [minLength]=3
+              field="displayCustomer" [style]="{'width': '100%'}"
+              placeholder="{{'Input.PlaceHolder.PleaseKeyIn' | translate}}" [showClear]="true"
+              (onClear)="formValue.customer= null">
+            </p-autoComplete>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="form-row grid">
+    <div class="form-col lg:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">Brand</label>
+          </div>
+        </div>
+
+        <div class="form-col col">
+          <div class="form-input">
+            <p-autoComplete [(ngModel)]="formValue.brand" [suggestions]="brandOptions"
+              (completeMethod)="filterBrand($event)" [minLength]="1" field="label" [style]="{ width: '100%' }"
+              (onBlur)="formValue.brand && (formValue.brand.value ?? (formValue.brand = null))"
+              [ngModelOptions]="{ standalone: true }" (onSelect)="onBrandSelect($event.value)"
+              (ngModelChange)="formValue.ctg1 = null;formValue.productCode = null;formValue.endCustomer = null;"
+               placeholder="{{ 'Input.PlaceHolder.PleaseKeyIn' | translate }}"
+              [showClear]="true"
+              (onClear)="formValue.brand = null">
+            </p-autoComplete>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-col lg:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">Ctg1</label>
+          </div>
+        </div>
+
+        <div class="form-col col">
+          <div class="form-select">
+            <p-dropdown [options]="ctg1Options" appendTo="body" placeholder="{{
+                'DropDown.PlaceHolder.PleaseChoose' | translate
+              }}" [(ngModel)]="formValue.ctg1" (onBlur)="formValue.ctg1 ?? (formValue.ctg1 = null)"
+              [disabled]="!formValue.brand" [ngModelOptions]="{ standalone: true }" [style]="{ width: '100%' }"
+              [filter]="true" (ngModelChange)="onCtg1Select($event)" [showClear]="true" (onClear)="formValue.ctg1 = null">
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-col lg:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">Item</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-input">
+            <p-autoComplete [(ngModel)]="formValue.productCode" [suggestions]="itemOptions" (completeMethod)="
+               filterItem($event)
+              " [minLength]="1" field="label" [style]="{ width: '100%' }"
+              (onBlur)="formValue.productCode && (formValue.productCode.value ?? (formValue.productCode = null))"
+              [ngModelOptions]="{ standalone: true }" placeholder="{{
+                'Input.PlaceHolder.PleaseKeyIn' | translate
+              }}" appendTo="body" [showClear]="true"
+              (onClear)="onItemChange()">
+            </p-autoComplete>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-row grid">
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">End Customer</label>
+          </div>
+        </div>
+
+        <div class="form-col col">
+          <div class="form-input">
+            <p-autoComplete [(ngModel)]="formValue.endCustomer" [suggestions]="endCustomerOptions"
+              (completeMethod)="filterEndCustomer($event)" [minLength]="1" field="endCustomerName"
+              [style]="{ width: '100%' }"
+              (onBlur)="formValue.endCustomer && (formValue.endCustomer.endCustomerName ?? (formValue.endCustomer = null))"
+              [ngModelOptions]="{ standalone: true }" appendTo="body" [showClear]="true"
+              [disabled]="!formValue.ouGroup||!formValue.ou||!formValue.brand"
+              placeholder="{{'Input.PlaceHolder.PleaseKeyIn' | translate}}"
+              (onClear)="formValue.endCustomer = null">
+            </p-autoComplete>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "SalesMarginToleranceSetup.Label.Flag" | translate
+              }}</label>
+          </div>
+        </div>
+
+        <div class="form-col col">
+          <div class="form-select">
+            <p-dropdown [options]="statusOptions" appendTo="body" placeholder="{{
+                  'DropDown.PlaceHolder.PleaseChoose' | translate
+                }}" [(ngModel)]="formValue.status" name="flag" [ngModelOptions]="{ standalone: true }">
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-container">
+    <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-secondary"
+      (click)="resetOnClick()"></button>
+    <button pButton type="button" label="{{ 'Button.Label.Query' | translate }}" (click)="searchBtnClick(false)"
+      *ngIf="permissions.includes('view')"></button>
+    <button pButton type="button" label="{{ 'Button.Label.Download' | translate }}" (click)="downloadBtnClick()"
+      *ngIf="permissions.includes('view')"></button>
+  </div>
+</form>
+
+<ng-container *ngIf="displayResult">
+  <p-table #lazyTable class="table-panel" [value]="data" [columns]="selectedCols" [scrollable]="false"
+    [paginator]="true" paginatorPosition="bottom" [rowsPerPageOptions]="[10, 20]"
+    dataKey="id" [lazy]="true" (onLazyLoad)="onLazyLoad($event)" [selectionPageOnly]="true" [(selection)]="selectedData"
+    (onSort)="onSort($event)" (onPage)="onPage($event)" [totalRecords]="totalRecords" [resizableColumns]="true"
+    breakpoint="640px" scrollHeight="500px"
+    [first]="tableStatusKeepService.keepInfo.pageEvent.first" [rows]="tableStatusKeepService.keepInfo.pageEvent.rows">
+    <ng-template pTemplate="caption">
+      <div class="table-action-block">
+        <div class="table-search ui-inputgroup">
+          <input type="text" pInputText size="30" placeholder="Search keyword" [(ngModel)]="globalFilter"
+            (input)="filterLazy($event.target.value)" />
+          <span class="ui-inputgroup-addon">
+            <i class="pi pi-search"></i>
+          </span>
+        </div>
+
+        <div class="btn-container">
+          <button pButton type="button" icon="pi pi-plus" label="{{ 'Button.Label.Add' | translate }}" class="btn-teal"
+            (click)="dialogOpen()" *ngIf="permissions.includes('add')"></button>
+        </div>
+
+        <div class="btn-container right">
+          <button pButton type="button" icon="pi pi-sliders-h" label="{{ 'Button.Label.Filter' | translate }}"
+            class="btn-line" (click)="showFilter()"></button>
+        </div>
+      </div>
+      <!-- end: table-action-block -->
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr style="position: sticky; top: 0; z-index: 1">
+        <ng-container *ngFor="let col of selectedCols">
+          <th [ngClass]="col.css" *ngIf="
+              col.field === 'edit' ||
+              col.field === 'del' ||
+              col.field === 'viewArea' ||
+              col.field === 'viewHistory'
+            " scope="col">
+            <ng-container *ngIf="col.header.includes('/') && col.css === ''">
+              {{ col.header.substring(0, col.header.indexOf("/") + 1) }}
+              <br />
+              {{ col.header.substring(col.header.indexOf("/") + 1) }}
+            </ng-container>
+
+            <ng-container *ngIf="!col.header.includes('/') || col.css !== ''">
+              {{ col.header }}
+            </ng-container>
+          </th>
+          <th [pSortableColumn]="col.field" [ngClass]="col.css" *ngIf="
+              col.field !== 'edit' &&
+              col.field !== 'del' &&
+              col.field !== 'viewArea' &&
+              col.field !== 'viewHistory'
+            " scope="col"
+            [ngStyle]="{ 'min-width': col.minWidth ? col.minWidth + 'px' : '0' }">
+            <ng-container *ngIf="col.header.includes('/') && col.css === ''">
+              {{ col.header.substring(0, col.header.indexOf("/") + 1) }}
+              <br />
+              {{ col.header.substring(col.header.indexOf("/") + 1) }}
+            </ng-container>
+
+            <ng-container *ngIf="!col.header.includes('/') || col.css !== ''">
+              {{ col.header }}
+            </ng-container>
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </ng-container>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td *ngFor="let col of selectedCols" [ngClass]="col.css">
+          <span class="p-column-title">{{ col.header }}</span>
+          <ng-container *ngIf="col.field === 'edit' && permissions.includes('edit')">
+            <div class="btn-container">
+              <button pButton type="button" class="icon-btn btn-orange" (click)="dialogOpen(data)">
+                <img src="./assets/imgs/icon-btn/edit.svg" alt="Detail" />
+              </button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="col.field === 'del'">
+            <div class="btn-container">
+              <button pButton type="button" icon="pi pi-trash" class="icon-btn btn-dark-red"
+                (click)="clickDelete(data)"></button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="col.field === 'viewArea'">
+            <div class="btn-container">
+              <button pButton type="button" class="icon-btn btn-teal" (click)="viewArea(data['productCode'])">
+                <img src="./assets/imgs/icon-btn/detail.svg" alt="Detail" />
+              </button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="col.field === 'viewHistory'">
+            <div class="btn-container">
+              <button pButton type="button" class="icon-btn btn-teal" (click)="viewHistory(data)">
+                <img src="./assets/imgs/icon-btn/detail.svg" alt="Detail" />
+              </button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="
+              col.field !== 'del' &&
+              col.field !== 'edit' &&
+              col.field !== 'viewArea' &&
+              col.field !== 'viewHistory'
+            ">
+            <!-- <p>{{data[col.field]}}</p> -->
+            <p [ngStyle]="{ 'color': col.field ==='fromDate' && data.fromDate > nowDate && data.status == 'Y' ? 'red' : '' }">{{ processTableData(col.field, data) }}</p>
+          </ng-container>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-container>
+<p-dialog header="{{ 'Dialog.Header.FilterColumns' | translate }}" [(visible)]="displayFilter" [draggable]="false"
+  [blockScroll]="true" [modal]="true">
+  <form>
+    <div class="form-row grid">
+      <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of tableCols">
+        <div class="form-checkbox">
+          <p-checkbox name="checkboxGroup" [label]="col.header" [value]="col" [(ngModel)]="selectedCols"
+            [disabled]="col?.isDisabled"></p-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-gray btn-line"
+        (click)="changeFilter()"></button>
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog class="width-sm" [(visible)]="displayDelDialog" [draggable]="false" [blockScroll]="true" [modal]="true">
+  <div class="popup-content center">
+    <h2>{{ "SalesMarginToleranceSetup.Label.ConfirmDelete" | translate }}</h2>
+  </div>
+
+  <div class="btn-container">
+    <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray btn-line"
+      (click)="displayDelDialog = false"></button>
+    <button pButton type="button" label="{{ 'Button.Label.Delete' | translate }}" class="btn-dark-red"
+      (click)="delete()"></button>
+  </div>
+</p-dialog>
+
+<p-dialog [header]="dialogHeader" [(visible)]="showDialog" [draggable]="false" [closeOnEscape]="true"
+  [blockScroll]="true" [modal]="true" (onHide)="onHideDetailDialog()" *ngIf="formValue">
+  <ng-container *ngIf="isAddMode">
+    <p-tabView>
+      <!--# Single item add event tab-->
+      <p-tabPanel header="{{'SalesMarginToleranceSetup.Label.SingleAdd' | translate }}" leftIcon="pi pi-file">
+        <app-sales-margin-tolerance-setup-dialog [showDialog]="showDialog" (closeDialog)="dialogClose()"
+          [editObj]="editObj" (saveEmitter)="getDialogInfo($event)" *ngIf="showDialog">
+        </app-sales-margin-tolerance-setup-dialog>
+      </p-tabPanel>
+      <p-tabPanel header="{{'SalesMarginToleranceSetup.Label.MultiAdd' | translate }}" leftIcon="pi pi-clone">
+        <sales-margin-tolerance-upload-dialog [isDialogClose]="isUploadDialogClose"
+          (saveEmitter)="getDialogInfo($event)" (closeDialog)="dialogClose()"  *ngIf="showDialog">
+        </sales-margin-tolerance-upload-dialog>
+      </p-tabPanel>
+    </p-tabView>
+  </ng-container>
+  <ng-container *ngIf="isEditMode">
+    <app-sales-margin-tolerance-setup-dialog [showDialog]="showDialog" (closeDialog)="dialogClose()" [editObj]="editObj"
+      (saveEmitter)="getDialogInfo($event)" *ngIf="showDialog">
+    </app-sales-margin-tolerance-setup-dialog>
+  </ng-container>
+</p-dialog>
+
+<!-- 訊息dialog -->
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams" [contentList]="noticeContentList">
+</app-common-notice-check-dialog>
+
+<p-progressSpinner *ngIf="showSpinner"></p-progressSpinner>

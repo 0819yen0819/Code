@@ -1,0 +1,21 @@
+<div id="accordion_stepchart" class="toggler" *ngIf="chartDataOfLang.length > 0">
+    <div id="effect" class="ui-widget-content ui-corner-all" style="border: 0px solid #FFFFFF;">
+
+        <h3 class="ui-widget-header ui-corner-all" id="h_title" (click)="toggleCollapsible()" style="cursor: pointer;">
+            <span
+                [ngClass]="{'ui-icon ui-icon-triangle-1-s': !isContentVisible, 'ui-icon ui-icon-triangle-1-e': isContentVisible}"
+                style="display:inline-block;" id="sp_icon">
+            </span>Step
+        </h3>
+
+        <div class="collapsible-content" [ngClass]="{ 'show': isContentVisible }">
+            <div class="steps2">
+                <ng-container *ngFor="let data of chartDataOfLang">
+                    <a [ngClass]="data.className" [title]="data.toolTips">{{data.content}}</a>
+                </ng-container>
+                <a>{{'MyFlow.accordionStepChart.closure' | translate}}</a>
+            </div>
+        </div>
+
+    </div>
+</div>

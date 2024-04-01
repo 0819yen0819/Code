@@ -1,0 +1,28 @@
+<div class="main-title-container">
+  <p>{{ "SoaControlSetup.Label.SoaControlSetup" | translate }}</p>
+</div>
+
+<div class="tab-view-container">
+  <p-tabView>
+    <p-tabPanel
+      leftIcon="pi pi-file"
+      header="{{ 'SoaControlSetup.Label.SoaControlSetupByUser' | translate }}"
+    >
+      <ng-template pTemplate="content">
+        <app-soa-control-setup-by-user></app-soa-control-setup-by-user>
+      </ng-template>
+    </p-tabPanel>
+    <p-tabPanel
+      leftIcon="pi pi-file"
+      header="{{ 'SoaControlSetup.Label.SoaControlSetupByItem' | translate }}"
+      ><ng-template pTemplate="content">
+        <app-soa-control-setup-by-item></app-soa-control-setup-by-item> </ng-template
+    ></p-tabPanel>
+    <p-tabPanel
+      leftIcon="pi pi-file-excel"
+      header="{{ 'SoaControlSetup.Label.SoaExclusionControl' | translate }}"
+      ><ng-template pTemplate="content">
+        <app-soa-exclusion-control></app-soa-exclusion-control> </ng-template
+    ></p-tabPanel>
+  </p-tabView>
+</div>

@@ -1,0 +1,5298 @@
+{
+  "LANG": {
+    "zh-tw": "繁體中文",
+    "en-us": "English",
+    "Options": [
+      {
+        "label": "繁體中文",
+        "value": "zh-tw"
+      },
+      {
+        "label": "English",
+        "value": "en-us"
+      }
+    ]
+  },
+  "MainLayout": {
+    "Label": {
+      "testEnv": "TestENV"
+    }
+  },
+  "Login": {
+    "Label": {
+      "DevLogin": "Dev Login"
+    }
+  },
+  "PendingApproval": {
+    "Label": {
+      "PendingList": "Pending List",
+      "CompletedAndNotification": "Completed&Notification",
+      "FormName": "Form Name",
+      "FormNo": "Form No",
+      "Applicant": "Applicant",
+      "StartDate": "Start Date",
+      "EndDate": "End Date",
+      "ProcessStatus": "Process Status"
+    },
+    "Columns": [
+      {
+        "field": "submitDate",
+        "header": "Applied Date",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formNo",
+        "header": "Form No",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formTypeNameE",
+        "header": "Form Name",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "subject",
+        "header": "Subject",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "requesterName",
+        "header": "Applicant",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "lastUpdatedDate",
+        "header": "Processed Time",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "owner",
+        "header": "Owner",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "desc",
+        "header": "Summary",
+        "isDefault": true,
+        "isDisabled": false
+      }
+    ],
+    "ColumnsTab2": [
+      {
+        "field": "submitDate",
+        "header": "Applied Date",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formNo",
+        "header": "Form No",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formTypeNameE",
+        "header": "Form Name",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "subject",
+        "header": "Subject",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "requesterName",
+        "header": "Applicant",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "lastUpdatedDate",
+        "header": "Processed Time ",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "owner",
+        "header": "Owner",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "workflowStatus",
+        "header": "Flow Status",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "status",
+        "header": "Process Status",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "desc",
+        "header": "Summary",
+        "isDefault": true,
+        "isDisabled": false
+      }
+    ],
+    "PlaceHolder": {
+      "PleaseChoose": "Please Choose",
+      "PleaseEnter": "Please Enter"
+    }
+  },
+  "NewApplication": {
+    "Label": {
+      "NewForm": "New Form Intake"
+    }
+  },
+  "MyApplication": {
+    "Label": {
+      "MyForm": "My Form",
+      "TrackForm": "Track Form",
+      "FormName": "Form Name",
+      "FormNo": "Form No",
+      "Applicant": "Applicant",
+      "StartDate": "Start Date",
+      "EndDate": "End Date",
+      "Status": "Flow Status",
+      "ConfirmDelete": "Are you sure you want to delete this record?",
+      "SearchType": "Search Type",
+      "Subject": "Subject",
+      "Owner": "Owner",
+      "Corp": "Corp",
+      "Keyword": "Keyword"
+    },
+    "Columns": [
+      {
+        "field": "submitDate",
+        "header": "Applied Date",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formNo",
+        "header": "Form No",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formTypeNameE",
+        "header": "Form Name",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "subject",
+        "header": "Subject",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "requesterName",
+        "header": "Applicant",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "lastUpdatedDate",
+        "header": "Processed Time",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "owner",
+        "header": "Owner",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "status",
+        "header": "Flow Status",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "desc",
+        "header": "Summary",
+        "isDefault": true,
+        "isDisabled": false
+      }
+    ],
+    "PlaceHolder": {
+      "PleaseChoose": "Please Choose",
+      "PleaseEnter": "Please Enter",
+      "Keyword": "Enter for multiple criteria"
+    },
+    "EditColums": {
+      "field": "edit",
+      "header": "Edit"
+    },
+    "ColumnFunctions": [
+      {
+        "field": "edit",
+        "header": "Edit"
+      },
+      {
+        "field": "del",
+        "header": "Delete"
+      }
+    ],
+    "Options": {
+      "searchTypeOptions": [
+        {
+          "label": "General",
+          "value": "General"
+        },
+        {
+          "label": "Supervisor - Applicant",
+          "value": "SupervisorApplicant"
+        },
+        {
+          "label": "Supervisor - Owner",
+          "value": "SupervisorOwner"
+        },
+        {
+          "label": "Assistant - Applicant",
+          "value": "AssistantApplicant"
+        },
+        {
+          "label": "Assistant - Owner",
+          "value": "AssistantOwner"
+        },
+        {
+          "label": "Resign - Applicant",
+          "value": "ResignApplicant"
+        },
+        {
+          "label": "Resign - Owner",
+          "value": "ResignOwner"
+        }
+      ],
+      "StatusOptions": [
+        {
+          "label": "Please Choose",
+          "value": ""
+        },
+        {
+          "label": "Draft",
+          "value": "Draft"
+        },
+        {
+          "label": "Approving",
+          "value": "Approving"
+        },
+        {
+          "label": "Approve",
+          "value": "Approve"
+        },
+        {
+          "label": "Reject",
+          "value": "Reject"
+        }
+      ],
+      "trackFormStatusOptions": [
+        {
+          "label": "All",
+          "value": "All"
+        },
+        {
+          "label": "Approving",
+          "value": "Approving"
+        },
+        {
+          "label": "Approve",
+          "value": "Approve"
+        },
+        {
+          "label": "Reject",
+          "value": "Reject"
+        },
+        {
+          "label": "System Withdraw",
+          "value": "Withdraw"
+        }
+      ],
+      "trackFormApplicantOptions": [
+        {
+          "label": "All",
+          "value": "All"
+        }
+      ],
+      "trackFormOwnerOptions": [
+        {
+          "label": "All",
+          "value": "All"
+        }
+      ]
+    },
+    "TrackFormColumns": [
+      {
+        "field": "createdDate",
+        "header": "Applied Date",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formNo",
+        "header": "Form No",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formTypeNameE",
+        "header": "Form Name",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "subject",
+        "header": "Subject",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "status",
+        "header": "Flow Status",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "owner",
+        "header": "Owner",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "requesterName",
+        "header": "Applicant",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "remark",
+        "header": "Remark",
+        "isDefault": true,
+        "isDisabled": false
+      }
+    ],
+    "statusDesc": {
+      "Approving": "Approving",
+      "Approve": "Approve",
+      "Reject": "Reject",
+      "Draft": "Draft"
+    },
+    "Message": {
+      "DelSuccess": "Successfully deleted"
+    }
+  },
+  "MyFlow": {
+    "Label": {},
+    "Options": {
+      "documentTypeOptions": [
+        {
+          "label": "Notfication",
+          "value": "Notfication"
+        },
+        {
+          "label": "Completed",
+          "value": "Completed"
+        }
+      ]
+    },
+    "workflowStatusDesc": {
+      "Approving": "Approving",
+      "Approve": "Approve",
+      "Reject": "Reject",
+      "Withdrawed": "Withdrawed"
+    },
+    "statusDesc": {
+      "Notice": "Notfication",
+      "Cancel": "Notfication",
+      "AddCosigner": "Notfication",
+      "Approve": "Completed",
+      "Reject": "Completed",
+      "Resolve": "Completed",
+      "Approving": "Approving",
+      "Rollback": "Completed"
+    },
+    "accordionStepChart":{
+      "closure" : "Closure"
+    }
+  },
+  "Delegation": {
+    "Title": {
+      "AddDelegationSetting": "Add Delegation Setting",
+      "EditDelegationSetting": "Edit Delegation Setting"
+    },
+    "Label": {
+      "DelegationSetting": "Deputy Staff Setting",
+      "AgentUserStatus": "Status",
+      "User": "User",
+      "AgentDate": "Period",
+      "GeneralType": "General Setting",
+      "DeptType": "Advanced Setting",
+      "FormName": "Form Name",
+      "MailFlag": "Receive Mail Alert When Deputy Staff Receive Flow",
+      "FormType": "Application Form",
+      "DeptName": "Department",
+      "ActiveFlag": "ActiveFlag",
+      "Yes": "Yes",
+      "No": "No",
+      "PleaseInputUserCode":"Please enter deputy staff code"
+    },
+    "Columns": [
+      {
+        "field": "activeFlag",
+        "header": "Status",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "userName",
+        "header": "User",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "agentType",
+        "header": "Setup",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "agentDeptNameC",
+        "header": "Department",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "agentUser",
+        "header": "Deputy",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formTypeId",
+        "header": "Application Form",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "ouCode",
+        "header": "OU",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "mailFlag",
+        "header": "Receive Mail Alert",
+        "isDefault": true,
+        "isDisabled": false
+      }
+    ],
+    "Options": {
+      "ActiveFlagOptions": [
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ],
+      "SupervisorUserOptions": [{ "label": "Please Choose", "value": null }]
+    },
+    "Descs": {
+      "YesOrNoDesc": {
+        "Y": "Yes",
+        "N": "No"
+      },
+      "ActiveFlagDesc": {
+        "Y": "Active",
+        "N": "InActive"
+      },
+      "AgentTypeDesc": {
+        "GENERAL": "General Setting",
+        "DEPT": "Advanced Setting"
+      }
+    },
+    "EditColums": {
+      "field": "edit",
+      "header": "Edit",
+      "isDefault": true,
+      "isDisabled": false
+    },
+    "Message": {
+      "AgentInfoDuplicate": "Your deputy staff setting is duplicate. Please check again."
+    }
+  },
+  "DPLResult": {
+    "Label": {
+      "DPLCheckResultSearch": "DPL Check Result Search",
+      "TransactionCheckResultQuery": "Transaction Check Result Query",
+      "BatchCheckResultQuery": "Batch Check Result Query",
+      "StartDate": "Start Date",
+      "EndDate": "End Date",
+      "AreaOrCountry": "Area/Country"
+    },
+    "Columns": [
+      {
+        "field": "trxReferenceNo",
+        "header": "Trx Reference No",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "precisionRunNumber",
+        "header": "Precision Run Number",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "sourceType",
+        "header": "Source Type",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "dataType",
+        "header": "Data Type",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "partyType",
+        "header": "Party Type",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "custNameE",
+        "header": "Cust Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "addressId",
+        "header": "Address Id",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "addressLine",
+        "header": "Address Line",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "country",
+        "header": "Country",
+        "isDefault": true,
+        "css": "sm-col",
+        "maxWidth": "4%",
+        "textAlign": "left"
+      },
+      {
+        "field": "eccnItemLine",
+        "header": "ECCN Item Line",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "resultsStatus",
+        "header": "Results Status",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "resultsUrl",
+        "header": "Results Url",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "complianceStatus",
+        "header": "Compliance Status",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "dplResultsStatus",
+        "header": "DplResults Status",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ebcResultsStatus",
+        "header": "EbcResults Status",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "eccnResultsStatus",
+        "header": "EccnResults Status",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayCreatedDate",
+        "header": "Run Date",
+        "isDefault": true,
+        "css": "datetime-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "BatchColumns": [
+      {
+        "field": "batchReference",
+        "header": "Batch Reference",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouCode",
+        "header": "Ou Code",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouName",
+        "header": "Ou Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "additionalReference3",
+        "header": "Cust Code",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "custName",
+        "header": "Cust Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "addressId",
+        "header": "Address Id",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "addressLine",
+        "header": "Address Line",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "addressLineCn",
+        "header": "Address Line Cn",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "country",
+        "header": "Country",
+        "isDefault": true,
+        "css": "sm-col",
+        "maxWidth": "6%",
+        "textAlign": "left"
+      },
+      {
+        "field": "countryName",
+        "header": "Country Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "resultsStatus",
+        "header": "Results Status",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "resultsUrl",
+        "header": "Results Url",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "location",
+        "header": "Location Code",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "hubCtm",
+        "header": "HUB CTM",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayCreatedDate",
+        "header": "Run Date",
+        "isDefault": true,
+        "css": "datetime-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "DetailColums": {
+      "field": "detail",
+      "header": "Detail",
+      "css": "icon-col",
+      "maxWidth": "",
+      "textAlign": "left"
+    },
+    "Options": {
+      "countryOptions": [
+        {
+          "label": "Please Choose",
+          "value": null
+        }
+      ],
+      "sourceTypeOptions": [
+        {
+          "label": "Please Choose",
+          "value": null
+        },
+        {
+          "label": "online",
+          "value": "online"
+        },
+        {
+          "label": "shipment",
+          "value": "shipment"
+        }
+      ]
+    },
+    "Message": {
+      "DownloadProcess": "Currently processing, The result will be sent by email."
+    }
+  },
+  "DPL_Hold_Fail": {
+    "statusDesc": {
+      "Approve": "Flow End",
+      "Reject": "Reject",
+      "Approving": "Approving"
+    }
+  },
+  "DPL_Hold": {
+    "Label": {
+      "Applicant": "Applicant",
+      "Department": "Department",
+      "ApplicantDate": "Applicant Date",
+      "ApplicationInformation": "Application Information",
+      "ApprovalHistory": "Approval History",
+      "AttachFileAndURL": "Attach File&URL",
+      "AttachFile": "Attach File",
+      "AttachURL": "Attach URL",
+      "Censor": "Approvals",
+      "GoBack": "Go Back",
+      "ReferenceNumber": "Reference Number",
+      "FormNo": "Form No",
+      "Sales": "Sales",
+      "Date": "Date",
+      "SalesDept": "Sales Dept",
+      "CreatedByLastUpdateBy": "Created By/Last Update By",
+      "CustomerCode": "Customer Code",
+      "Facility": "Facility",
+      "CustomerChineseName": "Customer Chinese Name",
+      "CustomerEnglishName": "Customer English Name",
+      "FileUpload": "File Upload",
+      "CensorAction": "Approval Action",
+      "Approve": "Approve",
+      "Reject": "Reject",
+      "Return": "Return",
+      "AddCosigner": "Redirect Approval",
+      "AddAssignee": "Seek Endorsement",
+      "Endorser": "Endorser",
+      "Opinion": "Opinion",
+      "ReturnTo": "Return To",
+      "CustNameE": "CustNameE",
+      "City": "City",
+      "Country": "Country",
+      "PostalCode": "Postal Code",
+      "ResultURL": "Result URL",
+      "ResultStatus": "Result Status",
+      "ShipTo": "Ship To",
+      "DeliverTo": "Deliver To",
+      "AddFileOrLink": "Add File / Link",
+      "MaxFileSize": "File attach cannot exceed 40 MB",
+      "Confirm": "Confirm",
+      "ConfirmSubmit": "Do you want to submit?",
+      "ConfirmAccept": "Yes",
+      "ConfirmReject": "No"
+    },
+    "Message": {
+      "DuplicateFileName": "Duplicate File Name.",
+      "SubmitSuccess": "Submit Success !"
+    }
+  },
+  "DPL_Fail": {
+    "Label": {
+      "Applicant": "Applicant",
+      "Department": "Department",
+      "ApplicantDate": "Applicant Date",
+      "ApplicationInformation": "Application Information",
+      "ApprovalHistory": "Approval History",
+      "AttachFileAndURL": "Attach File&URL",
+      "AttachFile": "Attach File",
+      "AttachURL": "Attach URL",
+      "Censor": "Approvals",
+      "GoBack": "Go Back",
+      "ReferenceNumber": "Reference Number",
+      "FormNo": "Form No",
+      "Sales": "Sales",
+      "Date": "Date",
+      "SalesDept": "Sales Dept",
+      "CreatedByLastUpdateBy": "Created By/Last Update By",
+      "CustomerCode": "Customer Code",
+      "Facility": "Facility",
+      "CustomerChineseName": "Customer Chinese Name",
+      "CustomerEnglishName": "Customer English Name",
+      "FileUpload": "File Upload",
+      "CensorAction": "Approval Action",
+      "Approve": "Approve",
+      "Reject": "Reject",
+      "Return": "Return",
+      "AddCosigner": "Redirect Approval",
+      "AddAssignee": "Seek Endorsement",
+      "Endorser": "Endorser",
+      "Opinion": "Opinion",
+      "ReturnTo": "Return To",
+      "ReviewResults": "Review Results",
+      "WhiteListDPLHold": "White List DPL Hold",
+      "CustomerNumber": "Customer Number",
+      "CustomerName": "Customer Name",
+      "Country": "Country",
+      "Address": "Address",
+      "ResultsStatus": "Results Status",
+      "ResultsUrl": "Results Url",
+      "AddressID": "Address ID",
+      "AddFileOrLink": "Add File / Link",
+      "MaxFileSize": "File attach cannot exceed 40 MB",
+      "Confirm": "Confirm",
+      "ConfirmSubmit": "Do you want to submit?",
+      "ConfirmAccept": "Yes",
+      "ConfirmReject": "No"
+    },
+    "Message": {
+      "DuplicateFileName": "Duplicate File Name.",
+      "SubmitSuccess": "Submit Success !"
+    }
+  },
+  "BlackMtn": {
+    "Label": {
+      "DPLMtn": "DPL Mtn",
+      "Flag": "Flag"
+    },
+    "Columns": [
+      {
+        "field": "customerNo",
+        "header": "Customer No",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "customerName",
+        "header": "Customer Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "customerNameEg",
+        "header": "Customer Eng Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "frNumber",
+        "header": "FR Number",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "source",
+        "header": "Source",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayPublishDate",
+        "header": "Publish Date",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "remark",
+        "header": "Remark",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "flag",
+        "header": "Flag",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "6%",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayCreatedDate",
+        "header": "Created Date",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "createdBy",
+        "header": "Created By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayLastUpdatedDate",
+        "header": "Last Updated Date",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "header": "Last Updated By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "EditColums": {
+      "field": "edit",
+      "header": "Edit",
+      "css": "icon-col",
+      "maxWidth": "4%",
+      "textAlign": "left"
+    },
+    "Options": {
+      "flagOptions": [
+        {
+          "label": "Please Choose",
+          "value": null
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ]
+    },
+    "DplSuccess": {
+      "flowEnd": "Flow End.",
+      "waitFor": "Pending at ",
+      "approve": " for approval.",
+      "assignee": "Assignee"
+    }
+  },
+  "WhiteListTempMtn": {
+    "Label": {
+      "TemporaryWhiteListManagement": "Temporary White List Mtn",
+      "TemporaryWhiteListFileUpload": "Temporary White List File Upload",
+      "Flag": "Flag"
+    },
+    "Columns": [
+      {
+        "field": "customerNameEg",
+        "header": "Customer Eng Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "country",
+        "header": "Country",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "8%",
+        "textAlign": "left"
+      },
+      {
+        "field": "address",
+        "header": "Address",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "flag",
+        "header": "Flag",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "8%",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayEndDate",
+        "header": "End Date",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "10%",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayCreatedDate",
+        "header": "Created Date",
+        "isDefault": true,
+        "css": "datetime-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "createdBy",
+        "header": "Created By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayLastUpdatedDate",
+        "header": "Last Updated Date",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "header": "Last Updated By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "Options": {
+      "flagOptions": [
+        {
+          "label": "Please Choose",
+          "value": null
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ]
+    },
+    "Message": {
+      "UploadSuccessfully": "Upload Successfully!"
+    }
+  },
+  "WhiteListMtn": {
+    "Label": {
+      "WhiteListManagement": "White List Mtn",
+      "Flag": "Flag"
+    },
+    "Columns": [
+      {
+        "field": "ouCode",
+        "header": "OU Code",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "customerNo",
+        "header": "Customer No",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "customerName",
+        "header": "Customer Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "customerNameEg",
+        "header": "Customer Eng Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "country",
+        "header": "Country",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "addressId",
+        "header": "Address Id",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "address",
+        "header": "Address",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "flag",
+        "header": "Flag",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "6%",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayCreatedDate",
+        "header": "Created Date",
+        "isDefault": true,
+        "css": "datetime-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "createdBy",
+        "header": "Created By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayLastUpdatedDate",
+        "header": "Last Updated Date",
+        "isDefault": true,
+        "css": "datetime-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "header": "Last Updated By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "Options": {
+      "flagOptions": [
+        {
+          "label": "Please Choose",
+          "value": null
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ]
+    }
+  },
+  "NonEARItemMtn": {
+    "Label": {
+      "NonEARItemMtn": "Non-EAR Item Mtn",
+      "NonEARItemItem": "Non-EAR Item",
+      "DownloadSampleFile": "Download Sample File",
+      "Flag": "Flag",
+      "DPLCustomerNo": "DPL Customer No"
+    },
+    "Columns": [
+      {
+        "field": "brand",
+        "header": "Brand",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "productCode",
+        "header": "Item",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "15%",
+        "textAlign": "left"
+      },
+      {
+        "field": "corpGroup",
+        "header": "Group",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouCode",
+        "header": "OU Code",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouName",
+        "header": "OU Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "customerNo",
+        "header": "DPL Customer No",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "customerName",
+        "header": "DPL Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "remark",
+        "header": "Remark",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "flag",
+        "header": "Flag",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayCreatedDate",
+        "header": "Created Date",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "createdBy",
+        "header": "Created By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayLastUpdatedDate",
+        "header": "Last Updated Date",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "header": "Last Updated By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "EditColums": {
+      "field": "edit",
+      "header": "Edit",
+      "css": "icon-col",
+      "maxWidth": "4%",
+      "textAlign": "left"
+    },
+    "Options": {
+      "flagOptions": [
+        {
+          "label": "Please Choose",
+          "value": null
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ],
+      "groupOptions": [
+        {
+          "label": "Please Choose",
+          "value": null
+        }
+      ]
+    }
+  },
+  "SampleOutDPL": {
+    "Label": {
+      "SampleOutDPLCheck": "Sample Out DPL Check",
+      "SingleQuery": "Single Query",
+      "BatchQuery": "Batch Query",
+      "DPLLog": "DPL Log(Single)",
+      "CustomerName": "Customer Name",
+      "AreaOrCountry": "Area / Country",
+      "CustomerAddress": "Customer Address",
+      "ECCNCode": "ECCN Code",
+      "PleaseFillCompany": "Please fill out company full-name",
+      "PleaseFillCompanyAddress": "Please fill out company full-address",
+      "PleaseFillCustomerName": "Please fill customer name in English",
+      "PleaseFillCustomerAddress": "Please fill customer address in English",
+      "RequiredField": "Required field",
+
+      "RequiredCustomerName": "The customer name of characters is limited to 80,if more than will be truncated.",
+      "RequiredCustomerAddress": "The customer address of characters is limited to 120,if more than will be truncated.",
+      "AcceptsUploadFileType": "Upload file only accepts : CSV/XLS/XLSX",
+      "Range": "Range",
+      "Today": "Today",
+      "LastWeek": "Last Week",
+      "ThisMonth": "This Month",
+      "LastMonth": "Last Month",
+      "DownloadSampleFile": "Download Sample File"
+    },
+    "Columns": [
+      {
+        "field": "displayCreatedDate",
+        "header": "Date",
+        "isDefault": true,
+        "css": "datetime-col"
+      },
+      {
+        "field": "ouName",
+        "header": "OU Name",
+        "isDefault": true,
+        "css": ""
+      },
+      {
+        "field": "userCode",
+        "header": "User Id",
+        "isDefault": true,
+        "css": ""
+      },
+      {
+        "field": "userName",
+        "header": "User Name",
+        "isDefault": true,
+        "css": ""
+      },
+      {
+        "field": "custNameE",
+        "header": "Customer Name",
+        "isDefault": true,
+        "css": "lg-col"
+      },
+      {
+        "field": "country",
+        "header": "Area / Country",
+        "isDefault": true,
+        "css": ""
+      },
+      {
+        "field": "addressLine",
+        "header": "Customer Address",
+        "isDefault": true,
+        "css": "lg-col"
+      },
+      {
+        "field": "resultsStatus",
+        "header": "DPL Result",
+        "isDefault": true,
+        "css": ""
+      },
+      {
+        "field": "eccn",
+        "header": "ECCN Code",
+        "isDefault": true,
+        "css": ""
+      },
+      {
+        "field": "exportFlag",
+        "header": "Control Item",
+        "isDefault": true,
+        "css": ""
+      },
+      {
+        "field": "runNumber",
+        "header": "Compliance Run#",
+        "isDefault": true,
+        "css": ""
+      }
+    ],
+    "Options": {
+      "countryOptions": [
+        {
+          "label": "Please Choose",
+          "value": null
+        }
+      ]
+    },
+    "Message": {
+      "UploadSuccessfully": "Upload Successfully! The result will be sent by email.",
+      "NotAllowMulitpleFileUpload": "Upload failed! Single file only.",
+      "NotAllowThisUploadFileType": "Upload failed! Invalid file type.",
+      "FileSizeExceed": "Upload failed! maximum upload size exceed."
+    }
+  },
+  "ImpExpLicenseMtn": {
+    "Label": {
+      "ImpLicenseMtn": "Import License",
+      "ExpLicenseMtn": "Export License",
+      "FormName": "Form Name",
+      "FormNo": "Form No",
+      "CountryCode": "Warehouse Location",
+      "CustomerVendorType": "Customer / Vendor",
+      "CustomerVendorCode": "Customer/Vendor#",
+      "Item": "Item No",
+      "Flag": "ActiveFlag(Y/N)",
+      "StartDate": "Start Date",
+      "EndDate": "End Date",
+      "OOuCode": "Purchasing OU",
+      "OuCode": "Receiving OU",
+      "OOuCodeExp": "Orders OU",
+      "OuCodeExp": "Shipping OU",
+      "Consignee": "Exporter / Consignee",
+      "ConsigneeAddress": "Exporter / Consignee Address",
+      "CCATS": "CCATS",
+      "ConfirmDelete": "Are you sure you want to delete this record?",
+      "LicenseNo": "License#",
+      "ECCN": "ECCN",
+      "ShipFrom": "Ship From",
+      "ShipTo": "Ship To Address",
+      "DeliverTo": "Deliver To Address",
+      "Customer": "Customer",
+      "Vendor": "Vendor"
+    },
+    "ImpColumns": [
+      {
+        "field": "displayOOuCode",
+        "header": "Purchasing OU",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "datetime-col"
+      },
+      {
+        "field": "oouName",
+        "header": "Order OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayOuCode",
+        "header": "Receiving OU",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "datetime-col"
+      },
+      {
+        "field": "ouName",
+        "header": "Receiving OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "licenseNo",
+        "header": "License#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "productCode",
+        "header": "Item No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "eccn",
+        "header": "ECCN",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ccats",
+        "header": "CCATs",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "proviso",
+        "header": "Proviso",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "vcType",
+        "header": "VC Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "vcNo",
+        "header": "Vendor#/Customer#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "vcName",
+        "header": "Vendor/Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "shipFromAddress",
+        "header": "Ship From",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "price",
+        "header": "Price",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "quantity",
+        "header": "Apply Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "balanceQuantity",
+        "header": "Balance Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "scFlag",
+        "header": "Special  Condition",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "countryCode",
+        "header": "Warehouse Location",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "remark",
+        "header": "Remark",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "formNo",
+        "header": "Flow No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "licenseType",
+        "header": "Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "activeFlag",
+        "header": "Flag",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "ExpColumns": [
+      {
+        "field": "displayOOuCode",
+        "header": "Orders OU",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "datetime-col"
+      },
+      {
+        "field": "oouName",
+        "header": "Orders OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayOuCode",
+        "header": "Shipping OU",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "datetime-col"
+      },
+      {
+        "field": "ouName",
+        "header": "Shipping OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "licenseNo",
+        "header": "License#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "productCode",
+        "header": "Item No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "eccn",
+        "header": "ECCN",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ccats",
+        "header": "CCATs",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "proviso",
+        "header": "Proviso",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "vcType",
+        "header": "VC Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "vcNo",
+        "header": "Vendor#/Customer#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "vcName",
+        "header": "Vendor/Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "shipToAddress",
+        "header": "Ship To Address",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "deliveryToAddress",
+        "header": "Deliver To Address",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "price",
+        "header": "Price",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "quantity",
+        "header": "Apply Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "balanceQuantity",
+        "header": "Balance Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "deliveryNo",
+        "header": "Delivery No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "endUseRmk",
+        "header": "End Use",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "endUser",
+        "header": "End User",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "endUserAddress",
+        "header": "End User Address",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "countryCode",
+        "header": "Warehouse Location",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "remark",
+        "header": "Remark",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "formNo",
+        "header": "Flow No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "licenseType",
+        "header": "Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "activeFlag",
+        "header": "Flag",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "EditColums": {
+      "field": "edit",
+      "header": "Edit",
+      "isDefault": true,
+      "isDisabled": false,
+      "maxWidth": "",
+      "textAlign": "left",
+      "css": "sm-col"
+    },
+    "Options": {
+      "customerVendorTypeOptions": [
+        {
+          "label": "Customer",
+          "value": "Customer"
+        },
+        {
+          "label": "Vendor",
+          "value": "Vendor"
+        }
+      ],
+      "flagOptions": [
+        {
+          "label": "Please Choose",
+          "value": null
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ],
+      "vcTypeOptions": [
+        {
+          "label": "Customer",
+          "value": "C"
+        },
+        {
+          "label": "Vendor",
+          "value": "V"
+        }
+      ],
+      "countryCodeOptions": [
+        {
+          "label": "Please Choose",
+          "value": null
+        }
+      ],
+      "itemFilterTypeOptions": [
+        {
+          "label": "Include",
+          "value": "Include"
+        },
+        {
+          "label": "Starts With",
+          "value": "StartsWith"
+        },
+        {
+          "label": "Ends With",
+          "value": "EndsWith"
+        },
+        {
+          "label": "Multi",
+          "value": "Multi"
+        }
+      ],
+      "editScFlagOptions": [
+        {
+          "label": "Please Choose",
+          "value": null
+        },
+        {
+          "label": "SC047",
+          "value": "SC047"
+        },
+        {
+          "label": "SC054",
+          "value": "SC054"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ]
+    },
+    "Message": {
+      "AddSuccess": "Successfully added",
+      "EditSuccess": "Successfully saved",
+      "DelSuccess": "Successfully deleted",
+      "AddFailed": "Failed added",
+      "EditFailed": "Failed saved",
+      "DelFailed": "Failed deleted",
+      "ShipFromAddressOuCodeAndVcNoRequired": "OuCode and VcNo must be selected before searching",
+      "LicenseMasterExists": "Already exists, please confirm.",
+      "MustBeNumber": "Must be number and",
+      "QtyMustBeGE": "Must be greater than ",
+      "DateMustBeLater": "Start Date must be no later than End Date"
+    },
+    "ColumnFunctions": [
+      {
+        "field": "del",
+        "header": "Delete",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "viewArea",
+        "header": "View Area",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "viewHistory",
+        "header": "View History",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      }
+    ],
+    "AreaEccnColums": [
+      {
+        "field": "country",
+        "header": "Country",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "eccn",
+        "header": "ECCN",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "exportControlFlag",
+        "header": "Export Control",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "HistoryColums": [
+      {
+        "field": "trxReferenceNo",
+        "header": "Trx Number",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayCreateDate",
+        "header": "Delivery Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "productCode",
+        "header": "Item",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ccats",
+        "header": "CCATs",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "quantity",
+        "header": "Used Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "balanceQuantity",
+        "header": "Balance Quantity",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "PlaceHolder": {
+      "Items": "Enter for multiple criteria"
+    }
+  },
+  "EucLicenseMtn": {
+    "PageTitle": "End Use Certificate (EUC)",
+    "Dialog": {
+      "Label": {
+        "Group": "Group",
+        "Exp": "Effective Date",
+        "Flag": "Flag"
+      },
+      "Hint": {
+        "DelSuccess": "Delete successed",
+        "DelFailed": "Delete Failed"
+      }
+    },
+    "Message": {
+      "AddSuccess": "Successfully added",
+      "EditSuccess": "Successfully saved",
+      "DelSuccess": "Successfully deleted",
+      "AddFailed": "Failed added",
+      "EditFailed": "Failed saved",
+      "DelFailed": "Failed deleted",
+      "LicenseMasterExists": "Already exists, please confirm."
+    },
+    "Columns": [
+      {
+        "field": "displayOuGroup",
+        "header": "Group",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "licenseNo",
+        "header": "License#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "productCode",
+        "header": "Item No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "eccn",
+        "header": "ECCN",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ccats",
+        "header": "CCATs",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "proviso",
+        "header": "Proviso",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "vcType",
+        "header": "VC Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "vcNo",
+        "header": "Vendor#/Customer#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "vcNameE",
+        "header": "Vendor/Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "quantity",
+        "header": "Apply Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "balanceQuantity",
+        "header": "Balance Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+
+      {
+        "field": "government",
+        "header": "Government Unit",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "civilianEndUser",
+        "header": "Civilian End User",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "civilianEndUse",
+        "header": "Civilian End Use",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "remark",
+        "header": "Remark",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "formNo",
+        "header": "Flow No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "licenseType",
+        "header": "Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "activeFlag",
+        "header": "Flag",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "ColumnFunctions": [
+      {
+        "field": "edit",
+        "header": "Edit",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "del",
+        "header": "Delete",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "viewArea",
+        "header": "View Area",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "viewHistory",
+        "header": "View History",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      }
+    ]
+  },
+  "SoaLicenseMtn": {
+    "PageTitle": "Statement of Assurance (SOA)",
+    "Message": {
+      "DownloadProcess": "Currently processing, The result will be sent by email."
+    },
+    "Label": {
+      "IsOriginal": "Original /　Non-Original",
+      "OuGroup": "Group",
+      "OOuCode": "Orders OU",
+      "OuCode": "Shipping OU",
+      "Original": "Original",
+      "NonOriginal": "Non-Original"
+    },
+    "Columns": [
+      {
+        "field": "displayOuGroup",
+        "header": "Group",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ouCode",
+        "header": "Orders OU",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ouName",
+        "header": "Order OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "vcNo",
+        "header": "Vendor#/Customer#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "vcName",
+        "header": "Vendor/Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "specialApproval",
+        "header": "Special Approval",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "isOriginal",
+        "header": "Original/Non-Original",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "productCode",
+        "header": "Item",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "brand",
+        "header": "Brand",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ctg1",
+        "header": "Ctg1",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ctg2",
+        "header": "Ctg2",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ctg3",
+        "header": "Ctg3",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "eccn",
+        "header": "ECCN",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "quantityFlag",
+        "header": "Deduction",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "licenseNo",
+        "header": "License#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ccats",
+        "header": "CCATs",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "proviso",
+        "header": "Proviso",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "quantity",
+        "header": "Apply Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "balanceQuantity",
+        "header": "Balance Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "formNo",
+        "header": "Flow No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "licenseType",
+        "header": "Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "vcType",
+        "header": "VC Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "activeFlag",
+        "header": "Flag",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "ColumnFunctions": [
+      {
+        "field": "viewArea",
+        "header": "View Area",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "viewHistory",
+        "header": "View History",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "edit",
+        "header": "Edit",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "del",
+        "header": "Delete",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      }
+    ],
+    "Options": {
+      "IsOriginalOptions": [
+        {
+          "label": "Please Choose",
+          "value": null
+        },
+        {
+          "label": "Original",
+          "value": "Y"
+        },
+        {
+          "label": "Non-Original",
+          "value": "N"
+        }
+      ]
+    },
+    "Msg":{
+      "ApplyForErpPermission":"Please apply for ERP permission"
+    }
+  },
+  "Sc047LicenseMtn": {
+    "PageTitle": "HK Special Condition (SC047/SC054)",
+    "Label": {
+      "ShipTo": "Ship To Address",
+      "DeliverTo": "Deliver To Address"
+    },
+    "Dialog": {
+      "Label": {
+        "Flag": "Flag"
+      }
+    },
+    "Columns": [
+      {
+        "field": "displayOOuCode",
+        "header": "Orders OU",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "oouName",
+        "header": "Orders OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "displayOuCode",
+        "header": "Shipping OU",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ouName",
+        "header": "Shipping OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "licenseNo",
+        "header": "License#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "productCode",
+        "header": "Item No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "eccn",
+        "header": "ECCN",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ccats",
+        "header": "CCATs",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "proviso",
+        "header": "Proviso",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "vcType",
+        "header": "VC Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "vcNo",
+        "header": "Vendor#/Customer#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "vcNameE",
+        "header": "Vendor/Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "shipToAddress",
+        "header": "Ship To Address",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "deliveryToAddress",
+        "header": "Deliver To Address",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "price",
+        "header": "Price",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "quantity",
+        "header": "Apply Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "balanceQuantity",
+        "header": "Balance Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "endUseRmk",
+        "header": "End Use",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "countryCode",
+        "header": "Warehouse Location",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "remark",
+        "header": "Remark",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "formNo",
+        "header": "Flow No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "licenseType",
+        "header": "Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "activeFlag",
+        "header": "Flag",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "Message": {
+      "AddSuccess": "Successfully added",
+      "EditSuccess": "Successfully saved",
+      "DelSuccess": "Successfully deleted",
+      "AddFailed": "Failed added",
+      "EditFailed": "Failed saved",
+      "DelFailed": "Failed deleted",
+      "ShipFromAddressOuCodeAndVcNoRequired": "OuCode and VcNo must be selected before searching",
+      "LicenseMasterExists": "Already exists, please confirm."
+    }
+  },
+  "RuleSetup": {
+    "Title": {
+      "EditRuleSetup": "Edit Rule Setting"
+    },
+    "Label": {
+      "RuleSetting": "Rule Setting",
+      "Tenant": "Tenant",
+      "RuleItem": "Rule Item",
+      "RuleVal": "Rule Value"
+    },
+    "Columns": [
+      {
+        "field": "rulesTenant",
+        "header": "Tenant",
+        "isDefault": true,
+        "isDisabled": false,
+        "css": "sm-col"
+      },
+      {
+        "field": "rulesCategoryRuleNameCn",
+        "header": "Rule Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "css": "sm-col"
+      },
+      {
+        "field": "ruleVal",
+        "header": "Value",
+        "isDefault": true,
+        "isDisabled": false,
+        "css": "sm-col"
+      }
+    ],
+    "ColumnFunctions": [
+      {
+        "field": "edit",
+        "header": "Edit"
+      }
+    ],
+    "Options": {
+      "DefaultNull": [
+        {
+          "label": "Please Choose",
+          "value": null
+        }
+      ]
+    },
+    "Message": {
+      "RuleValRequied": "Please Enter Rule Value"
+    }
+  },
+  "FormFileQuery": {
+    "PageTitle": "Form File Query",
+    "Label": {
+      "FormTypeName": "Form Name",
+      "FormNo": "Form No",
+      "Subject": "Subject",
+      "Remark": "Remark",
+      "FileName": "File Name",
+      "UploadBy": "Upload By",
+      "UploadDate": "Upload Date"
+    },
+    "Columns": [
+      {
+        "field": "displayUploadDate",
+        "header": "Upload Date",
+        "isDefault": true
+      },
+      {
+        "field": "formNo",
+        "header": "Form No",
+        "isDefault": true
+      },
+      {
+        "field": "formTypeName",
+        "header": "Form Name",
+        "isDefault": true
+      },
+      {
+        "field": "subject",
+        "header": "Subject",
+        "isDefault": true
+      },
+      {
+        "field": "fileName",
+        "header": "File Name",
+        "isDefault": true
+      },
+      {
+        "field": "uploadBy",
+        "header": "Upload By",
+        "isDefault": true
+      },
+      {
+        "field": "remark",
+        "header": "Remark",
+        "isDefault": true
+      }
+    ],
+    "PlaceHolder": {
+      "PleaseChoose": "Please Choose",
+      "Remark": "Enter for multiple criteria"
+    }
+  },
+  "FormType": {
+    "Label": {
+      "FormTypeAuth": "Form Permission",
+      "Category": "Category",
+      "FormType": "Form Type",
+      "FormTypeNameC": "Form Chinese Name",
+      "FormTypeNameE": "Form English Name",
+      "IsWithdraw": "Is Withdrawed",
+      "Status": "Status",
+      "Display": "Display",
+      "AddUrl": "Add Url",
+      "ProcessKey": "Process Key",
+      "ConfirmDelete": "確認刪除？"
+    },
+    "Title": {
+      "AddFormTypeAuth": "Add Form Type Auth",
+      "EditFormTypeAuth": "Edit Form Type Auth",
+      "ViewFormTypeAuth": "View Form Type Auth"
+    },
+    "Columns": [
+      {
+        "field": "category",
+        "header": "Category",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formType",
+        "header": "Form Type",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formTypeNameC",
+        "header": "Form Chinese Name",
+        "isDefault": true,
+        "isDisabled": true
+      },
+      {
+        "field": "formTypeNameE",
+        "header": "Form English Name",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "status",
+        "header": "Status",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "display",
+        "header": "Display",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "addUrl",
+        "header": "Add Url",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "processKey",
+        "header": "Process Key",
+        "isDefault": true,
+        "isDisabled": false
+      }
+    ],
+    "Message": {
+      "formTypeRequired": "Required field",
+      "formTypeNameCRequired": "Required field",
+      "formTypeNameERequired": "Required field",
+      "FormTypeAlreadyExists": "Form Type already exists",
+      "addUrlRequired": "Required field"
+    },
+    "isWithdrawDesc": {
+      "true": "true",
+      "false": "false"
+    },
+    "statusDesc": {
+      "Deactivate": "Deactivate",
+      "Activate": "Activate"
+    },
+    "displayDesc": {
+      "true": "true",
+      "false": "false"
+    },
+    "Options": {
+      "statusOptions": [
+        {
+          "label": "Deactivate",
+          "value": "Deactivate"
+        },
+        {
+          "label": "Activate",
+          "value": "Activate"
+        }
+      ],
+      "isWithdrawOptions": [
+        {
+          "label": "True",
+          "value": "true"
+        },
+        {
+          "label": "False",
+          "value": "false"
+        }
+      ],
+      "displayOptions": [
+        {
+          "label": "True",
+          "value": "true"
+        },
+        {
+          "label": "False",
+          "value": "false"
+        }
+      ]
+    },
+    "PlaceHolder": {
+      "PleaseChoose": "Please Choose",
+      "PleaseEnter": "Please Enter"
+    },
+    "EditColums": {
+      "field": "edit",
+      "header": "Edit"
+    }
+  },
+  "AuthGroup": {
+    "Title": {
+      "AddAuthGroup": "Add Group",
+      "EditAuthGroup": "Edit Group",
+      "ViewAuthGroup": "View Group"
+    },
+    "Label": {
+      "AuthGroupMgmt": "Group Management",
+      "Tenant": "Tenant",
+      "AuthGroupType": "Group Type",
+      "AuthGroupDesc": "Group Description",
+      "IsDefault": "Is Default Group",
+      "AuthGroupName": "Group Name",
+      "Member": "Member",
+      "ConfirmDelete": "Are you sure you want to delete this record?"
+    },
+    "Options": {
+      "DefaultNull": [
+        {
+          "label": "Please Choose",
+          "value": null
+        }
+      ],
+      "AuthGroupType": [
+        {
+          "label": "User",
+          "value": "USER"
+        },
+        {
+          "label": "BU",
+          "value": "BU"
+        },
+        {
+          "label": "Department",
+          "value": "DEPT"
+        }
+      ],
+      "IsDefault": [
+        {
+          "label": "Yes",
+          "value": "Y"
+        },
+        {
+          "label": "No",
+          "value": "N"
+        }
+      ]
+    },
+    "Columns": [
+      {
+        "field": "tenant",
+        "header": "Tenant",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "authGroupName",
+        "header": "Group Name",
+        "isDefault": true,
+        "isDisabled": true
+      },
+      {
+        "field": "authGroupType",
+        "header": "Group Type",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "isDefault",
+        "header": "Is Default Group",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "authGroupDesc",
+        "header": "Group Description",
+        "isDefault": true,
+        "isDisabled": false
+      }
+    ],
+    "ColumnFunctions": [
+      {
+        "field": "edit",
+        "header": "Edit"
+      },
+      {
+        "field": "del",
+        "header": "Delete"
+      },
+      {
+        "field": "view",
+        "header": "View"
+      }
+    ],
+    "Message": {
+      "AuthGroupNameRequired": "Group Name Required",
+      "AuthGroupNameExists": "This record already exists. Please check.",
+      "AddSuccess": "Successfully saved",
+      "EditSuccess": "Successfully saved",
+      "DelSuccess": "Successfully deleted",
+      "MemberRequired": "Please Choose Member",
+      "AuthGroupNameOverLength": "Over Length 100",
+      "AuthGroupDescOverLength": "Over Length 300"
+    }
+  },
+  "Role": {
+    "Label": {
+      "RoleMgmt": "Role Permission Management",
+      "Tenant": "Tenant",
+      "RoleName": "Role Name",
+      "RoleDesc": "Role Description",
+      "RoleType": "Role Type",
+      "RoleStatus": "Status",
+      "Permission": "Permission",
+      "FilterColumns": "欄位篩選",
+      "ConfirmDelete": "Are you sure you want to delete this record?",
+      "ExpandAll": "Expand All",
+      "SelectGroup": "Group Setting",
+      "AuthGroupIsDefault": "Default",
+      "RolePermissionSetting": "Role Permission Setting"
+    },
+    "PlaceHolder": {
+      "RoleName": "請輸入",
+      "RoleDesc": "請輸入",
+      "Search": "Search"
+    },
+    "Options": {
+      "DefaultNull": [
+        {
+          "label": "Please Choose",
+          "value": null
+        }
+      ],
+      "RoleType": [
+        {
+          "label": "Default Role ",
+          "value": "DEFAULT"
+        },
+        {
+          "label": "General Role",
+          "value": "GENERAL"
+        },
+        {
+          "label": "System Admin",
+          "value": "ADMIN"
+        }
+      ],
+      "RoleStatus": [
+        {
+          "label": "Activate",
+          "value": "ACTIVATE"
+        },
+        {
+          "label": "Deactivate",
+          "value": "DEACTIVATE"
+        }
+      ],
+      "AuthGroupType": [
+        {
+          "label": "User",
+          "value": "USER"
+        },
+        {
+          "label": "BU",
+          "value": "BU"
+        },
+        {
+          "label": "Department",
+          "value": "DEPT"
+        }
+      ],
+      "AuthGroupIsDefault": [
+        {
+          "label": "Default",
+          "value": "Y"
+        },
+        {
+          "label": "",
+          "value": "N"
+        }
+      ]
+    },
+    "Columns": [
+      {
+        "field": "roleName",
+        "header": "Role Name",
+        "isDefault": true,
+        "isDisabled": true
+      },
+      {
+        "field": "roleDesc",
+        "header": "Role Description",
+        "isDefault": true
+      },
+      {
+        "field": "roleType",
+        "header": "Role Type",
+        "isDefault": true
+      },
+      {
+        "field": "status",
+        "header": "Status",
+        "isDefault": true,
+        "isDisabled": true
+      },
+      {
+        "field": "lastUpdatedDate",
+        "header": "Last Updated Date",
+        "isDefault": true
+      },
+      {
+        "field": "lastUpdatedBy",
+        "header": "Last Updated By",
+        "isDefault": true
+      }
+    ],
+    "ColumnFunctions": [
+      {
+        "field": "edit",
+        "header": "Edit"
+      },
+      {
+        "field": "del",
+        "header": "Delete"
+      },
+      {
+        "field": "view",
+        "header": "Detail"
+      }
+    ],
+    "Role-Step1": {
+      "Title1": "Role Setting",
+      "Title2": "Group Setting"
+    },
+    "Role-Step2": {
+      "Title": "Role Permission Setting"
+    },
+    "Role-Step3": {
+      "Title": "Role Information"
+    },
+    "Message": {
+      "TenantRequired": "Tenant Required",
+      "RoleNameRequired": "Role Name Required",
+      "RoleTypeRequired": "Role Type Required",
+      "RoleStatusRequired": "Status Required",
+      "RoleNameExists": "This record already exists. Please check.",
+      "AddSuccess": "Successfully saved",
+      "EditSuccess": "Successfully saved",
+      "DelSuccess": "Successfully deleted",
+      "AuthGroupRequired": "Please Choose Group",
+      "PermissionRequired": "Please Choose Permission",
+      "RoleNameOverLength": "Over Length 100",
+      "RoleDescOverLength": "Over Length 300"
+    },
+    "StepItems": [
+      {
+        "label": "Role & Group Setting"
+      },
+      {
+        "label": "Role Permission Setting"
+      },
+      {
+        "label": "Confirm"
+      }
+    ],
+    "SubscribedDesc": [
+      {
+        "label": "",
+        "value": "Y"
+      },
+      {
+        "label": "(Not Subscribed)",
+        "value": "N"
+      }
+    ]
+  },
+  "System": {
+    "Message": {
+      "Error": "系統發生錯誤，請稍後再試"
+    }
+  },
+  "Button": {
+    "Label": {
+      "Action": "Action",
+      "Accept": "Accept",
+      "Download": "Download",
+      "Edit": "Edit",
+      "Add": "Add",
+      "Modify": "Modify",
+      "Delete": "Delete",
+      "Query": "Query",
+      "Reset": "Reset",
+      "Save": "Save",
+      "Cancel": "Cancel",
+      "Confirm": "Confirm",
+      "ConfirmAction": "Confirm Action",
+      "Filter": "Filter",
+      "PreviousPage": "Previous Page",
+      "PreviousStep": "Previous Step",
+      "NextStep": "Next Step",
+      "Close": "Close",
+      "Login": "Login",
+      "Logout": "Logout",
+      "Submit": "Submit",
+      "Approve": "Approve",
+      "Draft": "Save as Draft",
+      "Quering": "Quering...",
+      "BackToPendingList": "Back to Pending List",
+      "RedirectApprove": "Redirect Approval",
+      "RedirectApproval": "Seek Endorsement",
+      "Extend": "Extend",
+      "PackUp": "Pack Up",
+      "ExportPdf":"Export PDF"
+    }
+  },
+  "Input": {
+    "PlaceHolder": {
+      "PleaseEnter": "Please Enter",
+      "PleaseSelect": "Please select",
+      "PleaseKeyIn": "Please key in",
+      "Choose": "Choose",
+      "PleaseSelectOrKeyIn": "Please select or key in",
+      "PleaseEnterKeyword": "Please Enter Keyword",
+      "PleaseEnterRefShipment": "Please Enter Ref Shipment#",
+      "SearchTableByKeyword": "Search",
+      "OnlyPosIntAndBig0": "Please key in in numeric.",
+      "OnlyBig0": "Can only be greater than 0",
+      "PleaseSelectStartDate": "Please selecte/key in start date.",
+      "PleaseSelectEndDate": "Please selecte/key in end date.",
+      "FreeKeyInorSelect": "Free key in or automatically displayed according to selection",
+      "NoMatch": "No match"
+    }
+  },
+  "DropDown": {
+    "PlaceHolder": {
+      "PleaseChoose": "Please choose",
+      "NoChooseEqualtoALL":", Not selected means ALL",
+      "NoData":"No Data"
+    }
+  },
+  "Dialog": {
+    "Header": {
+      "AddAssignee": "Add Assignee(s)",
+      "Choose": "Choose",
+      "Approve": "Approve",
+      "MessagePrompt": "Message",
+      "FilterColumns": "Column Filter"
+    },
+    "Message": {
+      "SuccessfullySaved": "Successfully saved",
+      "SelectAtLeastOne": "Select At Least One"
+    }
+  },
+  "Span": {
+    "Label": {
+      "RequiredField": "Required Field",
+      "InvalidURL": "Link must be a valid URL",
+      "OnlyPosIntAndBig0": "Please key in in numeric.",
+      "OnlyBig0": "Can only be greater than 0",
+      "OnlyBigEqual0": "Can only be greater than or equal to 0",
+      "RequiredBig0Field": "Please fill in an integer greater than 0"
+    }
+  },
+  "Info": "Info",
+  "Success": "Success",
+  "Warn": "Warn",
+  "Error": "Error",
+  "LEHRuleManager": {
+    "Label": {
+      "Flag": "Flag"
+    },
+    "Columns": [
+      {
+        "field": "eccn",
+        "label": "ECCN"
+      },
+      {
+        "field": "civ",
+        "label": "CIV"
+      },
+      {
+        "field": "gbs",
+        "label": "GBS"
+      },
+      {
+        "field": "enc",
+        "label": "ENC"
+      },
+      {
+        "field": "lvs",
+        "label": "LVS"
+      },
+      {
+        "field": "orderAmt",
+        "label": "LVS:AMT(Single Order_USD)"
+      },
+      {
+        "field": "yearAmt",
+        "label": "LVS LimitAMT(YearItem Cust/End Cust_USD)"
+      },
+      {
+        "field": "remark",
+        "label": "Remark"
+      },
+      {
+        "field": "flag",
+        "label": "Flag"
+      },
+      {
+        "field": "createdDate",
+        "label": "Creation Date"
+      },
+      {
+        "field": "createdBy",
+        "label": "Creation By"
+      },
+      {
+        "field": "lastUpdatedDate",
+        "label": "Last Update Date"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "label": "Last Updated By"
+      }
+    ],
+    "Dialog": {
+      "Header": {
+        "Add": "Add License Exception Rule",
+        "Modify": "Modify License Exception Rule"
+      }
+    }
+  },
+  "ECCNStatusMTNManager": {
+    "Label": {
+      "Flag": "Flag"
+    },
+    "Columns": [
+      {
+        "field": "eccn",
+        "label": "ECCN"
+      },
+      { "field": "civ", "label": "CIV" },
+      { "field": "gbs", "label": "GBS" },
+      { "field": "enc", "label": "ENC" },
+      { "field": "lvs", "label": "LVS" },
+      { "field": "orderAmt", "label": "Order AMT" },
+      { "field": "yearAmt", "label": "Year AMT" },
+      { "field": "remark", "label": "Remark" },
+      {
+        "field": "flag",
+        "label": "Flag"
+      },
+      {
+        "field": "createdDate",
+        "label": "Creation Date"
+      },
+      {
+        "field": "createdBy",
+        "label": "Creation By"
+      },
+      {
+        "field": "lastUpdatedDate",
+        "label": "Last Update Date"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "label": "Last Updated By"
+      }
+    ]
+  },
+  "LicenseMgmt": {
+    "FormType": {
+      "Imp": "Import License Control Form",
+      "Exp": "Export License Control Form",
+      "SC047": "SC047 / SC054 License Form",
+      "SOA": "SOA Form",
+      "ECCNStatusMtn": "ECCN Maintain",
+      "LEH": "License Exception HOLD"
+    },
+    "Status": {
+      "Approve": "Approve",
+      "Reject": "Reject",
+      "Approving": "Approving",
+      "Draft": "Draft",
+      "null": "System Error"
+    },
+    "Common": {
+      "Label": {
+        "Apply": "Apply",
+        "ReferenceNo": "Reference No",
+        "Applicant": "Applicant",
+        "Date": "Date",
+        "Department": "Dept",
+        "Action": "Action",
+        "SimpleAction": "Action",
+        "FileUpload": "File Upload",
+        "AttachedLink": "Attached Link",
+        "FlowReturnTo": "Flow Return To",
+        "Endorsement": "Endorsement",
+        "Opinion": "Opinion",
+        "BatchEdit": "Batch Edit"
+      },
+      "Button": {
+        "AddAttachment": "Add File / URL Attachment"
+      },
+      "Title": {
+        "FormArea": "Form Filling Area",
+        "AddItemInfo": "Add Item Related Information",
+        "AddECCNInfo": "Add ECCN",
+        "AttachedFile": "Attached File",
+        "AttachedLink": "Attached Link",
+        "AuditHistoryLog": "Sign-off History",
+        "Notification": "Notification",
+        "SelectField": "Column Filter",
+        "SelectItems": "Select Item(s) From",
+        "Opinion": "Opinion",
+        "Attachment": "Attachment",
+        "AddFileOrLink": "Add File / Link",
+        "AddEUCMtnRecord": "Add End Use Certificate (EUC)",
+        "ModifyEUCMtnRecord": "Modify End Use Certificate (EUC)",
+        "AddSCMtnRecord": "Add HK Sepcial Condition (SC047)",
+        "ModifySCMtnRecord": "Modify HK Sepcial Condition (SC047)"
+      },
+      "Tabs": {
+        "ApplicationInfo": "Application Info",
+        "AuditHistoryLog": "Sign-off History",
+        "AttachmentLink": "Attachment & Link",
+        "SingleModify": "Single Modify",
+        "SingleAdd": "Single Add",
+        "MultiAdd": "Multi Add",
+        "File": "File",
+        "Link": "Link",
+        "SignOffHistory": "Sign-off History"
+      },
+      "Option": {
+        "Accept": "Approve",
+        "Reject": "Reject",
+        "RedirectApproval": "Redirect Approval",
+        "SeekEndorsement": "Seek Endorsement",
+        "FlowReturn": "Flow Return"
+      },
+      "Hint": {
+        "AddURLFailed": "Add URL Failed",
+        "AddURLSuccess": "Add URL Successed",
+        "AddFileFailed": "Add File Failed",
+        "AddFileSuccess": "Add File Successed",
+        "AddURLFailedExisted": "The link already exists in the existing list.",
+        "NoData": "No Data",
+        "NoMatchResult": "No matching results.",
+        "DoubleSearch": "Search",
+        "AddProductFirst": "Please add product first.",
+        "QDeleteData": "Do you want to delete the selected data(s) ?",
+        "QDeleteFile": "Do you want to delete the selected file(s) ?",
+        "QDeleteLink": "Do you want to delete the selected link(s) ?",
+        "QSubmit": "Are you sure send this form?",
+        "FileExistTemOrQueueList": "already exists in the temporary/existing queue.",
+        "URLExistTemOrQueueList": "The URL already exists in the temporary/existing queue.",
+        "PlzChooseReturnTask": "Please choose flow return to.",
+        "PlzChooseCosigners": "Please choose cosigner(s).",
+        "Timeout": "Server Timeout !",
+        "AttachedURL": "Sitelink format, must start with http:// or https://",
+        "AttachedURLFormatError": "URL is malformed. ( ex : http(s)://... )",
+        "AuditApprovingPrefix": "Pending at",
+        "AuditApprovingSuffix": " for approval",
+        "AuditApprovingConSigneeSuffix": "(as endorsor) ",
+        "AddFileCKMe": "Add attached files, click me !",
+        "NotAllowReturn": "Not allow return now.",
+        "CurWordCount": "Current word count",
+        "ItemExistError": "already exists and cannot be duplicated! If you want to modify it, please click the edit button of the record.",
+        "ApplySuccess": "Apply Successfully.",
+        "DraftSuccess": "Draft Save Successfully.",
+        "ApproveSuccess": "Approve Successfully.",
+        "ApplyFailed": "Apply Failed.",
+        "DraftFailed": "Draft Save Failed.",
+        "ApproveFailed": "Approve Failed.",
+        "NotKeyIn": "Not Key In",
+        "OpinionUpto250": "Comments can only be within 250 (inclusive) words",
+        "FileNotUploaded": "The file has not been uploaded, confirm if you want to close the window",
+        "NotAllowedChinese": "not allowed Chinese",
+        "NoResult": "No Result",
+        "CreateSuccess": "Create Success",
+        "EditSuccess": "Edit Success",
+        "EditFailed": "Edit Failed",
+        "EXPDOError": "Error Delivery No.",
+        "DupItemLicenseError": "The same part number cannot apply for a duplicate license.",
+        "DupCCATsLicenseError": "The same CCATs cannot apply for a duplicate license.",
+        "ITEMCCATsChooseOne": "Either Item or CCATs is required",
+        "LicenseQtyMustLessThanBAFAQty": "License# Qty must less than BAFA# Balance Qty",
+        "ServerErrorPleaseContactAdmin":"InternalServer error, please contact system administrator",
+        "ReminderSend":"Reminder Send！",
+        "ReminderSendFailed":"Reminder Send Failed！"
+      }
+    },
+    "EUC": {
+      "Title": {},
+      "Label": {
+        "CV": "Customer/Vendor",
+        "EndUser": "End User",
+        "Group": "Group",
+        "Exp": "Effective Date",
+        "EndUse": "End Use",
+        "Remark": "Remark",
+        "Customer": "Customer",
+        "Vendor": "Vendor"
+      },
+      "Tabs": {},
+      "Option": {
+        "Gov": "Government",
+        "Civ": "Civilian",
+        "NCivUse": "Civilian Use",
+        "CivUse": "Non-Civilian Use"
+      },
+      "Hint": {
+        "EUCFile": "Please upload attachment: EUC document that signed by Customer"
+      },
+      "Cols": {
+        "productCode": "Item",
+        "brand": "Brand",
+        "eccn": "ECCN",
+        "ccats": "CCATs",
+        "proviso": "Proviso",
+        "quantity": "Quantity",
+        "ctmPo": "Ctm Po",
+        "project": "Project",
+        "periodFrom": "Period From",
+        "periodTo": "Period To"
+      }
+    },
+    "IMPEXP": {
+      "Option": {
+        "AJB_Shipping": "AJB Shipping",
+        "General_Shipping": "General Shipping"
+      },
+      "PlaceHolder": {
+        "EndUseAllowNumAndEng": ", End Use only allows alphanumeric characters.",
+        "PlzSelectOOUAndCVIMP": "Please select Receiving OU and Customer/Vendor first",
+        "PlzSelectOOUAndCVEXP": "Please select Orders OU and Customer/Vendor first",
+        "PlzKeyOrByShiptoCode": "Please key in Ship To Address or pick by automatically",
+        "PleaseKeyInUSDPrice": "Please key in Price (USD)",
+        "PleaseKeyInPrice": "Please key in Price"
+      },
+      "Label": {
+        "Receiving_Shipping_OU_IMP": "Purchasing OU",
+        "Receiving_Shipping_OU_EXP": "Orders OU",
+        "Receiving_Shipping_Inventory_OU_IMP": "Receiving OU (Import License Application Form)",
+        "Receiving_Shipping_Inventory_OU_EXP": "Shipping OU (Export License Application Form)",
+        "Warehouse_Location": "Warehouse Location",
+        "CV": "Customer/Vendor",
+        "Shipping_Type": "Shipping Type",
+        "ExpImpConsignee": "Exporter / Consignee (Import)",
+        "ExpConsignee": "Exporter",
+        "ImpConsignee": "Consignee (Import)"
+      },
+      "Hint": {
+        "ProductSelectFirst": "Please select Item first.",
+        "EndUseAllowNumAndEng": "End Use only allows alphanumeric characters.",
+        "SelectWarehouseFirst": "Please select Warehouse Location first.",
+        "SelectOUFirstIMP": "Please select Receiving OU (Import License Application Form) first.",
+        "SelectOUFirstEXP": "Please select Shipping OU (Import License Application Form) first.",
+        "SelectShipToAddressFirst": "Please key in Ship To Address first.",
+        "SelectCVFirst": "Please select Customer/Vendor first.",
+        "EXPSpecialNotice": "This order is for AJB, please pay attention to the company when applying for a license.",
+        "IMPSpecialNotice": "This order is for purchasing, please pay attention to the company when applying for a license.",
+        "LicenseQtyMustLessThanBalanceQty": "BAFA License Qty must less than balance quantity",
+        "ItemNoRecord":" no application record found. Please upload the relevant information as an attachment.\ne.g., Data sheet, CSC037, CCATS, etc.",
+        "WarehouseHKPriceRequired":"The warehouse location is in Hong Kong, the Price (USD) is required."
+      },
+
+      "Cols": {
+        "IMP": {
+          "key":"Seq",
+          "productCode": "Item",
+          "quantity": "Quantity",
+          "price": "Price",
+          "usdPrice":"Price (USD)",
+          "eccn": "ECCN",
+          "ccats": "CCATs",
+          "specialLabel": "Special Condition",
+          "shipFrom": "Ship From",
+          "remark": "Remark",
+          "license": "License#",
+          "licenseQty": "License# QTY",
+          "bafaLicense": "BAFA#",
+          "bafaBalQty": "BAFA# Balance QTY",
+          "bafaTotalQty": "BAFA# Total QTY",
+          "startDate": "Start Date",
+          "endDate": "End Date"
+        },
+        "EXP": {
+          "key":"Seq",
+          "productCode": "Item",
+          "quantity": "Quantity",
+          "price": "Price",
+          "usdPrice":"Price (USD)",
+          "eccn": "ECCN",
+          "ccats": "CCATs",
+          "remark": "Remark",
+          "deliveryNo": "Delivery No.",
+          "refShipment": "Ref Shipment",
+          "license": "License#",
+          "licenseQty": "License# QTY",
+          "bafaLicense": "BAFA#",
+          "bafaBalQty": "BAFA# Balance QTY",
+          "bafaTotalQty": "BAFA# Total QTY",
+          "startDate": "Start Date",
+          "endDate": "End Date"
+        }
+      }
+    },
+    "SC047": {
+      "Option": {
+        "AJB_Shipping": "AJB Shipping",
+        "General_Shipping": "General Shipping"
+      },
+      "PlaceHolder": {
+        "PlzSelectOOUAndCV": "Please select Orders OU and Customer/Vendor first",
+        "PlzSelectOUAndCV": "Please select Orders OU and Customer/Vendor first",
+        "PlzKeyOrByShiptoCode": "Please key in Ship To Address or pick by automatically",
+        "PlzKeyOrByDelivertoCode": "Please key in Deliver To Address or pick by automatically",
+        "AutoFillbySelectLicense": "After selecting License, automatically fill in the order number",
+        "EndUseAllowNumAndEng": ", End Use only allows alphanumeric characters.",
+        "AutoFillbyImportLicense": "After Import License, automatically fill in the Orders OU",
+        "PlzSelectLicense": "Please select import license first",
+        "PlzSelectItem": "Please select Item first",
+        "Loading": "Auto searching..."
+      },
+      "Label": {
+        "Purchasing_Orders_OU": "Orders OU",
+        "Receiving_Shipping_OU": "Shipping OU (Import License Application Form)",
+        "Warehouse_Location": "Warehouse Location",
+        "CV": "Customer/Vendor",
+        "Shipping_Type": "Shipping Type",
+        "ExpImpConsignee": "Exporter / Consignee (Import)",
+        "Business_Registration_Certificate": "Business Registration Certificate"
+      },
+      "Hint": {
+        "SC047File": "If you have SC047 template attachments, please click on the Attachment & Link tab to upload the SC047 template attachments!",
+        "SelectWarehouseFirst": "Please select Warehouse Location first.",
+        "SelectOUFirst": "Please select Shipping OU (Import License Application Form) first.",
+        "SelectCVFirst": "Please select Customer/Vendor first.",
+        "KeyInShipToAddressFirst": "Please key in Ship To Address！",
+        "SCSpecialNotice": "This order is for AJB, please pay attention to the company when applying for a license.",
+        "FillItemQTY": ", Please fill Applied Qty",
+        "FillItemIMPLicense": ", Please select Import License No.",
+        "ApplyNumOverControlNum": "Applied QTY cannot exceed the SC047 control Qty"
+      },
+      "Cols": {
+        "key":"Seq",
+        "productCode": "Item",
+        "quantity": "Applied QTY",
+        "ccats": "CCATs",
+        "license": "Import License No.",
+        "refShipment": "Ref Shipment",
+        "receipt": "Receipt",
+        "remark": "Remark"
+      }
+    },
+    "ICP": {
+      "Option": {
+        "NewCustomer": "New Customer",
+        "OldCustomer": "Old Customer"
+      },
+      "PlaceHolder": {
+        "CustName": "Please fill in the person responsible for screening.",
+        "TrxDate": "Please fill in the execution date.",
+        "CompanyName": "Please fill in the client company name.",
+        "CustAddress": "Please fill in customer correspondence address.",
+        "NewOldCustomer": "Please select new or old customers.",
+        "KeywordSearch": "Please enter key words",
+        "EmpInfo": "XPlease select 負責篩選人員"
+      },
+      "Label": {
+        "CustName": "X負責篩選人員",
+        "ExecutionDate": "Execution Date",
+        "ClientCompanyName": "Client Company Name",
+        "CustomerMailingAddress": "Customer Mailing Address",
+        "NewOldCustomer": "New / Old Customer",
+        "AllSelect": "All Select"
+      },
+      "Hint": {
+        "ICPWarring": "X若出現以下紅色警戒指標，且後續調查無法消除客戶嫌疑，相關交易應立即中止。"
+      }
+    },
+    "ECCNStatusMtn": {
+      "Label": {
+        "Flag": "Flag"
+      }
+    }
+  },
+  "Common": {
+    "TableView": {
+      "Default": {
+        "Columns": {
+          "Edit": "Edit",
+          "Detail": "Detail",
+          "ViewHistory": "View History"
+        }
+      },
+      "Message": {
+        "PlzAdd": "Please add data first"
+      }
+    },
+    "Dialog": {
+      "Header": {
+        "Error": "Some errror occured",
+        "Notice": "Notice"
+      },
+      "Message": {
+        "PlzChoose": "Please Choose",
+        "PlzKeyIn": "Please key in",
+        "Upto300": "Up to 300 characters",
+        "OnlyPosDecimal": "Only positive numbers can be entered, decimals are allowed"
+      }
+    },
+    "Toast": {
+      "SuccessAdd": "Successfully added",
+      "SuccessSave": "Successfully saved",
+      "SuccessUpdate": "Successfully updated"
+    },
+    "Options": {
+      "flagOptions": [
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ],
+      "flagOptionsWithDefault": [
+        {
+          "label": "Please choose",
+          "value": ""
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ]
+    }
+  },
+  "APPROVING_LEH": {
+    "Label": {
+      "ReferenceNo": "Reference No",
+      "Applicant": "Applicant",
+      "ApplicantDate": "Applicant Date",
+      "Type": "Type",
+      "Corp": "Corp",
+      "ReferenceNumber": "Reference Number",
+      "Group": "Group",
+      "Sales": "Sales",
+      "SalesDept": "Sales Dept",
+      "CreatedByLastUpdateBy": "Created By/Last Update By",
+      "CustomerChineseName": "Customer Chinese Name",
+      "CustomerEnglishName": "Customer English Name",
+      "CustomerCode": "Customer Code",
+      "EUC": "EUC",
+      "Brand": "Brand",
+      "Item": "Item",
+      "Qty": "Qty",
+      "CtmPo": "CTM PO/Project",
+      "ECCN": "ECCN",
+      "CCATs": "CCATs",
+      "Proviso": "Proviso",
+      "ExceptionHoldReason": "Exception Hold Reason",
+      "BillToCountry": "Bill to Country",
+      "BillTo": "Bill to",
+      "ShipToCountry": "Ship to Country",
+      "ShipTo": "Ship to",
+      "DeliverToCountry": "Deliver to Country",
+      "DeliverTo": "Deliver to",
+      "Approved": "Approve",
+      "Reject": "Reject",
+      "Approving": "Approving",
+      "BackToPendingList": "Back To Pending List",
+      "GoBack": "Go Back",
+      "AuditApprovingPrefix": "Pending at ",
+      "Approve": " for approval.",
+      "AuditApprovingSuffix": "(as endorsor)",
+      "GovermentUnit": "Goverment Unit",
+      "CivillianEndUser": "Civillian End User",
+      "CillianEndUse": "Cillian End Use"
+    }
+  },
+  "SOA": {
+    "Label": {
+      "CV": "Customer/Vendor",
+      "Customer": "Customer",
+      "Vendor": "Vendor",
+      "FillingArea": "SOA filing Area",
+      "Origin": "Original",
+      "SpecialApproval":"Special Approval"
+    },
+    "Msg": {
+      "ShouldBeOrigin": "WPG-CLOUD or WPGH Need to have the original.",
+      "ItemAlreadyExist": "This item has been selected before, can not be duplicated!",
+      "duplicateItem":"Brand、ctg1、ctg2、ctg3、ECCN、Item no has been selected before, can not be repeated.",
+      "AllItemNotAllowEdit": "All Item not allow to edit",
+      "AlreadySend": "been submitted.",
+      "AlreadySaveAsDraft": "been save as draft.",
+      "MulitpleUploadItemAlreadExist": "already exists",
+      "ItemNotFound": "not found",
+      "DateInvaild": "effective date error : start date should earlier than end date",
+      "FileFormatError": "file upload error : Invaild format",
+      "ErrorDateFormat": "Effective Date format error",
+      "PlzChooseDept": "Please choose applyer dept",
+      "PlzChooseDocArea": "Please choose SOA filing Area",
+      "AllGroupOnlyAllowOrigin": "All Group cannot be chosen, when there is no original SOA",
+      "PleaseKeyInQty": "Please key in Qty."
+    },
+    "Button": {
+      "confirm": "confirm",
+      "deduct": "Deduction"
+    },
+    "ApprovingLicense":{
+      "Title": "SOA inquiry applied",
+      "Label": {
+        "NotFound": "not found",
+        "AlreadyHaveApprovingLicense": "SOA data already applied in your group, pls check it from Bpaas (SOA management)"
+      },
+      "Table": [
+        {
+          "field": "applicantName",
+          "header": "Applicant",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left",
+          "minWidth":"200"
+        },
+        {
+          "field": "formNo",
+          "header": "SOA#",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        },
+        {
+          "field": "status",
+          "header": "Flow Status",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        },
+        {
+          "field": "displayOuGroup",
+          "header": "Group",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        },
+        {
+          "field": "ouCode",
+          "header": "Orders OU",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        },
+        {
+          "field": "ouName",
+          "header": "Order OU Name",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        },
+        {
+          "field": "specialApproval",
+          "header": "Special Approval",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        },
+        {
+          "field": "isOriginal",
+          "header": "Original/Non-Original",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        },
+        {
+          "field": "productCode",
+          "header": "Item",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        }
+      ]
+    }
+  },
+  "EccnMtn": {
+    "Label": {
+      "AreaEccnSetting": "Area ECCN Setting",
+      "SplitHint": "Mutiple search please separate with ','",
+      "PleaseSearchOrAdd": "No result , please search or add first"
+    },
+    "Msg": {
+      "CreateSuccess": "Create success",
+      "EditSuccess": "Edit success",
+      "DelSuccess": "Delete success",
+      "PleaseChoose": "Please Choose",
+      "ItemExistError": "This record already exists. Please check again.",
+      "PleaseEnter": "Please Enter",
+      "PleaseEnterKeyWord": "Please enter item",
+      "PleaseChooseType": "Please choose search type",
+      "PleaseChooseMasterEccn": "If there's no area Eccn, pls refer \"Master ECCN\" "
+    },
+    "Options": {
+      "itemFilterTypeOptions": [
+        {
+          "label": "Equal",
+          "value": "Equals"
+        },
+        {
+          "label": "Include",
+          "value": "Include"
+        },
+        {
+          "label": "Starts With",
+          "value": "StartsWith"
+        },
+        {
+          "label": "Ends With",
+          "value": "EndsWith"
+        },
+        {
+          "label": "Multi",
+          "value": "Multi"
+        }
+      ]
+    }
+  },
+  "ReAssignDialog": {
+    "Btn": {
+      "ReAssign": "Redirect Approval"
+    },
+    "Label": {
+      "RedirectFrom": "Redirect Form",
+      "RedirectEmp": "Redirect Emp",
+      "PleaseChoose": "Please Choose",
+      "SelectReAssginer": "Please select redirect emp"
+    },
+    "Msg": {
+      "SaveFail": "Reassign failed!",
+      "AlreadyReAssign": "Already redirected to",
+      "PleaseSelectRedirectFrom": "Please select redirect from",
+      "PleaseSelectRedirectEmp": "Please select redirect emp"
+    }
+  },
+  "SoaControlSetup": {
+    "Label": {
+      "SoaControlSetup": "SOA Control Setup",
+      "SoaControlSetupByUser":"Control by user",
+      "SoaControlSetupByItem":"Control by item",
+      "SoaExclusionControl":"Exclusion Control",
+      "CustomerVendorType": "Customer / Vendor",
+      "Flag": "Flag",
+      "CV": "Customer / Vendor",
+      "PleaseSearchOrAdd": "No result , please search or add first",
+      "ValidFrom": "Valid From",
+      "SpecialApproval":"Special Approval",
+      "Update":"Update"
+    },
+    "Options": {
+      "flagOptions": [
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ],
+      "flagOptionsWithDefault": [
+        {
+          "label": "Please choose",
+          "value": ""
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ]
+    },
+    "Msg": {
+      "CreateSuccess": "Create success",
+      "EditSuccess": "Edit success",
+      "EditFail": "Edit fail",
+      "DelSuccess": "Delete success",
+      "NotAllowEmpty": "cannot be empty",
+      "NotAllowEditAllItem": "All Item not allow to batch edit",
+      "DownloadProcess": "Currently processing, The result will be sent by email."
+    },
+    "TableColumn": {
+      "soaControlTableColByUser": [
+        {
+          "label": "Group",
+          "field": "group"
+        },
+        {
+          "label": "OU Code",
+          "field": "ouCode"
+        },
+        {
+          "label": "OU Name",
+          "field": "ouName"
+        },
+        {
+          "label": "Type",
+          "field": "vcType"
+        },
+        {
+          "label": "Vendor#/Customer#",
+          "field": "vcCode"
+        },
+        {
+          "label": "Vendor/Customer",
+          "field": "vcName"
+        },
+        {
+          "label": "Flag",
+          "field": "flag"
+        },
+        {
+          "label": "Valid From",
+          "field": "validFrom"
+        },
+        {
+          "label": "Remark",
+          "field": "remark"
+        },
+        {
+          "label": "Creation Date",
+          "field": "createdDate"
+        },
+        {
+          "label": "Creation By",
+          "field": "createdBy"
+        },
+        {
+          "label": "Last Update Date",
+          "field": "lastUpdatedDate"
+        },
+        {
+          "label": "Last Update By",
+          "field": "lastUpdatedBy"
+        }
+      ],
+      "soaControlTableColByItem": [
+        {
+          "label": "Vendor#/Customer#",
+          "field": "vcCode"
+        },
+        {
+          "label": "Vendor/Customer",
+          "field": "vcName"
+        },
+        {
+          "label": "Brand",
+          "field": "brand"
+        },
+        {
+          "label": "Special Approval",
+          "field": "specialApproval"
+        },
+        {
+          "label": "Ctg1",
+          "field": "ctg1"
+        }, {
+          "label": "Ctg2",
+          "field": "ctg2"
+        }, {
+          "label": "Ctg3",
+          "field": "ctg3"
+        },
+        {
+          "label": "ECCN",
+          "field": "eccn"
+        },
+        {
+          "label": "Item",
+          "field": "productCode"
+        },
+        {
+          "label": "Flag",
+          "field": "flag"
+        },
+        {
+          "label": "Valid From",
+          "field": "validFrom"
+        },
+        {
+          "label": "Remark",
+          "field": "remark"
+        },
+        {
+          "label": "Creation Date",
+          "field": "createdDate"
+        },
+        {
+          "label": "Creation By",
+          "field": "createdBy"
+        },
+        {
+          "label": "Last Update Date",
+          "field": "lastUpdatedDate"
+        },
+        {
+          "label": "Last Update By",
+          "field": "lastUpdatedBy"
+        }
+      ],
+      "soaExclusionControlTableCol": [
+        {
+          "label": "Group",
+          "field": "group"
+        },
+        {
+          "label": "Vendor#/Customer#",
+          "field": "vcCode"
+        },
+        {
+          "label": "Vendor/Customer",
+          "field": "vcName"
+        },
+        {
+          "label": "Brand",
+          "field": "brand"
+        },
+        {
+          "label": "Valid From",
+          "field": "validFrom"
+        },
+        {
+          "label": "Flag",
+          "field": "flag"
+        },
+        {
+          "label": "Remark",
+          "field": "remark"
+        },
+        {
+          "label": "Creation Date",
+          "field": "createdDate"
+        },
+        {
+          "label": "Creation By",
+          "field": "createdBy"
+        },
+        {
+          "label": "Last Update Date",
+          "field": "lastUpdatedDate"
+        },
+        {
+          "label": "Last Update By",
+          "field": "lastUpdatedBy"
+        }
+      ]
+    }
+  },
+  "BafaLicenseMtn": {
+    "Label": {
+      "BafaLicenseMtn": "BAFA License Maintain",
+      "LicenseNo": "BAFA License#",
+      "Flag": "Active Flag",
+      "AddBafaLicense": "Add BAFA License#",
+      "EditBafaLicense": "Edit BAFA License#",
+      "ApproveDate": "Apply Date",
+      "EffectiveDate": "End Date",
+      "StartDate": "Start Date",
+      "EndDate": "End Date",
+      "impExpLicenseNo":"Imp/Exp License#"
+    },
+    "Msg": {
+      "PleaseSelectFlag": "Please Select Active Flag",
+      "PleaseChooseEndDate": "Please Choose End Date",
+      "InvalidEndDate": "End Date must be later than Apply Date",
+      "PleaseChooseBatchField": "Please Input Active Flag Or Choose End Date",
+      "PleaseInputLicense": "Please fill in BAFA License#.",
+      "PleaseInputItem": "Please fill in Item.",
+      "PleaseInputStartDate": "Please fill in Apply Date.",
+      "PleaseInputEndDate": "Please fill in End Date.",
+      "PleaseInputEndQty": "Please fill in BAFA License Qty."
+    },
+    "Options": {
+      "flagOptions": [
+        {
+          "label": "Please Choose",
+          "value": null
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ],
+      "itemFilterTypeOptions": [
+        {
+          "label": "Equals",
+          "value": "Equals"
+        },
+        {
+          "label": "Include",
+          "value": "Include"
+        },
+        {
+          "label": "Starts With",
+          "value": "StartsWith"
+        },
+        {
+          "label": "Ends With",
+          "value": "EndsWith"
+        },
+        {
+          "label": "Multi",
+          "value": "Multi"
+        }
+      ]
+    },
+    "ImportHistoryColumns": [
+      {
+        "field": "licenseNo",
+        "header": "Import License No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "startDate",
+        "header": "Apply Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouCode",
+        "header": "OU Code",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouName",
+        "header": "OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "useQty",
+        "header": "AD Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "formNo",
+        "header": "Flow No.",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "ExportHistoryColumns": [
+      {
+        "field": "licenseNo",
+        "header": "Export License No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "startDate",
+        "header": "Apply Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouCode",
+        "header": "OU Code",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouName",
+        "header": "OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "useQty",
+        "header": "Apply Quantity",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "formNo",
+        "header": "Flow No.",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "Table": {
+      "mainTable": [
+        {
+          "field": "viewHistory",
+          "label": "View History"
+        },
+        {
+          "field": "productCode",
+          "label": "Item"
+        },
+        {
+          "field": "bafaLicense",
+          "label": "BAFA License#"
+        },
+        {
+          "field": "quantity",
+          "label": "BAFA License Qty"
+        },
+        {
+          "field": "balanceQty",
+          "label": "Balance Qty"
+        },
+        {
+          "field": "approveDate",
+          "label": "Apply Date"
+        },
+        {
+          "field": "endDate",
+          "label": "End Date"
+        },
+        {
+          "field": "active",
+          "label": "Active Flag"
+        },
+        {
+          "field": "remark",
+          "label": "Remark"
+        },
+        {
+          "field": "createdDate",
+          "label": "Creation Date"
+        },
+        {
+          "field": "createdBy",
+          "label": "Creation By"
+        },
+        {
+          "field": "lastUpdatedDate",
+          "label": "LastUpdate Date"
+        },
+        {
+          "field": "lastUpdatedBy",
+          "label": "LastUpdate By"
+        }
+      ]
+    }
+  },
+  "EditAndSubmit": {
+    "Btn": {
+      "EditAndSubmit":"Edit and submit"
+    }
+  },
+  "SalesMarginToleranceSetup": {
+    "PageTitle": "Sales Margin Tolerance Setting",
+    "Label": {
+      "Flag": "Active Flag",
+      "EnabledFlag": "Enabled Flag",
+      "FromDate": "Start Date",
+      "ToDate": "End Date",
+      "FileUpload": "File Upload",
+      "SingleAdd": "Single Add",
+      "MultiAdd": "Multi Add",
+      "ConfirmDelete": "Are you sure you want to delete this record?",
+      "Notification": "Notification"
+    },
+    "Msg": {
+      "CreateSuccess": "Create success",
+      "EditSuccess": "Edit success",
+      "DelSuccess": "Delete success",
+      "DownloadProcess": "Currently processing, The result will be sent by email.",
+      "UploadSuccessfully": "Upload Successfully!"
+    },
+    "Error":{
+      "MinViolationMustOver0":"Must be greater than or equal to 0",
+      "ToleranceViolationMustOverMin":"Must be greater than or equal to Tolerance(%) - from",
+      "ToleranceViolationMustLess100":"Must be less than or equal to 100"
+    },
+    "Columns": [
+      {
+        "field": "ouGroup",
+        "header": "Group",
+        "isDefault": true,
+        "isDisabled": false,
+        "textAlign": "left"
+      },
+      {
+        "field": "ouCode",
+        "header": "OU Code",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "ouName",
+        "header": "OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"250"
+      },
+      {
+        "field": "custCode",
+        "header": "Customer #",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "custName",
+        "header": "Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"350"
+      },
+      {
+        "field": "endCustomer",
+        "header": "End Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"150"
+      },
+      {
+        "field": "brand",
+        "header": "Brand",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "ctg1",
+        "header": "Ctg1",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "productCode",
+        "header": "Item",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"200"
+      },
+      {
+        "field": "fromTolerance",
+        "header": "Tolerance(%) - from",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "toTolerance",
+        "header": "Tolerance(%) - to",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "fromDate",
+        "header": "Start Date",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "toDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "status",
+        "header": "Enabled Flag",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "createdDate",
+        "header": "Creation Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"170"
+      },
+      {
+        "field": "createdBy",
+        "header": "Creation By",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"210"
+      },
+      {
+        "field": "lastUpdatedDate",
+        "header": "Last Update Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"170"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "header": "Last Updated By",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"210"
+      }
+    ],
+    "ColumnFunctions": [
+      {
+        "field": "edit",
+        "header": "Edit",
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "del",
+        "header": "Delete",
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      }
+    ]
+  },
+  "PriceControlForm": {
+    "Label":{
+      "MaintainPrice":"Maintain 0-0 Price",
+      "Maintain":"Maintain",
+      "Price":"Price"
+    },
+    "PCFLinesMtnColumns": [
+      {
+        "field": "currency",
+        "header": "Currency",
+        "columnId": "p_currency"
+      },
+      {
+        "field": "minSellingPrice",
+        "header": "Worst Selling Price",
+        "columnId": "p_minSelling"
+      },
+      {
+        "field": "salesCost",
+        "header": "Sales Cost",
+        "columnId": "p_salesCost"
+      },
+      {
+        "field": "controlFlag",
+        "header": "Control Flag",
+        "columnId": "p_controlFlag"
+      },
+      {
+        "field": "maxSellingPrice",
+        "header": "Max Selling Price",
+        "columnId": "p_maxSelling"
+      },
+      {
+        "field": "salesGP",
+        "header": "Sales Gp%",
+        "columnId": "p_salesGp"
+      },
+      {
+        "field": "startDateString",
+        "header": "Effective from",
+        "columnId": "p_start"
+      },
+      {
+        "field": "endDateString",
+        "header": "Effective to",
+        "columnId": "p_end"
+      },
+      {
+        "field": "endCustomer",
+        "header": "End Customer",
+        "columnId": "p_endCust"
+      },
+      {
+        "field": "messageEng",
+        "header": "Message",
+        "columnId": "p_message"
+      }
+    ],
+    "PCFLinesMtnColumnsWSP": [
+      {
+        "field": "currency",
+        "header": "Currency",
+        "columnId": "p_currency"
+      },
+      {
+        "field": "minSellingPrice",
+        "header": "Worst Selling Price",
+        "columnId": "p_minSelling"
+      },
+      {
+        "field": "salesCost",
+        "header": "Sales Cost",
+        "columnId": "p_salesCost"
+      },
+      {
+        "field": "controlFlag",
+        "header": "Control Flag",
+        "columnId": "p_controlFlag"
+      },
+      {
+        "field": "maxSellingPrice",
+        "header": "Max Selling Price",
+        "columnId": "p_maxSelling"
+      },
+      {
+        "field": "salesGP",
+        "header": "Sales Gp%",
+        "columnId": "p_salesGp"
+      },
+      {
+        "field": "startDateString",
+        "header": "Effective from",
+        "columnId": "p_start"
+      },
+      {
+        "field": "endDateString",
+        "header": "Effective to",
+        "columnId": "p_end"
+      },
+      {
+        "field": "endCustomer",
+        "header": "End Customer",
+        "columnId": "p_endCust"
+      },
+      {
+        "field": "message",
+        "header": "Message",
+        "columnId": "p_message"
+      }
+    ],
+    "Msg":{
+      "allowOnly0To1":"Only allow to fill in 0 ~ 1",
+      "Error": "System Error",
+      "LineMtnSellingPriceError":"The phrase Worst Selling Price must be greater than or equal to the Sales Cost"
+    }
+  },
+  "FreightAdder": {
+    "Label":{
+      "title":"Freight Adder Setting",
+      "addFreightAdder":"Add Freight Adder",
+      "modifyFreightAdder":"Modify Freight Adder",
+      "Notification": "Notification"
+    },
+    "Msg": {
+      "CreateSuccess": "Create success",
+      "EditSuccess": "Edit success",
+      "DelSuccess": "Delete success",
+      "DownloadProcess": "Currently processing, The result will be sent by email."
+    },
+    "Columns": [
+      {
+        "field": "groupName",
+        "header": "Group",
+        "isDefault": true,
+        "isDisabled": false,
+        "textAlign": "left"
+      },
+      {
+        "field": "ouCode",
+        "header": "OU Code",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "ouName",
+        "header": "OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"250"
+      },
+      {
+        "field": "custCode",
+        "header": "Customer #",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "custName",
+        "header": "Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"350"
+      },
+      {
+        "field": "endCustomer",
+        "header": "End Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"150"
+      },
+      {
+        "field": "vendorCode",
+        "header": "Vendor #",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "vendorName",
+        "header": "Vendor",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "brand",
+        "header": "Brand",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "ctg1",
+        "header": "Ctg1",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "productCode",
+        "header": "Item",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"200"
+      },
+      {
+        "field": "ncnr",
+        "header": "NCNR",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "eol",
+        "header": "EOL",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "single",
+        "header": "Single",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "customize",
+        "header": "Customize",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "freightAdder",
+        "header": "Adder",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "flag",
+        "header": "Flag",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "creationDate",
+        "header": "Creation Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"170"
+      },
+      {
+        "field": "createdBy",
+        "header": "Creation By",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"210"
+      },
+      {
+        "field": "lastUpdatedDate",
+        "header": "Last Update Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"170"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "header": "Last Updated By",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"210"
+      }
+    ],
+    "ColumnFunctions": [
+      {
+        "field": "edit",
+        "header": "Edit",
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "del",
+        "header": "Del",
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      }
+    ],
+    "Options": {
+      "normalOptions": [
+        {
+          "label": "Please Choose",
+          "value": null
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ]
+    }
+  }
+  ,"SalesOrderChange": {
+    "field": {
+      "Corp":"Company",
+      "OrderNumber":"Order Number",
+      "Sales":"Salesperson",
+      "Customer":"Customer",
+      "OrderDate":"Order Date",
+      "SalesDept":"Sales Department",
+      "Currency":"Currency",
+      "CustomerPONo":"Customer PO No."
+    },
+    "button":{
+      "withdraws":"Withdraws"
+    },
+    "Status": {
+      "APPROVE": "Approve",
+      "REJECT": "Reject",
+      "APPROVING": "Approving",
+      "DRAFT": "Draft",
+      "NULL": "System Error",
+      "WITHDRAW":"Withdraw"
+    },
+    "Msg":{
+      "ApproveRejectRequired":"Please select Approve/Reject.",
+      "SalesDeptCodeEmpty":"This sales has no valid department assigned. Please contact system support for assistance."
+    },
+    "Label":{
+      "ApplyDate": "Apply Date",
+      "SelectAll":"Select all"
+    }
+  },"SOVCommon":{
+    "Option": {
+      "Accept": "Submit Flow"
+    }
+  },
+  "AgentInfoHint":{
+    "Type":"Type",
+    "AgentUser":"Agent User",
+    "StartDate":"Start Date",
+    "EndDate":"End Date",
+    "ApplicationForm":"Application Form",
+    "DeputyStaffInformation":"Deputy Staff Information",
+    "Hint":" had set his/her deputy.<br>System will not auto sent the application to the deputy staff.<br>Click OK to process with seeking endorsement/redirect approval or Cancel to select other personnel by referring to the deputy staff information menu."
+  }
+}

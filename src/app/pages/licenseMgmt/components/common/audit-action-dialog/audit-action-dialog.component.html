@@ -1,0 +1,194 @@
+<p-confirmDialog [baseZIndex]="10000" key="auditActionDialog"></p-confirmDialog>
+
+<!--# common notice-check dialog-->
+<app-common-notice-check-dialog
+  [settingParams]="noticeCheckDialogParams"
+  [contentList]="noticeContentList"
+>
+</app-common-notice-check-dialog>
+
+<p-dialog
+  [header]="dialogSetting.getValue().title"
+  [(visible)]="dialogSetting.getValue().visiable"
+  [modal]="dialogSetting.getValue().modal"
+  [draggable]="dialogSetting.getValue().draggable"
+  [resizable]="dialogSetting.getValue().resizeable"
+  (onHide)="onDialogHide()"
+  styleClass="approve-dialog"
+>
+  <form [formGroup]="formGroup" class="form-table">
+    <div class="form-row grid">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{
+            "LicenseMgmt.Common.Label.Action" | translate
+          }}</label>
+        </div>
+      </div>
+
+      <div class="form-col col">
+        <div class="form-radio" *ngIf="!isAssigneeTask">
+          <ng-container *ngFor="let actionRadio of actionRadioKit">
+            <p-radioButton
+              formControlName="action"
+              name="action"
+              [label]="actionRadio.label"
+              [value]="actionRadio.value"
+              [inputId]="actionRadio.value"
+              (ngModelChange)="actionOnChange()"
+            ></p-radioButton>
+          </ng-container>
+        </div>
+        <div class="form-radio" *ngIf="isAssigneeTask">
+          <ng-container *ngFor="let actionRadio of actionRadioKit; let first = first ; let last = last">
+            <p-radioButton
+              *ngIf="first || last"
+              formControlName="action"
+              name="action"
+              [label]="actionRadio.label"
+              [value]="actionRadio.value"
+              [inputId]="actionRadio.value"
+              (ngModelChange)="actionOnChange()"
+            ></p-radioButton>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <ng-container *ngIf="formGroup.get('action').value == 'rollback'">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "LicenseMgmt.Common.Label.FlowReturnTo" | translate
+            }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-select">
+            <p-dropdown
+              name="activityId"
+              formControlName="activityId"
+              [filter]="true"
+              [options]="rollbackStepOptions"
+              placeholder="{{
+                'DropDown.PlaceHolder.PleaseChoose' | translate
+              }}"
+            ></p-dropdown>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="
+        formGroup.get('action').value == 'addCosigner' ||
+        formGroup.get('action').value == 'addAssignee'
+      "
+    >
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "LicenseMgmt.Common.Label.Endorsement" | translate
+            }}</label>
+          </div>
+        </div>
+        <div class="form-col col">
+          <div class="form-input">
+            <ng-container
+              *ngIf="
+                formGroup.get('action').value == 'addCosigner';
+                then thenTemplate;
+                else elseTemplate
+              "
+            ></ng-container>
+            <ng-template #thenTemplate>
+              <p-autoComplete
+                name="cosigners"
+                formControlName="cosigners"
+                (completeMethod)="onCosignersFilterHandler($event)"
+                [suggestions]="fuzzyEmpInfosOptions.getValue()"
+                [virtualScroll]="true"
+                [itemSize]="30"
+                [minLength]="1"
+                [multiple]="false"
+                [style]="{ width: '100%' }"
+                field="label"
+                appendTo="body"
+                dataKey="value"
+                placeholder="請輸入關鍵字查詢"
+                (keydown)="onFieldKeyDownHandler($event, 'cosigners')"
+                (onSelect)="onFieldSelectAlready()"
+                (keydown)="onCosignerKeyDownHandler($event, 'cosigners')"
+              >
+              </p-autoComplete>
+            </ng-template>
+            <ng-template #elseTemplate>
+              <p-autoComplete
+                name="cosigners"
+                formControlName="cosigners"
+                (completeMethod)="onCosignersFilterHandler($event)"
+                [suggestions]="fuzzyEmpInfosOptions.getValue()"
+                [virtualScroll]="true"
+                [itemSize]="30"
+                [minLength]="1"
+                [multiple]="true"
+                [style]="{ width: '100%' }"
+                field="label"
+                appendTo="body"
+                dataKey="value"
+                placeholder="請輸入關鍵字查詢"
+                (onSelect)="addAssigneeOnSelect()" (keydown)="onAssigneeFieldKeyDown($event, 'cosigners')"
+                (onUnselect)="addAssigneeOnSelect()"
+              ></p-autoComplete>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="form-row grid">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">{{
+            "LicenseMgmt.Common.Label.Opinion" | translate
+          }}</label>
+        </div>
+      </div>
+
+      <div class="form-col col">
+        <div class="form-textarea">
+          <textarea
+            pInputTextarea
+            name="comment"
+            formControlName="comment"
+            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <ng-container *ngFor="let agentInfo of agentInfoArr">
+      <app-agent-info-table [userCode]="agentInfo"></app-agent-info-table>
+     </ng-container>
+
+    <div class="btn-container">
+      <button
+        pButton
+        type="button"
+        label="{{ 'Button.Label.Cancel' | translate }}"
+        class="btn-gray"
+        (click)="onDialogClosed()"
+      ></button>
+      <button
+        pButton
+        type="button"
+        label="{{ 'Button.Label.Submit' | translate }}"
+        (click)="onFormSubmit()"
+      ></button>
+    </div>
+  </form>
+</p-dialog>
+
+<p-confirmDialog [baseZIndex]="10000" key="agentCheckConfirmDialog"  [style]="{ width: '40%' }"></p-confirmDialog>

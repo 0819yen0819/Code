@@ -1,0 +1,189 @@
+<!--# audit action dialog-->
+<app-common-audit-action-dialog [settingParams]="formAuditActionDialogParams">
+</app-common-audit-action-dialog>
+
+<!--# License Form Main title component-->
+<div class="main-title-container" stickyZone>
+  <div class="override-content-container-padding"></div>
+  <p>{{ mainTitle }}</p>
+  <ng-container *ngIf="curformStatus && curformStatus.status == 'approve'">
+    <div class="btn-container gap-1">
+      <button
+        *ngIf="showEditAndSubmit"
+        pButton
+        type="button"
+        label="{{ 'EditAndSubmit.Btn.EditAndSubmit' | translate }}"
+        [ngStyle]="editAndSubmitService.style"
+        (click)="editAndSubmitOnClick()"
+        class="show-edit-and-submit"
+      ></button>
+
+      <button
+        pButton
+        type="button"
+        *ngIf="reassignDialogService.reAssignBtnSetting.visiable"
+        label="{{ reassignDialogService.reAssignBtnSetting.name | translate }}"
+        (click)="reassignDialogService.openAssignDialog()"
+        [ngStyle]="{
+          'background-color': reassignDialogService.reAssignBtnSetting.color
+        }"
+      ></button>
+      <ng-container *ngIf="routerHandler.url.includes('approving')">
+        <button
+          pButton
+          type="button"
+          label="{{ 'Button.Label.Action' | translate }}"
+          class="btn-dark-red"
+          (click)="onAuditActionDialogHandler()"
+          *ngIf="isApproveOrAssignee"
+        ></button>
+      </ng-container>
+
+      <button
+        pButton
+        type="button"
+        [label]="integrateService.backBtnLabel"
+        class="btn-gray"
+        (click)="integrateService.backBtnOnClick()"
+      ></button>
+
+      <!-- <button *ngIf="extendFormPermission" pButton type="button" [label]="extendBtnLabel" class="btn-gray"
+      (click)="extendFormOnClick()"></button> -->
+
+      <button *ngIf="extendFormPermission" pButton type="button" label="{{ 'Button.Label.ExportPdf' | translate }}" class="btn-gray"
+      (click)="exportPdfOnClick()"></button>
+    </div>
+  </ng-container>
+</div>
+
+<div class="form-table form-list">
+  <div class="form-row grid">
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "LicenseMgmt.Common.Label.ReferenceNo" | translate
+            }}</label>
+          </div>
+        </div>
+
+        <div class="form-col md:col col-12">
+          <div class="form-label">
+            <label class="txt">{{ formNo }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{
+                "LicenseMgmt.Common.Label.Date" | translate
+              }}</label>
+            </div>
+          </div>
+
+          <div class="form-col md:col col-12">
+            <div class="form-label">
+              <label class="txt">{{ today | date : "yyyy/MM/dd" }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row grid">
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{
+              "LicenseMgmt.Common.Label.Applicant" | translate
+            }}</label>
+          </div>
+        </div>
+
+        <div class="form-col md:col col-12">
+          <div class="form-label">
+            <ng-container *ngIf="userInfo.getValue() !== null">
+              <label class="txt"
+                >{{ userInfo.getValue().userCode }}&nbsp;{{
+                  userInfo.getValue().userName
+                }}&nbsp;/&nbsp;{{ userInfo.getValue().userNameE }}</label
+              >
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <!--# Dynamic form component by license type-->
+
+      <ng-container
+        *ngIf="
+          formType === 'EUC' ||
+          formType === 'exp' ||
+          formType === 'imp' ||
+          formType === 'SC047' ||
+          formType === 'ICP'
+        "
+      >
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{
+                "LicenseMgmt.Common.Label.Department" | translate
+              }}</label>
+            </div>
+          </div>
+
+          <div class="form-col md:col col-12">
+            <ng-container
+              *ngIf="
+                (userDeptsOptions.getValue().length > 1 &&
+                  curformStatus &&
+                  curformStatus.status == 'draft') ||
+                  (userDeptsOptions.getValue().length > 1 &&
+                    isTaskStarter &&
+                    router.url.includes('approving')) ||
+                  (userDeptsOptions.getValue().length > 1 && isEditAndSubmit);
+                then thenTemplate;
+                else elseTemplate
+              "
+            ></ng-container>
+            <ng-template #thenTemplate>
+              <div class="form-select">
+                <p-dropdown
+                  name="userDept"
+                  [options]="userDeptsOptions.getValue()"
+                  placeholder="{{
+                    'DropDown.PlaceHolder.PleaseChoose' | translate
+                  }}"
+                  [(ngModel)]="curUserDept"
+                  (onChange)="onUserDeptIdHandler($event)"
+                ></p-dropdown>
+              </div>
+            </ng-template>
+            <ng-template #elseTemplate>
+              <div class="form-label">
+                <ng-container *ngIf="userDeptsOptions.getValue().length > 0">
+                  <label class="txt">
+                    {{ userDeptsOptions.getValue()[0].label }}
+                  </label>
+                </ng-container>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<app-reassign-dialog
+  *ngIf="reassignDialogService.formTypeId"
+></app-reassign-dialog>

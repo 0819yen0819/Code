@@ -1,0 +1,456 @@
+<div id="dplhold-search-full-content">
+<app-accordion-stepchart [formNo]="headerData.formNo" [formTypeId]="formTypeId"></app-accordion-stepchart>
+<div class="main-title-container" style="margin-top: 0;">
+  <p>{{ 'DPL_Fail.Label.FormNo' | translate }} / {{headerData.formNo}} ({{statusDesc(headerData.status)}})</p>
+  <div class="btn-container">
+    <button pButton type="button" [label]="integrateService.backBtnLabel" class="btn-gray"
+    (click)="integrateService.backBtnOnClick()" *ngIf="!storeBatchEditEntryService.openByBatchEditFromStore"></button>
+
+    <button pButton type="button" [label]="extendBtnLabel" class="btn-gray"
+    (click)="extendFormOnClick()"></button>
+
+    <button pButton type="button" label="{{ 'Button.Label.ExportPdf' | translate }}" class="btn-gray"
+    (click)="exportPdf()"></button>
+  </div>
+</div>
+<!-- end: main-title-container -->
+
+<div class="form-table form-list">
+  <div class="form-row grid">
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'DPL_Fail.Label.Applicant' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-label">
+            <label class="txt">{{headerData.owner}}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'DPL_Fail.Label.Department' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-label">
+            <label class="txt">{{headerData.ownerDept}}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'DPL_Fail.Label.ApplicantDate' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-label">
+            <label class="txt">{{headerData.submitDate | date: "yyyy/MM/dd HH:mm:ss"}}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+</div>
+
+
+<ng-container *ngIf="!extendForm; then packTemplate; else extendTemplate"> </ng-container>
+
+<p-dialog header="{{ 'Dialog.Header.FilterColumns' | translate }}" [(visible)]="displayFilterDetail" [draggable]="false"
+  [blockScroll]="true" [modal]="true">
+  <form>
+    <div class="form-row grid">
+      <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of cols">
+        <div class="form-checkbox">
+          <p-checkbox name="checkboxGroup" [label]="col.header" [value]="col" [(ngModel)]="selectedCols"
+            [disabled]="col?.isDisabled"></p-checkbox>
+        </div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="btn-container">
+      <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-gray btn-line"
+        (click)="changeFilterDetail()"></button>
+    </div>
+  </form>
+</p-dialog>
+
+<!-- 收起區域 -->
+<ng-template #packTemplate>
+  <p-tabView>
+    <p-tabPanel header="{{ 'DPL_Fail.Label.ApplicationInformation' | translate }}">
+      <div class="sub-title-container">
+        <p>{{ 'DPL_Fail.Label.WhiteListDPLHold' | translate }}</p>
+      </div>
+      <!-- end: sub-title-container -->
+
+      <ng-container *ngTemplateOutlet="mainContentTemplate"></ng-container>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{ 'DPL_Fail.Label.ApprovalHistory' | translate }}">
+      <ng-container *ngTemplateOutlet="historyTemplate"></ng-container>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{ 'DPL_Fail.Label.AttachFileAndURL' | translate }}">
+      <app-attachment-uploader [formTypeId]="formTypeId"  [formNo]="headerData.formNo"></app-attachment-uploader>
+    </p-tabPanel>
+  </p-tabView>
+</ng-template>
+
+<!-- 展開 -->
+<ng-template #extendTemplate>
+  <div class="extend-form-container">  
+      <div class="sub-title-container">
+        <p>{{ 'DPL_Fail.Label.WhiteListDPLHold' | translate }}</p>
+      </div>
+      <!-- end: sub-title-container -->
+      <ng-container *ngTemplateOutlet="mainContentTemplate"></ng-container>
+
+      <app-attachment-uploader [formTypeId]="formTypeId"  [formNo]="headerData.formNo" style="margin: 30px 0;"></app-attachment-uploader>
+
+      <div class="sub-title-container">
+        <p>{{ 'DPL_Hold.Label.ApprovalHistory' | translate }}</p>
+      </div>
+
+      <ng-container *ngTemplateOutlet="historyTemplate"></ng-container>
+  </div>
+</ng-template>
+ 
+
+</div>
+
+<ng-template #mainContentTemplate>
+  <form class="form-table">
+    <div class="form-row grid">
+      <div class="form-col md:col-12 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Fail.Label.CustomerNumber' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+            <div class="form-label">
+              <label class="txt">{{headerData.custNumber}}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Fail.Label.CustomerName' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+            <div class="form-label">
+              <label class="txt">{{headerData.custNameC}}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid">
+      <div class="form-col md:col-12 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Customer English Name</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+            <div class="form-label">
+              <label class="txt">{{headerData.custNameE}}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Fail.Label.Country' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+            <div class="form-label">
+              <label class="txt">{{headerData.country}}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid">
+      <div class="form-col md:col-12 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Fail.Label.Address' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+            <div class="form-label">
+              <label class="txt">{{headerData.addressline}}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Fail.Label.ResultsStatus' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+            <div class="form-label">
+              <label class="txt">{{headerData.resultsStatus}}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="form-row grid">
+      <div class="form-col md:col-6 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Fail.Label.ResultsUrl' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+            <div class="form-label">
+              <a class="txt" href="{{headerData.resultsUrl}}" target="_blank" rel="noopener">{{headerData.resultsUrl}}</a>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+        </div>
+        <!-- end: form-row -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col md:col-6 sm:col-12 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">OU</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <ng-template [ngIf]="headerData.ouName === undefined || headerData.ouName === ''" [ngIfElse]="showAll">
+            <div class="form-col col">
+              <div class="form-label">{{headerData.ouCode}}</div>
+            </div>
+          </ng-template>
+          <ng-template #showAll>
+            <div class="form-col col">
+              <div class="form-label">{{'(' + headerData.ouCode + ')' + headerData.ouName}}</div>
+            </div>
+          </ng-template>
+          <!-- end: form-col -->
+        </div>
+
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">{{ 'DPL_Fail.Label.AddressID' | translate }}</label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+            <div class="form-label">
+              <label class="txt"><a>{{headerData.addressId}}</a></label>
+            </div>
+            <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+
+
+      </div>
+    </div>
+    <!-- end: form-row -->
+
+  </form>
+
+  <p-table #dt class="table-panel" [value]="lineData" [columns]="selectedCols" [scrollable]="true" dataKey="id">
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let col of selectedCols" [pSortableColumn]="col.field" [ngClass]="{
+            'icon-col': (col.field == 'checkbox')
+          }" scope="col">
+          <ng-container *ngIf="col.field == 'checkbox'">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </ng-container>
+          <ng-container *ngIf="col.field != 'checkbox'">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </ng-container>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td *ngFor="let col of selectedCols" [ngClass]="{
+            'icon-col': (col.field == 'checkbox')
+          }">
+          <ng-container *ngIf="col.field == 'checkbox'">
+            <p-tableCheckbox [value]="data"></p-tableCheckbox>
+          </ng-container>
+          <ng-container *ngIf="col.field != 'checkbox'">
+            <p>{{data[col.field]}}</p>
+          </ng-container>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-template>
+
+<ng-template #historyTemplate>
+  <form class="form-table">
+    <p-table #ht class="table-panel upload" [value]="historyData" [columns]="historyCols" [scrollable]="true"
+      dataKey="id">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of historyCols" [pSortableColumn]="col.field" scope="col">
+            <ng-container>
+              {{col.header}}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            </ng-container>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-data>
+        <tr>
+          <td *ngFor="let col of historyCols">
+            <ng-container *ngIf="col.field === 'signerCode'">
+              <div class="user-info">
+                <p>{{data[col.field] + ' ' + data['signerNameEn'] + ' ' + data['signerNameCn']}}</p>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="col.field === 'completeTime'">
+              <div class="user-info">
+                <p>{{data[col.field] | date : 'yyyy/MM/dd HH:mm:ss'}}</p>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="col.field !== 'signerCode' && col.field !== 'completeTime'">
+              <p>{{data[col.field]}}</p>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </form>
+
+  <div class="wait-approving-wrap">
+    <ng-container *ngIf="waitApproveList.length > 0">
+      <span>
+        {{ "LicenseMgmt.Common.Hint.AuditApprovingPrefix" | translate }}&nbsp;{{
+          this.waitApproveList.toString()
+        }}
+        <ng-container *ngIf="waitAssigneeList.length > 0"
+          >,{{ this.waitAssigneeList.toString() }}</ng-container
+        >
+        &nbsp;{{ "LicenseMgmt.Common.Hint.AuditApprovingSuffix" | translate }}
+      </span>
+    </ng-container>
+
+    <ng-container
+      *ngIf="waitApproveList.length === 0 && waitAssigneeList.length > 0"
+    >
+      <span>
+        {{ "LicenseMgmt.Common.Hint.AuditApprovingPrefix" | translate }}&nbsp;{{
+          this.waitApproveList.toString()
+        }}
+        {{ this.waitAssigneeList.toString() }}
+        &nbsp;{{ "LicenseMgmt.Common.Hint.AuditApprovingSuffix" | translate }}
+      </span>
+    </ng-container>
+    <span
+      class="reminder-send-btn"
+      *ngIf="waitApproveList.length > 0 || waitAssigneeList.length > 0"
+      (click)="onReminderSend()"
+      ><img src="./assets/imgs/mail.jpg" alt="mail" />
+    </span>
+  </div>
+</ng-template>

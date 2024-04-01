@@ -1,0 +1,806 @@
+
+<div id="icp-full-content">
+
+  <!--# common notice-check dialog-->
+  <app-common-notice-check-dialog
+    [settingParams]="noticeCheckDialogParams"
+    [contentList]="noticeContentList"
+    (closeNotice)="onRedirectHandler()"
+  ></app-common-notice-check-dialog>
+
+  <div>
+    <app-common-license-form-header
+    [formType]="formType"
+    (outputCurFormNo)="onCurFormNoHandler($event)"
+    (outputCurFormTypeId)="onFormTypeIdHandler($event)"
+    (outputUserDeptInfo)="onCurUserDeptHandler($event)"
+    (extendBtnOnClick)="getExtendBtnOnClick($event)"
+    (exportPdf)="exportPdf()"
+    ></app-common-license-form-header>
+  </div>
+
+  <ng-container *ngIf="!extendForm; then packTemplate;  else extendTemplate"> </ng-container>
+
+  <!--# Main Form Section-->
+  <!-- 收起區塊 -->
+  <ng-template #packTemplate>
+    <div ICPFormBody>
+      <p-tabView>
+        <p-tabPanel
+          header="{{ 'LicenseMgmt.Common.Tabs.ApplicationInfo' | translate }}"
+        >
+          <!--# 表單客制區 -->
+          <form [formGroup]="formGroup" class="form-container form-table">
+            <!--# Customer  custCode/custName -->
+            <!--# Source  source -->
+            <div class="form-row grid">
+              <div class="form-col lg:col-6 col-12">
+                <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                    <div class="form-label">
+                      <label class="txt">Customer</label>
+                    </div>
+                  </div>
+                  <div class="grid md:col col-12">
+                    <div
+                      class="form-col form-input col-12"
+                      style="height: unset !important"
+                    >
+                      <div class="form-label">
+                        <label class="txt">
+                          {{ formGroup.get("custName").value }}({{
+                            formGroup.get("custCode").value
+                          }})
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-col lg:col-6 col-12">
+                <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                    <div class="form-label">
+                      <label class="txt">Source</label>
+                    </div>
+                  </div>
+                  <div class="grid md:col col-12">
+                    <div class="form-col form-input col-12">
+                      <div class="form-label">
+                        <label class="txt">{{
+                          formGroup.get("source").value
+                        }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--# 負責篩選人員  empCode/empName -->
+            <!--# 執行日期 trxDate -->
+            <div class="form-row grid">
+              <div class="form-col lg:col-6 col-12">
+                <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                    <div class="form-label require">
+                      <label class="txt">{{
+                        "LicenseMgmt.ICP.Label.CustName" | translate
+                      }}</label>
+                    </div>
+                  </div>
+                  <div class="grid md:col col-12">
+                    <div
+                      class="form-col form-input col-12"
+                      style="height: unset !important"
+                    >
+                      <div class="form-input">
+                        <p-autoComplete
+                          name="empInfo"
+                          [(ngModel)]="curEmpInfo"
+                          [ngModelOptions]="{ standalone: true }"
+                          (completeMethod)="onEmpFilterHandler($event)"
+                          [suggestions]="fuzzyEmpInfosOptions.getValue()"
+                          [virtualScroll]="true"
+                          [itemSize]="30"
+                          [minLength]="1"
+                          [multiple]="false"
+                          [style]="{ width: '100%' }"
+                          field="label"
+                          appendTo="body"
+                          dataKey="value"
+                          placeholder="{{
+                            'LicenseMgmt.ICP.PlaceHolder.KeywordSearch' | translate
+                          }}"
+                          (keydown)="onFieldKeyDownHandler($event)"
+                          (onBlur)="onFieldBlurHandler()"
+                          (ngModelChange)="onCurEmpInfoWather($event)"
+                          [type]="
+                            isEmpFieldLock &&
+                            isTaskStarter &&
+                            routerInfo.url.includes('approving')
+                              ? 'search'
+                              : 'text'
+                          "
+                          [disabled]="!isTaskStarter"
+                        >
+                        </p-autoComplete>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-col lg:col-6 col-12">
+                <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                    <div class="form-label require">
+                      <label class="txt">{{
+                        "LicenseMgmt.ICP.Label.ExecutionDate" | translate
+                      }}</label>
+                    </div>
+                  </div>
+                  <div class="grid md:col col-12">
+                    <div class="form-col form-input col-12">
+                      <div class="form-input">
+                        <p-calendar [selectOtherMonths]="true" [showButtonBar]="true"
+                          formControlName="trxDate"
+                          dateFormat="yy/mm/dd"
+                          appendTo="body"
+                          [showIcon]="true"
+                          placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                          (onInput)="onDatePickerInput($event)"
+                          (onSelect)="onDatePickerSelectAndBlur()"
+                          (onBlur)="onDatePickerSelectAndBlur()"
+                          (onClose)="onDatePickerClose('trxDate')"
+                        ></p-calendar>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--# 客戶公司名稱  companyName -->
+            <!--# 新/舊客戶 isNew -->
+            <div class="form-row grid">
+              <div class="form-col lg:col-6 col-12">
+                <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                    <div class="form-label require">
+                      <label class="txt">{{
+                        "LicenseMgmt.ICP.Label.ClientCompanyName" | translate
+                      }}</label>
+                    </div>
+                  </div>
+                  <div class="grid md:col col-12">
+                    <div
+                      class="form-col form-input col-12"
+                      style="height: unset !important"
+                    >
+                      <div class="form-input">
+                        <input
+                          autocomplete="off"
+                          type="text"
+                          pInputText
+                          name="companyName"
+                          formControlName="companyName"
+                          placeholder="{{
+                            'LicenseMgmt.ICP.PlaceHolder.CompanyName' | translate
+                          }}"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-col lg:col-6 col-12">
+                <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                    <div class="form-label require">
+                      <label class="txt">{{
+                        "LicenseMgmt.ICP.Label.NewOldCustomer" | translate
+                      }}</label>
+                    </div>
+                  </div>
+                  <div class="grid md:col col-12">
+                    <div class="form-col form-input col-12">
+                      <div class="form-select">
+                        <p-dropdown
+                          name="isNew"
+                          [options]="customerTypeOptiom"
+                          formControlName="isNew"
+                          placeholder="{{
+                            'LicenseMgmt.ICP.PlaceHolder.NewOldCustomer' | translate
+                          }}"
+                        ></p-dropdown>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--# 客戶通訊地址  custAddress -->
+            <div class="form-row grid">
+              <div class="form-col col-12">
+                <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                    <div class="form-label require">
+                      <label class="txt">{{
+                        "LicenseMgmt.ICP.Label.CustomerMailingAddress" | translate
+                      }}</label>
+                    </div>
+                  </div>
+                  <div class="grid md:col col-12">
+                    <div
+                      class="form-col form-input col-12"
+                      style="height: unset !important"
+                    >
+                      <div class="form-input">
+                        <input
+                          autocomplete="off"
+                          type="text"
+                          pInputText
+                          name="custAddress"
+                          formControlName="custAddress"
+                          placeholder="{{
+                            'LicenseMgmt.ICP.PlaceHolder.CustAddress' | translate
+                          }}"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- #當SOURCE為ORDER或trxNo有資料才需顯示這三個欄位 -->
+            <ng-container
+              *ngIf="
+                (formGroup.get('source').value &&
+                  formGroup.get('source').value === 'ORDER') ||
+                formGroup.get('trxNo').value
+              "
+            >
+              <!--# SO  trxNo -->
+              <!--# Export control item  exportControlItem -->
+              <div class="form-row grid">
+                <div class="form-col lg:col-4 col-12">
+                  <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                      <div class="form-label">
+                        <label class="txt">SO</label>
+                      </div>
+                    </div>
+                    <div class="grid md:col col-12">
+                      <div
+                        class="form-col form-input col-12"
+                        style="height: unset !important"
+                      >
+                        <div class="form-label">
+                          <label class="txt">
+                            {{ formGroup.get("trxNo").value }}
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-col lg:col-8 col-12">
+                  <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                      <div class="form-label">
+                        <label class="txt">Export Control Item</label>
+                      </div>
+                    </div>
+                    <div class="grid md:col col-12">
+                      <div class="form-col form-input col-12">
+                        <div class="form-label">
+                          <label class="txt">
+                            {{ formGroup.get("exportControlItem").value }}</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!--# Ship To Address  shipToAddress -->
+              <div class="form-row grid">
+                <div class="form-col col-12">
+                  <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                      <div class="form-label">
+                        <label class="txt">Ship To Address</label>
+                      </div>
+                    </div>
+                    <div class="grid md:col col-12">
+                      <div
+                        class="form-col form-input col-12"
+                        style="height: unset !important"
+                      >
+                        <div class="form-label">
+                          <label class="txt">
+                            {{ formGroup.get("shipToAddress").value }}</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </form>
+
+          <!--# Hint -->
+          <div class="hint-highlight">
+            <span>*{{ "LicenseMgmt.ICP.Hint.ICPWarring" | translate }}</span>
+          </div>
+
+          <!--# ICP Rules -->
+          <div class="icp-rules-container">
+            <div
+              class="icp-rules-all-set-section"
+              *ngIf="isTaskStarter && routerInfo.url.includes('approving')"
+            >
+              <div class="label">
+                <span class="label-text">{{
+                  "LicenseMgmt.ICP.Label.AllSelect" | translate
+                }}</span>
+              </div>
+              <div class="check-option">
+                <p-selectButton
+                  [options]="stateOptions"
+                  [(ngModel)]="curAllSetStatus"
+                  optionLabel="label"
+                  optionValue="value"
+                  (onChange)="onAllSetSelectorHandler($event)"
+                ></p-selectButton>
+              </div>
+            </div>
+            <ng-container *ngFor="let icpRule of icpCheckRules.getValue()">
+              <div class="icp-rule-kit">
+                <div class="icp-rule-header">
+                  <span class="title-text">
+                    {{ icpRule.groupNameC }}
+                  </span>
+                </div>
+                <ng-container *ngFor="let icpRuleOption of icpRule.checkOption">
+                  <div class="icp-rule-body">
+                    <div class="icp-rule-content check-option">
+                      <p-selectButton
+                        [options]="stateOptions"
+                        [(ngModel)]="icpRuleOption.isTrue"
+                        [disabled]="
+                          icpRuleOption.isDisabled ||
+                          !isTaskStarter ||
+                          !routerInfo.url.includes('approving')
+                        "
+                        optionLabel="label"
+                        optionValue="value"
+                        (onChange)="onSingleSelectorHandler()"
+                      ></p-selectButton>
+                    </div>
+                    <div class="icp-rule-content title-kit">
+                      <span class="title-text">
+                        {{ icpRuleOption.checkNameC }}
+                        <span class="title-example">
+                          {{ icpRuleOption.exampleC }}
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-container>
+          </div>
+        </p-tabPanel>
+        <ng-container *ngIf="curFormStatus.status == 'approve'">
+          <p-tabPanel
+            header="{{ 'LicenseMgmt.Common.Tabs.AuditHistoryLog' | translate }}"
+            [disabled]="curFormStatus.status == 'draft'"
+          >
+            <app-common-audit-history-log
+              *ngIf="reassignDialogService.reAssignHistoryRefreshController"
+              [formNo]="curFormNo"
+              [formTypeId]="curFormTypeId"
+            ></app-common-audit-history-log>
+          </p-tabPanel>
+        </ng-container>
+        <p-tabPanel
+          header="{{ 'LicenseMgmt.Common.Tabs.AttachmentLink' | translate }}"
+        >
+          <app-attachment-uploader [formTypeId]="curFormTypeId"  [formNo]="curFormNo"></app-attachment-uploader>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+  </ng-template>
+
+  <!-- 展開 -->
+  <ng-template #extendTemplate>
+    <div class="extend-form-container">
+      <div>
+        <!--# 表單客制區 -->
+        <form [formGroup]="formGroup" class="form-container form-table">
+          <!--# Customer  custCode/custName -->
+          <!--# Source  source -->
+          <div class="form-row grid">
+            <div class="form-col lg:col-6 col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label">
+                    <label class="txt">Customer</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div
+                    class="form-col form-input col-12"
+                    style="height: unset !important"
+                  >
+                    <div class="form-label">
+                      <label class="txt">
+                        {{ formGroup.get("custName").value }}({{
+                          formGroup.get("custCode").value
+                        }})
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-col lg:col-6 col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label">
+                    <label class="txt">Source</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div class="form-col form-input col-12">
+                    <div class="form-label">
+                      <label class="txt">{{
+                        formGroup.get("source").value
+                      }}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--# 負責篩選人員  empCode/empName -->
+          <!--# 執行日期 trxDate -->
+          <div class="form-row grid">
+            <div class="form-col lg:col-6 col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label require">
+                    <label class="txt">{{
+                      "LicenseMgmt.ICP.Label.CustName" | translate
+                    }}</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div
+                    class="form-col form-input col-12"
+                    style="height: unset !important"
+                  >
+                    <div class="form-input">
+                      <p-autoComplete
+                        name="empInfo"
+                        [(ngModel)]="curEmpInfo"
+                        [ngModelOptions]="{ standalone: true }"
+                        (completeMethod)="onEmpFilterHandler($event)"
+                        [suggestions]="fuzzyEmpInfosOptions.getValue()"
+                        [virtualScroll]="true"
+                        [itemSize]="30"
+                        [minLength]="1"
+                        [multiple]="false"
+                        [style]="{ width: '100%' }"
+                        field="label"
+                        appendTo="body"
+                        dataKey="value"
+                        placeholder="{{
+                          'LicenseMgmt.ICP.PlaceHolder.KeywordSearch' | translate
+                        }}"
+                        (keydown)="onFieldKeyDownHandler($event)"
+                        (onBlur)="onFieldBlurHandler()"
+                        (ngModelChange)="onCurEmpInfoWather($event)"
+                        [type]="
+                          isEmpFieldLock &&
+                          isTaskStarter &&
+                          routerInfo.url.includes('approving')
+                            ? 'search'
+                            : 'text'
+                        "
+                        [disabled]="!isTaskStarter"
+                      >
+                      </p-autoComplete>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-col lg:col-6 col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label require">
+                    <label class="txt">{{
+                      "LicenseMgmt.ICP.Label.ExecutionDate" | translate
+                    }}</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div class="form-col form-input col-12">
+                    <div class="form-input">
+                      <p-calendar [selectOtherMonths]="true" [showButtonBar]="true"
+                        formControlName="trxDate"
+                        dateFormat="yy/mm/dd"
+                        appendTo="body"
+                        [showIcon]="true"
+                        placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                        (onInput)="onDatePickerInput($event)"
+                        (onSelect)="onDatePickerSelectAndBlur()"
+                        (onBlur)="onDatePickerSelectAndBlur()"
+                        (onClose)="onDatePickerClose('trxDate')"
+                      ></p-calendar>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--# 客戶公司名稱  companyName -->
+          <!--# 新/舊客戶 isNew -->
+          <div class="form-row grid">
+            <div class="form-col lg:col-6 col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label require">
+                    <label class="txt">{{
+                      "LicenseMgmt.ICP.Label.ClientCompanyName" | translate
+                    }}</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div
+                    class="form-col form-input col-12"
+                    style="height: unset !important"
+                  >
+                    <div class="form-input">
+                      <input
+                        autocomplete="off"
+                        type="text"
+                        pInputText
+                        name="companyName"
+                        formControlName="companyName"
+                        placeholder="{{
+                          'LicenseMgmt.ICP.PlaceHolder.CompanyName' | translate
+                        }}"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-col lg:col-6 col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label require">
+                    <label class="txt">{{
+                      "LicenseMgmt.ICP.Label.NewOldCustomer" | translate
+                    }}</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div class="form-col form-input col-12">
+                    <div class="form-select">
+                      <p-dropdown
+                        name="isNew"
+                        [options]="customerTypeOptiom"
+                        formControlName="isNew"
+                        placeholder="{{
+                          'LicenseMgmt.ICP.PlaceHolder.NewOldCustomer' | translate
+                        }}"
+                      ></p-dropdown>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--# 客戶通訊地址  custAddress -->
+          <div class="form-row grid">
+            <div class="form-col col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label require">
+                    <label class="txt">{{
+                      "LicenseMgmt.ICP.Label.CustomerMailingAddress" | translate
+                    }}</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div
+                    class="form-col form-input col-12"
+                    style="height: unset !important"
+                  >
+                    <div class="form-input">
+                      <input
+                        autocomplete="off"
+                        type="text"
+                        pInputText
+                        name="custAddress"
+                        formControlName="custAddress"
+                        placeholder="{{
+                          'LicenseMgmt.ICP.PlaceHolder.CustAddress' | translate
+                        }}"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- #當SOURCE為ORDER或trxNo有資料才需顯示這三個欄位 -->
+          <ng-container
+            *ngIf="
+              (formGroup.get('source').value &&
+                formGroup.get('source').value === 'ORDER') ||
+              formGroup.get('trxNo').value
+            "
+          >
+            <!--# SO  trxNo -->
+            <!--# Export control item  exportControlItem -->
+            <div class="form-row grid">
+              <div class="form-col lg:col-4 col-12">
+                <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                    <div class="form-label">
+                      <label class="txt">SO</label>
+                    </div>
+                  </div>
+                  <div class="grid md:col col-12">
+                    <div
+                      class="form-col form-input col-12"
+                      style="height: unset !important"
+                    >
+                      <div class="form-label">
+                        <label class="txt">
+                          {{ formGroup.get("trxNo").value }}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-col lg:col-8 col-12">
+                <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                    <div class="form-label">
+                      <label class="txt">Export Control Item</label>
+                    </div>
+                  </div>
+                  <div class="grid md:col col-12">
+                    <div class="form-col form-input col-12">
+                      <div class="form-label">
+                        <label class="txt">
+                          {{ formGroup.get("exportControlItem").value }}</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--# Ship To Address  shipToAddress -->
+            <div class="form-row grid">
+              <div class="form-col col-12">
+                <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                    <div class="form-label">
+                      <label class="txt">Ship To Address</label>
+                    </div>
+                  </div>
+                  <div class="grid md:col col-12">
+                    <div
+                      class="form-col form-input col-12"
+                      style="height: unset !important"
+                    >
+                      <div class="form-label">
+                        <label class="txt">
+                          {{ formGroup.get("shipToAddress").value }}</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </form>
+
+        <!--# Hint -->
+        <div class="hint-highlight">
+          <span>*{{ "LicenseMgmt.ICP.Hint.ICPWarring" | translate }}</span>
+        </div>
+
+        <!--# ICP Rules -->
+        <div class="icp-rules-container">
+          <div
+            class="icp-rules-all-set-section"
+            *ngIf="isTaskStarter && routerInfo.url.includes('approving')"
+          >
+            <div class="label">
+              <span class="label-text">{{
+                "LicenseMgmt.ICP.Label.AllSelect" | translate
+              }}</span>
+            </div>
+            <div class="check-option">
+              <p-selectButton
+                [options]="stateOptions"
+                [(ngModel)]="curAllSetStatus"
+                optionLabel="label"
+                optionValue="value"
+                (onChange)="onAllSetSelectorHandler($event)"
+              ></p-selectButton>
+            </div>
+          </div>
+          <ng-container *ngFor="let icpRule of icpCheckRules.getValue()">
+            <div class="icp-rule-kit">
+              <div class="icp-rule-header">
+                <span class="title-text">
+                  {{ icpRule.groupNameC }}
+                </span>
+              </div>
+              <ng-container *ngFor="let icpRuleOption of icpRule.checkOption">
+                <div class="icp-rule-body">
+                  <div class="icp-rule-content check-option">
+                    <p-selectButton
+                      [options]="stateOptions"
+                      [(ngModel)]="icpRuleOption.isTrue"
+                      [disabled]="
+                        icpRuleOption.isDisabled ||
+                        !isTaskStarter ||
+                        !routerInfo.url.includes('approving')
+                      "
+                      optionLabel="label"
+                      optionValue="value"
+                      (onChange)="onSingleSelectorHandler()"
+                    ></p-selectButton>
+                  </div>
+                  <div class="icp-rule-content title-kit">
+                    <span class="title-text">
+                      {{ icpRuleOption.checkNameC }}
+                      <span class="title-example">
+                        {{ icpRuleOption.exampleC }}
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <app-attachment-uploader class="attachment-uploader" [formTypeId]="curFormTypeId"  [formNo]="curFormNo"></app-attachment-uploader>
+
+      <ng-container *ngIf="curFormStatus.status == 'approve'">
+          <app-common-audit-history-log
+            *ngIf="reassignDialogService.reAssignHistoryRefreshController"
+            [formNo]="curFormNo"
+            [formTypeId]="curFormTypeId"
+          ></app-common-audit-history-log>
+      </ng-container>
+    </div>
+  </ng-template>
+
+</div>
+
+ 

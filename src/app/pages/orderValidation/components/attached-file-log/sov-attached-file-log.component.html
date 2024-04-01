@@ -1,0 +1,43 @@
+<sov-app-common-approve-add-attached-dialog
+  [settingParams]="formAuditActionDialogParams"
+  (isClose)="onInitAttachedFileLogView()"
+  [attachedFilesData]="attachedFilesData.getValue()"
+  [attachedURLData]="attachedURLData.getValue()"
+  [formTypeId] = "formTypeId"
+></sov-app-common-approve-add-attached-dialog>
+
+<!--# Form Section-->
+<div class="sub-title-container form-section">
+  <p>{{ "LicenseMgmt.Common.Title.AttachedFile" | translate }}</p>
+
+  <div class="add-attached-container">
+    <ng-container *ngIf="isAddAttachedShow">
+      <button
+        pButton
+        type="button"
+        icon="pi pi-plus"
+        label="{{ 'LicenseMgmt.Common.Button.AddAttachment' | translate }}"
+        class="btn-teal"
+        (click)="onAddAttachedDialogHandler()"
+      ></button>
+    </ng-container>
+  </div>
+</div>
+
+<sov-app-common-data-table-viewer
+  [data]="attachedFilesData.getValue()"
+  [tableCols]="attachedFilesTableCols"
+  [tableSettings]="dataTableSettings"
+  (isSingleDeleteItemActive)="onInitAttachedFileLogView()"
+></sov-app-common-data-table-viewer>
+
+<div class="sub-title-container form-section">
+  <p>{{ "LicenseMgmt.Common.Title.AttachedLink" | translate }}</p>
+</div>
+
+<sov-app-common-data-table-viewer
+  [data]="attachedURLData.getValue()"
+  [tableCols]="attachedURLTableCols"
+  [tableSettings]="dataTableSettings"
+  (isSingleDeleteItemActive)="onInitAttachedFileLogView()"
+></sov-app-common-data-table-viewer>

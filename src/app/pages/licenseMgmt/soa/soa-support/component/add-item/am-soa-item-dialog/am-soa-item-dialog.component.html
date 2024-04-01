@@ -1,0 +1,292 @@
+<!--# common selector dialog-->
+<app-common-selector-dialog [settingParams]="selectorDialogParams" (outputResult)="onSelectorDialogCallback($event)">
+</app-common-selector-dialog>
+
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams" [contentList]="noticeContentList">
+</app-common-notice-check-dialog>
+
+<p-dialog header="{{'LicenseMgmt.Common.Title.AddItemInfo' | translate}}" [(visible)]="showDialog" modal="true"
+    [draggable]="false" [resizable]="false" (onHide)="close()">
+
+    <p-tabView>
+        <!-- 單選 -->
+        <p-tabPanel header="{{'LicenseMgmt.Common.Tabs.SingleAdd' | translate}}" leftIcon="pi pi-file">
+            <div class="form-container form-table">
+                <div class="form-row grid" style="gap:3px;">
+
+                    <!--# Brand-->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Brand</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col" style="height: 100%;">
+                                    <div class="form-label" *ngIf="this.itemInfo.label !== 'All Item'">
+                                        <label class="txt">{{this.itemInfo.value.brand}}</label>
+                                    </div>
+
+                                    <div class="form-input" *ngIf="this.itemInfo.label === 'All Item'">
+                                        <input type="text" pInputText name="brand" readonly
+                                            (click)="onOpenSelectorBrandDialog()" [(ngModel)]="itemInfo.value.brand"
+                                            placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}} Brand" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--# ctg1-->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Ctg1</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col" style="height: 100%;">
+                                    <div class="form-label" *ngIf="this.itemInfo.label !== 'All Item'">
+                                        <label class="txt">{{this.itemInfo.value.ctg1}}</label>
+                                    </div>
+
+                                    <div  *ngIf="this.itemInfo.label === 'All Item'"> 
+                                        <div class="form-label" *ngIf="ctg1Options.length === 1">
+                                            <label class="txt">No category</label>
+                                        </div>    
+
+                                        <div class="form-select" *ngIf="ctg1Options.length > 1">
+                                            <p-dropdown [options]="ctg1Options" [(ngModel)]="itemInfo.value.ctg1"
+                                            (ngModelChange)="ctg1OnChange()"  [disabled]="!itemInfo.value.brand" [filter]="true"
+                                            placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}} Ctg1" appendTo="body"> 
+                                                <ng-template pTemplate="item" let-option> 
+                                                    <span>{{option.label  || 'PendingApproval.PlaceHolder.PleaseChoose' | translate}}</span>
+                                                </ng-template>
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <!--# ctg2-->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Ctg2</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col" style="height: 100%;"> 
+
+                                    <div class="form-label" *ngIf="this.itemInfo.label !== 'All Item'">
+                                        <label class="txt">{{this.itemInfo.value.ctg2}}</label>
+                                    </div>
+
+                                    <div  *ngIf="this.itemInfo.label === 'All Item'"> 
+                                        <div class="form-label" *ngIf="ctg2Options.length === 1">
+                                            <label class="txt">No category</label>
+                                        </div>    
+
+                                        <div class="form-select" *ngIf="ctg2Options.length > 1">
+                                            <p-dropdown  [options]="ctg2Options" [(ngModel)]="itemInfo.value.ctg2"
+                                            (ngModelChange)="ctg2OnChange()"  [disabled]="!itemInfo.value.ctg1"  [filter]="true"
+                                            placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}} Ctg2" appendTo="body">
+                                                <ng-template pTemplate="item" let-option> 
+                                                    <span>{{option.label  || 'PendingApproval.PlaceHolder.PleaseChoose' | translate}}</span>
+                                                </ng-template>
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <!--# ctg3-->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Ctg3</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col" style="height: 100%;">
+                                    <div class="form-label" *ngIf="this.itemInfo.label !== 'All Item'">
+                                        <label class="txt">{{this.itemInfo.value.ctg3}}</label>
+                                    </div>
+
+                                    <div  *ngIf="this.itemInfo.label === 'All Item'"> 
+                                        <div class="form-label" *ngIf="ctg3Options.length === 1">
+                                            <label class="txt">No category</label>
+                                        </div>    
+
+                                        <div class="form-select" *ngIf="ctg3Options.length > 1">
+                                            <p-dropdown [options]="ctg3Options" [(ngModel)]="itemInfo.value.ctg3"
+                                                [disabled]="!itemInfo.value.ctg2"  [filter]="true"
+                                                placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}} Ctg3" appendTo="body">
+                                                <ng-template pTemplate="item" let-option> 
+                                                    <span>{{option.label  || 'PendingApproval.PlaceHolder.PleaseChoose' | translate}}</span>
+                                                </ng-template>
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--# ECCN-->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">ECCN</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col" style="height: 100%;"> 
+                                    <div class="form-label" *ngIf="this.itemInfo.label !== 'All Item'">
+                                        <label class="txt">{{this.itemInfo.value.eccn}}</label>
+                                    </div>
+
+                                    <div  *ngIf="this.itemInfo.label === 'All Item'"> 
+                                        <div class="form-select">
+                                            <p-dropdown [options]="eccnListOptions" [(ngModel)]="itemInfo.value.eccn"  [filter]="true" appendTo="body">
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--# Item Selector-->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Item</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col">
+                                    <div class="form-input">
+                                        <input type="text" pInputText name="productCode" readonly
+                                            (click)="onOpenSelectorDialogEvent()" [(ngModel)]="itemInfo.label"
+                                            placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}} Item" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+ 
+                    <!--# 是否扣量-->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">{{'SOA.Button.deduct' | translate}}</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col" style="height: 100%;">
+                                    <div class="form-select">
+                                        <p-dropdown [options]="deduction.options" [(ngModel)]="itemInfo.value.isDeduct"
+                                            (ngModelChange)="deductChange()"
+                                            [disabled]="soaCommonService.disabledEditDeduct">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ng-container *ngIf="itemInfo.value.isDeduct === 'Y'">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Qty</label>
+                                    </div>
+                                </div>
+                                <div class="md:col col-12">
+                                    <div class="form-col" style="height: 100%;">
+                                        <div class="form-input">
+                                            <input type="text" pInputText
+                                                placeholder="{{'SOA.Msg.PleaseKeyInQty' | translate}}"
+                                                [(ngModel)]="itemInfo.value.qty"
+                                                [disabled]="soaCommonService.disabledEditDeduct" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--# Form Actions -->
+            <div class="btn-container">
+                <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray"
+                    (click)="onCloseAddItemDialogEvent()"></button>
+                <button pButton type="submit" label="{{'SOA.Button.confirm' | translate}}"
+                    (click)="onFormSubmit()"></button>
+            </div>
+        </p-tabPanel>
+
+        <!-- 多選 -->
+        <p-tabPanel header="{{'LicenseMgmt.Common.Tabs.MultiAdd' | translate}}" leftIcon="pi pi-file">
+
+            <div class="form-table">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">{{"LicenseMgmt.Common.Label.FileUpload" | translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <p-fileUpload #fileUploader class="form-file-upload" name="fileUpload[]"
+                            [multiple]="fileUploaderSettings.multiple" [auto]="fileUploaderSettings.auto"
+                            [chooseIcon]="fileUploaderSettings.chooseIcon"
+                            [chooseLabel]="fileUploaderSettings.chooseLabel"
+                            [showCancelButton]="fileUploaderSettings.showCancelButton"
+                            [showUploadButton]="fileUploaderSettings.showUploadButton"
+                            [uploadIcon]="fileUploaderSettings.uploadIcon" [fileLimit]="fileUploaderSettings.fileLimit"
+                            [previewWidth]="fileUploaderSettings.previewWidth"
+                            [customUpload]="fileUploaderSettings.customUpload"
+                            (onSelect)="onFileUploadHandler($event, fileUploader)" dndUploadHandler
+                            [files]="selectedFileList" (fileDropped)="onDropHandler($event)"
+                            (onFileDroppedError)="onDropError($event)"
+                            [acceptDropFileType]="fileUploaderSettings.accept" (onRemove)="mulitpleAddOnRemove()">
+                        </p-fileUpload>
+                    </div>
+                </div>
+
+                <div class="sample-file-section">
+                    <button pButton pRipple type="button" label="Primary" class="p-button-text"
+                        label="Download Sample File" (click)="onDownloadSampleFileEvent()"></button>
+                </div>
+
+                <!--# Form Actions -->
+                <div class="btn-container">
+                    <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray"
+                        (click)="onCloseAddItemDialogEvent()"></button>
+
+                    <button *ngIf="selectedFileList.length !== 0" pButton type="button" class="submit"
+                        (click)="multipleItemUpload()" label="{{ 'Button.Label.Submit' | translate }}"></button>
+                </div>
+            </div>
+
+        </p-tabPanel>
+    </p-tabView>
+</p-dialog>
+
+<p-progressSpinner *ngIf="showSpinner"></p-progressSpinner>

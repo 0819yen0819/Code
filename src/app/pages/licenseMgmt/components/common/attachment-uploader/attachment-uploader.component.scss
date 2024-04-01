@@ -1,0 +1,123 @@
+.add-attached-container {
+    @apply absolute right-2 bottom-3 md:bottom-4;
+}
+
+.sub-title-container {
+    &:first-of-type {
+        @apply m-0;
+    }
+}
+
+.form-section {
+    margin-bottom: -3vh !important;
+}
+
+
+
+:host ::ng-deep {
+
+    .attachment-th,
+    .attachment-td {
+        height: unset !important;
+        min-height: unset !important;
+        padding: 4px !important;
+    }
+}
+
+.file-download {
+    color: #4299e1;
+    /* 藍色文字 */
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+        color: #3182ce;
+        /* 懸停時的深藍色文字 */
+    }
+}
+
+
+.data-container .has-data p-table {
+    margin-top: 1.5rem;
+    overflow-y: auto !important;
+}
+
+.data-container .has-data p-table td {
+    cursor: default;
+}
+
+.data-container .has-data p-table td.extranet,
+.data-container .has-data p-table td.file-download {
+    color: #4299e1;
+    cursor: pointer;
+}
+
+.data-container .has-data p-table td.extranet:hover,
+.data-container .has-data p-table td.file-download:hover {
+    color: #3182ce;
+}
+
+.data-container .no-data {
+    height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.data-container .no-data span {
+    font-weight: 600;
+    color: #718096;
+}
+
+app-dt-viewer-dropdown {
+    width: 100%;
+}
+
+:host ::ng-deep .p-toolbar {
+    background: transparent;
+    border: none;
+}
+
+:host ::ng-deep .p-button {
+    min-width: 0;
+}
+
+:host ::ng-deep .p-button.p-button-danger {
+    background: #f9fafc;
+    color: #fc8181;
+    border: 1px solid #fc8181;
+}
+
+:host ::ng-deep .p-button.p-button-danger:hover {
+    background: #fc8181;
+    color: #f9fafc;
+}
+
+:host ::ng-deep .table-search {
+    width: 100%;
+    max-width: 20rem;
+    /* Adjust according to your design */
+}
+
+:host ::ng-deep p-table {
+    margin: 0;
+    padding-bottom: 1rem !important;
+}
+
+:host ::ng-deep p-table .p-datatable-wrapper {
+    max-height: 600px;
+}
+
+:host ::ng-deep p-table .p-datatable-thead {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+:host ::ng-deep p-table tr.hide {
+    display: none;
+}
+
+.table-panel {
+    margin-top: 2rem;
+}

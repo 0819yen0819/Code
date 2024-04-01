@@ -1,0 +1,8 @@
+.btn-container {
+  &.filter-action {
+    @apply xxs:mb-2 md:mb-0 #{!important};
+    .p-button {
+      @apply xxs:mt-2 md:mt-0 #{!important};
+    }
+  }
+}

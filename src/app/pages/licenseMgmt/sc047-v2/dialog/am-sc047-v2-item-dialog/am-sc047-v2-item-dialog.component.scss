@@ -1,0 +1,33 @@
+@import "../../../../../../styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+.form-container {
+  &.form-table {
+    .form-row {
+      .form-col {
+        .form-label {
+          &.force-height {
+            @apply h-12 #{!important};
+          }
+        }
+        .form-input {
+          input {
+            @apply cursor-pointer;
+          }
+
+          .p-input-icon-right {
+            .clean-btn {
+              @apply mr-2;
+              &:hover {
+                @apply cursor-pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+

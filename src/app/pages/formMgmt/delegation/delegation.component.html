@@ -1,0 +1,767 @@
+<div class="main-title-container">
+  <p>{{ 'Delegation.Label.DelegationSetting' | translate }}</p>
+</div>
+<!-- end: main-title-container -->
+
+<form class="form-table form-search">
+  <div class="form-row grid">
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'Delegation.Label.AgentUserStatus' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-select">
+            <!-- add class `error-active` in `form-select` when input error  -->
+            <p-dropdown name="selectedActiveFlag" [(ngModel)]="selectedActiveFlag" [options]="activeFlagOptions" placeholder="{{ 'PendingApproval.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+          </div>
+          <!-- end: form-select -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'Delegation.Label.User' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-select">
+            <p-dropdown name="selectedAgentUser" [(ngModel)]="selectedAgentUser" [filter]="true" [options]="supervisorUserOptions"
+                  (onFilter)="agentUserFilterChange($event)" placeholder="{{ 'PendingApproval.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+          </div>
+          <!-- end: form-select -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'Delegation.Label.AgentDate' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-date">
+            <p-calendar
+                [selectOtherMonths]="true"
+                [showButtonBar]="true"
+                [showIcon]="true"
+                appendTo="body"
+                name="startDate"
+                [(ngModel)]="startDate"
+                dateFormat="yy/mm/dd"
+                (onInput)="onDatePickerInput($event)"
+                (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                (onBlur)="onDatePickerSelectAndBlur()"
+                (onClose)="onDatePickerClose('startDate');onCheckDateHandler()"
+                placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+              >
+            </p-calendar>
+          </div>
+          <!-- end: form-date -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col col-1">
+          <div class="form-label form-date-between">
+            <label class="txt">~</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-date">
+            <p-calendar
+                [selectOtherMonths]="true"
+                [showButtonBar]="true"
+                [showIcon]="true"
+                appendTo="body"
+                name="endDate"
+                [(ngModel)]="endDate"
+                [minDate]="startDate"
+                dateFormat="yy/mm/dd"
+                (onInput)="onDatePickerInput($event)"
+                (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                (onBlur)="onDatePickerSelectAndBlur()"
+                (onClose)="onDatePickerClose('endDate');onCheckDateHandler()"
+                placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+              >
+            </p-calendar>
+          </div>
+          <!-- end: form-date -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="btn-container">
+    <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-secondary" (click)="resetQueryForm()"></button>
+    <button pButton type="button" label="{{ 'Button.Label.Query' | translate }}" (click)="searchBtnClick()" *ngIf="permissions.includes('view')"></button>
+  </div>
+</form>
+
+<!--# TK-35854 -->
+<p-table #dt class="table-panel" [value]="data" [columns]="cols"
+  [scrollable]="true" scrollHeight="500px"
+  [paginator]="true" [rows]="10"
+  paginatorPosition="bottom" [rowsPerPageOptions]="[10,20]"
+  dataKey="id">
+  <ng-template pTemplate="caption">
+    <div class="table-action-block">
+      <div class="table-search ui-inputgroup">
+        <input type="text" pInputText size="30" placeholder="{{'Input.PlaceHolder.SearchTableByKeyword' | translate}}"
+        [(ngModel)]="searchDelegation" (input)="dt.filterGlobal($event.target.value, 'contains')" />
+        <span class="ui-inputgroup-addon">
+          <i class="pi pi-search"></i>
+        </span>
+      </div>
+
+      <div class="btn-container">
+        <button pButton type="button" icon="pi pi-plus" label="{{ 'Button.Label.Add' | translate }}"
+          class="btn-teal" (click)="showEdit('new', null)" *ngIf="permissions.includes('add')"></button>
+      </div>
+
+      <div class="btn-container right">
+        <button pButton type="button" icon="pi pi-sliders-h" label="{{ 'Button.Label.Filter' | translate }}"
+          class="btn-line" (click)="showFilter()"></button>
+      </div>
+    </div>
+    <!-- end: table-action-block -->
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngFor="let col of selectedCols" [pSortableColumn]="col.field"
+        [ngClass]="{
+        'icon-col': (col.field == 'checkbox' || col.field === 'seq' || col.field === 'edit' || col.field === 'del' || col.field === 'detail')
+        }"
+        scope="col"
+      >
+        <ng-container  *ngIf="col.field === 'edit'">
+          {{col.header}}
+        </ng-container>
+        <ng-container  *ngIf="col.field !== 'edit'">
+          {{col.header}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </ng-container>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-data>
+    <tr>
+      <td *ngFor="let col of selectedCols"
+      [ngClass]="{
+        'icon-col': (col.field == 'checkbox' || col.field === 'seq' || col.field === 'edit' || col.field === 'del' || col.field === 'detail')
+        }"
+      >
+        <ng-container  *ngIf="col.field === 'edit'">
+          <div class="btn-container">
+            <button pButton type="button" class="icon-btn btn-orange" (click)="showEdit('edit',data['agentInfoId'])">
+              <img src="./assets/imgs/icon-btn/edit.svg" alt="Edit">
+            </button>
+          </div>
+        </ng-container>
+        <ng-container  *ngIf="col.field === 'desc'">
+          <p *ngFor="let item of data[col.field]">{{item}}</p>
+        </ng-container>
+        <ng-container *ngIf="col.field === 'activeFlag'">
+          <p>{{data[col.field]}}</p>
+        </ng-container>
+        <ng-container *ngIf="col.field === 'agentType'">
+          <p>{{agentTypeDesc[data[col.field]]}}</p>
+        </ng-container>
+        <ng-container *ngIf="col.field === 'mailFlag'">
+          <p>{{yesOrNoDesc[data[col.field]]}}</p>
+        </ng-container>
+        <ng-container *ngIf="col.field === 'startDate' || col.field === 'endDate'">
+          <p>{{data[col.field] | date : 'yyyy/MM/dd HH:mm'}}</p>
+        </ng-container>
+        <ng-container  *ngIf="col.field !== 'edit' && col.field !== 'desc' && col.field !== 'startDate' &&
+           col.field !== 'endDate' && col.field !== 'activeFlag' && col.field !== 'mailFlag' && col.field !== 'agentType'">
+          <p>{{data[col.field]}}</p>
+        </ng-container>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog header="{{ 'Dialog.Header.FilterColumns' | translate }}" [(visible)]="displayFilterDetail"
+  [draggable]="false" [blockScroll]="true" [modal]="true" >
+  <form>
+    <div class="form-row grid">
+      <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of cols">
+        <div class="form-checkbox">
+          <p-checkbox name="checkboxGroup" [label]="col.header" [value]="col" [(ngModel)]="selectedCols"
+            [disabled]="col?.isDisabled"></p-checkbox>
+        </div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="btn-container">
+      <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-gray btn-line"
+        (click)="changeFilterDetail()"></button>
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog [header]="title" [(visible)]="displayEditDetail" [closeOnEscape]="true"
+  [draggable]="false" [blockScroll]="true"  [modal]="true" (onHide)="onHideDetailDialog($event)">
+
+  <p-tabView #tabView (onChange)="tabViewChange($event.index)" [(activeIndex)]="selectedTabIndex">
+    <p-tabPanel header="{{ 'Delegation.Label.GeneralType' | translate }}">
+      <ng-container>
+      <form [formGroup]="editForm" class="form-table">
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{ 'Delegation.Label.User' | translate }}</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                <div class="form-select">
+                  <p-dropdown name="userCode" formControlName="userCode" [filter]="true" [options]="supervisorUserOptions"
+                  (onFilter)="agentUserFilterChange($event)"
+                  placeholder="{{ 'PendingApproval.PlaceHolder.PleaseChoose' | translate }}"
+                  filterPlaceholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+                  <p class="error-active" *ngIf="formSubmitted && editF.userCode.errors?.required">
+                    <i class="pi pi-exclamation-circle"></i>
+                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                  </p>
+                </div>
+                <!-- end: form-select -->
+              </div>
+              <!-- end: form-col -->
+            </div>
+            <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{ 'Delegation.Label.MailFlag' | translate }}</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                  <div class="form-radio">
+                    <p-radioButton name="ccMail" label="{{ 'Delegation.Label.Yes' | translate }}" value="Y" formControlName="ccMail"></p-radioButton>
+                    <p-radioButton name="ccMail" label="{{ 'Delegation.Label.No' | translate }}" value="N" formControlName="ccMail"></p-radioButton>
+                    <p class="error-active" *ngIf="formSubmitted && editF.ccMail.errors?.required">
+                      <i class="pi pi-exclamation-circle"></i>
+                      <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                    </p>
+                  </div>
+                  <!-- end: form-radio -->
+              </div>
+              <!-- end: form-col -->
+            </div>
+            <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{ 'Delegation.Label.AgentDate' | translate }}</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                <div class="form-date">
+                  <p-calendar
+                    [selectOtherMonths]="true"
+                    [showButtonBar]="true"
+                    [showIcon]="true"
+                    [showTime]="true"
+                    name="startTime"
+                    formControlName="startTime"
+                    appendTo="body"
+                    dateFormat="yy/mm/dd"
+                    (onSelect)="onCheckDateHandler(editForm)"
+                    appendTo="body"
+                    placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                  ></p-calendar>
+                  <p class="error-active" *ngIf="formSubmitted && editF.startTime.errors?.required">
+                    <i class="pi pi-exclamation-circle"></i>
+                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                  </p>
+                </div>
+                <!-- end: form-date -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col col-1">
+                <div class="form-label form-date-between">
+                  <label class="txt">~</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                <div class="form-date">
+                  <p-calendar
+                    [selectOtherMonths]="true"
+                    [showButtonBar]="true"
+                    [showIcon]="true"
+                    [showTime]="true"
+                    name="endTime"
+                    [disabled]="editForm.get('startTime').invalid"
+                    [minDate]="editForm.get('startTime').value"
+                    formControlName="endTime"
+                    formControlName="endTime"
+                    appendTo="body"
+                    dateFormat="yy/mm/dd"
+                    placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                  ></p-calendar>
+                  <p class="error-active" *ngIf="formSubmitted && editF.endTime.errors?.required">
+                    <i class="pi pi-exclamation-circle"></i>
+                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                  </p>
+                </div>
+                <!-- end: form-date -->
+              </div>
+              <!-- end: form-col -->
+            </div>
+            <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{ 'Delegation.Label.DelegationSetting' | translate }}</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                <div class="form-select">
+                  <p-dropdown *ngIf="displayEditDetail" name="agentUser" formControlName="agentUser" [filter]="true" [options]="agentUserOptions"
+                  (onFilter)="agentUserFilterChange($event)" placeholder="{{ 'Delegation.Label.PleaseInputUserCode' | translate }}" filterPlaceholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+                  <p class="error-active" *ngIf="formSubmitted && editF.agentUser.errors?.required">
+                    <i class="pi pi-exclamation-circle"></i>
+                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                  </p>
+                </div>
+                <!-- end: form-input -->
+              </div>
+              <!-- end: form-col -->
+            </div>
+            <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">{{ 'Delegation.Label.FormType' | translate }}</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                <div class="form-select">
+                  <!-- add class `error-active` in `form-input` when input error  -->
+                  <p-multiSelect *ngIf="displayEditDetail" [options]="formTypeOptions" formControlName="formTypes" name="formTypes" appendTo="body" [showToggleAll]="false"
+                  placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}{{ 'DropDown.PlaceHolder.NoChooseEqualtoALL' | translate }}"></p-multiSelect>
+                </div>
+                <!-- end: form-input -->
+              </div>
+              <!-- end: form-col -->
+            </div>
+            <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">OU</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                <div class="form-select">
+                  <!-- add class `error-active` in `form-input` when input error  -->
+                  <p-multiSelect *ngIf="displayEditDetail" name="ouCodeList" formControlName="ouCodeList" [filter]="true" [options]="ouListOptions"
+                    (onFilter)="onOUInfoListFilter($event)" (onChange)="onOUInfoListChange($event)"
+                    placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}{{ 'DropDown.PlaceHolder.NoChooseEqualtoALL' | translate }}"
+                    filterPlaceHolder="{{ 'Input.PlaceHolder.PleaseKeyIn' | translate }} OU" appendTo="body" [showToggleAll]="false"></p-multiSelect>
+                </div>
+                <!-- end: form-input -->
+              </div>
+              <!-- end: form-col -->
+            </div>
+            <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{ 'Delegation.Label.ActiveFlag' | translate }}</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                <div class="form-select">
+                  <!-- add class `error-active` in `form-input` when input error  -->
+                  <p-dropdown name="activeFlag" formControlName="activeFlag" [options]="activeFlagOptions" placeholder="{{ 'PendingApproval.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+                  <p class="error-active" *ngIf="formSubmitted && editF.activeFlag.errors?.required">
+                    <i class="pi pi-exclamation-circle"></i>
+                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                  </p>
+                </div>
+                <!-- end: form-input -->
+              </div>
+              <!-- end: form-col -->
+            </div>
+            <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+      </form>
+      </ng-container>
+      <div class="btn-container">
+        <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray" (click)="closeEdit();"></button>
+        <button pButton type="button" label="{{ 'Button.Label.Save' | translate }}" (click)="saveBtnClick('GENERAL')"></button>
+      </div>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{ 'Delegation.Label.DeptType' | translate }}">
+      <ng-container>
+      <form [formGroup]="editForm2" class="form-table">
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{ 'Delegation.Label.User' | translate }}</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                <div class="form-select">
+                  <p-dropdown name="userCode" formControlName="userCode" [filter]="true" [options]="supervisorUserOptions"
+                  (onFilter)="agentUserFilterChange($event)" placeholder="{{ 'PendingApproval.PlaceHolder.PleaseChoose' | translate }}" filterPlaceholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"
+                  (onChange)="onChangeSupervisorUser($event)"></p-dropdown>
+                  <p class="error-active" *ngIf="formSubmitted && editF2.userCode.errors?.required">
+                    <i class="pi pi-exclamation-circle"></i>
+                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                  </p>
+                </div>
+                <!-- end: form-select -->
+              </div>
+              <!-- end: form-col -->
+            </div>
+            <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{ 'Delegation.Label.MailFlag' | translate }}</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                  <div class="form-radio">
+                    <p-radioButton name="ccMail" label="{{ 'Delegation.Label.Yes' | translate }}" value="Y" formControlName="ccMail"></p-radioButton>
+                    <p-radioButton name="ccMail" label="{{ 'Delegation.Label.No' | translate }}" value="N" formControlName="ccMail"></p-radioButton>
+                    <p class="error-active" *ngIf="formSubmitted && editF2.ccMail.errors?.required">
+                      <i class="pi pi-exclamation-circle"></i>
+                      <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                    </p>
+                  </div>
+                  <!-- end: form-radio -->
+              </div>
+              <!-- end: form-col -->
+            </div>
+            <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{ 'Delegation.Label.DeptName' | translate }}</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                <div class="form-select">
+                  <!-- add class `error-active` in `form-select` when input error  -->
+                  <p-dropdown [options]="agentDeptOptions" formControlName="dept" name="dept" placeholder="{{ 'PendingApproval.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+                  <p class="error-active" *ngIf="formSubmitted && editF2.dept.errors?.required">
+                    <i class="pi pi-exclamation-circle"></i>
+                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                  </p>
+                </div>
+                <!-- end: form-select -->
+              </div>
+              <!-- end: form-col -->
+            </div>
+            <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{ 'Delegation.Label.AgentDate' | translate }}</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                <div class="form-date">
+                  <p-calendar
+                    [selectOtherMonths]="true"
+                    [showButtonBar]="true"
+                    [showIcon]="true"
+                    [showTime]="true"
+                    name="startTime"
+                    formControlName="startTime"
+                    appendTo="body"
+                    dateFormat="yy/mm/dd"
+                    (onSelect)="onCheckDateHandler(editForm2)"
+                    placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                  ></p-calendar>
+                  <p class="error-active" *ngIf="formSubmitted && editF2.startTime.errors?.required">
+                    <i class="pi pi-exclamation-circle"></i>
+                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                  </p>
+                </div>
+                <!-- end: form-date -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col col-1">
+                <div class="form-label form-date-between">
+                  <label class="txt">~</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                <div class="form-date">
+                  <p-calendar
+                    [selectOtherMonths]="true"
+                    [showButtonBar]="true"
+                    [showIcon]="true"
+                    [showTime]="true"
+                    name="endTime"
+                    [disabled]="editForm2.get('startTime').invalid"
+                    [minDate]="editForm2.get('startTime').value"
+                    formControlName="endTime"
+                    appendTo="body"
+                    dateFormat="yy/mm/dd"
+                    placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                  ></p-calendar>
+                  <p class="error-active" *ngIf="formSubmitted && editF2.endTime.errors?.required">
+                    <i class="pi pi-exclamation-circle"></i>
+                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                  </p>
+                </div>
+                <!-- end: form-date -->
+              </div>
+              <!-- end: form-col -->
+            </div>
+            <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{ 'Delegation.Label.DelegationSetting' | translate }}</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                <div class="form-select">
+                  <p-dropdown *ngIf="displayEditDetail" name="agentUser" formControlName="agentUser" [filter]="true" [options]="agentUserOptions"
+                  (onFilter)="agentUserFilterChange($event)" placeholder="{{ 'Delegation.Label.PleaseInputUserCode' | translate }}" filterPlaceholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+                  <p class="error-active" *ngIf="formSubmitted && editF2.endTime.errors?.required">
+                    <i class="pi pi-exclamation-circle"></i>
+                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                  </p>
+                </div>
+                <!-- end: form-input -->
+              </div>
+              <!-- end: form-col -->
+            </div>
+            <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">{{ 'Delegation.Label.FormType' | translate }}</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                <div class="form-select">
+                  <!-- add class `error-active` in `form-input` when input error  -->
+                  <p-multiSelect *ngIf="displayEditDetail"  [options]="formTypeOptions" formControlName="formTypes" name="formTypes" appendTo="body" [showToggleAll]="false"
+                  placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}{{ 'DropDown.PlaceHolder.NoChooseEqualtoALL' | translate }}"></p-multiSelect>
+                </div>
+                <!-- end: form-input -->
+              </div>
+              <!-- end: form-col -->
+            </div>
+            <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+          <!-- end: form-row -->
+
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{ 'Delegation.Label.ActiveFlag' | translate }}</label>
+                </div>
+                <!-- end: form-label -->
+              </div>
+              <!-- end: form-col -->
+
+              <div class="form-col col">
+                <div class="form-select">
+                  <!-- add class `error-active` in `form-input` when input error  -->
+                  <p-dropdown name="activeFlag" formControlName="activeFlag" [options]="activeFlagOptions" placeholder="{{ 'PendingApproval.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+                  <p class="error-active" *ngIf="formSubmitted && editF2.activeFlag.errors?.required">
+                    <i class="pi pi-exclamation-circle"></i>
+                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                  </p>
+                </div>
+                <!-- end: form-input -->
+              </div>
+              <!-- end: form-col -->
+            </div>
+            <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+        </div>
+        <!-- end: form-row -->
+
+
+      </form>
+      </ng-container>
+      <div class="btn-container">
+        <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray" (click)="closeEdit();"></button>
+        <button pButton type="button" label="{{ 'Button.Label.Save' | translate }}" (click)="saveBtnClick('DEPT')"></button>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</p-dialog>
+
+<p-progressSpinner *ngIf="showLoader"></p-progressSpinner>

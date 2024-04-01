@@ -1,0 +1,2770 @@
+<p-tabView>
+    <p-tabPanel header="{{ 'ImpExpLicenseMtn.Label.ImpLicenseMtn' | translate }}" leftIcon="icon icon-list">
+        <form class="form-table form-search">
+
+            <div class="form-row grid">
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.LicenseNo' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="licenseNo" [(ngModel)]="queryReq.licenseNo"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.OOuCode' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <span class="p-input-icon-right" style="width:100%">
+                                    <ng-container *ngIf="curOOULable != ''">
+                                        <i
+                                        class="pi pi-times input-icon"
+                                        (click)="onSelectorClean('Import', 'alloou')"
+                                    ></i>
+                                    </ng-container>
+                                    <input type="text" pInputText name="oouCode" readonly
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" [value]="curOOULable"
+                                    (click)="onOpenSelectorDialogEvent('Import', 'alloou')" />
+                                </span>
+
+                            </div>
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.OuCode' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <span class="p-input-icon-right" style="width:100%">
+                                    <ng-container *ngIf="curOULable != ''">
+                                        <i
+                                        class="pi pi-times input-icon"
+                                        (click)="onSelectorClean('Import', 'allou')"
+                                    ></i>
+                                    </ng-container>
+                                    <input type="text" pInputText name="ouCode" readonly
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" [value]="curOULable"
+                                    (click)="onOpenSelectorDialogEvent('Import', 'allou')" />
+                                </span>
+
+                            </div>
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+            </div>
+
+            <div class="form-row grid">
+
+                <div class="form-col md:col-8 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.CustomerVendorType' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col-3">
+                            <div class="form-select">
+                                <!-- add class `error-active` in `form-select` when input error  -->
+                                <p-dropdown name="customerVendorType" [(ngModel)]="queryReq.customerVendorType"
+                                    [options]="customerVendorTypeOptions"
+                                    placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"
+                                    (onChange)="onChangeVCType($event)"></p-dropdown>
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-select -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col pl-2">
+                            <div class="form-input">
+                                <span class="p-input-icon-right" style="width:100%">
+                                    <ng-container *ngIf="curCVLable != ''">
+                                        <i
+                                        class="pi pi-times input-icon"
+                                        (click)="onSelectorClean('Import', 'cusven')"
+                                    ></i>
+                                    </ng-container>
+                                    <input type="text" pInputText name="curstorId" readonly
+                                    placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}" [value]="curCVLable"
+                                    (click)="onOpenSelectorDialogEvent('Import', 'cusven')" />
+                                </span>
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">Flow No.</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="formNo" [(ngModel)]="queryReq.formNo"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+            </div>
+
+            <div class="form-row grid">
+
+                <div class="form-col md:col-8 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.Item' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+
+                        <div class="form-col col-3">
+                            <div class="form-select">
+                                <!-- add class `error-active` in `form-select` when input error  -->
+                                <p-dropdown name="itemFilterType" [(ngModel)]="queryReq.itemFilterType"
+                                    [options]="itemFilterTypeOptions"
+                                    placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"
+                                    (onChange)="onChangeItemFilterType('Import')"></p-dropdown>
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-select -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <!-- end: form-col -->
+                        <div class="form-col col pl-2">
+                            <div class="form-input" *ngIf="queryReq.itemFilterType !== 'Multi'">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="item" [(ngModel)]="queryReq.item"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-input -->
+                            <div class="form-chip" *ngIf="queryReq.itemFilterType === 'Multi'">
+                                <p-chips name="items" [(ngModel)]="queryReq.items"
+                                    placeholder="{{ 'ImpExpLicenseMtn.PlaceHolder.Items' | translate }}">
+                                </p-chips>
+                            </div>
+                        </div>
+                        <!-- end: form-col -->
+
+
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.ECCN' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="eccn" [(ngModel)]="queryReq.eccn"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+            </div>
+
+            <div class="form-row grid">
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.CCATS' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="ccats" [(ngModel)]="queryReq.ccats"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-8 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.ShipFrom' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="shipFrom" [(ngModel)]="queryReq.shipFrom"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+            </div>
+
+            <div class="form-row grid">
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.StartDate' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-date">
+                                <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true" name="startDate" [(ngModel)]="queryReq.startDate"
+                                (onInput)="onDatePickerInput($event)"
+                                (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler('imp')"
+                                (onBlur)="onDatePickerSelectAndBlur()"
+                                (onClose)="onDatePickerClose('imp','startDate');onCheckDateHandler('imp')"
+                                dateFormat="yy/mm/dd" appendTo="body"
+                                placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                >
+                                </p-calendar>
+                            </div>
+                            <!-- end: form-date -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.EndDate' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-date">
+                                <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true" name="endDate" [(ngModel)]="queryReq.endDate" [minDate]="queryReq.startDate"
+                                    dateFormat="yy/mm/dd" appendTo="body"
+                                    (onInput)="onDatePickerInput($event)"
+                                    (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler('imp')"
+                                    (onBlur)="onDatePickerSelectAndBlur()"
+                                    (onClose)="onDatePickerClose('imp','endDate');onCheckDateHandler('imp')"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                    >
+                                </p-calendar>
+                            </div>
+                            <!-- end: form-date -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.CountryCode' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-select">
+                                <!-- add class `error-active` in `form-select` when input error  -->
+                                <p-dropdown name="countryCode" [(ngModel)]="queryReq.countryCode"
+                                    [options]="countryCodeOptions"
+                                    placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-select -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+            </div>
+
+            <div class="form-row grid">
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.Consignee' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="consignee" [(ngModel)]="queryReq.consignee"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.ConsigneeAddress' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="consigneeAddress"
+                                    [(ngModel)]="queryReq.consigneeAddress"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.Flag' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-select">
+                                <!-- add class `error-active` in `form-select` when input error  -->
+                                <p-dropdown name="flag" [(ngModel)]="queryReq.flag" [options]="flagOptions"
+                                    placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-select -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+            </div>
+
+            <div class="form-row grid"> 
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                  <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                      <div class="form-label">
+                        <label class="txt">Trx Number</label>
+                      </div>
+                    </div>
+                    <div class="form-col col">
+                      <div class="form-input">
+                        <span class="p-input-icon-right" style="width: 100%">
+                          <input type="text" pInputText name="trxReferenceNo" 
+                           placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" [(ngModel)]="queryReq.trxReferenceNo"
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <div class="btn-container">
+                <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-secondary"
+                    (click)="resetBtnClick()"></button>
+                <!-- <button pButton type="button" label="{{ 'Button.Label.Query' | translate }}"
+                    (click)="searchBtnClickImp()" *ngIf="permissions.includes('view')"></button> -->
+                <button pButton type="button" label="{{ 'Button.Label.Query' | translate }}"
+                    (click)="searchBtnClickImp()"></button>
+                <button pButton type="button" label="{{ 'Button.Label.Download' | translate }}"
+                    (click)="downloadBtnClick('downloadImport')"></button>
+            </div>
+
+        </form>
+
+        <!--# TK-35854 -->
+        <ng-container *ngIf="displayResultImp">
+            <p-table #lazyTableImp class="table-panel" [value]="dataImp" [columns]="selectedColsImp" [scrollable]="false"
+                scrollHeight="500px" [paginator]="true" [rows]="10" paginatorPosition="bottom"
+                [rowsPerPageOptions]="[10,20]" [(selection)]="selectedDataImp" dataKey="id"
+                [lazy]="true" (onLazyLoad)="onLazyLoadImp($event)" (onSort)="onSortImp($event)"
+                (onPage)="onPageImp($event)" [totalRecords]="totalRecordsImp" [resizableColumns]="true">
+                <ng-template pTemplate="caption">
+                    <div class="table-action-block">
+                        <div class="table-search ui-inputgroup">
+                            <input type="text" pInputText size="30" placeholder="Search keyword"
+                                [(ngModel)]="globalFilterImp" (input)="filterLazyImp($event.target.value)" />
+                            <span class="ui-inputgroup-addon">
+                                <i class="pi pi-search"></i>
+                            </span>
+                        </div>
+
+                        <div class="btn-container">
+                            <button pButton type="button" icon="pi pi-plus" label="{{ 'Button.Label.Add' | translate }}"
+                                class="btn-teal" (click)="editDetail()" *ngIf="permissions.includes('add')"></button>
+                        </div>
+
+                        <div class="btn-container right">
+                            <button pButton type="button" icon="pi pi-sliders-h"
+                                label="{{ 'Button.Label.Filter' | translate }}" class="btn-line"
+                                (click)="showFilterImp()"></button>
+                        </div>
+                    </div>
+                    <!-- end: table-action-block -->
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr style="position: sticky; top: 0; z-index: 1;">
+                        <ng-container *ngFor="let col of selectedColsImp">
+                            <th [ngClass]="col.css"
+                                *ngIf="col.field === 'edit' || col.field === 'del' || col.field === 'viewArea' || col.field === 'viewHistory'"
+                                scope="col">
+                                {{col.header}}
+                            </th>
+                            <th [pSortableColumn]="col.field" [ngClass]="col.css"
+                                *ngIf="col.field !== 'edit' && col.field !== 'del' && col.field !== 'viewArea' && col.field !== 'viewHistory'"
+                                scope="col">
+                                {{col.header}}
+                                <p-sortIcon [field]="col.field"></p-sortIcon>
+                            </th>
+                        </ng-container>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-data>
+                    <tr>
+                        <td *ngFor="let col of selectedColsImp" [ngClass]="col.css">
+                            <div class="license-mtn-td-container">
+                                <span class="p-column-title font-bold">{{col.header}}</span>
+                                <ng-container *ngIf="col.field === 'edit'">
+                                    <div class="btn-container">
+                                    <button pButton type="button" class="icon-btn btn-orange"
+                                        (click)="editDetail(data['seq'])">
+                                        <img src="./assets/imgs/icon-btn/edit.svg" alt="Detail">
+                                    </button>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="col.field === 'del'">
+                                    <div class="btn-container">
+                                    <button pButton type="button" icon="pi pi-trash" class="icon-btn btn-dark-red"
+                                        (click)="clickDeleteImp(data);"></button>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="col.field === 'viewArea'">
+                                    <div class="btn-container">
+                                        <button pButton type="button" class="icon-btn btn-teal"
+                                            (click)="viewArea(data['productCode'])">
+                                            <img src="./assets/imgs/icon-btn/detail.svg" alt="Detail">
+                                        </button>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="col.field === 'viewHistory'">
+                                    <div class="btn-container">
+                                        <button pButton type="button" class="icon-btn btn-teal"
+                                            (click)="viewHistory(data)">
+                                            <img src="./assets/imgs/icon-btn/detail.svg" alt="Detail">
+                                        </button>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="col.field !== 'edit' && col.field !== 'del' && col.field !== 'viewArea' && col.field !== 'viewHistory'">
+                                    <!-- <p>{{data[col.field]}}</p> -->
+                                    <p>{{processTableData(col.field, data)}}</p>
+                                </ng-container>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-container>
+
+        <!-- 進口 新增/編輯 -->
+        <p-dialog header="" [(visible)]="displayDetailImp" [draggable]="false" [closeOnEscape]="true"
+            [blockScroll]="true" [modal]="true" (onHide)="onHideDetailDialog($event)">
+            <ng-container>
+                <form [formGroup]="editFormImp" class="form-table">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label require">
+                                <label class="txt">Receiving OU</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText name="addOu" readonly
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" [value]="curAddOuLable"
+                                    (click)="isEdit ? '' : onOpenSelectorDialogEvent('EditImport', 'allou')" />
+                                <p class="error-active"
+                                    *ngIf="formSubmitted && editFormImp.controls.addOu.errors?.required">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label require">
+                                <label class="txt">Purchasing OU</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText name="addOOu" readonly
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" [value]="curAddOOuLable"
+                                    (click)="isEdit ? '' : onOpenSelectorDialogEvent('EditImport', 'alloou')" />
+                                <p class="error-active"
+                                    *ngIf="formSubmitted && editFormImp.controls.addOOu.errors?.required">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-row grid">
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">OU Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-label">
+                                        <label class="txt">{{detailBeanImp.ouName}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Order OU Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-label">
+                                        <label class="txt">{{detailBeanImp.oouName}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> -->
+
+                    <div class="form-row grid">
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">VC Type</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-select">
+                                        <p-dropdown formControlName="vcType" [options]="editVcTypeOptions"
+                                            (onChange)="onChangeEditVCType($event)">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">Vendor# / Customer#</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <input type="text" pInputText name="curstorVcId" readonly
+                                            placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}" [value]="curVcOuLable"
+                                            (click)="onOpenSelectorDialogEvent('EditImport', 'cusven')" />
+                                        <p class="error-active"
+                                            *ngIf="formSubmitted && editFormImp.controls.vcOu.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Item</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <p-autoComplete formControlName="product" id="autocompleteWithClearAndLoading"
+                                            [suggestions]="filteredEditProductCode" (onSelect)="onSelectProductCode()"
+                                            (onBlur)="onBlurProductCode($event)"
+                                            (completeMethod)="filterProductCode($event)" [minLength]=1 field="name"
+                                            [style]="{'width': '100%'}" [showClear]="false">
+                                        </p-autoComplete>
+                                        <i *ngIf="editFormImp.get('product').value" class="pi pi-times clean-btn" (click)="impProductOnClear()">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">Ship From Address</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <p-autoComplete formControlName="shipFromAddress"
+                                            [suggestions]="shipFromAddressResult" (onSelect)="onSelectShipFromAddress()"
+                                            (onBlur)="onBlurShipFromAddress($event)"
+                                            (completeMethod)="filterShipFromAddress($event)" [minLength]=3
+                                            [style]="{'width': '100%'}">
+                                        </p-autoComplete>
+                                        <p class="error-active"
+                                            *ngIf="formSubmitted && editFormImp.controls.shipFromAddress.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                        <p class="error-active" *ngIf="shipFromAddressOuCodeAndVcNoRequired">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'ImpExpLicenseMtn.Message.ShipFromAddressOuCodeAndVcNoRequired' |
+                                                translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Price</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <p-inputNumber
+                                            [min]="0"
+                                            [max]="999999999"
+                                            [minFractionDigits]="1"
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                            formControlName="price"
+                                        >
+                                        </p-inputNumber>
+                                        <p class="error-active"
+                                            *ngIf="editFormImpPriceMustBeGE">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'ImpExpLicenseMtn.Message.MustBeNumber' | translate }}{{ 'ImpExpLicenseMtn.Message.QtyMustBeGE' | translate }}{{editFormImpPrice}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">Apply Qty</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <p-inputNumber
+                                            [min]="1"
+                                            [max]="999999999"
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                            formControlName="quantity"
+                                            (onInput)="onChangeQty($event)"
+                                        >
+                                        </p-inputNumber>
+                                        <p class="error-active"
+                                            *ngIf="formSubmitted && (editFormImp.controls.quantity.errors?.required || editFormImpQtyMustBeGE)">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'ImpExpLicenseMtn.Message.MustBeNumber' | translate }}{{ 'ImpExpLicenseMtn.Message.QtyMustBeGE' | translate }}{{editFormImpQty}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">Start Date</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-date">
+                                        <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true" formControlName="startDate" dataType="string"
+                                            dateFormat="yy/mm/dd" appendTo="body"
+                                            (onInput)="onFormDatePickerInput($event)"
+                                            (onSelect)="onFormDatePickerSelectAndBlur();onFormCheckDateHandler('imp')"
+                                            (onBlur)="onFormDatePickerSelectAndBlur()"
+                                            (onClose)="onFormDatePickerClose('imp','startDate');onFormCheckDateHandler('imp')"
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                        >
+                                        </p-calendar>
+                                        <p class="error-active"
+                                            *ngIf="formSubmitted && editFormImp.controls.startDate.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">End Date</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-date">
+                                        <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true" formControlName="endDate" dataType="string" [minDate]="impMinDate"
+                                            dateFormat="yy/mm/dd" appendTo="body"
+                                            (onInput)="onFormDatePickerInput($event)"
+                                            (onSelect)="onFormDatePickerSelectAndBlur();onFormCheckDateHandler('imp')"
+                                            (onBlur)="onFormDatePickerSelectAndBlur()"
+                                            (onClose)="onFormDatePickerClose('imp','endDate');onFormCheckDateHandler('imp')"
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                        >
+                                        </p-calendar>
+                                        <p class="error-active"
+                                            *ngIf="formSubmitted && editFormImp.controls.endDate.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                        <p class="error-active"
+                                            *ngIf="editFormImpEndDateMustBeLater">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'ImpExpLicenseMtn.Message.DateMustBeLater' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">SC Flag</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-select">
+                                        <p-dropdown formControlName="scFlag" [options]="editScFlagOptions">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Flag</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-select">
+                                        <p-dropdown formControlName="activeFlag" [options]="editFlagOptions">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">Warehouse Location</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-select">
+                                        <p-dropdown formControlName="countryCode" [options]="countryCodeOptions">
+                                        </p-dropdown>
+                                        <p class="error-active"
+                                            *ngIf="formSubmitted && editFormImp.controls.countryCode.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Remark</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <input type="text" pInputText
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                            formControlName="remark" />
+                                        <p class="error-active"
+                                            *ngIf="formSubmitted && editFormImp.controls.remark.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row grid">
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">ECCN</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-label">
+                                        <label class="txt">{{detailBeanImp.eccn}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">License#</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <input
+                                            *ngIf="isEdit" readonly
+                                            type="text" pInputText
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                            formControlName="licenseNo" />
+                                        <input
+                                            *ngIf="!isEdit"
+                                            type="text" pInputText
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                            formControlName="licenseNo" />
+                                        <p class="error-active"
+                                            *ngIf="formSubmitted && editFormImp.controls.licenseNo.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row grid">
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">CCATs</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input" *ngIf="!editFormImp.get('product').value">
+                                        <input
+                                            autocomplete="off"
+                                            type="text"
+                                            pInputText
+                                            placeholder="{{'Input.PlaceHolder.PleaseEnter' | translate}}"
+                                            formControlName="ccats"
+                                        />
+                                    </div>
+                                    <div class="form-label" *ngIf="editFormImp.get('product').value">
+                                        <label class="txt">{{editFormImp.get('ccats').value}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Proviso</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-label">
+                                        <label class="txt">{{detailBeanImp.proviso}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="form-row notice grid"
+                            *ngIf="!editFormImp.get('product').value && !editFormImp.get('ccats').value"
+                        >
+                            <div class="form-col col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Notice</label>
+                                </div>
+                                </div>
+                                <div class="grid md:col col-12">
+                                <div class="form-col col-12">
+                                    <div class="form-label">
+                                        <label class="txt notice-label">{{ "LicenseMgmt.Common.Hint.ITEMCCATsChooseOne" | translate }}</label>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+            </ng-container>
+            <div class="btn-container">
+                <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray"
+                    (click)="cancelDetail()"></button>
+                <button pButton type="button" label="{{ 'Button.Label.Save' | translate }}"
+                    (click)="saveDetail()"></button>
+            </div>
+        </p-dialog>
+
+        <!-- 進口 欄位篩選 -->
+        <p-dialog header="{{ 'Dialog.Header.FilterColumns' | translate }}" [(visible)]="displayFilterImp"
+            [draggable]="false" [blockScroll]="true" [modal]="true">
+            <form>
+                <div class="form-row grid">
+                    <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of colsImp">
+                        <div class="form-checkbox">
+                            <p-checkbox name="checkboxGroup" [label]="col.header" [value]="col"
+                                [(ngModel)]="selectedColsImp" [disabled]="col?.isDisabled"></p-checkbox>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button pButton type="button" label="{{'Button.Label.Reset' | translate}}" class="btn-gray btn-line"
+                        (click)="changeFilterImp()"></button>
+                </div>
+            </form>
+        </p-dialog>
+
+        <!-- 進口 確認刪除 -->
+        <p-dialog class="width-sm" [(visible)]="displayDelDialogImp" [draggable]="false" [blockScroll]="true"
+            [modal]="true">
+            <div class="popup-content center">
+                <h2>{{ 'ImpExpLicenseMtn.Label.ConfirmDelete' | translate }}</h2>
+            </div>
+
+            <div class="btn-container">
+                <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray btn-line"
+                    (click)="displayDelDialogImp = false;"></button>
+                <button pButton type="button" label="{{ 'Button.Label.Delete' | translate }}" class="btn-dark-red"
+                    (click)="deleteImp()"></button>
+            </div>
+        </p-dialog>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{ 'ImpExpLicenseMtn.Label.ExpLicenseMtn' | translate }}" leftIcon="icon icon-list">
+        <form class="form-table form-search">
+
+            <div class="form-row grid">
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.LicenseNo' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="licenseNoExp" [(ngModel)]="queryReqExp.licenseNo"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.OOuCodeExp' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <span class="p-input-icon-right" style="width:100%">
+                                    <ng-container *ngIf="curOOULableExp != ''">
+                                        <i
+                                        class="pi pi-times input-icon"
+                                        (click)="onSelectorClean('Export', 'alloou')"
+                                    ></i>
+                                    </ng-container>
+									<input type="text" pInputText name="oouCodeExp" readonly
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" [value]="curOOULableExp"
+                                    (click)="onOpenSelectorDialogEvent('Export', 'alloou')" />
+                                </span>
+
+                            </div>
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.OuCodeExp' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <span class="p-input-icon-right" style="width:100%">
+                                    <ng-container *ngIf="curOULableExp != ''">
+                                        <i
+                                        class="pi pi-times input-icon"
+                                        (click)="onSelectorClean('Export', 'allou')"
+                                    ></i>
+                                    </ng-container>
+                                    <input type="text" pInputText name="ouCodeExp" readonly
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" [value]="curOULableExp"
+                                    (click)="onOpenSelectorDialogEvent('Export', 'allou')" />
+                                </span>
+
+                            </div>
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+            </div>
+
+            <div class="form-row grid">
+
+                <div class="form-col md:col-8 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.CustomerVendorType' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col-3">
+                            <div class="form-select">
+                                <!-- add class `error-active` in `form-select` when input error  -->
+                                <p-dropdown name="customerVendorTypeExp" [(ngModel)]="queryReqExp.customerVendorType"
+                                    [options]="customerVendorTypeOptions"
+                                    placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"
+                                    (onChange)="onChangeVCTypeExp($event)"></p-dropdown>
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-select -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col pl-2">
+                            <div class="form-input">
+                                <span class="p-input-icon-right" style="width:100%">
+                                    <ng-container *ngIf="curCVLableExp != ''">
+                                        <i
+                                        class="pi pi-times input-icon"
+                                        (click)="onSelectorClean('Export', 'cusven')"
+                                    ></i>
+                                    </ng-container>
+									<input type="text" pInputText name="curstorIdExp" readonly
+                                    placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}" [value]="curCVLableExp"
+                                    (click)="onOpenSelectorDialogEvent('Export', 'cusven')" />
+                                </span>
+
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">Flow No.</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="formNoExp" [(ngModel)]="queryReqExp.formNo"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+            </div>
+
+            <div class="form-row grid">
+
+                <div class="form-col md:col-8 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.Item' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+
+                        <div class="form-col col-3">
+                            <div class="form-select">
+                                <!-- add class `error-active` in `form-select` when input error  -->
+                                <p-dropdown name="itemFilterTypeExp" [(ngModel)]="queryReqExp.itemFilterType"
+                                    [options]="itemFilterTypeOptions"
+                                    placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"
+                                    (onChange)="onChangeItemFilterType('Export')"></p-dropdown>
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-select -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <!-- end: form-col -->
+                        <div class="form-col col pl-2">
+                            <div class="form-input" *ngIf="queryReqExp.itemFilterType !== 'Multi'">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="itemExp" [(ngModel)]="queryReqExp.item"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <div class="form-chip" *ngIf="queryReqExp.itemFilterType === 'Multi'">
+                                <p-chips name="items" [(ngModel)]="queryReqExp.items"
+                                    placeholder="{{ 'ImpExpLicenseMtn.PlaceHolder.Items' | translate }}">
+                                </p-chips>
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+
+
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.ECCN' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="eccnExp" [(ngModel)]="queryReqExp.eccn"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+            </div>
+
+            <div class="form-row grid">
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.CCATS' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="ccatsExp" [(ngModel)]="queryReqExp.ccats"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.ShipTo' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="shipToExp" [(ngModel)]="queryReqExp.shipTo"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.DeliverTo' | translate }}</label>
+                            </div>
+                        </div>
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText name="deliveryTo" [(ngModel)]="queryReqExp.deliveryTo"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-row grid">
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.StartDate' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-date">
+                                <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true" name="startDateExp" [(ngModel)]="queryReqExp.startDate" dateFormat="yy/mm/dd" appendTo="body"
+                                (onInput)="onDatePickerInput($event)"
+                                (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler('exp')"
+                                (onBlur)="onDatePickerSelectAndBlur()"
+                                (onClose)="onDatePickerClose('exp','startDate');onCheckDateHandler('exp')"
+                                placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                >
+                                </p-calendar>
+                            </div>
+                            <!-- end: form-date -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.EndDate' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-date">
+                                <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true" name="endDateExp" [(ngModel)]="queryReqExp.endDate"
+                                    dateFormat="yy/mm/dd" [minDate]="queryReqExp.startDate" appendTo="body"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                    (onInput)="onDatePickerInput($event)"
+                                    (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler('exp')"
+                                    (onBlur)="onDatePickerSelectAndBlur()"
+                                    (onClose)="onDatePickerClose('exp','endDate');onCheckDateHandler('exp')"
+                                    >
+                                </p-calendar>
+                            </div>
+                            <!-- end: form-date -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.CountryCode' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-select">
+                                <!-- add class `error-active` in `form-select` when input error  -->
+                                <p-dropdown name="countryCodeExp" [(ngModel)]="queryReqExp.countryCode"
+                                    [options]="countryCodeExpOptions"
+                                    placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-select -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+            </div>
+
+            <div class="form-row grid">
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.Consignee' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="consigneeExp" [(ngModel)]="queryReqExp.consignee"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.ConsigneeAddress' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <!-- add class `error-active` in `form-input` when input error  -->
+                                <input type="text" pInputText name="consigneeAddressExp"
+                                    [(ngModel)]="queryReqExp.consigneeAddress"
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                    [ngModelOptions]="{standalone: true}" />
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-input -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'ImpExpLicenseMtn.Label.Flag' | translate }}</label>
+                            </div>
+                            <!-- end: form-label -->
+                        </div>
+                        <!-- end: form-col -->
+
+                        <div class="form-col col">
+                            <div class="form-select">
+                                <!-- add class `error-active` in `form-select` when input error  -->
+                                <p-dropdown name="flagExp" [(ngModel)]="queryReqExp.flag" [options]="flagOptions"
+                                    placeholder="{{ 'DropDown.PlaceHolder.PleaseChoose' | translate }}"></p-dropdown>
+                                <p class="error-msg">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>錯誤訊息</span>
+                                </p>
+                            </div>
+                            <!-- end: form-select -->
+                        </div>
+                        <!-- end: form-col -->
+                    </div>
+                    <!-- end: form-row -->
+                </div>
+                <!-- end: form-col -->
+
+            </div>
+
+            <div class="form-row grid"> 
+                <div class="form-col md:col-4 sm:col-12 col-12">
+                  <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                      <div class="form-label">
+                        <label class="txt">Trx Number</label>
+                      </div>
+                    </div>
+                    <div class="form-col col">
+                      <div class="form-input">
+                        <span class="p-input-icon-right" style="width: 100%">
+                          <input type="text" pInputText name="trxReferenceNo" 
+                           placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" [(ngModel)]="queryReqExp.trxReferenceNo"
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <div class="btn-container">
+                <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-secondary"
+                    (click)="resetBtnClick()"></button>
+                <!-- <button pButton type="button" label="{{ 'Button.Label.Query' | translate }}"
+                    (click)="searchBtnClickImp()" *ngIf="permissions.includes('view')"></button> -->
+                <button pButton type="button" label="{{ 'Button.Label.Query' | translate }}"
+                    (click)="searchBtnClickExp()"></button>
+                <button pButton type="button" label="{{ 'Button.Label.Download' | translate }}"
+                    (click)="downloadBtnClick('downloadExport')"></button>
+            </div>
+
+        </form>
+        <!--# TK-35854 -->
+        <ng-container *ngIf="displayResultExp">
+            <p-table #lazyTableExp class="table-panel" [value]="dataExp" [columns]="selectedColsExp" [scrollable]="false"
+                scrollHeight="500px" [paginator]="true" paginatorPosition="bottom"
+                [rowsPerPageOptions]="[10,20]" [(selection)]="selectedDataExp" dataKey="id"
+                [lazy]="true" (onLazyLoad)="onLazyLoadExp($event)" (onSort)="onSortExp($event)"
+                (onPage)="onPageExp($event)" [totalRecords]="totalRecordsExp" [resizableColumns]="true"
+                [first]="tableStatusKeepService.keepInfo.pageEvent.first" [rows]="tableStatusKeepService.keepInfo.pageEvent.rows">
+                <ng-template pTemplate="caption">
+                    <div class="table-action-block">
+                        <div class="table-search ui-inputgroup">
+                            <input type="text" pInputText size="30" placeholder="Search keyword"
+                                [(ngModel)]="globalFilterExp" (input)="filterLazyExp($event.target.value)" />
+                            <span class="ui-inputgroup-addon">
+                                <i class="pi pi-search"></i>
+                            </span>
+                        </div>
+
+                        <div class="btn-container">
+                            <button pButton type="button" icon="pi pi-plus" label="{{ 'Button.Label.Add' | translate }}"
+                                class="btn-teal" (click)="editDetailExp()" *ngIf="permissions.includes('add')"></button>
+                        </div>
+
+                        <div class="btn-container right">
+                            <button pButton type="button" icon="pi pi-sliders-h"
+                                label="{{ 'Button.Label.Filter' | translate }}" class="btn-line"
+                                (click)="showFilterExp()"></button>
+                        </div>
+                    </div>
+                    <!-- end: table-action-block -->
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr style="position: sticky; top: 0; z-index: 1;">
+                        <ng-container *ngFor="let col of selectedColsExp">
+                            <th [ngClass]="col.css"
+                                *ngIf="col.field === 'edit' || col.field === 'del' || col.field === 'viewArea' || col.field === 'viewHistory'"
+                                scope="col">
+                                {{col.header}}
+                            </th>
+                            <th [pSortableColumn]="col.field" [ngClass]="col.css"
+                                *ngIf="col.field !== 'edit' && col.field !== 'del' && col.field !== 'viewArea' && col.field !== 'viewHistory'"
+                                scope="col">
+                                {{col.header}}
+                                <p-sortIcon [field]="col.field"></p-sortIcon>
+                            </th>
+                        </ng-container>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-data>
+                    <tr>
+                        <td *ngFor="let col of selectedColsExp" [ngClass]="col.css">
+                            <div class="license-mtn-td-container">
+                                <span class="p-column-title font-bold">{{col.header}}</span>
+                                <ng-container *ngIf="col.field === 'edit'">
+                                    <div class="btn-container">
+                                    <button pButton type="button" class="icon-btn btn-orange"
+                                        (click)="editDetailExp(data['seq'])">
+                                        <img src="./assets/imgs/icon-btn/edit.svg" alt="Detail">
+                                    </button>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="col.field === 'del'">
+                                    <div class="btn-container">
+                                    <button pButton type="button" icon="pi pi-trash" class="icon-btn btn-dark-red"
+                                        (click)="clickDeleteExp(data);"></button>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="col.field === 'viewArea'">
+                                    <div class="btn-container">
+                                        <button pButton type="button" class="icon-btn btn-teal"
+                                            (click)="viewArea(data['productCode'])">
+                                            <img src="./assets/imgs/icon-btn/detail.svg" alt="Detail">
+                                        </button>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="col.field === 'viewHistory'">
+                                    <div class="btn-container">
+                                        <button pButton type="button" class="icon-btn btn-teal"
+                                            (click)="viewHistory(data)">
+                                            <img src="./assets/imgs/icon-btn/detail.svg" alt="Detail">
+                                        </button>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="col.field !== 'edit' && col.field !== 'viewArea' && col.field !== 'viewHistory'">
+                                    <!-- <p>{{data[col.field]}}</p> -->
+                                    <p>{{processTableDataExp(col.field, data)}}</p>
+                                </ng-container>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-container>
+
+        <!-- 出口 新增 / 編輯 -->
+        <p-dialog header="" [(visible)]="displayDetailExp" [draggable]="false" [closeOnEscape]="true"
+            [blockScroll]="true" [modal]="true" (onHide)="onHideDetailDialogExp($event)">
+            <ng-container>
+                <form [formGroup]="editFormExp" class="form-table">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label require">
+                                <label class="txt">Shipping OU</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText name="addOuExp" readonly
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" [value]="curAddOuExpLable"
+                                    (click)="isEditExp ? '' : onOpenSelectorDialogEvent('EditExport', 'allou')" />
+                                <p class="error-active"
+                                    *ngIf="formSubmittedExp && editFormExp.controls.addOu.errors?.required">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed require">
+                            <div class="form-label require">
+                                <label class="txt">Orders OU</label>
+                            </div>
+                        </div>
+
+                        <div class="form-col col">
+                            <div class="form-input">
+                                <input type="text" pInputText name="addOOuExp" readonly
+                                    placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}" [value]="curAddOOuExpLable"
+                                    (click)="isEditExp ? '' : onOpenSelectorDialogEvent('EditExport', 'alloou')" />
+                                <p class="error-active"
+                                    *ngIf="formSubmittedExp && editFormExp.controls.addOOu.errors?.required">
+                                    <i class="pi pi-exclamation-circle"></i>
+                                    <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-row grid">
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">OU Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-label">
+                                        <label class="txt">{{detailBeanExp.ouName}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Order OU Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-label">
+                                        <label class="txt">{{detailBeanExp.oouName}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> -->
+
+                    <div class="form-row grid">
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">VC Type</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-select">
+                                        <p-dropdown formControlName="vcType" [options]="editVcTypeOptions"
+                                            (onChange)="onChangeEditVCTypeExp($event)">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">Vendor# / Customer#</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <input type="text" pInputText name="curstorVcExpId" readonly
+                                            placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}" [value]="curVcOuExpLable"
+                                            (click)="onOpenSelectorDialogEvent('EditExport', 'cusven')" />
+                                        <p class="error-active"
+                                            *ngIf="formSubmittedExp && editFormExp.controls.vcOu.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Item</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <p-autoComplete formControlName="product"
+                                            [suggestions]="filteredEditProductCodeExp"
+                                            (onSelect)="onSelectProductCodeExp()"
+                                            (onBlur)="onBlurProductCodeExp($event)"
+                                            (completeMethod)="filterProductCodeExp($event)" [minLength]=1 field="name"
+                                            [style]="{'width': '100%'}"
+                                            id="autocompleteWithClearAndLoading"
+                                            [showClear]="false">
+                                        </p-autoComplete>
+                                        <i *ngIf="editFormExp.get('product').value" class="pi pi-times clean-btn" (click)="expProductOnClear()">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Flag</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-select">
+                                        <p-dropdown formControlName="activeFlag" [options]="editFlagOptions">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row grid">
+                        <!-- <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Ship From Address</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <p-autoComplete formControlName="shipFromAddress"
+                                            [suggestions]="shipFromAddressResultExp" (onSelect)="onSelectShipFromAddressExp()"
+                                            (onBlur)="onBlurShipFromAddressExp($event)"
+                                            (completeMethod)="filterShipFromAddressExp($event)" [minLength]=3
+                                            [style]="{'width': '100%'}">
+                                        </p-autoComplete>
+                                        <p class="error-active"
+                                            *ngIf="formSubmittedExp && editFormExp.controls.shipFromAddress.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                        <p class="error-active" *ngIf="shipFromAddressOuCodeAndVcNoRequiredExp">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'ImpExpLicenseMtn.Message.ShipFromAddressOuCodeAndVcNoRequired' |
+                                                translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="form-col col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">Ship To Address</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <p-autoComplete formControlName="shipToAddress"
+                                            [suggestions]="shipToAddressResultExp" (onSelect)="onSelectShipToAddressExp()"
+                                            (onBlur)="onBlurShipToAddressExp($event)"
+                                            (completeMethod)="filterShipToAddressExp($event)" [minLength]=3
+                                            [style]="{'width': '100%'}">
+                                        </p-autoComplete>
+                                        <p class="error-active"
+                                            *ngIf="formSubmittedExp && editFormExp.controls.shipToAddress.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                        <p class="error-active" *ngIf="shipToAddressOuCodeAndVcNoRequiredExp">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'ImpExpLicenseMtn.Message.ShipFromAddressOuCodeAndVcNoRequired' |
+                                                translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Deliver To Address</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <p-autoComplete formControlName="deliverToAddress"
+                                            [suggestions]="deliverToAddressResultExp" (onSelect)="onSelectDeliverToAddressExp()"
+                                            (onBlur)="onBlurDeliverToAddressExp($event)"
+                                            (completeMethod)="filterDeliverToAddressExp($event)" [minLength]=3
+                                            [style]="{'width': '100%'}">
+                                        </p-autoComplete>
+                                        <p class="error-active"
+                                            *ngIf="formSubmittedExp && editFormExp.controls.deliverToAddress.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                        <p class="error-active" *ngIf="deliverToAddressOuCodeAndVcNoRequiredExp">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'ImpExpLicenseMtn.Message.ShipFromAddressOuCodeAndVcNoRequired' |
+                                                translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Price</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <p-inputNumber
+                                            [min]="0"
+                                            [max]="999999999"
+                                            [minFractionDigits]="1"
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                            formControlName="price"
+                                        >
+                                        </p-inputNumber>
+                                        <p class="error-active"
+                                            *ngIf="editFormExpPriceMustBeGE">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'ImpExpLicenseMtn.Message.MustBeNumber' | translate }}{{ 'ImpExpLicenseMtn.Message.QtyMustBeGE' | translate }}{{editFormExpPrice}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">Apply Qty</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <p-inputNumber
+                                            [min]="1"
+                                            [max]="999999999"
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                            formControlName="quantity"
+                                            (onInput)="onChangeQty($event)"
+                                        >
+                                        </p-inputNumber>
+                                        <p class="error-active"
+                                            *ngIf="formSubmittedExp && (editFormExp.controls.quantity.errors?.required || editFormExpQtyMustBeGE)">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'ImpExpLicenseMtn.Message.MustBeNumber' | translate }}{{ 'ImpExpLicenseMtn.Message.QtyMustBeGE' | translate }}{{editFormExpQty}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">Start Date</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-date">
+                                        <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true" formControlName="startDate" dataType="string"
+                                            dateFormat="yy/mm/dd" appendTo="body"
+                                            (onInput)="onFormDatePickerInput($event)"
+                                            (onSelect)="onFormDatePickerSelectAndBlur();onFormCheckDateHandler('exp')"
+                                            (onBlur)="onFormDatePickerSelectAndBlur()"
+                                            (onClose)="onFormDatePickerClose('exp','startDate');onFormCheckDateHandler('exp')"
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                        >
+                                        </p-calendar>
+                                        <p class="error-active"
+                                            *ngIf="formSubmittedExp && editFormExp.controls.startDate.errors?.required" >
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">End Date</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-date">
+                                        <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true" formControlName="endDate" dataType="string" [minDate]="expMinDate"
+                                            dateFormat="yy/mm/dd" appendTo="body"
+                                            (onInput)="onFormDatePickerInput($event)"
+                                            (onSelect)="onFormDatePickerSelectAndBlur();onFormCheckDateHandler('exp')"
+                                            (onBlur)="onFormDatePickerSelectAndBlur()"
+                                            (onClose)="onFormDatePickerClose('exp','endDate');onFormCheckDateHandler('exp')"
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                                          >
+                                        </p-calendar>
+                                        <p class="error-active"
+                                            *ngIf="formSubmittedExp && editFormExp.controls.endDate.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                        <p class="error-active"
+                                            *ngIf="editFormExpEndDateMustBeLater">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'ImpExpLicenseMtn.Message.DateMustBeLater' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row grid">
+                        <!-- <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">SC Flag</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-select">
+                                        <p-dropdown formControlName="scFlag" [options]="editScFlagOptions">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Delivery No</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <input type="text" pInputText
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                            formControlName="deliveryNo" />
+                                        <p class="error-active"
+                                            *ngIf="formSubmittedExp && editFormExp.controls.deliveryNo.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">End Use</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <input type="text" pInputText
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                            formControlName="endUseRmk" />
+                                        <p class="error-active"
+                                            *ngIf="formSubmittedExp && editFormExp.controls.endUseRmk.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">End User</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <p-autoComplete formControlName="endUserOu"
+                                            [suggestions]="filteredEditEndUserExp" (onSelect)="onSelectEndUserExp()"
+                                            (onBlur)="onBlurEndUserExp($event)"
+                                            (completeMethod)="filterEndUserExp($event)" [minLength]=1 field="displayOu"
+                                            [style]="{'width': '100%'}">
+                                        </p-autoComplete>
+                                        <p class="error-active"
+                                            *ngIf="formSubmitted && editFormExp.controls.endUserOu.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">End User Address</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <input type="text" pInputText
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                            formControlName="endUserAddress" />
+                                        <p class="error-active"
+                                            *ngIf="formSubmittedExp && editFormExp.controls.endUserAddress.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">Warehouse Location</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-select">
+                                        <p-dropdown formControlName="countryCode" [options]="countryCodeExpOptions">
+                                        </p-dropdown>
+                                        <p class="error-active"
+                                            *ngIf="formSubmittedExp && editFormExp.controls.countryCode.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row grid">
+                        <div class="form-col col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Remark</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <input type="text" pInputText
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                            formControlName="remark" />
+                                        <p class="error-active"
+                                            *ngIf="formSubmittedExp && editFormExp.controls.remark.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row grid">
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">ECCN</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-label">
+                                        <label class="txt">{{detailBeanExp.eccn}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label require">
+                                        <label class="txt">License#</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input">
+                                        <input
+                                            *ngIf="isEditExp" readonly
+                                            type="text" pInputText
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                            formControlName="licenseNo" />
+                                        <input
+                                            *ngIf="!isEditExp"
+                                            type="text" pInputText
+                                            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                            formControlName="licenseNo" />
+                                        <p class="error-active"
+                                            *ngIf="formSubmittedExp && editFormExp.controls.licenseNo.errors?.required">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row grid">
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">CCATs</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-input" *ngIf="!editFormExp.get('product').value">
+                                        <input
+                                            autocomplete="off"
+                                            type="text"
+                                            pInputText
+                                            placeholder="{{'Input.PlaceHolder.PleaseEnter' | translate}}"
+                                            formControlName="ccats"
+                                        />
+                                    </div>
+                                    <div class="form-label" *ngIf="editFormExp.get('product').value">
+                                        <label class="txt">{{editFormExp.get('ccats').value}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col col-6">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Proviso</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-col col">
+                                    <div class="form-label">
+                                        <label class="txt">{{detailBeanExp.proviso}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="form-row notice grid"
+                            *ngIf="!editFormExp.get('product').value && !editFormExp.get('ccats').value"
+                        >
+                            <div class="form-col col-12">
+                            <div class="form-row grid">
+                                <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Notice</label>
+                                </div>
+                                </div>
+                                <div class="grid md:col col-12">
+                                <div class="form-col col-12">
+                                    <div class="form-label">
+                                        <label class="txt notice-label">{{ "LicenseMgmt.Common.Hint.ITEMCCATsChooseOne" | translate }}</label>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </form>
+            </ng-container>
+            <div class="btn-container">
+                <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray"
+                    (click)="cancelDetailExp()"></button>
+                <button pButton type="button" label="{{ 'Button.Label.Save' | translate }}"
+                    (click)="saveDetailExp()"></button>
+            </div>
+        </p-dialog>
+
+        <!-- 出口 欄位篩選 -->
+        <p-dialog header="{{ 'Dialog.Header.FilterColumns' | translate }}" [(visible)]="displayFilterExp"
+            [draggable]="false" [blockScroll]="true" [modal]="true">
+            <form>
+                <div class="form-row grid">
+                    <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of colsExp">
+                        <div class="form-checkbox">
+                            <p-checkbox name="checkboxGroup" [label]="col.header" [value]="col"
+                                [(ngModel)]="selectedColsExp" [disabled]="col?.isDisabled"></p-checkbox>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button pButton type="button" label="{{'Button.Label.Reset' | translate}}" class="btn-gray btn-line"
+                        (click)="changeFilterExp()"></button>
+                </div>
+            </form>
+        </p-dialog>
+
+        <!-- 出口 確認刪除 -->
+        <p-dialog class="width-sm" [(visible)]="displayDelDialogExp" [draggable]="false" [blockScroll]="true"
+            [modal]="true">
+            <div class="popup-content center">
+                <h2>{{ 'ImpExpLicenseMtn.Label.ConfirmDelete' | translate }}</h2>
+            </div>
+
+            <div class="btn-container">
+                <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray btn-line"
+                    (click)="displayDelDialogExp = false;"></button>
+                <button pButton type="button" label="{{ 'Button.Label.Delete' | translate }}" class="btn-dark-red"
+                    (click)="deleteExp()"></button>
+            </div>
+        </p-dialog>
+    </p-tabPanel>
+</p-tabView>
+
+<!-- 檢視Area -->
+<p-dialog header="Area" [(visible)]="displayArea" [draggable]="false" [blockScroll]="true" [modal]="true"
+    [style]="{width: '1200px'}">
+    <form class="form-table">
+        <div class="form-row grid">
+            <div class="form-col md:col-4 sm:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Item No</label>
+                        </div>
+                    </div>
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <label class="txt">{{getItemEccnRsp.productCode}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-col md:col-4 sm:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">ECCN</label>
+                        </div>
+                    </div>
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <label class="txt">{{getItemEccnRsp.masterEccn?.eccn ? getItemEccnRsp.masterEccn.eccn :
+                                ''}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-col md:col-4 sm:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Export Control</label>
+                        </div>
+                    </div>
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <label class="txt">{{getItemEccnRsp.masterEccn?.exportControlFlag ?
+                                getItemEccnRsp.masterEccn.exportControlFlag : ''}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <label class="txt">若所屬區域並無ECCN，請使用Master ECCN</label>
+        <br>
+        <label class="txt">(If there's no area ECCN, pls refer "Master ECCN")</label>
+        <br>
+        <!--# TK-35854 -->
+        <p-table #areaEccn class="table-panel" [value]="getItemEccnRsp.areaEccn" [columns]="selectedColsAreaEccn"
+            [scrollable]="false" scrollHeight="500px" [paginator]="true" paginatorPosition="bottom"
+            [rowsPerPageOptions]="[10,20]" dataKey="id" [resizableColumns]="true"
+            [first]="tableStatusKeepService.keepInfo.pageEvent.first" [rows]="tableStatusKeepService.keepInfo.pageEvent.rows">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let col of selectedColsAreaEccn" [pSortableColumn]="col.field" [ngClass]="{
+                    'icon-col': (col.field == 'checkbox')
+                  }" scope="col">
+                        <ng-container *ngIf="col.field != 'checkbox'">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                        </ng-container>
+                    </th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-areaEccn>
+                <tr>
+                    <td *ngFor="let col of selectedColsAreaEccn" [ngClass]="{
+                    'icon-col': (col.field == 'checkbox')
+                  }">
+                        <div class="license-mtn-td-container">
+                            <span class="p-column-title font-bold">{{col.header}}</span>
+                            <ng-container *ngIf="col.field != 'checkbox'">
+                                <!-- <p>{{getItemEccnRsp.areaEccn[col.field]}}</p> -->
+                                <p>{{areaEccn[col.field]}}</p>
+                            </ng-container>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </form>
+</p-dialog>
+
+<!-- 檢視History -->
+<p-dialog header="History" [(visible)]="displayHistory" [draggable]="false" [blockScroll]="true" [modal]="true"
+    [style]="{width: '1200px'}">
+    <form class="form-table">
+        <div class="form-row grid">
+            <div class="form-col md:col-6 sm:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Item</label>
+                        </div>
+                    </div>
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <label class="txt">{{licenseHistoryRsp.productCode}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-col md:col-6 sm:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">CCATs</label>
+                        </div>
+                    </div>
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <label class="txt">{{historyCcats}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        <div class="form-row grid">
+            <div class="form-col md:col-6 sm:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">License</label>
+                        </div>
+                    </div>
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <label class="txt">{{licenseHistoryRsp.licenseNo}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-col md:col-6 sm:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Balance Qty</label>
+                        </div>
+                    </div>
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <label class="txt">{{licenseHistoryRsp.balanceQuantity}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <!--# TK-35854 -->
+        <p-table #history class="table-panel" [value]="licenseHistoryRsp.licenseHistories"
+            [columns]="selectedColsHistory" [scrollable]="false" scrollHeight="500px" [paginator]="true" [rows]="10"
+            paginatorPosition="bottom" [rowsPerPageOptions]="[10,20]" dataKey="id" [resizableColumns]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let col of selectedColsHistory" [pSortableColumn]="col.field" scope="col"
+                    [ngClass]="{'icon-col': (col.field == 'checkbox')   ,'large-col': (col.field == 'productCode') } ">
+                        <ng-container *ngIf="col.field != 'checkbox'">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                        </ng-container>
+                    </th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-history>
+                <tr>
+                    <td *ngFor="let col of selectedColsHistory" [ngClass]="{
+                    'icon-col': (col.field == 'checkbox')
+                  }">
+                        <div class="license-mtn-td-container">
+                            <span class="p-column-title font-bold">{{col.header}}</span>
+                            <ng-container *ngIf="col.field != 'checkbox'">
+                                <!-- <p>{{getItemEccnRsp.areaEccn[col.field]}}</p> -->
+                                <p>{{history[col.field]}}</p>
+                            </ng-container>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+
+    </form>
+</p-dialog>
+
+<!--# common v/c selector dialog-->
+<app-common-selector-dialog [settingParams]="selectorDialogParams" (outputResult)="onSelectorDialogCallback($event)">
+</app-common-selector-dialog>

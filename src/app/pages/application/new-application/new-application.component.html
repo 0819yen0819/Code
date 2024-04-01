@@ -1,0 +1,54 @@
+<div class="main-title-container">
+  <p>{{ "NewApplication.Label.NewForm" | translate }}</p>
+</div>
+<!-- end: main-title-container -->
+
+<form class="form-table form-search-for">
+  <div class="form-row grid">
+    <div class="form-col col md:col-6 sm:col-12 col-12">
+      <div class="form-input require form-search-input p-input-icon-right">
+        <!-- add class `error-active` in `form-input` when input error  -->
+        <input type="text" pInputText value="" placeholder="Search" 
+        (input)="filterNewIntakeFormType($event.target.value)"/>
+        <i class="pi pi-search"></i>
+        <p class="error-msg">
+          <i class="pi pi-exclamation-circle"></i>
+          <span>錯誤訊息</span>
+        </p>
+      </div>
+      <!-- end: form-input -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+</form>
+
+<div class="panel-container grid">
+  <div
+    class="md:col-3 sm:col-12 col-12"
+    *ngFor="let item of newIntakeFormTypeList"
+  >
+    <p-panel
+      header="{{
+        translateService.currentLang == 'zh-tw'
+          ? item.formCategoryNameC
+          : item.formCategoryNameE
+      }}"
+      [toggleable]="true"
+      toggler="header"
+      collapseIcon="pi pi-angle-up"
+      expandIcon="pi pi-angle-down"
+    >
+      <ul *ngFor="let itemL2 of item.subNewIntakeFormTypeList; let i2 = index">
+        <li>
+          <a href="{{ itemL2.addUrl }}" rel="noopener">{{
+            translateService.currentLang == "zh-tw"
+              ? itemL2.formTypeNameC
+              : itemL2.formTypeNameE
+          }}</a>
+        </li>
+      </ul>
+    </p-panel>
+  </div>
+</div>
+<!-- end: panel-container -->

@@ -1,0 +1,551 @@
+<app-common-selector-dialog
+  [settingParams]="selectorDialogParams"
+  (outputResult)="onSelectorDialogCallback($event)"
+></app-common-selector-dialog>
+
+<p-dialog
+  [header]="dialogSetting.getValue().title"
+  [(visible)]="dialogSetting.getValue().visiable"
+  [modal]="dialogSetting.getValue().modal"
+  [draggable]="dialogSetting.getValue().draggable"
+  [resizable]="dialogSetting.getValue().resizeable"
+  (onHide)="onDialogCloseEvent()"
+>
+  <form [formGroup]="formGroup" class="form-container form-table">
+    <!--# OU Group Selector -->
+    <div class="form-row ou-kit-selector grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">{{
+                "LicenseMgmt.EUC.Label.Group" | translate
+              }}</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-label">
+                <label class="txt">
+                  {{
+                    settingParams && settingParams.data
+                      ? settingParams.data.displayOuGroup
+                      : ""
+                  }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# VC Type Selector -->
+    <div class="form-row ou-kit-selector grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">VC Type</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-select">
+                <p-dropdown
+                  name="vcType"
+                  [options]="userTypeOptions"
+                  formControlName="vcType"
+                  (onChange)="onVCTypChangeeHandler()"
+                  appendTo="body"
+                ></p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# VC Name Selector -->
+    <div class="form-row ou-kit-selector grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">Vendor#/Customer#</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-input no-h-full">
+                <input
+                  autocomplete="off"
+                  type="text"
+                  pInputText
+                  name="vcNo"
+                  readonly
+                  placeholder="{{
+                    'Input.PlaceHolder.PleaseSelect' | translate
+                  }}"
+                  formControlName="vcName"
+                  (click)="onOpenSelectorDialogEvent('custormer')"
+                />
+                <p
+                  class="error-active"
+                  *ngIf="
+                    isFormSubmit &&
+                    formGroup.controls.vcName.errors &&
+                    formGroup.controls.vcName.errors.required
+                  "
+                >
+                  <i class="pi pi-exclamation-circle"></i>
+                  <span>{{ "Span.Label.RequiredField" | translate }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--# Item Selector-->
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">Item</label>
+            </div>
+          </div>
+          <div class="md:col col-12">
+            <div class="form-col">
+              <div
+                class="form-input"
+                [class]="
+                  isFormSubmit &&
+                  formGroup.controls.productCode.errors &&
+                  formGroup.controls.productCode.errors.required
+                    ? 'no-h-full'
+                    : ''
+                "
+              >
+                <input
+                  autocomplete="off"
+                  type="text"
+                  pInputText
+                  name="productCode"
+                  formControlName="productCode"
+                  readonly
+                  placeholder="{{
+                    'Input.PlaceHolder.PleaseSelect' | translate
+                  }}"
+                  (click)="onOpenSelectorDialogEvent('item')"
+                />
+                <p
+                  class="error-active"
+                  *ngIf="
+                    isFormSubmit &&
+                    formGroup.controls.productCode.errors &&
+                    formGroup.controls.productCode.errors.required
+                  "
+                >
+                  <i class="pi pi-exclamation-circle"></i>
+                  <span>{{ "Span.Label.RequiredField" | translate }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# eccn / ccats-->
+    <div class="form-row grid">
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">ECCN</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-label">
+                <label class="txt">{{ formGroup.get("eccn").value }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">CCATs</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-label">
+                <label class="txt">{{ formGroup.get("ccats").value }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# proviso / license-->
+    <div class="form-row grid">
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Proviso</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-label">
+                <label class="txt">{{ formGroup.get("proviso").value }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">License#</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div
+                class="form-input"
+                [class]="
+                  isFormSubmit &&
+                  formGroup.controls.licenseNo.errors &&
+                  formGroup.controls.licenseNo.errors.required
+                    ? 'no-h-full'
+                    : ''
+                "
+              >
+                <input
+                  autocomplete="off"
+                  type="text"
+                  pInputText
+                  name="licenseNo"
+                  placeholder="{{
+                    'Input.PlaceHolder.PleaseKeyIn' | translate
+                  }}"
+                  formControlName="licenseNo"
+                />
+                <p
+                  class="error-active"
+                  *ngIf="
+                    isFormSubmit &&
+                    formGroup.controls.licenseNo.errors &&
+                    formGroup.controls.licenseNo.errors.required
+                  "
+                >
+                  <i class="pi pi-exclamation-circle"></i>
+                  <span>{{ "Span.Label.RequiredField" | translate }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# Qty / Active Flag-->
+    <div class="form-row grid">
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">Apply Qty</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div
+                class="form-input"
+                [class]="
+                  isFormSubmit &&
+                  ((formGroup.controls.quantity.errors &&
+                    formGroup.controls.quantity.errors.required) ||
+                    !posIntRegex.test(formGroup.get('quantity').value))
+                    ? 'no-h-full'
+                    : ''
+                "
+              >
+                <input
+                  autocomplete="off"
+                  type="text"
+                  pInputText
+                  name="quantity"
+                  formControlName="quantity"
+                  placeholder="{{
+                    'Input.PlaceHolder.PleaseEnter' | translate
+                  }}"
+                  onwheel="this.blur()"
+                />
+                <p
+                  class="error-active"
+                  *ngIf="
+                    isFormSubmit &&
+                    ((formGroup.controls.quantity.errors &&
+                      formGroup.controls.quantity.errors.required) ||
+                      !posIntRegex.test(formGroup.get('quantity').value))
+                  "
+                >
+                  <i class="pi pi-exclamation-circle"></i>
+                  <span>{{
+                    formGroup.controls.quantity.errors &&
+                    formGroup.controls.quantity.errors.required
+                      ? ("Span.Label.RequiredField" | translate)
+                      : ("Span.Label.RequiredBig0Field" | translate)
+                  }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">{{
+                "EucLicenseMtn.Dialog.Label.Flag" | translate
+              }}</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-select no-h-full">
+                <p-dropdown
+                  formControlName="activeFlag"
+                  [options]="editFlagOptions"
+                  appendTo="body"
+                >
+                </p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# Date Range Kit-->
+    <div class="form-row grid">
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">Start Date</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-input">
+                <p-calendar [selectOtherMonths]="true" [showButtonBar]="true"
+                  formControlName="startDate"
+                  appendTo="body"
+                  dateFormat="yy/mm/dd"
+                  [showIcon]="true"
+                  inputId="startDate"
+                  placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                  (onInput)="onDatePickerInput($event)"
+                  (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                  (onBlur)="onDatePickerSelectAndBlur()"
+                  (onClose)="onDatePickerClose('startDate');onCheckDateHandler()"
+                ></p-calendar>
+
+                <p
+                  class="error-active"
+                  *ngIf="
+                    isFormSubmit &&
+                    formGroup.controls.startDate.errors &&
+                    formGroup.controls.startDate.errors.required
+                  "
+                >
+                  <i class="pi pi-exclamation-circle"></i>
+                  <span>{{ "Span.Label.RequiredField" | translate }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">End Date</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-input">
+                <p-calendar [selectOtherMonths]="true" [showButtonBar]="true"
+                  formControlName="endDate"
+                  appendTo="body"
+                  dateFormat="yy/mm/dd"
+                  [minDate]="formGroup.get('startDate').value"
+                  [showIcon]="true"
+                  inputId="endDate"
+                  placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                  (onInput)="onDatePickerInput($event)"
+                  (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                  (onBlur)="onDatePickerSelectAndBlur()"
+                  (onClose)="onDatePickerClose('endDate');onCheckDateHandler()"
+                ></p-calendar>
+                <p
+                  class="error-active"
+                  *ngIf="
+                    isFormSubmit &&
+                    formGroup.controls.endDate.errors &&
+                    formGroup.controls.endDate.errors.required
+                  "
+                >
+                  <i class="pi pi-exclamation-circle"></i>
+                  <span>{{ "Span.Label.RequiredField" | translate }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# End User-->
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">{{
+                "LicenseMgmt.EUC.Label.EndUser" | translate
+              }}</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-select-btnkit">
+                <p-selectButton
+                  [options]="eUserTypeOptions"
+                  optionLabel="label"
+                  optionValue="value"
+                  formControlName="endUserType"
+                >
+                  <ng-template let-item>
+                    <i
+                      *ngIf="
+                        formGroup.get('endUserType').value == 'Y' &&
+                        item.value === 'Y'
+                      "
+                      class="pi pi-check"
+                    ></i>
+                    <i
+                      *ngIf="
+                        formGroup.get('endUserType').value == 'N' &&
+                        item.value === 'N'
+                      "
+                      class="pi pi-check"
+                    ></i>
+                    <span>{{ item.label }}</span>
+                  </ng-template>
+                </p-selectButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# End Use-->
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label require">
+              <label class="txt">{{
+                "LicenseMgmt.EUC.Label.EndUse" | translate
+              }}</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-select-btnkit">
+                <p-selectButton
+                  [options]="eUseTypeOptions"
+                  optionLabel="label"
+                  optionValue="value"
+                  formControlName="endUseType"
+                >
+                  <ng-template let-item>
+                    <i
+                      *ngIf="
+                        formGroup.get('endUseType').value == 'Y' &&
+                        item.value === 'Y'
+                      "
+                      class="pi pi-check"
+                    ></i>
+                    <i
+                      *ngIf="
+                        formGroup.get('endUseType').value == 'N' &&
+                        item.value === 'N'
+                      "
+                      class="pi pi-check"
+                    ></i>
+                    <span>{{ item.label }}</span>
+                  </ng-template>
+                </p-selectButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# remark -->
+    <div class="form-row grid">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">Remark</label>
+        </div>
+      </div>
+
+      <div class="form-col col">
+        <div class="form-textarea">
+          <textarea
+            pInputTextarea
+            name="remark"
+            formControlName="remark"
+            placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <button
+        pButton
+        type="button"
+        label="{{ 'Button.Label.Cancel' | translate }}"
+        class="btn-gray"
+        (click)="onDialogCloseEvent()"
+      ></button>
+      <button
+        pButton
+        type="button"
+        class="submit"
+        label="{{ 'Button.Label.Submit' | translate }}"
+        (click)="onFormSubmit()"
+      ></button>
+    </div>
+  </form>
+</p-dialog>

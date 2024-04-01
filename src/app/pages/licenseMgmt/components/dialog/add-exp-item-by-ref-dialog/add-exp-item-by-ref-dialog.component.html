@@ -1,0 +1,111 @@
+<p-dialog
+  [header]="dialogSetting.getValue().title"
+  [(visible)]="dialogSetting.getValue().visiable"
+  [modal]="dialogSetting.getValue().modal"
+  [draggable]="dialogSetting.getValue().draggable"
+  [resizable]="dialogSetting.getValue().resizeable"
+  styleClass="add-exp-item-by-ref-dialog"
+  (onHide)="onSearchKeywordClean()"
+>
+  <form [formGroup]="formGroup" class="form-container form-table">
+    <!--# Keyword-->
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="grid md:col col-12">
+            <div
+              class="form-col form-input no-h-full flex-grow-1 flex-shrink-1"
+            >
+              <div class="form-input">
+                <span class="p-input-icon-right">
+                  <ng-container *ngIf="formGroup.get('keyword').value">
+                    <i
+                      class="pi pi-times input-icon"
+                      (click)="onSearchKeywordClean()"
+                    ></i>
+                  </ng-container>
+                  <input
+                    type="text"
+                    pInputText
+                    name="keyword"
+                    placeholder="{{
+                      'Input.PlaceHolder.PleaseEnterRefShipment' | translate
+                    }}"
+                    formControlName="keyword"
+                    autocomplete="off"
+                    autofocus
+                    (keydown)="onSearchKeyDownHandler($event)"
+                  />
+                </span>
+              </div>
+            </div>
+            <div class="form-col flex-shrink-0">
+              <ng-container
+                *ngIf="isLoading; then loadingTemplate; else notloadingTemplate"
+              ></ng-container>
+              <ng-template #loadingTemplate>
+                <div class="form-action">
+                  <button
+                    pButton
+                    type="submit"
+                    label="{{ 'Button.Label.Quering' | translate }}"
+                    class="submit"
+                    disabled
+                    icon="pi pi-spin pi-spinner"
+                    iconPos="right"
+                  ></button>
+                </div>
+              </ng-template>
+              <ng-template #notloadingTemplate>
+                <div class="form-action">
+                  <button
+                    pButton
+                    type="submit"
+                    label="{{ 'Button.Label.Query' | translate }}"
+                    class="submit"
+                    [disabled]="!formGroup.valid"
+                    (click)="onSearchEXPRefSubmit()"
+                  ></button>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <span>Loading...</span>
+  </div>
+
+  <div class="loading-container" *ngIf="isEmpty">
+    <span>No Result</span>
+  </div>
+
+  <div class="result-container">
+    <app-exp-ref-data-table
+      [data]="expDOList"
+      [cols]="itemCols"
+      (outputTargetData)="onSelectedDataRecive($event)"
+    ></app-exp-ref-data-table>
+  </div>
+
+  <div class="btn-container">
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Close' | translate }}"
+      class="btn-gray"
+      (click)="onCloseDialogHandler()"
+    ></button>
+
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Confirm' | translate }}"
+      *ngIf="selectedData && selectedData.length > 0"
+      (click)="onSelectedDataSubmit()"
+    ></button>
+  </div>
+</p-dialog>

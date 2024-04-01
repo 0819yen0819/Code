@@ -1,0 +1,58 @@
+<p-progressSpinner *ngIf="!soaCommonService.serviceInitFinish"></p-progressSpinner>
+
+<!-- 表頭 -->
+<app-soa-header *ngIf="soaCommonService.serviceInitFinish" (deptInfo)="getEmitHandler($event,'header')"
+    (submitInfo)="getApproveDialogResult($event)">
+
+    <div stickyZone>
+        <!-- 主要內容(申請資訊、簽核歷程、附件連結) -->
+        <p-tabView *ngIf="soaCommonService.serviceInitFinish">
+            <!-- 1.申請資訊 -->
+            <p-tabPanel header="{{ 'LicenseMgmt.Common.Tabs.ApplicationInfo' | translate }}">
+                <ng-container>
+                    <app-edit-apply-option (applyInfoEmmiter)="getApplyInfo($event)" [ouRefer]="soaData.ouInfo.docValue"
+                        (ouInfoEmmiter)="getEmitHandler($event,'ouInfo')">
+                    </app-edit-apply-option>
+                    <app-add-item (itemEmmiter)="getItemInfo($event)" [soaData]="soaData">
+                    </app-add-item>
+                    <app-soa-form-common (btnClick)="getCommonBtnClick($event)"
+                        (formCommonData)="getEmitHandler($event,'formCommon')">
+                    </app-soa-form-common>
+                </ng-container>
+            </p-tabPanel>
+
+            <ng-container *ngIf="formTypeId">
+                <!-- 2.簽核歷程 -->
+                <p-tabPanel header="{{ 'LicenseMgmt.Common.Tabs.SignOffHistory' | translate }}"
+                    *ngIf="soaCommonService.showHistory">
+                    <app-history-log *ngIf="reassignDialogService.reAssignHistoryRefreshController"
+                        [formTypeId]="formTypeId"
+                        [formNo]="soaCommonService.SOAformNo"></app-history-log>
+                </p-tabPanel>
+
+                <!-- 3.附件連結 -->
+                <p-tabPanel header="{{ 'LicenseMgmt.Common.Tabs.AttachmentLink' | translate }}"> 
+                        <app-attachment-uploader [formTypeId]="formTypeId"  [formNo]="soaCommonService.SOAformNo"></app-attachment-uploader>
+                </p-tabPanel>
+            </ng-container>
+        </p-tabView>
+
+        <!-- 訊息dialog -->
+        <app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams" [contentList]="noticeContentList"
+            (closeNotice)="noticeDialogClose()">
+        </app-common-notice-check-dialog>
+
+        <p-progressSpinner *ngIf="showSpinner"></p-progressSpinner>
+ 
+        <p-confirmDialog *ngIf="showApprovingLicenseConfirmDialog" header="Confirmation" icon="pi pi-exclamation-triangle" [closable]="false" 
+            acceptLabel="{{ 'Button.Label.ConfirmAction' | translate }}"
+            rejectLabel="{{ 'DPL_Fail.Label.ConfirmReject' | translate }}" [style]="{width: '600px'}" >
+        </p-confirmDialog>
+
+
+    </div>
+</app-soa-header>
+
+<app-approve-dialog *ngIf="openRedirectDialog" [dialogOpen]="openRedirectDialog"
+    (submitInfo)="sendApply('addAssignee','',$event)" (closeDialog)="updateDialog()">
+    </app-approve-dialog>

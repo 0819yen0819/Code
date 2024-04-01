@@ -1,0 +1,29 @@
+// @import "../../../../../../styles/components/plugin";
+@import "../../../../../../styles/components/plugin";
+
+.main-title-container {
+  @apply mt-0;
+}
+.form-table {
+  .form-row {
+    .form-col {
+      .form-label {
+        @apply w-full h-full p-2;
+        .txt {
+          @apply flex justify-start items-center p-1 pl-2;
+        }
+      }
+      .form-select {
+        @apply p-0 #{!important};
+      }
+    }
+  }
+}
+ 
+.show-edit-and-submit{ 
+  &:focus,&:active{
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+} 

@@ -1,0 +1,145 @@
+@import "../../../../styles/wpg-cus-components/cus_form";
+
+@include FormBaseOverride;
+
+.sub-title-container {
+  &.item-section {
+    @apply inline-flex justify-start items-center w-full;
+    @apply mt-5 #{!important};
+    > div {
+      &:not(:first-of-type) {
+        @apply ml-8;
+      }
+    }
+  }
+}
+.add-item {
+  @apply bg-blue-50 bg-opacity-50 border border-blue-500 text-blue-500 min-w-fit;
+  &:not(:disabled) {
+    &:hover {
+      @apply bg-blue-500 text-white border-blue-500;
+    }
+    &:disabled {
+      &:hover {
+        @apply bg-white border-blue-500 text-blue-500;
+      }
+    }
+  }
+  &:not(:first-of-type) {
+    @apply ml-2;
+  }
+}
+
+.hint-highlight {
+  @apply mt-4 mb-4 font-semibold text-base text-red-600 break-words;
+}
+
+.icp-rules-container {
+  .icp-rules-all-set-section {
+    @apply flex justify-start items-center;
+    @apply w-fit h-fit;
+    @apply border border-gray-200 border-solid rounded-md;
+    @apply bg-blue-50 bg-opacity-70;
+    @apply mb-4;
+    @apply pt-2 pb-2 pl-4 pr-4;
+    .label {
+      @apply cursor-default;
+
+      .label-text {
+        @apply text-lg font-bold;
+      }
+    }
+
+    .check-option {
+      @apply ml-4;
+    }
+  }
+
+  .icp-rule-kit {
+    .icp-rule-header {
+      @apply flex justify-center items-center;
+      @apply pt-2 pb-2;
+      @apply border border-gray-200 border-solid rounded-md;
+      @apply bg-blue-50 bg-opacity-70;
+      @apply cursor-default;
+      .title-text {
+        @apply text-lg font-bold;
+      }
+    }
+    .icp-rule-body {
+      @apply xxs:block xs:flex justify-start items-center;
+      @apply mt-4 mb-4;
+
+      .icp-rule-content {
+        @apply flex;
+        &.check-option {
+          min-width: 136px;
+          @apply pl-4 pr-4;
+        }
+        &.title-kit {
+          @apply xxs:mt-4 xs:mt-0;
+          @apply cursor-default;
+          .title-text {
+            @apply font-semibold text-lg text-gray-700;
+            @apply tracking-wide;
+          }
+          .title-example {
+            @apply text-lg text-gray-500 font-normal;
+            @apply tracking-wide;
+          }
+        }
+      }
+    }
+  }
+}
+
+:host ::ng-deep {
+  p-calendar {
+    .p-datepicker-trigger {
+      height: inherit;
+    }
+  }
+
+  .icp-rules-container {
+    .p-selectbutton {
+      &:first-of-type {
+        .p-button {
+          @apply h-12;
+        }
+      }
+
+      .p-button {
+        @apply w-fit #{!important};
+
+        &:focus {
+          @apply shadow-none #{!important};
+        }
+
+        &:nth-of-type(1) {
+          &.p-highlight {
+            &:hover {
+              @apply bg-blue-600 #{!important};
+            }
+          }
+        }
+
+        &:nth-of-type(2) {
+          &.p-highlight {
+            @apply bg-red-600 #{!important};
+            &:hover {
+              @apply bg-red-500 #{!important};
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.extend-form-container{
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+  padding: 3vh 0; 
+  box-sizing: border-box;
+}

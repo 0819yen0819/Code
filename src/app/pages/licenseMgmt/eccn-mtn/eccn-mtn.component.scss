@@ -1,0 +1,40 @@
+.setting-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  .form-select {
+    width: 20%;
+  }
+
+  .form-input,
+  .form-chip {
+    width: 55%;
+  }
+
+  span {
+    color: #006deb;
+  }
+
+  //> Rioton 22/10/29 btn UI
+  .btn-container {
+    @apply mb-2 md:mb-0 #{!important};
+    .p-button {
+      @apply mb-2 md:mb-0;
+    }
+  }
+
+  @media screen and (max-width: 720px) {
+    .form-select {
+      width: 100%;
+      min-width: 180px;
+    }
+
+    .form-input,
+    .form-chip {
+      width: 100%;
+    }
+  }
+}

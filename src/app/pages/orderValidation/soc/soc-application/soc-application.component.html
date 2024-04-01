@@ -1,0 +1,174 @@
+<!-- 申請資訊 -->
+<div class="application-container">
+    <form class="form-table">
+        <div class="form-container form-table">
+
+            <!-- Corp -->
+            <div class="form-row multi-input-kit grid">
+                <div class="form-col col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label"
+                                style="display: flex; flex-direction: column; align-items: start;">
+                                <label class="txt"> {{ 'SalesOrderChange.field.Corp' | translate}}
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="grid md:col col-12">
+                            <div class="form-label" style="display: flex; align-items: center; flex-wrap: wrap;"> 
+                                <label class="txt">
+                                  {{formInfo.ouCode}} - {{formInfo.ouName}}
+                                </label> 
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Number -->
+            <div class="form-row exp-date grid">
+                <div class="form-col lg:col-6 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt"> {{ 'SalesOrderChange.field.OrderNumber' | translate}}</label>
+                            </div>
+                        </div>
+
+                        <div class="grid md:col col-12">
+                            <div class="form-label" style="display: flex; align-items: center; flex-wrap: wrap;"> 
+                                <label class="txt">
+                                  {{formInfo.orderNumber}}
+                                </label> 
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Order Date -->
+                <div class="form-col lg:col-6 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt"> {{ 'SalesOrderChange.field.OrderDate' | translate}}
+                                </label>
+                            </div>
+                        </div>
+
+                        
+                        <div class="grid md:col col-12">
+                            <div class="form-label" style="display: flex; align-items: center; flex-wrap: wrap;"> 
+                                <label class="txt">
+                                 {{formInfo.orderDate  | date : 'yyyy/MM/dd'}}
+                                </label> 
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Sales -->
+            <div class="form-row exp-date grid">
+                <div class="form-col lg:col-6 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'SalesOrderChange.field.Sales' | translate}}</label>
+                            </div>
+                        </div>
+
+                        
+                        <div class="grid md:col col-12">
+                            <div class="form-label" style="display: flex; align-items: center; flex-wrap: wrap;"> 
+                                <label class="txt">
+                                {{formInfo.salesCode}} {{formInfo.salesName}}
+                                </label> 
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- SalesDept -->
+                <div class="form-col lg:col-6 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'SalesOrderChange.field.SalesDept' | translate}}
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="grid md:col col-12">
+                            
+                            <div class="form-col form-select col-12" style="height: unset !important" *ngIf="(currentDept && canEditDept && userDeptsOptions.getValue().length > 1)">
+                                <p-dropdown name="userDept" [options]="userDeptsOptions.getValue()"
+                                placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}"  [(ngModel)]="currentDept" (onChange)="userDeptOnChange()">
+                              </p-dropdown>
+                            </div>
+
+                            <div class="form-label" style="display: flex; align-items: center; flex-wrap: wrap;" *ngIf="!(currentDept && canEditDept && userDeptsOptions.getValue().length > 1)"> 
+                                <label class="txt" >
+                                  {{ currentDept?.label }}
+                                </label> 
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Customer -->
+            <div class="form-row exp-date grid">
+                <div class="form-col lg:col-6 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'SalesOrderChange.field.Customer' | translate}}</label>
+                            </div>
+                        </div>
+
+                        <div class="grid md:col col-12">
+                            <div class="form-label" style="display: flex; align-items: center; flex-wrap: wrap;"> 
+                                <label class="txt">
+                                  {{formInfo.custCode}} - {{formInfo.custName}}
+                                </label> 
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Currency -->
+                <div class="form-col lg:col-6 col-12">
+                    <div class="form-row grid">
+                        <div class="form-col col-fixed">
+                            <div class="form-label">
+                                <label class="txt">{{ 'SalesOrderChange.field.Currency' | translate}}
+                                </label>
+                            </div>
+                        </div>
+
+                        
+                        <div class="grid md:col col-12">
+                            <div class="form-label" style="display: flex; align-items: center; flex-wrap: wrap;"> 
+                                <label class="txt">
+                                  {{formInfo.currency}}
+                                </label> 
+                            </div>
+                        </div> 
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </form>
+</div>

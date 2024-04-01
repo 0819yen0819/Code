@@ -1,0 +1,291 @@
+@mixin FormBaseOverride {
+  .form-container {
+    &.form-table {
+      &:not(.form-search) {
+        @apply border-0;
+        .col-fixed {
+          .form-label {
+            border-bottom: 0px !important;
+            * {
+              @apply m-0;
+            }
+          }
+        }
+        > .form-row {
+          > .form-col {
+            @apply border-t-0 border-l-0 border-r-0 border-b-2 border-gray-50 border-solid;
+          }
+        }
+        .form-row {
+          @apply m-0;
+
+          &.multi-input-kit {
+            div {
+              &:nth-of-type(2) {
+                @apply md:h-full h-fit;
+              }
+            }
+          }
+
+          &.triple-input-kit {
+            div {
+              &:nth-of-type(2) {
+                @apply lg:h-full h-fit;
+              }
+            }
+          }
+
+          &.notice {
+            .form-label {
+              @apply bg-red-50;
+
+              .txt {
+                @apply text-red-500;
+              }
+            }
+          }
+
+          .form-col {
+            min-height: 48px !important;
+
+            .form-label {
+              border-bottom: 0px !important;
+              min-height: 48px !important;
+              @apply w-full;
+              &:not(.no-h-full) {
+                @apply h-full #{!important};
+              }
+              .txt {
+                min-height: unset !important;
+                @apply justify-start items-center p-1 pl-2;
+                span {
+                  @apply text-sm;
+                }
+              }
+            }
+
+            .form-input,
+            .form-textarea {
+              @apply p-1 #{!important};
+
+              &:last-of-type {
+                @apply pr-1 #{!important};
+              }
+
+              &:not(.no-h-full) {
+                @apply h-full;
+                input,
+                span {
+                  @apply w-full h-full;
+                }
+                textarea {
+                  min-height: 96px;
+                  @apply max-w-full #{!important};
+                }
+              }
+
+              input[type="number"]::-webkit-outer-spin-button,
+              input[type="number"]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+              }
+              input[type="number"] {
+                -moz-appearance: textfield;
+              }
+            }
+
+            .form-auto-complete-dropdown {
+              ::ng-deep {
+                .p-autocomplete-dropdown {
+                  @apply w-fit min-w-0 #{!important};
+                  @apply pl-2 pr-2;
+                }
+              }
+            }
+
+            .form-date-range-select {
+              @apply p-1 flex;
+              > div {
+                &:nth-of-type(odd) {
+                  width: 45%;
+                }
+                &:nth-of-type(even) {
+                  width: 10%;
+                  @apply flex justify-center items-center;
+                  span {
+                    @apply h-fit w-fit #{!important};
+                  }
+                }
+              }
+            }
+
+            .form-inner-action {
+              @apply w-full h-full;
+              @apply flex lg:justify-center justify-start items-center;
+              @apply md:ml-1 md:mb-0 lg:m-0 ml-1 mb-1;
+            }
+
+            .form-hint {
+              @apply mt-2 mb-2 ml-2  w-full;
+              &.warring {
+                span {
+                  @apply text-red-600;
+                }
+              }
+              span {
+                @apply block text-sm font-semibold text-gray-400;
+              }
+            }
+
+            .form-select {
+              @apply w-full h-full pt-1 pl-1 pb-1 xxs:pr-1 md:pr-0 flex justify-center items-center;
+              > p-dropdown {
+                @apply w-full;
+                .p-disabled {
+                  @apply cursor-not-allowed   #{!important};
+                  span {
+                    @apply text-gray-400;
+                  }
+                  span {
+                    @apply text-gray-400;
+                  }
+                }
+              }
+            }
+
+            .form-tags {
+              @apply pt-1 pl-2 pb-2 pr-2 cursor-default;
+              .form-tag {
+                @apply flex justify-center items-center  p-2 pl-4 pr-4 rounded-md min-h-0;
+                @apply text-gray-400 text-sm;
+                @apply border-2 border-solid border-blue-300;
+              }
+            }
+
+            .form-select-btnkit {
+              @apply pt-1 pb-1 w-full h-full flex justify-center items-center;
+            }
+          }
+        }
+
+        .btn-container {
+          button {
+            margin-bottom: 10px !important;
+            &:disabled {
+              @apply cursor-not-allowed;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  :host ::ng-deep {
+    .p-inputtext,
+    input,
+    span,
+    textarea {
+      &:disabled {
+        @apply cursor-not-allowed;
+        @apply bg-white #{!important};
+        @apply text-gray-500;
+        @apply opacity-90 #{!important};
+      }
+    }
+
+    p-inputnumber {
+      @apply w-full;
+
+      .p-inputnumber {
+        @apply w-full;
+      }
+    }
+
+    .p-dropdown {
+      min-height: 42px;
+      .p-dropdown-label {
+        &.p-inputtext {
+          @apply border-none;
+        }
+      }
+
+      &.p-disabled {
+        @apply opacity-90 #{!important};
+      }
+
+      &.p-disabled {
+        @apply opacity-90 #{!important};
+      }
+    }
+
+    .form-toggle {
+      @apply w-full h-full flex justify-center items-center p-4;
+      .p-button {
+        @apply min-w-fit w-20;
+        &.p-highlight {
+          @apply bg-blue-400 border border-blue-500 border-solid;
+          &:hover {
+            @apply bg-blue-500  border-blue-600;
+          }
+        }
+      }
+    }
+
+    p-selectbutton {
+      .p-button {
+        @apply min-w-min;
+        &:not(:first-of-type) {
+          @apply border-l border-gray-100 border-r-0 border-t-0 border-b-0;
+        }
+        &.p-disabled {
+          @apply opacity-90 #{!important};
+        }
+        &.p-disabled {
+          @apply opacity-90 #{!important};
+        }
+
+        i {
+          @apply pr-2 #{!important};
+        }
+      }
+
+      &.fit-button {
+        .p-button {
+          @apply w-fit;
+        }
+      }
+    }
+
+    p-calendar {
+      > span {
+        @apply w-full;
+        button {
+          height: inherit;
+          @apply min-w-0 #{!important};
+        }
+      }
+    }
+
+    .p-inputgroup {
+      .p-inputtext {
+        @apply rounded-r-none cursor-text #{!important};
+      }
+      .p-button {
+        @apply min-w-min  h-11;
+      }
+    }
+  }
+}
+
+:host ::ng-deep {
+  .p-disabled,
+  .p-disabled * {
+    cursor: not-allowed !important;
+    pointer-events: all !important;
+  }
+  button:disabled,
+  input:disabled {
+    cursor: not-allowed !important;
+    pointer-events: all !important;
+  }
+}

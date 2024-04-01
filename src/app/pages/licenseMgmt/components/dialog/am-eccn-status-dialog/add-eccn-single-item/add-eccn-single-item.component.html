@@ -1,0 +1,78 @@
+<!--# common notice-check dialog-->
+<app-common-notice-check-dialog
+  [settingParams]="noticeCheckDialogParams"
+  [contentList]="noticeContentList"
+  (closeNotice)="onCloseNoticeHandler()"
+></app-common-notice-check-dialog>
+
+<form [formGroup]="formGroup" class="form-container form-table">
+  <div class="form-row grid">
+    <div class="form-col lg:col-6 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label require">
+            <label class="txt">ECCN</label>
+          </div>
+        </div>
+        <div class="grid md:col col-12">
+          <div
+            class="form-col form-input col-12"
+            style="height: unset !important"
+          >
+            <div class="form-input">
+              <input
+                autocomplete="off"
+                type="text"
+                pInputText
+                name="eccn"
+                formControlName="eccn"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-col lg:col-6 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label require">
+            <label class="txt">{{
+              "LicenseMgmt.ECCNStatusMtn.Label.Flag" | translate
+            }}</label>
+          </div>
+        </div>
+        <div class="grid md:col col-12">
+          <div class="form-col form-input col-12">
+            <div class="form-select-btnkit">
+              <p-selectButton
+                [options]="stateOptions"
+                optionLabel="label"
+                optionValue="value"
+                formControlName="activeFlag"
+              ></p-selectButton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--# Form Actions -->
+  <div class="btn-container">
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Cancel' | translate }}"
+      class="btn-gray"
+      (click)="onCloseAddItemDialog('C')"
+    ></button>
+
+    <button
+      pButton
+      type="submit"
+      label="{{ 'Button.Label.Submit' | translate }}"
+      [disabled]="formGroup.invalid"
+      (click)="onCloseAddItemDialog('S')"
+    ></button>
+  </div>
+</form>

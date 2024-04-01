@@ -1,0 +1,186 @@
+<p-dialog
+  [header]="formTitle"
+  [(visible)]="showDialog"
+  modal="true"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="close()"
+>
+  <div class="hint">*{{ hint }}</div>
+  <form [formGroup]="formGroup" class="form-container form-table">
+    <div class="form-row grid">
+      <!-- Item -->
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div
+              class="form-label"
+              [ngClass]="currentMode == 'add' ? 'require' : ''"
+            >
+              <label class="txt">Item</label>
+            </div>
+          </div>
+          <div class="md:col col-12">
+            <div class="form-col">
+              <!-- enabled -->
+              <div class="form-input" *ngIf="currentMode !== 'edit'">
+                <input
+                  type="text"
+                  pInputText
+                  readonly
+                  (click)="showItemSelectDialog()"
+                  formControlName="item"
+                  placeholder="{{
+                    'Input.PlaceHolder.PleaseSelect' | translate
+                  }} Item"
+                />
+              </div>
+              <!-- disabled -->
+              <div class="form-label" *ngIf="currentMode === 'edit'">
+                <label class="txt"> {{ formGroup.controls.item.value }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <!-- Master ECCN -->
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Master ECCN</label>
+            </div>
+          </div>
+          <div class="sm:col col-12" style="display: flex;">
+            <div class="form-col">
+              <div class="form-label">
+                <label class="txt">{{ formGroup.controls.masterEccn.value }}</label>
+              </div>
+            </div>
+          </div>
+          <!-- Master Export Control -->
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Master Export Control</label>
+            </div>
+          </div>
+          <div class="sm:col col-12">
+            <div class="form-label">
+              <label class="txt">{{
+                formGroup.controls.masterExportControl?.value
+              }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-col col-12">
+        <div
+          class="form-row grid eccn-setting-kit"
+          style="width: 100%; justify-content: space-between"
+        >
+          <!-- Area -->
+          <div class="form-col col-fixed">
+            <div class="eccn-setting-container">
+              <div
+                class="form-label"
+                [ngClass]="currentMode == 'add' ? 'require' : ''"
+              >
+                <div class="txt">Area</div>
+              </div>
+
+              <!-- enabled -->
+              <div class="form-select" *ngIf="!(currentMode === 'edit')">
+                <p-dropdown
+                  name="area"
+                  [options]="areaList"
+                  appendTo="body"
+                  [filter]="true"
+                  formControlName="area"
+                  placeholder="{{
+                    'DropDown.PlaceHolder.PleaseChoose' | translate
+                  }}"
+                  (onChange)="getAreaEccnNonOuCheck()"
+                >
+                </p-dropdown>
+              </div>
+              <!-- disabled -->
+              <div class="form-label" *ngIf="currentMode === 'edit'">
+                <label class="txt"> {{ formGroup.controls.area.value }}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- ECCN -->
+          <div class="form-col col-fixed">
+            <div class="eccn-setting-container">
+              <div class="form-label require">
+                <label class="txt">ECCN</label>
+              </div>
+
+              <div class="form-select">
+                <p-dropdown
+                  name="eccn"
+                  [options]="eccnListOptions"
+                  appendTo="body"
+                  [filter]="true"
+                  formControlName="eccn"
+                  placeholder="{{
+                    'DropDown.PlaceHolder.PleaseChoose' | translate
+                  }}"
+                  (onChange)="getAreaEccnNonOuCheck()"
+                >
+                </p-dropdown>
+              </div>
+            </div>
+          </div>
+
+          <!-- Export Control -->
+          <div class="form-col col-fixed">
+            <div class="eccn-setting-container">
+              <div class="form-label">
+                <label class="txt">Export Control</label>
+              </div>
+              <div class="form-label">
+                <div class="txt">
+                  {{ formGroup.controls.exportControl?.value }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!--# Form Actions -->
+  <div class="btn-container">
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Cancel' | translate }}"
+      class="btn-gray"
+      (click)="close()"
+    ></button>
+    <button
+      pButton
+      type="submit"
+      label="{{ 'SOA.Button.confirm' | translate }}"
+      (click)="onSumbit()"
+    ></button>
+  </div>
+</p-dialog>
+
+<app-common-selector-dialog
+  [settingParams]="selectorDialogParams"
+  (outputResult)="onSelectorDialogCallback($event)"
+>
+</app-common-selector-dialog>
+
+<!-- 訊息 -->
+<app-common-notice-check-dialog
+  [settingParams]="noticeCheckDialogParams"
+  [contentList]="noticeContentList"
+>
+</app-common-notice-check-dialog>

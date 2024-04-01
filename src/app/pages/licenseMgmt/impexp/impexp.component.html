@@ -1,0 +1,953 @@
+<!--# common notice-check dialog-->
+<app-common-notice-check-dialog
+  [settingParams]="noticeCheckDialogParams"
+  [contentList]="noticeContentList"
+  (closeNotice)="onRedirectHandler()"
+></app-common-notice-check-dialog>
+
+<!--# common selector dialog-->
+<app-common-selector-dialog
+  [settingParams]="selectorDialogParams"
+  (outputResult)="onSelectorDialogCallback($event)"
+>
+</app-common-selector-dialog>
+
+<!--# apply add assignee action dialog -->
+<app-common-apply-action-dialog
+  [settingParams]="applyDialogParams"
+  (outputResult)="onApplyDialogCallback($event)"
+>
+</app-common-apply-action-dialog>
+
+<!--# imp am item dialog -->
+<app-am-imp-item-dialog
+  [settingParams]="impItemAMDialogParams"
+  [mode]="impItemAMDialogMode"
+  [selectedData]="selectedImpItemInfo"
+  (outputResult)="onImpItemAMDialogCallback($event)"
+></app-am-imp-item-dialog>
+
+<!--# exp am item dialog -->
+<app-am-exp-item-dialog
+  [settingParams]="expItemAMDialogParams"
+  [mode]="expItemAMDialogMode"
+  [selectedData]="selectedExpItemInfo"
+  (outputResult)="onExpItemAMDialogCallback($event)"
+></app-am-exp-item-dialog>
+
+<!--# exp add item by ref dialog -->
+<app-add-exp-item-by-ref-dialog
+  [settingParams]="expItemRefDialogParams"
+  (outputResult)="onExpItemFromRefCallback($event)"
+></app-add-exp-item-by-ref-dialog>
+
+<!--# Main title Section-->
+<div stickyZone>
+  <app-common-license-form-header
+    [enabledEditAndSubmit]="true"
+    [formType]="formType"
+    (outputCurFormNo)="onCurFormNoHandler($event)"
+    (outputUserDeptInfo)="onCurUserDeptHandler($event)"
+    (outputCurFormTypeId)="onFormTypeIdHandler($event)"
+    (editAndSubmitEmitter)="getEditAndSubmitEmitter($event)"
+  ></app-common-license-form-header>
+
+  <p-tabView>
+    <p-tabPanel
+      header="{{ 'LicenseMgmt.Common.Tabs.ApplicationInfo' | translate }}"
+    >
+      <form [formGroup]="formGroup" class="form-container form-table">
+        <!--# Form Section-->
+        <!--# oOU Group Selector -->
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{
+                    formType === "imp"
+                      ? ("LicenseMgmt.IMPEXP.Label.Receiving_Shipping_OU_IMP"
+                        | translate)
+                      : ("LicenseMgmt.IMPEXP.Label.Receiving_Shipping_OU_EXP"
+                        | translate)
+                  }}</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div
+                  class="form-col form-input col-12"
+                  style="height: unset !important"
+                >
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="oOuCode"
+                      readonly
+                      placeholder="{{
+                        'Input.PlaceHolder.PleaseSelect' | translate
+                      }} {{
+                        formType === 'imp'
+                          ? ('LicenseMgmt.IMPEXP.Label.Receiving_Shipping_OU_IMP'
+                            | translate)
+                          : ('LicenseMgmt.IMPEXP.Label.Receiving_Shipping_OU_EXP'
+                            | translate)
+                      }}"
+                      formControlName="oOuCode"
+                      [value]="formGroup.get('oOuName').value"
+                      (click)="onOpenSelectorDialogEvent('oou')"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# OU Group Selector -->
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{
+                    formType === "imp"
+                      ? ("LicenseMgmt.IMPEXP.Label.Receiving_Shipping_Inventory_OU_IMP"
+                        | translate)
+                      : ("LicenseMgmt.IMPEXP.Label.Receiving_Shipping_Inventory_OU_EXP"
+                        | translate)
+                  }}</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div
+                  class="form-col form-input col-12"
+                  style="height: unset !important"
+                >
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="ouCode"
+                      readonly
+                      placeholder="{{
+                        'Input.PlaceHolder.Choose' | translate
+                      }} {{
+                        formType === 'imp'
+                          ? ('LicenseMgmt.IMPEXP.Label.Receiving_Shipping_Inventory_OU_IMP'
+                            | translate)
+                          : ('LicenseMgmt.IMPEXP.Label.Receiving_Shipping_Inventory_OU_EXP'
+                            | translate)
+                      }}"
+                      formControlName="ouCode"
+                      [value]="formGroup.get('ouName').value"
+                      (click)="onOpenSelectorDialogEvent('ou')"
+                      (ngModelChange)="
+                        onOUCodeChangeHandler(); onInitHKConsigneeList()
+                      "
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ng-container
+          *ngIf="
+            formGroup.get('oOuCode').value != formGroup.get('ouCode').value &&
+            formGroup.get('oOuCode').value &&
+            formGroup.get('ouCode').value
+          "
+        >
+          <div class="form-row notice grid">
+            <div class="form-col col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label">
+                    <label class="txt">Notice</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div class="form-col col-12">
+                    <div class="form-label">
+                      <label class="txt">{{
+                        formType === "imp"
+                          ? ("LicenseMgmt.IMPEXP.Hint.IMPSpecialNotice"
+                            | translate)
+                          : ("LicenseMgmt.IMPEXP.Hint.EXPSpecialNotice"
+                            | translate)
+                      }}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <!--# Warehouse Selector -->
+        <ng-container *ngIf="formType == 'imp'">
+          <div class="form-row ou-kit-selector grid">
+            <div class="form-col col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label require">
+                    <label class="txt">{{
+                      "LicenseMgmt.IMPEXP.Label.Warehouse_Location" | translate
+                    }}</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div
+                    class="form-col form-input col-12"
+                    style="height: unset !important"
+                  >
+                    <div class="form-select">
+                      <p-dropdown
+                        name="country"
+                        [options]="warehouseOptions"
+                        [filter]="true"
+                        formControlName="country"
+                        (onChange)="
+                          onCountryChangeHandler(); onInitHKConsigneeList()
+                        "
+                      ></p-dropdown>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="formType == 'exp'">
+          <div class="form-row grid">
+            <div class="form-col lg:col-6 col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label require">
+                    <label class="txt">{{
+                      "LicenseMgmt.IMPEXP.Label.Warehouse_Location" | translate
+                    }}</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div
+                    class="form-col form-input col-12"
+                    style="height: unset !important"
+                  >
+                    <div class="form-select">
+                      <p-dropdown
+                        name="country"
+                        [options]="warehouseOptions"
+                        placeholder="{{
+                          'DropDown.PlaceHolder.PleaseChoose' | translate
+                        }}"
+                        [filter]="true"
+                        formControlName="country"
+                        (onChange)="
+                          onCountryChangeHandler(); onInitHKConsigneeList()
+                        "
+                      ></p-dropdown>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-col lg:col-6 col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label require">
+                    <label class="txt">{{
+                      "LicenseMgmt.IMPEXP.Label.Shipping_Type" | translate
+                    }}</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div class="form-col form-input col-12">
+                    <div class="form-select">
+                      <p-dropdown
+                        name="shipmentType"
+                        [options]="expTypeOptions"
+                        placeholder="{{
+                          'DropDown.PlaceHolder.PleaseChoose' | translate
+                        }}"
+                        formControlName="shipmentType"
+                      ></p-dropdown>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <!--# Customer or Vendor Selector-->
+        <div class="form-row multi-input-kit grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div
+                  class="form-label require"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: start;
+                  "
+                >
+                  <label class="txt"
+                    >{{ "ImpExpLicenseMtn.Label.Customer" | translate }} /
+                    <label>{{
+                      "ImpExpLicenseMtn.Label.Vendor" | translate
+                    }}</label>
+                  </label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input md:col-4 lg:col-3 col-12">
+                  <div class="form-select">
+                    <p-dropdown
+                      name="vcType"
+                      [options]="userTypeOptions"
+                      placeholder="{{
+                        'DropDown.PlaceHolder.PleaseChoose' | translate
+                      }}"
+                      formControlName="vcType"
+                      (onChange)="onUserTypeHandler()"
+                    ></p-dropdown>
+                  </div>
+                </div>
+                <div class="form-col form-input md:col-8 lg:col-9 col-12">
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="vcCode"
+                      readonly
+                      placeholder="{{
+                        'Input.PlaceHolder.PleaseSelect' | translate
+                      }}"
+                      formControlName="vcCode"
+                      [value]="formGroup.get('vcName').value"
+                      (click)="onOpenSelectorDialogEvent('custormer')"
+                      (ngModelChange)="onVCCodeChangeHandler()"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ng-container *ngIf="formType == 'exp'">
+          <!--# Ship To Code -->
+          <div class="form-row grid">
+            <div class="form-col col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label">
+                    <label class="txt">Ship To Code</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div
+                    class="form-col form-input col-12"
+                    style="height: unset !important"
+                  >
+                    <div class="form-input">
+                      <input
+                        autocomplete="off"
+                        type="text"
+                        pInputText
+                        name="shipToCode"
+                        readonly
+                        [placeholder]="shipToCodePlaceholder"
+                        formControlName="shipToCode"
+                        (click)="
+                          onOpenSelectorDialogEvent(
+                            'customerAddressQueryForLicenseShip'
+                          )
+                        "
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--# Ship To Address Input -->
+          <div class="form-row grid">
+            <div class="form-col col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label require">
+                    <label class="txt">Ship To Address</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div
+                    class="form-col form-input col-12"
+                    style="height: unset !important"
+                  >
+                    <div class="form-input">
+                      <input
+                        autocomplete="off"
+                        type="text"
+                        pInputText
+                        name="shipToAddress"
+                        placeholder="{{
+                          'LicenseMgmt.IMPEXP.PlaceHolder.PlzKeyOrByShiptoCode'
+                            | translate
+                        }}"
+                        formControlName="shipToAddress"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--# Ship To Address (English) Input -->
+          <div class="form-row grid">
+            <div class="form-col col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label require">
+                    <label class="txt">Ship To Address (English)</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div
+                    class="form-col form-input col-12"
+                    style="height: unset !important"
+                  >
+                    <div class="form-input">
+                      <input
+                        autocomplete="off"
+                        type="text"
+                        pInputText
+                        name="shipToAddressE"
+                        placeholder="{{
+                          'LicenseMgmt.IMPEXP.PlaceHolder.PlzKeyOrByShiptoCode'
+                            | translate
+                        }}"
+                        formControlName="shipToAddressE"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--# Deliver To Code -->
+          <div class="form-row grid">
+            <div class="form-col col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label">
+                    <label class="txt">Deliver To Code</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div
+                    class="form-col form-input col-12"
+                    style="height: unset !important"
+                  >
+                    <div class="form-input">
+                      <input
+                        autocomplete="off"
+                        type="text"
+                        pInputText
+                        name="deliverToCode"
+                        readonly
+                        [placeholder]="deliverToCodePlaceholder"
+                        formControlName="deliverToCode"
+                        (click)="
+                          onOpenSelectorDialogEvent(
+                            'customerAddressQueryForLicenseAddress'
+                          )
+                        "
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--# Deliver To Address Input -->
+          <div class="form-row grid">
+            <div class="form-col col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div
+                    class="form-label"
+                    [ngClass]="
+                      formGroup.get('deliverToAddress').value &&
+                      formGroup.get('vcType').value == 'C'
+                        ? 'require'
+                        : ''
+                    "
+                  >
+                    <label class="txt">Deliver To Address</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div
+                    class="form-col form-input col-12"
+                    style="height: unset !important"
+                  >
+                    <div class="form-input">
+                      <input
+                        autocomplete="off"
+                        type="text"
+                        pInputText
+                        name="deliverToAddress"
+                        placeholder="{{
+                          'LicenseMgmt.SC047.PlaceHolder.PlzKeyOrByDelivertoCode'
+                            | translate
+                        }}"
+                        formControlName="deliverToAddress"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--# Deliver To Address (English) Input -->
+          <div class="form-row grid">
+            <div class="form-col col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div
+                    class="form-label"
+                    [ngClass]="
+                      formGroup.get('deliverToAddress').value &&
+                      formGroup.get('vcType').value == 'C'
+                        ? 'require'
+                        : ''
+                    "
+                  >
+                    <label class="txt">Deliver To Address (English)</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div
+                    class="form-col form-input col-12"
+                    style="height: unset !important"
+                  >
+                    <div class="form-input">
+                      <input
+                        autocomplete="off"
+                        type="text"
+                        pInputText
+                        name="deliverToAddressE"
+                        placeholder="{{
+                          'LicenseMgmt.SC047.PlaceHolder.PlzKeyOrByDelivertoCode'
+                            | translate
+                        }}"
+                        formControlName="deliverToAddressE"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <!--# End Use Input -->
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div
+                  class="form-label"
+                  [ngClass]="{ require: formType === FormTypeEnum.LICENSE_EXP }"
+                >
+                  <label class="txt">End Use</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div
+                  class="form-col form-input col-12"
+                  style="height: unset !important"
+                >
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="endUse"
+                      placeholder="{{
+                        'Input.PlaceHolder.PleaseKeyIn' | translate
+                      }}{{
+                        'LicenseMgmt.IMPEXP.PlaceHolder.EndUseAllowNumAndEng'
+                          | translate
+                      }}"
+                      formControlName="endUse"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# End User Input kit-->
+        <div class="form-row multi-input-kit grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">End User</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input md:col-4 lg:col-3 col-12">
+                  <div class="form-input">
+                    <span class="p-input-icon-right" style="width: 100%">
+                      <ng-container *ngIf="formGroup.get('endUserCode').value">
+                        <i
+                          class="pi pi-times input-icon"
+                          (click)="onSelectorClean()"
+                        ></i>
+                      </ng-container>
+                      <input
+                        autocomplete="off"
+                        type="text"
+                        pInputText
+                        name="endUserCode"
+                        placeholder="{{
+                          'Input.PlaceHolder.PleaseSelect' | translate
+                        }} End User"
+                        formControlName="endUserCode"
+                        readonly
+                        [value]="formGroup.get('endUserCode').value"
+                        (click)="onOpenSelectorDialogEvent('endUser')"
+                      />
+                    </span>
+                  </div>
+                </div>
+                <div class="form-col form-input md:col-8 lg:col-9 col-12">
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="endUser"
+                      placeholder="{{
+                        'Input.PlaceHolder.FreeKeyInorSelect' | translate
+                      }} End User"
+                      formControlName="endUser"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# End User Address Input -->
+        <ng-container *ngIf="formType == 'exp'">
+          <div class="form-row grid">
+            <div class="form-col col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label">
+                    <label class="txt">End User Address</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div
+                    class="form-col form-input col-12"
+                    style="height: unset !important"
+                  >
+                    <div class="form-input">
+                      <input
+                        autocomplete="off"
+                        type="text"
+                        pInputText
+                        name="endUserAddress"
+                        placeholder="{{
+                          'Input.PlaceHolder.PleaseKeyIn' | translate
+                        }} End User Address"
+                        formControlName="endUserAddress"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <!--# Exporter/Consignee-->
+        <div class="form-row grid">
+          <div class="form-col xl:col-6 col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">{{ consigneeTitle }}</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div
+                    class="form-label"
+                    *ngIf="
+                      hkConsigneeOptions.length === 0 &&
+                      formGroup.get('ouCode').value &&
+                      formGroup.get('country').value &&
+                      formGroup.get('country').value.includes('HK')
+                    "
+                  >
+                    <label class="txt">{{
+                      formGroup.get("ouName").value
+                        ? formGroup
+                            .get("ouName")
+                            .value.substring(
+                              formGroup.get("ouName").value.indexOf("_") + 1
+                            )
+                        : ""
+                    }}</label>
+                  </div>
+                  <div
+                    class="form-label"
+                    *ngIf="hkConsigneeOptions.length === 1"
+                  >
+                    <label class="txt">{{
+                      formGroup.get("consignee").value
+                    }}</label>
+                  </div>
+                  <div
+                    class="form-select"
+                    *ngIf="hkConsigneeOptions.length > 1"
+                  >
+                    <p-dropdown
+                      [class]="
+                        formGroup.get('consignee').disabled ? 'disabled' : ''
+                      "
+                      [showClear]="true"
+                      [options]="hkConsigneeOptions"
+                      placeholder="{{
+                        'DropDown.PlaceHolder.PleaseChoose' | translate
+                      }}"
+                      formControlName="consigneeKit"
+                      (onChange)="onHKConsigneeChangeHandler($event)"
+                    ></p-dropdown>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-col xl:col-6 col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">{{ addressTitle }}</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-label">
+                    <!--# TK-21421 -->
+                    <!-- <label
+                      class="txt"
+                      *ngIf="
+                        formGroup.get('country').value &&
+                        formGroup.get('country').value.includes('HK') &&
+                        hkConsigneeOptions.length === 0
+                      "
+                      >{{ formGroup.get("shipToAddress").value }}</label
+                    > -->
+                    <label
+                      class="txt"
+                      *ngIf="
+                        formGroup.get('country').value &&
+                        formGroup.get('country').value.includes('HK') &&
+                        hkConsigneeOptions.length === 0
+                      "
+                    ></label>
+                    <label
+                      class="txt"
+                      *ngIf="
+                        hkConsigneeOptions.length > 0 &&
+                        formGroup.get('consigneeAddress').value
+                      "
+                      >{{ formGroup.get("consigneeAddress").value }}</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# items Section-->
+        <ng-container
+          *ngIf="curFormStatus.status != 'approve' || isTaskStarter"
+        >
+          <div class="sub-title-container item-section">
+            <div>
+              <ng-container *ngIf="formType == 'exp'">
+                <button
+                  pButton
+                  class="add-item"
+                  icon="pi pi-plus"
+                  type="button"
+                  label="Pick by Ref Shipmemt#"
+                  (click)="onOpenAddItemByRefDialog()"
+                ></button>
+              </ng-container>
+              <button
+                pButton
+                class="add-item"
+                icon="pi pi-plus"
+                type="button"
+                label="{{ 'Button.Label.Add' | translate }} Item"
+                (click)="onOpenAddItemDialogEvent()"
+              ></button>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container
+          *ngIf="router.url.includes('approving') && isWarehouseMember"
+        >
+          <div class="sub-title-container">
+            <p>{{ "LicenseMgmt.Common.Label.BatchEdit" | translate }}</p>
+          </div>
+
+          <app-impexp-item-batch-handler
+            [formNo]="curFormNo"
+            (outputResult)="onUpdateIMPEXPItembyBatch($event)"
+          ></app-impexp-item-batch-handler>
+        </ng-container>
+
+        <!--# item list table-->
+        <app-common-data-table-viewer
+          [data]="itemQueue.getValue()"
+          [deleteKeyBeforeReturn]="false"
+          [tableCols]="itemTableCols"
+          [tableSettings]="dataTableSettings"
+          (outputTargetData)="onEditSelectedDataCallback($event)"
+          (outputAfterDeletedData)="onAfterModifiedDataCallback($event)"
+        ></app-common-data-table-viewer>
+
+        <ng-container *ngIf="curFormStatus.status != 'approve'">
+          <!--# comment Section-->
+          <div class="sub-title-container comment-section">
+            <p>{{ "LicenseMgmt.Common.Title.Opinion" | translate }}</p>
+          </div>
+
+          <!--# Comment -->
+          <div class="form-row remark grid">
+            <div class="form-col col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label">
+                    <label class="txt">{{
+                      "LicenseMgmt.Common.Label.Opinion" | translate
+                    }}</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div class="form-col form-input col-12">
+                    <div class="form-input no-h-full">
+                      <textarea
+                        autocomplete="off"
+                        type="text"
+                        pInputTextarea
+                        name="comment"
+                        formControlName="comment"
+                      ></textarea>
+                      <div
+                        class="form-hint"
+                        [class]="
+                          formGroup.get('comment').value &&
+                          formGroup.get('comment').value.length > 250
+                            ? 'warring'
+                            : ''
+                        "
+                      >
+                        <span
+                          >{{
+                            "LicenseMgmt.Common.Hint.CurWordCount" | translate
+                          }}&nbsp;&nbsp;{{
+                            formGroup.get("comment").value == null
+                              ? 0
+                              : formGroup.get("comment").value.length
+                          }}&nbsp;/&nbsp;250</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <!--# action Section-->
+        <ng-container *ngIf="curFormStatus.status != 'approve'">
+          <div class="btn-container">
+            <button
+              pButton
+              type="button"
+              label="{{ 'Button.Label.Cancel' | translate }}"
+              class="btn-gray"
+              (click)="onFormCancelSubmitHandler()"
+            ></button>
+            <button
+              pButton
+              type="button"
+              class="submit"
+              label="{{ 'Button.Label.Submit' | translate }}"
+              (click)="onFormSubmitHandler('Apply')"
+            ></button>
+            <button
+              pButton
+              type="button"
+              label="{{ 'Button.Label.Draft' | translate }}"
+              class="draft btn-teal"
+              (click)="onFormSubmitHandler('Draft')"
+            ></button>
+            <button
+              pButton
+              type="button"
+              label="{{ 'Button.Label.RedirectApproval' | translate }}"
+              class="btn-outline-blue"
+              (click)="onOpenApplyAddAssigneeEvent()"
+            ></button>
+          </div>
+        </ng-container>
+      </form>
+    </p-tabPanel>
+    <ng-container *ngIf="curFormStatus.status == 'approve'">
+      <p-tabPanel
+        header="{{ 'LicenseMgmt.Common.Tabs.AuditHistoryLog' | translate }}"
+        [disabled]="curFormStatus.status == 'draft'"
+      >
+        <app-common-audit-history-log
+          *ngIf="reassignDialogService.reAssignHistoryRefreshController"
+          [formNo]="curFormNo"
+          [formTypeId]="curFormTypeId"
+        ></app-common-audit-history-log>
+      </p-tabPanel>
+    </ng-container>
+    <p-tabPanel
+      header="{{ 'LicenseMgmt.Common.Tabs.AttachmentLink' | translate }}"
+    >
+      <app-attachment-uploader [formTypeId]="curFormTypeId"  [formNo]="curFormNo"></app-attachment-uploader>
+    </p-tabPanel>
+  </p-tabView>
+</div>

@@ -1,0 +1,22 @@
+<p class="title">
+    {{'PriceControlForm.Label.Maintain' | translate}} {{ salesCostTypeDash }} {{'PriceControlForm.Label.Price' | translate}}
+</p>
+<p-table #history class="table-panel pcf-lines-readonly-table" [value]="inputData" [columns]="inputColumns" dataKey="id"
+    breakpoint="768px" >
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let col of inputColumns" class="pcf-lines-readonly-table-th" scope="col">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-history>
+        <tr>
+            <td *ngFor="let col of inputColumns" class="pcf-lines-readonly-table-td">
+                <p>{{history[col.field]}}</p>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

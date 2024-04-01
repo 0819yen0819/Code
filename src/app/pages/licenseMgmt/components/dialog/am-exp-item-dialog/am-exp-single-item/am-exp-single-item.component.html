@@ -1,0 +1,622 @@
+<app-common-notice-check-dialog
+  [settingParams]="noticeCheckDialogParams"
+  [contentList]="noticeContentList"
+></app-common-notice-check-dialog>
+
+<!--# common selector dialog-->
+<app-common-selector-dialog
+  [settingParams]="selectorDialogParams"
+  (outputResult)="onSelectorDialogCallback($event)"
+></app-common-selector-dialog>
+
+<form [formGroup]="formGroup" class="form-container form-table">
+  <!--# Item Selector-->
+  <div class="form-row grid">
+    <div class="form-col col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">Item</label>
+          </div>
+        </div>
+        <div class="md:col col-12">
+          <div class="form-col">
+            <div class="form-input">
+              <span class="p-input-icon-right">
+                <i class="pi pi-spin pi-spinner" *ngIf="isLoading"></i>
+                <i
+                  class="pi pi-times clean-btn"
+                  *ngIf="formGroup.get('productCode').value && !isLoading"
+                  (click)="onCleanSelectedItem()"
+                ></i>
+                <input
+                  autocomplete="off"
+                  type="text"
+                  pInputText
+                  name="productCode"
+                  formControlName="productCode"
+                  readonly
+                  placeholder="{{
+                    'Input.PlaceHolder.PleaseSelect' | translate
+                  }} Item"
+                  [value]="
+                    selectedITargetItem.getValue()
+                      ? selectedITargetItem.getValue().invItemNo
+                      : ''
+                  "
+                  (click)="onOpenSelectorDialogEvent('item')"
+                />
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--# CCATs Free Key In-->
+  <div class="form-row grid">
+    <div class="form-col col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">CCATs</label>
+          </div>
+        </div>
+        <div class="md:col col-12">
+          <div class="form-col">
+            <ng-container *ngIf="formGroup.get('productCode').value">
+              <div class="form-label">
+                <label class="txt">{{
+                  targetItemInfo.getValue()
+                    ? targetItemInfo.getValue().ccats
+                    : ""
+                }}</label>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!formGroup.get('productCode').value">
+              <div class="form-input">
+                <span class="p-input-icon-right">
+                  <i
+                    class="pi pi-times clean-btn"
+                    *ngIf="formGroup.get('ccats').value"
+                    (click)="onCleanCCATs()"
+                  ></i>
+                  <input
+                    autocomplete="off"
+                    type="text"
+                    pInputText
+                    name="ccats"
+                    formControlName="ccats"
+                    placeholder="{{
+                      'Input.PlaceHolder.PleaseKeyIn' | translate
+                    }} CCATs"
+                  />
+                </span>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="form-row notice grid"
+    *ngIf="!formGroup.get('productCode').value && !formGroup.get('ccats').value"
+  >
+    <div class="form-col col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">Notice</label>
+          </div>
+        </div>
+        <div class="grid md:col col-12">
+          <div class="form-col col-12">
+            <div class="form-label">
+              <label class="txt">{{
+                "LicenseMgmt.Common.Hint.ITEMCCATsChooseOne" | translate
+              }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row grid">
+    <!--# Brand -->
+    <div class="form-col lg:col-6 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">Brand</label>
+          </div>
+        </div>
+        <div class="grid md:col col-12">
+          <div class="form-col form-input col-12">
+            <div class="form-label">
+              <label class="txt">{{
+                targetItemInfo.getValue() ? targetItemInfo.getValue().brand : ""
+              }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# ECCN -->
+    <div class="form-col lg:col-6 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">ECCN</label>
+          </div>
+        </div>
+        <div class="grid md:col col-12">
+          <div class="form-col form-input col-12">
+            <div class="form-label">
+              <label class="txt">{{
+                targetItemInfo.getValue() ? targetItemInfo.getValue().eccn : ""
+              }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# Proviso -->
+    <div class="form-col lg:col-6 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">Proviso</label>
+          </div>
+        </div>
+        <div class="grid md:col col-12">
+          <div class="form-col form-input col-12">
+            <div class="form-label">
+              <label class="txt">{{
+                targetItemInfo.getValue()
+                  ? targetItemInfo.getValue().proviso
+                  : ""
+              }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--# Applied QTY-->
+  <div class="form-row grid">
+    <div class="form-col col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label require">
+            <label class="txt">Applied QTY</label>
+          </div>
+        </div>
+        <div class="md:col col-12">
+          <div class="form-col">
+            <div class="form-input">
+              <input
+                autocomplete="off"
+                type="number"
+                pInputText
+                name="quantity"
+                formControlName="quantity"
+                placeholder="{{
+                  'Input.PlaceHolder.PleaseKeyIn' | translate
+                }} Applied QTY"
+                onwheel="this.blur()"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--# Price-->
+  <div class="form-row grid">
+    <div class="form-col col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div
+            class="form-label"
+            [ngClass]="{
+              require:
+                settingParams &&
+                settingParams.data &&
+                settingParams.data.country &&
+                settingParams.data.country.includes('HK')
+            }"
+          >
+            <label class="txt"
+              >Price
+              {{
+                settingParams &&
+                settingParams.data &&
+                settingParams.data.country &&
+                settingParams.data.country.includes("HK")
+                  ? "(USD)"
+                  : ""
+              }}</label
+            >
+          </div>
+        </div>
+        <div class="md:col col-12">
+          <div class="form-col">
+            <div class="form-input">
+              <input
+                autocomplete="off"
+                type="number"
+                pInputText
+                name="price"
+                formControlName="price"
+                [placeholder]="
+                  settingParams &&
+                  settingParams.data &&
+                  settingParams.data.country &&
+                  settingParams.data.country.includes('HK')
+                    ? ('LicenseMgmt.IMPEXP.PlaceHolder.PleaseKeyInUSDPrice'
+                      | translate)
+                    : ('LicenseMgmt.IMPEXP.PlaceHolder.PleaseKeyInPrice'
+                      | translate)
+                "
+                onwheel="this.blur()"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--# Delivery No. Input -->
+  <div class="form-row grid">
+    <div class="form-col col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div
+            class="form-label"
+            [class]="
+              settingParams &&
+              settingParams.data &&
+              settingParams.data.country == 'SG'
+                ? 'require'
+                : ''
+            "
+          >
+            <label class="txt">Delivery No.</label>
+          </div>
+        </div>
+        <div class="grid md:col col-12">
+          <div class="form-col col-12" style="height: unset !important">
+            <div class="form-input">
+              <input
+                autocomplete="off"
+                type="text"
+                pInputText
+                name="deliveryNo"
+                placeholder="{{
+                  'Input.PlaceHolder.PleaseKeyIn' | translate
+                }} Delivery No."
+                formControlName="deliveryNo"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--# Ref Shipment# Input -->
+  <ng-container
+    *ngIf="
+      settingParams && settingParams.data && settingParams.data.country != 'SG'
+    "
+  >
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">Ref Shipment#</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12" style="height: unset !important">
+              <div class="form-input">
+                <input
+                  autocomplete="off"
+                  type="text"
+                  pInputText
+                  name="refShipment"
+                  placeholder="{{
+                    'Input.PlaceHolder.PleaseKeyIn' | translate
+                  }} Ref Shipment#"
+                  formControlName="refShipment"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!--# License# & QTY -->
+  <div
+    class="form-row grid"
+    *ngIf="settingParams && settingParams.data.isWarehouseMember"
+  >
+    <div class="form-col lg:col-6 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div
+            class="form-label"
+            [class]="formGroup.get('license').disabled ? '' : 'require'"
+          >
+            <label class="txt">License#</label>
+          </div>
+        </div>
+        <div class="grid md:col col-12">
+          <div class="form-col col-12">
+            <div class="form-input">
+              <input
+                autocomplete="off"
+                type="text"
+                pInputText
+                name="license"
+                formControlName="license"
+                placeholder="{{
+                  'Input.PlaceHolder.PleaseKeyIn' | translate
+                }} License#"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-col lg:col-6 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div
+            class="form-label"
+            [class]="formGroup.get('licenseQty').disabled ? '' : 'require'"
+          >
+            <label class="txt">License QTY</label>
+          </div>
+        </div>
+        <div class="grid md:col col-12">
+          <div class="form-col col-12">
+            <div class="form-input">
+              <input
+                autocomplete="off"
+                type="number"
+                pInputText
+                name="licenseQty"
+                formControlName="licenseQty"
+                placeholder="{{
+                  'Input.PlaceHolder.PleaseKeyIn' | translate
+                }} License QTY"
+                onwheel="this.blur()"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--# BAFA# & QTY -->
+  <ng-container
+    *ngIf="
+      settingParams &&
+      settingParams.data &&
+      (settingParams.data.country.includes('HK') ||
+        settingParams.data.country.includes('EU'))
+    "
+  >
+    <!--# BAFA#-->
+    <div class="form-row grid">
+      <div class="form-col col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div
+              class="form-label"
+              [class]="!formGroup.get('bafaLicense').value ? '' : 'require'"
+            >
+              <label class="txt">BAFA#</label>
+            </div>
+          </div>
+          <div class="md:col col-12">
+            <div class="form-col">
+              <div class="form-input">
+                <input
+                  autocomplete="off"
+                  type="text"
+                  pInputText
+                  name="bafaLicense"
+                  readonly
+                  [placeholder]="
+                    settingParams && settingParams.data.isWarehouseMember
+                      ? ''
+                      : bafaLicensePlaceholder
+                  "
+                  formControlName="bafaLicense"
+                  (click)="onOpenSelectorDialogEvent('bafaLicense')"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--# BAFA# Total and Balance Qty-->
+    <div class="form-row grid">
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">BAFA# Balance Qty</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-label">
+                <label class="txt">{{
+                  formGroup.get("bafaBalQty").value
+                }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-col lg:col-6 col-12">
+        <div class="form-row grid">
+          <div class="form-col col-fixed">
+            <div class="form-label">
+              <label class="txt">BAFA# Total Qty</label>
+            </div>
+          </div>
+          <div class="grid md:col col-12">
+            <div class="form-col col-12">
+              <div class="form-label">
+                <label class="txt">{{
+                  formGroup.get("bafaTotalQty").value
+                }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!--# start/end date -->
+  <div class="form-row grid">
+    <div class="form-col lg:col-6 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label require">
+            <label class="txt">Start Date</label>
+          </div>
+        </div>
+        <div class="grid md:col col-12">
+          <div class="form-col col-12">
+            <div class="form-input">
+              <p-calendar [selectOtherMonths]="true" [showButtonBar]="true"
+                formControlName="startDate"
+                dateFormat="yy/mm/dd"
+                appendTo="body"
+                [showIcon]="true"
+                placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                (onInput)="onDatePickerInput($event)"
+                (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                (onBlur)="onDatePickerSelectAndBlur()"
+                (onClose)="onDatePickerClose('startDate');onCheckDateHandler()"
+              ></p-calendar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-col lg:col-6 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div
+            class="form-label"
+            [class]="formGroup.get('endDate').disabled ? '' : 'require'"
+          >
+            <label class="txt">End Date</label>
+          </div>
+        </div>
+        <div class="grid md:col col-12">
+          <div class="form-col col-12">
+            <div class="form-input">
+              <p-calendar [selectOtherMonths]="true" [showButtonBar]="true"
+                formControlName="endDate"
+                dateFormat="yy/mm/dd"
+                [minDate]="minDate"
+                appendTo="body"
+                [showIcon]="true"
+                placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                (onInput)="onDatePickerInput($event)"
+                (onSelect)="onDatePickerSelectAndBlur();onCheckDateHandler()"
+                (onBlur)="onDatePickerSelectAndBlur()"
+                (onClose)="onDatePickerClose('endDate');onCheckDateHandler()"
+              ></p-calendar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--# Remark -->
+  <div class="form-row remark grid">
+    <div class="form-col col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">Remark</label>
+          </div>
+        </div>
+        <div class="grid md:col col-12">
+          <div class="form-col col-12">
+            <div class="form-input">
+              <textarea
+                autocomplete="off"
+                type="text"
+                pInputTextarea
+                name="remark"
+                formControlName="remark"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--# Form Actions -->
+  <div
+    class="btn-container"
+    [class]="isLoading && mode != 'edit' ? 'loading' : ''"
+  >
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Cancel' | translate }}"
+      class="btn-gray"
+      (click)="onCloseAddItemDialogEvent()"
+    ></button>
+    <button
+      pButton
+      type="submit"
+      [label]="submitBtnLabel"
+      [disabled]="
+        formGroup.invalid ||
+        (!formGroup.get('productCode').value &&
+          !formGroup.get('ccats').value) ||
+        (formGroup.get('license').value &&
+          !formGroup.get('licenseQty').value) ||
+        isRefChecking ||
+        (settingParams &&
+          settingParams.data &&
+          settingParams.data.country &&
+          settingParams.data.country.includes('HK') &&
+          !formGroup.get('price').value)
+      "
+      (click)="onFormSubmit()"
+      [icon]="isRefChecking ? 'pi pi-spin pi-spinner' : ''"
+      iconPos="right"
+      [ngClass]="isRefChecking ? 'is-checking' : ''"
+    ></button>
+  </div>
+</form>

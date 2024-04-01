@@ -1,0 +1,944 @@
+<div class="main-title-container">
+  <p>Form</p>
+</div>
+<!-- end: main-title-container -->
+
+<form class="form-table">
+  <div class="form-row grid">
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">Customer/Vendor</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-label">
+            <label class="txt">Customer</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+        <!-- end: form-col -->
+
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label require">
+            <label class="txt">客戶/廠商</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-label">
+            <label class="txt">1410 中強光電股份有限公司/ Coretronic Corporation</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label require">
+            <label class="txt">輸入框</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+        <div class="form-col col">
+          <div class="form-input require">
+            <!-- add class `error-active` in `form-input` when input error  -->
+            <input type="text" pInputText value="" placeholder="請輸入"/>
+            <p class="error-msg">
+              <i class="pi pi-exclamation-circle"></i>
+              <span>錯誤訊息</span>
+            </p>
+          </div>
+          <!-- end: form-input -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">輸入框</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+        <div class="form-col col">
+          <div class="form-item grid">
+            <div class="form-input require col-12">
+              <!-- add class `error-active` in `form-input` when input error  -->
+              <input type="text" pInputText value="" placeholder="請輸入"/>
+              <p class="error-msg">
+                <i class="pi pi-exclamation-circle"></i>
+                <span>錯誤訊息</span>
+              </p>
+            </div>
+            <!-- end: form-input -->
+
+            <div class="form-label col-2">
+              <label class="txt">Ext:</label>
+            </div>
+            <!-- end: form-label -->
+
+            <div class="form-input require col-10">
+              <!-- add class `error-active` in `form-input` when input error  -->
+              <input type="text" pInputText value="" placeholder="請輸入"/>
+              <p class="error-msg">
+                <i class="pi pi-exclamation-circle"></i>
+                <span>錯誤訊息</span>
+              </p>
+            </div>
+            <!-- end: form-input -->
+          </div>
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col-fixed">
+      <div class="form-label">
+        <label class="txt">輸入框 (Disabled)</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-input">
+        <!-- add class `error-active` in `form-input` when input error  -->
+        <input type="text" pInputText value="" placeholder="請輸入" [disabled]="true" />
+        <p class="error-msg">
+          <i class="pi pi-exclamation-circle"></i>
+          <span>錯誤訊息</span>
+        </p>
+      </div>
+      <!-- end: form-input -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+      <div class="form-col col-fixed">
+        <div class="form-label">
+          <label class="txt">意見</label>
+        </div>
+        <!-- end: form-label -->
+      </div>
+      <!-- end: form-col -->
+
+      <div class="form-col col">
+        <div class="form-textarea">
+          <!-- add class `error-active` in `form-textarea` when textarea error  -->
+          <textarea pInputTextarea placeholder="請輸入"></textarea>
+          <p class="error-msg">
+            <i class="pi pi-exclamation-circle"></i>
+            <span>錯誤訊息</span>
+          </p>
+        </div>
+        <!-- end: form-textarea -->
+      </div>
+      <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label">
+        <label class="txt">意見 (Disabled)</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-textarea">
+        <!-- add class `error-active` in `form-textarea` when textarea error  -->
+        <textarea pInputTextarea placeholder="請輸入" [disabled]="true"></textarea>
+        <p class="error-msg">
+          <i class="pi pi-exclamation-circle"></i>
+          <span>錯誤訊息</span>
+        </p>
+      </div>
+      <!-- end: form-textarea -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label">
+        <label class="txt">複選框</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-checkbox">
+        <p-checkbox name="checkboxGroup" label="X-Small" value="checked"></p-checkbox>
+        <p-checkbox name="checkboxGroup" label="Small" value="checked"></p-checkbox>
+        <p-checkbox name="checkboxGroup" label="Medium" value="checked"></p-checkbox>
+        <p-checkbox name="checkboxGroup" label="Medium/Large" value="checked"></p-checkbox>
+        <p-checkbox name="checkboxGroup" label="Large" value="checked"></p-checkbox>
+        <p-checkbox name="checkboxGroup" label="X-Large" value="checked"></p-checkbox>
+      </div>
+      <!-- end: form-checkbox -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label">
+        <label class="txt">日期</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-date">
+        <p-calendar [showButtonBar]="true" [showIcon]="true"></p-calendar>
+      </div>
+      <!-- end: form-date -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label">
+        <label class="txt">區間</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-date">
+        <p-calendar [showButtonBar]="true" [showIcon]="true"></p-calendar>
+      </div>
+      <!-- end: form-date -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col col-1">
+      <div class="form-label form-date-between">
+        <label class="txt">~</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-date">
+        <p-calendar [showButtonBar]="true" [showIcon]="true"></p-calendar>
+      </div>
+      <!-- end: form-date -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label">
+        <label class="txt">下拉選單</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-select">
+        <!-- add class `error-active` in `form-select` when input error  -->
+        <p-dropdown [options]="options"></p-dropdown>
+        <p class="error-msg">
+          <i class="pi pi-exclamation-circle"></i>
+          <span>錯誤訊息</span>
+        </p>
+      </div>
+      <!-- end: form-select -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label">
+        <label class="txt">下拉選單 (可篩選)</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-select">
+        <!-- add class `error-active` in `form-select` when input error  -->
+        <p-dropdown [options]="options" [filter]="true"></p-dropdown>
+        <p class="error-msg">
+          <i class="pi pi-exclamation-circle"></i>
+          <span>錯誤訊息</span>
+        </p>
+      </div>
+      <!-- end: form-select -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label">
+        <label class="txt">單選框</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-radio">
+        <p-radioButton name="radioGroup" label="X-Small" value="X-Small" [(ngModel)]="selectedRadio"></p-radioButton>
+        <p-radioButton name="radioGroup" label="Small" value="Small" [(ngModel)]="selectedRadio"></p-radioButton>
+        <p-radioButton name="radioGroup" label="Medium" value="Medium" [(ngModel)]="selectedRadio"></p-radioButton>
+        <p-radioButton name="radioGroup" label="Medium/Large" value="Medium/Large" [(ngModel)]="selectedRadio"></p-radioButton>
+        <p-radioButton name="radioGroup" label="Large" value="Large" [(ngModel)]="selectedRadio"></p-radioButton>
+        <p-radioButton name="radioGroup" label="X-Large" value="X-Large" [(ngModel)]="selectedRadio"></p-radioButton>
+      </div>
+      <!-- end: form-radio -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label">
+        <label class="txt">標籤組</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <div class="form-chip">
+        <p-chips name="chip" [(ngModel)]="chipVals"></p-chips>
+      </div>
+      <!-- end: form-radio -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label">
+        <label class="txt">上傳檔案</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col col">
+      <p-fileUpload class="form-file-upload" name="fileUpload[]" multiple="multiple"
+        maxFileSize="1000000" [chooseIcon]="''" [chooseLabel]="'Choose File'" [showCancelButton]="false"
+        [uploadIcon]="''">
+      </p-fileUpload>
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label">
+        <label class="txt">附加連結</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+    <div class="form-col col">
+      <div class="form-item grid">
+        <div class="form-input require p-inputgroup">
+          <!-- add class `error-active` in `form-input` when input error  -->
+          <input type="text" pInputText value="" placeholder="請輸入" name="link" [(ngModel)]="linkVal"/>
+          <button type="button" pButton icon="pi pi-plus" (click)="addLink(linkItem)"></button>
+          <p class="error-msg">
+            <i class="pi pi-exclamation-circle"></i>
+            <span>錯誤訊息</span>
+          </p>
+        </div>
+        <!-- end: form-input -->
+
+        <div class="form-insert-input-list">
+          <div class="form-label" *ngFor="let item of linkItem; let i = index;">
+            <label class="txt">{{ item }}</label>
+            <button type="button" pButton icon="pi pi-minus" class="btn-dark-red" (click)="delLink(linkItem, i)"></button>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-insert-input-list -->
+      </div>
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label">
+        <label class="txt">選擇列表</label>
+      </div>
+      <!-- end: form-label -->
+    </div>
+    <!-- end: form-col -->
+    <div class="form-col col">
+      <div class="form-item grid">
+        <p-pickList [source]="sourceList" [target]="targetList"
+          sourceHeader="Available" targetHeader="Selected"
+          filterBy="name" sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name"
+          [showSourceControls]="false" [showTargetControls]="false">
+          <ng-template let-member pTemplate="item">
+            <div>
+              <p>{{member.name}}</p>
+            </div>
+          </ng-template>
+        </p-pickList>
+      </div>
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+</form>
+
+<div class="btn-container">
+  <button pButton type="button" label="存成草稿" class="btn-secondary"></button>
+  <button pButton type="button" label="提交申請"></button>
+</div>
+
+<form class="form-table form-search">
+  <div class="form-row grid">
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">表單名稱</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-select">
+            <!-- add class `error-active` in `form-select` when input error  -->
+            <p-dropdown [options]="options"></p-dropdown>
+            <p class="error-msg">
+              <i class="pi pi-exclamation-circle"></i>
+              <span>錯誤訊息</span>
+            </p>
+          </div>
+          <!-- end: form-select -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">表單編號</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-input">
+            <!-- add class `error-active` in `form-input` when input error  -->
+            <input type="text" pInputText value="" placeholder="請輸入"/>
+            <p class="error-msg">
+              <i class="pi pi-exclamation-circle"></i>
+              <span>錯誤訊息</span>
+            </p>
+          </div>
+          <!-- end: form-input -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col md:col-4 sm:col-12 col-12"></div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">起始日期</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-date">
+            <p-calendar [showButtonBar]="true" [showIcon]="true"></p-calendar>
+          </div>
+          <!-- end: form-date -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">結束日期</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-date">
+            <p-calendar [showButtonBar]="true" [showIcon]="true"></p-calendar>
+          </div>
+          <!-- end: form-date -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col md:col-4 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">狀態</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-select">
+            <!-- add class `error-active` in `form-select` when input error  -->
+            <p-dropdown [options]="options"></p-dropdown>
+            <p class="error-msg">
+              <i class="pi pi-exclamation-circle"></i>
+              <span>錯誤訊息</span>
+            </p>
+          </div>
+          <!-- end: form-select -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="btn-container btn-auto left">
+    <button pButton type="button" label="今天" class="btn-gray btn-line"></button>
+    <button pButton type="button" label="前一週" class="btn-gray btn-line"></button>
+    <button pButton type="button" label="本月" class="btn-gray btn-line"></button>
+    <button pButton type="button" label="上一個月" class="btn-gray btn-line"></button>
+  </div>
+
+  <div class="btn-container">
+    <button pButton type="button" label="重設" class="btn-secondary"></button>
+    <button pButton type="button" label="查詢"></button>
+  </div>
+</form>
+
+<div class="form-table form-list">
+  <div class="form-row grid">
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">申請人</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-label">
+            <label class="txt">115192(蔡佩穎/Vicky Tsai)</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">申請部門</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-label">
+            <label class="txt">台商Ｂ三部PP/IPC</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">申請日期</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-label">
+            <label class="txt">2021/11/28</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">I/E TYPE</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-label">
+            <label class="txt">Export</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+</div>
+
+<form class="form-table form-search-for">
+  <div class="form-row grid">
+    <div class="form-col col md:col-6 sm:col-12 col-12">
+      <div class="form-input require form-search-input p-input-icon-right">
+        <!-- add class `error-active` in `form-input` when input error  -->
+        <input type="text" pInputText value="" placeholder="Search"/>
+        <i class="pi pi-search"></i>
+        <p class="error-msg">
+          <i class="pi pi-exclamation-circle"></i>
+          <span>錯誤訊息</span>
+        </p>
+      </div>
+      <!-- end: form-input -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+</form>
+
+<div class="main-title-container">
+  <p>Tab</p>
+</div>
+<!-- end: main-title-container -->
+
+<p-tabView>
+  <p-tabPanel header="頁籤一" leftIcon="pi pi-home">
+    內容一
+  </p-tabPanel>
+
+  <p-tabPanel header="頁籤二" leftIcon="pi pi-calendar">
+    內容二
+  </p-tabPanel>
+</p-tabView>
+
+<div class="main-title-container">
+  <p>Table</p>
+</div>
+<!-- end: main-title-container -->
+
+<!--# TK-35854 -->
+<p-table #dt class="table-panel" [value]="data" [columns]="selectedCols"
+  [scrollable]="true" scrollHeight="500px"
+  [paginator]="true" [rows]="10"
+  paginatorPosition="bottom" [rowsPerPageOptions]="[10,20]"
+  dataKey="id">
+  <ng-template pTemplate="caption">
+    <div class="table-action-block">
+      <div class="table-search ui-inputgroup">
+        <input type="text" pInputText size="30" placeholder="Search" />
+        <span class="ui-inputgroup-addon">
+          <i class="pi pi-search"></i>
+        </span>
+      </div>
+
+      <div class="btn-container">
+        <button pButton type="button" icon="pi pi-trash" label="刪除勾選" class="btn-gray"></button>
+        <button pButton type="button" icon="pi pi-check-circle" label="批次核准" class="btn-dark-red"></button>
+        <button pButton type="button" icon="pi pi-file-o"></button>
+      </div>
+
+      <div class="btn-container right">
+        <button pButton type="button" icon="pi pi-sliders-h" label="篩選" class="btn-line" (click)="showFilter()"></button>
+      </div>
+    </div>
+    <!-- end: table-action-block -->
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngFor="let col of selectedCols" [pSortableColumn]="col.field"
+        [ngClass]="{
+          'icon-col': (col.field == 'checkbox')
+        }"
+        scope="col"
+      >
+        <ng-container *ngIf="col.field == 'checkbox'">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </ng-container>
+        <ng-container  *ngIf="col.field != 'checkbox'">
+          {{col.header}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </ng-container>
+      </th>
+      <th class="icon-col" scope="col">編輯</th>
+      <th class="icon-col" scope="col">檢視</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-data>
+    <tr>
+      <td *ngFor="let col of selectedCols"
+        [ngClass]="{
+          'icon-col': (col.field == 'checkbox')
+        }"
+      >
+        <ng-container *ngIf="col.field == 'checkbox'">
+          <p-tableCheckbox [value]="data"></p-tableCheckbox>
+        </ng-container>
+        <ng-container  *ngIf="col.field != 'checkbox'">
+          <p>{{data[col.field]}}</p>
+        </ng-container>
+      </td>
+      <td class="icon-col">
+        <div class="btn-container">
+          <button pButton type="button" class="icon-btn btn-orange" [routerLink]="''">
+            <img src="./assets/imgs/icon-btn/edit.svg" alt="Edit">
+          </button>
+        </div>
+      </td>
+      <td class="icon-col">
+        <div class="btn-container">
+          <button pButton type="button" class="icon-btn btn-teal" [routerLink]="''">
+            <img src="./assets/imgs/icon-btn/detail.svg" alt="Detail">
+          </button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog header="欄位篩選" [(visible)]="displayFilterDetail"
+  [draggable]="false" [blockScroll]="true"  [modal]="true">
+  <form>
+    <div class="form-row grid">
+      <div class="form-col md:col-4 sm:col-12 col-12" *ngFor="let col of cols">
+        <div class="form-checkbox">
+          <p-checkbox name="checkboxGroup" [label]="col.header" [value]="col"
+            [(ngModel)]="selectedCols" [disabled]="col?.isDisabled"></p-checkbox>
+        </div>
+      </div>
+      <!-- end: form-col -->
+    </div>
+    <!-- end: form-row -->
+
+    <div class="btn-container">
+      <button pButton type="button" label="{{ 'Button.Label.Reset' | translate }}" class="btn-gray btn-line" (click)="changeFilterDetail()"></button>
+    </div>
+  </form>
+</p-dialog>
+
+<div class="main-title-container">
+  <p>Toggle Panel</p>
+</div>
+<!-- end: main-title-container -->
+
+<div class="panel-container grid">
+  <div class="md:col-3 sm:col-12 col-12">
+    <p-panel header="黑名單管理" [toggleable]="true" toggler="header" collapseIcon="pi pi-angle-up" expandIcon="pi pi-angle-down"
+      [collapsed]="true">
+      <ul>
+        <li><a href="">客戶黑名單管理</a></li>
+        <li><a href="">暫時性白名單管理</a></li>
+        <li><a href="">客戶地址白名單管理</a></li>
+        <li><a href="">EAR 白名單管理</a></li>
+        <li><a href="">Sample Out DPL</a></li>
+      </ul>
+    </p-panel>
+
+    <p-panel header="白名單管理" [toggleable]="true" toggler="header" collapseIcon="pi pi-angle-up" expandIcon="pi pi-angle-down">
+      <ul>
+        <li><a href="">客戶黑名單管理</a></li>
+        <li><a href="">暫時性白名單管理</a></li>
+        <li><a href="">Sample Out DPL</a></li>
+      </ul>
+    </p-panel>
+  </div>
+
+  <div class="md:col-3 sm:col-12 col-12">
+    <p-panel header="進出口管制管理" [toggleable]="true" toggler="header" collapseIcon="pi pi-angle-up" expandIcon="pi pi-angle-down">
+      <ul>
+        <li><a href="">End Use Certificate管理</a></li>
+        <li><a href="">進出口許可證管理</a></li>
+        <li><a href="">貿易合規確認函管理(SOA)</a></li>
+        <li><a href="">SC047管理</a></li>
+        <li><a href="">License Exception Hold管理</a></li>
+      </ul>
+    </p-panel>
+
+    <p-panel header="ERA表單" [toggleable]="true" toggler="header" collapseIcon="pi pi-angle-up" expandIcon="pi pi-angle-down">
+      <ul>
+        <li><a href="">End Use Certificate管理</a></li>
+        <li><a href="">進出口許可證管理</a></li>
+        <li><a href="">貿易合規確認函管理(SOA)</a></li>
+        <li><a href="">SC047管理</a></li>
+        <li><a href="">License Exception Hold管理</a></li>
+        <li><a href="">End Use Certificate管理</a></li>
+        <li><a href="">進出口許可證管理</a></li>
+      </ul>
+    </p-panel>
+  </div>
+
+  <div class="md:col-3 sm:col-12 col-12">
+    <p-panel header="白名單管理" [toggleable]="true" toggler="header" collapseIcon="pi pi-angle-up" expandIcon="pi pi-angle-down">
+      <ul>
+        <li><a href="">客戶黑名單管理</a></li>
+        <li><a href="">暫時性白名單管理</a></li>
+        <li><a href="">Sample Out DPL</a></li>
+      </ul>
+    </p-panel>
+
+    <p-panel header="XXX管制管理" [toggleable]="true" toggler="header" collapseIcon="pi pi-angle-up" expandIcon="pi pi-angle-down">
+      <ul>
+        <li><a href="">End Use Certificate管理</a></li>
+        <li><a href="">進出口許可證管理</a></li>
+        <li><a href="">貿易合規確認函管理(SOA)</a></li>
+        <li><a href="">SC047管理</a></li>
+        <li><a href="">License Exception Hold管理</a></li>
+      </ul>
+    </p-panel>
+  </div>
+
+  <div class="md:col-3 sm:col-12 col-12">
+    <p-panel header="其他表單" [toggleable]="true" toggler="header" collapseIcon="pi pi-angle-up" expandIcon="pi pi-angle-down">
+      <ul>
+        <li><a href="">End Use Certificate管理</a></li>
+        <li><a href="">進出口許可證管理</a></li>
+        <li><a href="">貿易合規確認函管理(SOA)</a></li>
+        <li><a href="">SC047管理</a></li>
+        <li><a href="">License Exception Hold管理</a></li>
+        <li><a href="">End Use Certificate管理</a></li>
+        <li><a href="">進出口許可證管理</a></li>
+        <li><a href="">貿易合規確認函管理(SOA)</a></li>
+        <li><a href="">SC047管理</a></li>
+        <li><a href="">License Exception Hold管理</a></li>
+      </ul>
+    </p-panel>
+
+    <p-panel header="許口管理" [toggleable]="true" toggler="header" collapseIcon="pi pi-angle-up" expandIcon="pi pi-angle-down">
+      <ul>
+        <li><a href="">客戶黑名單管理</a></li>
+        <li><a href="">暫時性白名單管理</a></li>
+        <li><a href="">Sample Out DPL</a></li>
+      </ul>
+    </p-panel>
+  </div>
+</div>
+<!-- end: panel-container -->
+<div class="main-title-container">
+  <p>Steps</p>
+</div>
+<!-- end: main-title-container -->
+
+<p-steps [model]="stepItems" [(activeIndex)]="activeIndex"></p-steps>
+<p-steps [model]="stepItems" [activeIndex]="1"></p-steps>
+<p-steps [model]="stepItems" [activeIndex]="2"></p-steps>
+
+<div class="main-title-container">
+  <p>Confirm Dialog</p>
+</div>
+<!-- end: main-title-container -->
+
+<div class="btn-container">
+  <button pButton type="button" label="Click" (click)="confirm()"></button>
+</div>
+
+<p-confirmDialog></p-confirmDialog>

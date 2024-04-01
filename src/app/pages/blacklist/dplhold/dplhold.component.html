@@ -1,0 +1,875 @@
+<div id="dplhold-search-full-content">
+<app-accordion-stepchart [formNo]="queryData.formNo" [formTypeId]="formTypeId"></app-accordion-stepchart>
+<div class="main-title-container" style="margin-top: 0;">
+  <p>{{ 'DPL_Hold.Label.FormNo' | translate }} / {{queryData.formNo}} ({{statusDesc(queryData.status)}})</p>
+  <div class="btn-container">
+
+    <!-- 重新分派按鈕 -->
+    <button
+      *ngIf="reassignDialogService.reAssignBtnSetting.visiable"
+      label="{{ reassignDialogService.reAssignBtnSetting.name | translate }}"
+      (click)="reassignDialogService.openAssignDialog()"
+      [ngStyle]="{'background-color': reassignDialogService.reAssignBtnSetting.color}"
+      pButton
+      type="button"
+      >
+    </button>
+
+    <button pButton type="button" [label]="integrateService.backBtnLabel" class="btn-gray"
+    (click)="integrateService.backBtnOnClick()" *ngIf="!storeBatchEditEntryService.openByBatchEditFromStore"></button>
+
+    <button pButton type="button" [label]="extendBtnLabel" class="btn-gray"
+    (click)="extendFormOnClick()"></button>
+
+    <button pButton type="button" label="{{ 'Button.Label.ExportPdf' | translate }}" class="btn-gray"
+    (click)="exportPdf()"></button>
+  </div>
+</div>
+<!-- end: main-title-container -->
+
+<div class="form-table form-list">
+  <div class="form-row grid">
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'DPL_Hold.Label.Applicant' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-label">
+            <label class="txt">{{queryData.owner}}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'DPL_Hold.Label.Department' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-label">
+            <label class="txt">{{queryData.ownerDept}}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+
+  <div class="form-row grid">
+    <div class="form-col md:col-6 sm:col-12 col-12">
+      <div class="form-row grid">
+        <div class="form-col col-fixed">
+          <div class="form-label">
+            <label class="txt">{{ 'DPL_Hold.Label.ApplicantDate' | translate }}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+
+        <div class="form-col col">
+          <div class="form-label">
+            <label class="txt">{{queryData.submitDate | date: "yyyy/MM/dd HH:mm:ss"}}</label>
+          </div>
+          <!-- end: form-label -->
+        </div>
+        <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+    </div>
+    <!-- end: form-col -->
+  </div>
+  <!-- end: form-row -->
+</div>
+
+<ng-container *ngIf="!extendForm; then packTemplate; else extendTemplate"> </ng-container>
+
+<!-- 轉派Dialog -->
+<app-reassign-dialog *ngIf="this.reassignDialogService.formTypeId" (reAssignFinish)="getHisotryLog()"></app-reassign-dialog>
+
+<!-- 收起區域 -->
+<ng-template #packTemplate>
+  <p-tabView>
+    <p-tabPanel header="{{ 'DPL_Hold.Label.ApplicationInformation' | translate }}">
+      <ng-container *ngTemplateOutlet="mainContentTemplate"></ng-container>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{ 'DPL_Hold.Label.ApprovalHistory' | translate }}">
+      <div class="main-title-container">
+        <p style="font-size: 18px;">{{ 'DPL_Hold.Label.ApprovalHistory' | translate }}</p>
+      </div>
+      <!-- end: main-title-container -->
+
+      <ng-container *ngTemplateOutlet="historyTemplate"></ng-container>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{ 'DPL_Hold.Label.AttachFileAndURL' | translate }}">
+        <app-attachment-uploader [formTypeId]="formTypeId"  [formNo]="queryData.formNo"></app-attachment-uploader>
+    </p-tabPanel>
+  </p-tabView>
+</ng-template>
+
+<!-- 表單展開 -->
+<ng-template #extendTemplate>
+
+  <div class="extend-form-container">  
+    <ng-container *ngTemplateOutlet="mainContentTemplate"></ng-container>
+  </div>
+
+  <app-attachment-uploader [formTypeId]="formTypeId"  [formNo]="queryData.formNo"></app-attachment-uploader>
+
+  <div class="main-title-container">
+    <p style="font-size: 18px;">{{ 'DPL_Hold.Label.ApprovalHistory' | translate }}</p>
+  </div>
+  <!-- end: main-title-container -->
+  <ng-container *ngTemplateOutlet="historyTemplate"></ng-container>
+
+</ng-template>
+
+</div>
+
+<ng-template #mainContentTemplate>
+  <div class="main-title-container">
+    <p style="font-size: 18px;">DPL Hold</p>
+  </div>
+  <!-- end: main-title-container -->
+
+  <form class="form-table">
+      <div class="form-row grid">
+          <div class="form-col md:col-6 sm:col-12 col-12">
+              <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                      <div class="form-label">
+                          <label class="txt">Type</label>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+                  <div class="form-col col">
+                      <div class="form-label">{{queryData.trxType}}</div>
+                  </div>
+                  <!-- end: form-col -->
+              </div>
+              <!-- end: form-row -->
+
+              <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                      <div class="form-label">
+                          <label class="txt">{{ 'DPL_Hold.Label.ReferenceNumber' | translate }}</label>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+                  <div class="form-col col">
+                      <div class="form-label">{{queryData.referenceNo}}</div>
+                  </div>
+                  <!-- end: form-col -->
+              </div>
+              <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.Date' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-label">{{queryData.trxDate | date: "yyyy/MM/dd HH:mm:ss"}}</div>
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+          <div class="form-col md:col-6 sm:col-12 col-12">
+              <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                      <div class="form-label">
+                          <label class="txt">Group</label>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+                  <div class="form-col col">
+                      <div class="form-label">{{queryData.corpGroup}}</div>
+                  </div>
+                  <!-- end: form-col -->
+              </div>
+              <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col md:col-6 sm:col-12 col-12">
+              <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                      <div class="form-label">
+                          <label class="txt">OU</label>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+                  <div class="form-col col">
+                      <div class="form-label">{{'(' + queryData.ouCode + ')' + queryData.ouName}}</div>
+                  </div>
+                  <!-- end: form-col -->
+              </div>
+              <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+          <div class="form-col md:col-6 sm:col-12 col-12">
+              <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                      <div class="form-label">
+                          <label class="txt">{{ 'DPL_Hold.Label.Sales' | translate }}</label>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+                  <div class="form-col col">
+                      <div class="form-item grid">
+                          <div class="form-label">{{queryData.salesName}}</div>
+                      </div>
+                  </div>
+                  <!-- end: form-col -->
+              </div>
+              <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.SalesDept' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-label">{{queryData.salesDeptName}}</div>
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+          <div class="form-col md:col-6 sm:col-12 col-12">
+              <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                      <div class="form-label">
+                          <label class="txt">{{ 'DPL_Hold.Label.CreatedByLastUpdateBy' | translate }}</label>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+                  <div class="form-col col">
+                      <div class="form-item grid">
+                          <div class="form-label">{{queryData.owner}}</div>
+                      </div>
+                  </div>
+                  <!-- end: form-col -->
+              </div>
+              <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.Facility' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-label">{{queryData.facility}}</div>
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.CustomerCode' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-label">{{queryData.custNumber}}</div>
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col md:col-6 sm:col-12 col-12">
+              <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                      <div class="form-label">
+                          <label class="txt">{{ 'DPL_Hold.Label.CustomerChineseName' | translate }}</label>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+                  <div class="form-col col">
+                      <div class="form-label">{{queryData.custNameC}}</div>
+                  </div>
+                  <!-- end: form-col -->
+              </div>
+              <!-- end: form-row -->
+
+              <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                      <div class="form-label">
+                          <label class="txt">{{ 'DPL_Hold.Label.CustomerEnglishName' | translate }}</label>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+                  <div class="form-col col">
+                      <div class="form-label">{{queryData.custNameE}}</div>
+                  </div>
+                  <!-- end: form-col -->
+              </div>
+              <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+          <div class="form-col md:col-6 sm:col-12 col-12">
+              <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                      <div class="form-label">
+                          <label class="txt">Source</label>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+                  <div class="form-col col">
+                      <div class="form-label">{{queryData.source}}</div>
+                  </div>
+                  <!-- end: form-col -->
+              </div>
+              <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col md:col-6 sm:col-12 col-12">
+              <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                      <div class="form-label">
+                          <label class="txt">Remark</label>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+                  <div class="form-col col">
+                      <div class="form-label">{{queryData.remark}}</div>
+                  </div>
+                  <!-- end: form-col -->
+              </div>
+              <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+      </div>
+  </form>
+
+  <div class="main-title-container" *ngIf="displayBillTo">
+      <p style="font-size: 18px;">Bill To</p>
+  </div>
+  <!-- end: main-title-container -->
+
+  <form class="form-table" *ngIf="displayBillTo">
+      <div class="form-row grid">
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">Address (ENG)</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-label">{{queryData.addressline1}}</div>
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.CustNameE' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-label">{{queryData.custNameE1}}</div>
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.City' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+              <div class="form-label">{{queryData.city1}}</div>
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.Country' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+              <div class="form-label">{{queryData.country1}}</div>
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.PostalCode' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+              <div class="form-label">{{queryData.postalcode1}}</div>
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+
+          <div class="form-col md:col-6 sm:col-12 col-12">
+              <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                      <div class="form-label">
+                          <label class="txt">{{ 'DPL_Hold.Label.ResultURL' | translate }}</label>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+
+                  <div class="form-col col">
+                      <div class="form-label">
+                          <a class="txt" href="{{queryData.resultsUrl1}}" target="_blank"
+                              rel="noopener">{{queryData.resultsUrl1}}</a>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+              </div>
+              <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.ResultStatus' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-label">{{queryData.resultsStatus1}}</div>
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt"></label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-checkbox">
+                  <p-checkbox name="whiteListFlag" [(ngModel)]="whiteListFlag" binary="true" disabled
+                      [label]="queryData.addToWhiteListMsg"></p-checkbox>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+  </form>
+
+  <div class="main-title-container" *ngIf="displayShipTo">
+      <p style="font-size: 18px;">{{ 'DPL_Hold.Label.ShipTo' | translate }}</p>
+  </div>
+  <!-- end: main-title-container -->
+
+  <form class="form-table" *ngIf="displayShipTo">
+      <div class="form-row grid">
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">Address (ENG)</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-label">{{queryData.addressline2}}</div>
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.CustNameE' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-label">{{queryData.custNameE2}}</div>
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.City' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+              <div class="form-label">{{queryData.city2}}</div>
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.Country' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+              <div class="form-label">{{queryData.country2}}</div>
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.PostalCode' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+              <div class="form-label">{{queryData.postalcode2}}</div>
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+          <div class="form-col md:col-6 sm:col-12 col-12">
+              <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                      <div class="form-label">
+                          <label class="txt">{{ 'DPL_Hold.Label.ResultURL' | translate }}</label>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+
+                  <div class="form-col col">
+                      <div class="form-label">
+                          <a class="txt" href="{{queryData.resultsUrl2}}" target="_blank"
+                              rel="noopener">{{queryData.resultsUrl2}}</a>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+              </div>
+              <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.ResultStatus' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-label">{{queryData.resultsStatus2}}</div>
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt"></label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-checkbox">
+                  <p-checkbox name="whiteListFlag" [(ngModel)]="whiteListFlag2" binary="true" disabled
+                      [label]="queryData.addToWhiteList2Msg"> </p-checkbox>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+  </form>
+
+  <div class="main-title-container" *ngIf="displayDeliverTo">
+      <p style="font-size: 18px;">{{ 'DPL_Hold.Label.DeliverTo' | translate }}</p>
+  </div>
+  <!-- end: main-title-container -->
+
+  <form class="form-table" *ngIf="displayDeliverTo">
+      <div class="form-row grid">
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">Address (ENG)</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-label">{{queryData.addressline3}}</div>
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.CustNameE' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-label">{{queryData.custNameE3}}</div>
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.City' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+              <div class="form-label">{{queryData.city3}}</div>
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.Country' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+              <div class="form-label">{{queryData.country3}}</div>
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.PostalCode' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+          <div class="form-col col">
+              <div class="form-label">{{queryData.postalcode3}}</div>
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+          <div class="form-col md:col-6 sm:col-12 col-12">
+              <div class="form-row grid">
+                  <div class="form-col col-fixed">
+                      <div class="form-label">
+                          <label class="txt">{{ 'DPL_Hold.Label.ResultURL' | translate }}</label>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+
+                  <div class="form-col col">
+                      <div class="form-label">
+                          <a class="txt" href="{{queryData.resultsUrl3}}" target="_blank"
+                              rel="noopener">{{queryData.resultsUrl3}}</a>
+                      </div>
+                      <!-- end: form-label -->
+                  </div>
+                  <!-- end: form-col -->
+              </div>
+              <!-- end: form-row -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt">{{ 'DPL_Hold.Label.ResultStatus' | translate }}</label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-label">{{queryData.resultsStatus3}}</div>
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+
+      <div class="form-row grid">
+          <div class="form-col col-fixed">
+              <div class="form-label">
+                  <label class="txt"></label>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+
+          <div class="form-col col">
+              <div class="form-checkbox">
+                  <p-checkbox name="whiteListFlag" [(ngModel)]="whiteListFlag3" binary="true" disabled
+                      [label]="queryData.addToWhiteList3Msg"></p-checkbox>
+              </div>
+              <!-- end: form-label -->
+          </div>
+          <!-- end: form-col -->
+      </div>
+      <!-- end: form-row -->
+  </form>
+</ng-template>
+
+<ng-template #historyTemplate>
+  <form class="form-table">
+    <p-table #dt class="table-panel upload" [value]="historyData" [columns]="historyCols" [scrollable]="true"
+        dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let col of historyCols" [pSortableColumn]="col.field"
+                    class="style: background-color: #FFFFFF" scope="col">
+                    <ng-container>
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </ng-container>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data>
+            <tr>
+                <td *ngFor="let col of historyCols">
+                    <ng-container *ngIf="col.field === 'signerCode'">
+                        <div class="user-info">
+                            <p>{{data[col.field] + ' ' + data['signerNameEn'] + ' ' + data['signerNameCn']}}</p>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="col.field === 'completeTime'">
+                        <div class="user-info">
+                            <p>{{data[col.field] | date : 'yyyy/MM/dd HH:mm:ss'}}</p>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="col.field !== 'signerCode' && col.field !== 'completeTime'">
+                        <p>{{data[col.field]}}</p>
+                    </ng-container>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+  </form>
+
+  <div class="wait-approving-wrap">
+      <ng-container *ngIf="waitApproveList.length > 0">
+          <span>
+              {{ "LicenseMgmt.Common.Hint.AuditApprovingPrefix" | translate }}&nbsp;{{
+              this.waitApproveList.toString()
+              }}
+              <ng-container *ngIf="waitAssigneeList.length > 0">,{{ this.waitAssigneeList.toString()
+                  }}</ng-container>
+              &nbsp;{{ "LicenseMgmt.Common.Hint.AuditApprovingSuffix" | translate }}
+          </span>
+      </ng-container>
+
+      <ng-container *ngIf="waitApproveList.length === 0 && waitAssigneeList.length > 0">
+          <span>
+              {{ "LicenseMgmt.Common.Hint.AuditApprovingPrefix" | translate }}&nbsp;{{
+              this.waitApproveList.toString()
+              }}
+              {{ this.waitAssigneeList.toString() }}
+              &nbsp;{{ "LicenseMgmt.Common.Hint.AuditApprovingSuffix" | translate }}
+          </span>
+      </ng-container>
+      <span class="reminder-send-btn" *ngIf="waitApproveList.length > 0 || waitAssigneeList.length > 0"
+          (click)="onReminderSend()"><img src="./assets/imgs/mail.jpg" alt="mail" />
+      </span>
+  </div>
+</ng-template>
+ 

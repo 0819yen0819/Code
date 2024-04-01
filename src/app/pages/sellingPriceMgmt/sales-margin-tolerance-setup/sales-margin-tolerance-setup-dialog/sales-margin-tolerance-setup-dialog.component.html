@@ -1,0 +1,418 @@
+<ng-container *ngIf="!showLoader">
+
+    <form #ngForm="ngForm" class="form-table">
+        <div class="form-row grid">
+            <!-- Group -->
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">Group</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-select" *ngIf="isAddMode">
+                            <p-dropdown appendTo="body" [options]="groupOptions" [filter]="true"
+                                placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}" #ouGroup="ngModel"
+                                name="ouGroup" [(ngModel)]="formValue.ouGroup" required (ngModelChange)="formValue.ou = null;formValue.endCustomer = null;">
+                            </p-dropdown>
+
+                            <p class="error-active" *ngIf="isSubmitted && ouGroup.errors">
+                                <i class="pi pi-exclamation-circle"></i>
+                                <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                            </p>
+                        </div>
+                        <div class="form-label" *ngIf="isEditMode">
+                            <label class="txt">{{formValue.ouGroup}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- status -->
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">{{
+                                "SalesMarginToleranceSetup.Label.EnabledFlag" | translate
+                                }}</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-select">
+                            <p-dropdown [options]="statusOptions" appendTo="body" placeholder="{{
+                                    'DropDown.PlaceHolder.PleaseChoose' | translate }}" 
+                                [ngModelOptions]="{ standalone: true }" #status="ngModel" name="status"
+                                [(ngModel)]="formValue.status" required>
+                            </p-dropdown>
+
+                            <p class="error-active" *ngIf="isSubmitted && status.errors">
+                                <i class="pi pi-exclamation-circle"></i>
+                                <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row grid">
+            <!-- OU Code -->
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">OU Code</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-input" *ngIf="isAddMode">
+                            <p-autoComplete [suggestions]="ouOptions" (completeMethod)="filterOu($event)"
+                                [minLength]="1" field="displayOu" [style]="{ width: '100%' }"
+                                (onBlur)="onBlurOu($event)" (onSelect)="onOuSelect($event)"
+                                [ngModelOptions]="{standalone: true}"
+                                placeholder="{{'Input.PlaceHolder.PleaseKeyIn' | translate}}" #ou="ngModel" name="ou"
+                                [(ngModel)]="formValue.ou" required (ngModelChange)="formValue.endCustomer = null;">
+                            </p-autoComplete>
+                            <p class="error-active" *ngIf="isSubmitted && ou.errors">
+                                <i class="pi pi-exclamation-circle"></i>
+                                <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                            </p>
+                        </div>
+                        <div class="form-label" *ngIf="isEditMode">
+                            <label class="txt">{{formValue.ou?.ouCode}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OU Name -->
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">OU Name</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col lg:col-6 md:col-6 col-12">
+                        <label class="txt" class="ou-name">{{ formValue.ou?.ouName }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row grid">
+            <div class="form-col lg:col-12 md:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label" [ngClass]="{'require': isAddMode || isEditMode}">
+                            <label class="txt">Customer #</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-input" *ngIf="isAddMode">
+                            <p-autoComplete [ngModelOptions]="{standalone: true}"
+                                [suggestions]="customerOptions" (completeMethod)="filterCustomer($event)"
+                                (onBlur)="formValue.customer && (formValue.customer.value ?? (formValue.customer = null))"
+                                [minLength]=3 field="displayCustomer" [style]="{'width': '100%'}"
+                                placeholder="{{'Input.PlaceHolder.PleaseKeyIn' | translate}}" #customer="ngModel"
+                                name="customer" [(ngModel)]="formValue.customer" required>
+                            </p-autoComplete>
+                            <p class="error-active" *ngIf="isSubmitted && customer.errors">
+                                <i class="pi pi-exclamation-circle"></i>
+                                <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                            </p>
+                        </div>
+                        <div class="form-label" *ngIf="isEditMode">
+                            <label class="txt">{{formValue.customer.displayCustomer}}</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- VC Value -->
+        <div class="form-row grid">
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">Brand</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-input" *ngIf="isAddMode">
+                            <p-autoComplete [suggestions]="brandOptions" (completeMethod)="filterBrand($event)"
+                                [minLength]="1" field="label" [style]="{ width: '100%' }"
+                                (onBlur)="formValue.brand && (formValue.brand.value ?? (formValue.brand = null))"
+                                [ngModelOptions]="{ standalone: true }" (onSelect)="onBrandSelect($event.value)"
+                                (ngModelChange)="formValue.ctg1 = null;formValue.productCode = null;formValue.endCustomer = null;"
+                                placeholder="{{ 'Input.PlaceHolder.PleaseKeyIn' | translate }}" [showClear]="true"
+                                (onClear)="formValue.brand = null;formValue.ctg1 = null" #brand="ngModel"
+                                name="brand" [(ngModel)]="formValue.brand" required>
+                            </p-autoComplete>
+                            <p class="error-active" *ngIf="isSubmitted && brand.errors">
+                                <i class="pi pi-exclamation-circle"></i>
+                                <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                            </p>
+                        </div>
+                        <div class="form-label" *ngIf="isEditMode">
+                            <label class="txt">{{formValue.brand?.value}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">End Customer</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-select" *ngIf="isAddMode">
+                            <p-dropdown [options]="endCustomerOptions" appendTo="body" placeholder="{{
+                                'DropDown.PlaceHolder.PleaseChoose' | translate
+                              }}" [(ngModel)]="formValue.endCustomer" name="endCustomer"
+                                (onBlur)="formValue.endCustomer ?? (formValue.endCustomer = null)"
+                                [disabled]="!formValue.ouGroup||!formValue.ou||!formValue.brand"
+                                [ngModelOptions]="{ standalone: true }" [style]="{ width: '100%' }" [filter]="true"
+                                [showClear]="true" (onClear)="formValue.endCustomer = null" >
+                            </p-dropdown>
+                        </div>
+                        <div class="form-label" *ngIf="isEditMode">
+                            <label class="txt">{{formValue.endCustomer}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row grid">
+            <div class="form-col col-12">
+                <div class="form-row grid">
+                    <!-- brand -->
+                    <div class="form-col lg:col-6 md:col-6 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Ctg1</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col">
+                                <div class="form-select" *ngIf="isAddMode">
+                                    <p-dropdown [options]="ctg1Options" appendTo="body" placeholder="{{
+                                            'DropDown.PlaceHolder.PleaseChoose' | translate
+                                          }}" [(ngModel)]="formValue.ctg1"
+                                        (onBlur)="formValue.ctg1 ?? (formValue.ctg1 = null)"
+                                        [disabled]="!formValue.brand" [ngModelOptions]="{ standalone: true }"
+                                        [style]="{ width: '100%' }" [filter]="true" (ngModelChange)="onCtg1Select($event)"
+                                        [showClear]="true" (onClear)="formValue.ctg1 = null">
+                                    </p-dropdown>
+                                </div>
+                                <div class="form-label" *ngIf="isEditMode">
+                                    <label class="txt">{{formValue.ctg1}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-col lg:col-6 md:col-6 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label require">
+                                    <label class="txt">Item</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col">
+                                <div class="form-input" *ngIf="isAddMode">
+                                    <p-autoComplete [suggestions]="itemOptions" (completeMethod)="filterItem($event)"
+                                        (onSelect)="onItemSelect($event)" [minLength]="1" field="label"
+                                        [style]="{ width: '100%' }"
+                                        (onBlur)="formValue.productCode && (formValue.productCode.value ?? (formValue.productCode = null))"
+                                        [ngModelOptions]="{ standalone: true }" placeholder="{{
+                                            'Input.PlaceHolder.PleaseKeyIn' | translate
+                                          }}" appendTo="body" [showClear]="true"
+                                        (onClear)="onItemChange()" #productCode="ngModel"
+                                        (ngModelChange)="onItemChange()"
+                                        name="productCode" [(ngModel)]="formValue.productCode" required>
+                                    </p-autoComplete>
+                                    <p class="error-active" *ngIf="isSubmitted && productCode.errors">
+                                        <i class="pi pi-exclamation-circle"></i>
+                                        <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                                    </p>
+                                </div>
+                                <div class="form-label" *ngIf="isEditMode">
+                                    <label class="txt">{{formValue.productCode.value}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row grid">
+            <div class="form-col col-12">
+                <div class="form-row grid">
+
+                    <div class="form-col lg:col-6 md:col-6 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label require">
+                                    <label class="txt">Tolerance(%)<br> - from</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <div class="form-input" *ngIf="isAddMode">
+                                        <input autocomplete="off" type="number" pInputText name="fromTolerance"
+                                            #fromTolerance="ngModel" name="fromTolerance"
+                                            [(ngModel)]="formValue.fromTolerance" required placeholder="{{
+                                                'Input.PlaceHolder.PleaseKeyIn' | translate
+                                              }} Tolerance From" onwheel="this.blur()" [min]="0" />
+                                        <p class="error-active" *ngIf="isSubmitted && fromTolerance.errors">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span *ngIf="fromTolerance.errors.required">{{ 'Span.Label.RequiredField' |
+                                                translate }}</span>
+                                            <span *ngIf="fromTolerance.errors.min">{{
+                                                'SalesMarginToleranceSetup.Error.MinViolationMustOver0' | translate
+                                                }}</span>
+
+                                        </p>
+                                    </div>
+                                    <div class="form-label" *ngIf="isEditMode">
+                                        <label class="txt">{{formValue.fromTolerance}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-col lg:col-6 md:col-6 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label require">
+                                    <label class="txt">Tolerance(%)<br> - to</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col">
+                                <div class="form-input">
+                                    <div class="form-input" *ngIf="isAddMode">
+                                        <input autocomplete="off" type="number" pInputText name="toTolerance"
+                                            #toTolerance="ngModel" name="toTolerance"
+                                            [(ngModel)]="formValue.toTolerance" required placeholder="{{
+                                                'Input.PlaceHolder.PleaseKeyIn' | translate
+                                              }} Tolerance To" onwheel="this.blur()" [max]="100"
+                                            [min]="formValue.fromTolerance" />
+                                        <p class="error-active" *ngIf="isSubmitted && toTolerance.errors">
+                                            <i class="pi pi-exclamation-circle"></i>
+                                            <span *ngIf="toTolerance.errors.required">{{ 'Span.Label.RequiredField' |
+                                                translate }}</span>
+                                            <span *ngIf="toTolerance.errors.min">{{
+                                                'SalesMarginToleranceSetup.Error.ToleranceViolationMustOverMin' |
+                                                translate }}</span>
+                                            <span *ngIf="toTolerance.errors.max">{{
+                                                'SalesMarginToleranceSetup.Error.ToleranceViolationMustLess100' |
+                                                translate }}</span>
+
+                                        </p>
+                                    </div>
+                                    <div class="form-label" *ngIf="isEditMode">
+                                        <label class="txt">{{formValue.toTolerance}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="form-row grid">
+            <!-- Start Date -->
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">{{
+                                "SalesMarginToleranceSetup.Label.FromDate" | translate
+                                }}</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-date" *ngIf="isAddMode">
+                            <p-calendar showButtonBar="true" dateFormat="yy/mm/dd" showClear="true" [minDate]="isAddMode?minDate:null"
+                                (onSelect)="formValue.toDate = null" appendTo="body" [showIcon]="true"
+                                readonlyInput="true" placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}}"
+                                #fromDate="ngModel" name="fromDate" [(ngModel)]="formValue.fromDate" required>
+                            </p-calendar>
+                            <p class="error-active" *ngIf="isSubmitted && (isAddMode || isEditMode) && fromDate.errors">
+                                <i class="pi pi-exclamation-circle"></i>
+                                <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                            </p>
+                        </div>
+                        <div class="form-label" *ngIf="isEditMode">
+                            <label class="txt">{{formValue.fromDate | date: 'yyyy/MM/dd'}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- End Date -->
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">{{
+                                "SalesMarginToleranceSetup.Label.ToDate" | translate
+                                }}</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-date" *ngIf="isAddMode">
+                            <p-calendar showButtonBar="true" dateFormat="yy/mm/dd" [minDate]="formValue.fromDate"
+                                showClear="true" appendTo="body" [showIcon]="true" readonlyInput="true"
+                                placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}}" #toDate="ngModel"
+                                name="toDate" [(ngModel)]="formValue.toDate" required>
+                            </p-calendar>
+
+                            <p class="error-active" *ngIf="isSubmitted && (isAddMode || isEditMode) && toDate.errors">
+                                <i class="pi pi-exclamation-circle"></i>
+                                <span>{{ 'Span.Label.RequiredField' | translate }}</span>
+                            </p>
+                        </div>
+                        <div class="form-label" *ngIf="isEditMode">
+                            <label class="txt">{{formValue.toDate | date: 'yyyy/MM/dd'}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</ng-container>
+
+<div class="btn-container">
+    <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray"
+        (click)="onHideDetailDialog()"></button>
+    <button pButton type="button" label="{{ 'Button.Label.Save' | translate }}" (click)="saveOnClick()"></button>
+</div>
+
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams" [contentList]="noticeContentList"
+(closeNotice)="msgDialogOnClose()">
+</app-common-notice-check-dialog>

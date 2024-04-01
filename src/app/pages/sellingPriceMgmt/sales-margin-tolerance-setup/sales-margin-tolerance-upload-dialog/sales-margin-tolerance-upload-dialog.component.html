@@ -1,0 +1,72 @@
+<form class="form-table">
+  <div class="form-row grid">
+    <div class="form-col col-fixed">
+      <div class="form-label">
+        <label class="txt">{{
+          "SalesMarginToleranceSetup.Label.FileUpload" | translate
+        }}</label>
+      </div>
+    </div>
+
+    <div class="form-col col">
+      <p-fileUpload
+        #fileUploader
+        class="form-file-upload"
+        name="fileUpload[]"
+        [multiple]="fileUploaderSettings.multiple"
+        [auto]="fileUploaderSettings.auto"
+        [chooseIcon]="fileUploaderSettings.chooseIcon"
+        [chooseLabel]="fileUploaderSettings.chooseLabel"
+        [showCancelButton]="fileUploaderSettings.showCancelButton"
+        [showUploadButton]="fileUploaderSettings.showUploadButton"
+        [uploadIcon]="fileUploaderSettings.uploadIcon"
+        [fileLimit]="fileUploaderSettings.fileLimit"
+        [previewWidth]="fileUploaderSettings.previewWidth"
+        [customUpload]="fileUploaderSettings.customUpload"
+        (onSelect)="onFileUploadHandler($event, fileUploader)"
+        (onRemove)="onFileRemoveHandler()"
+        dndUploadHandler
+        [files]="selectedFileList"
+        (fileDropped)="onDropHandler($event)"
+        (onFileDroppedError)="onDropError($event)"
+        [acceptDropFileType]="fileUploaderSettings.accept"
+      >
+      </p-fileUpload>
+    </div>
+  </div>
+
+  <div class="sample-file-section">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Primary"
+      class="p-button-text"
+      label="Download Sample File"
+      (click)="onDownloadSampleFileEvent()"
+    ></button>
+  </div>
+
+  <!--# Form Actions -->
+  <div class="btn-container">
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Cancel' | translate }}"
+      class="btn-gray"
+      (click)="onCloseAddItemDialog()"
+    ></button>
+
+    <button
+      pButton
+      type="button"
+      class="submit"
+      label="{{ 'Button.Label.Submit' | translate }}"
+      (click)="onFormSubmit()"
+      [disabled]="selectedFileList.length === 0"
+    ></button>
+  </div>
+</form>
+<app-common-notice-check-dialog [settingParams]="noticeCheckDialogParams" [contentList]="noticeContentList"
+(closeNotice)="msgDialogOnClose()">
+</app-common-notice-check-dialog>

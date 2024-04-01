@@ -1,0 +1,313 @@
+// 檔案上傳
+.field-btn {
+    margin: 10px 0 10px 20px;
+    width: 148px;
+    height: 80px;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 20px;
+    cursor: pointer;
+
+    &.export {
+        background-color: #47b8db;
+    }
+
+    &.upload {
+        margin-left: 0;
+        background-color: #dcdcdc;
+    }
+}
+
+#pcf-fileUpload {
+    width: 100%;
+}
+
+// Table
+
+
+@media screen and (min-width: 768px) {
+    .pcf-tr {
+        height: 70px !important;
+        display: flex;
+        align-items: center;
+        background-color: #f1f6f9;
+    }
+
+
+}
+
+
+:host ::ng-deep {
+
+    .th-approving-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .th-approving-label {
+            height: 2.5vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 0px !important;
+            font-size: 12px;
+            margin-left: 0.8vw;
+        }
+
+        @media screen and (max-width: 768px) {
+            .th-approving-label {
+                justify-content: center;
+            }
+        }
+
+        @media screen and (max-width: 1280px) and (min-width: 768px) {
+            .th-approving-label {
+                height: 25px;
+            }
+        }
+    }
+
+    .th-normal-label {
+        max-width: 0px !important;
+        line-height: 18px !important;
+        word-break: keep-all;
+        font-size: 12px;
+    }
+
+    .p-column-title {
+        &.approve {
+            display: flex !important;
+            justify-content: space-around !important;
+            width: 100% !important;
+            font-size: 18px !important;
+            margin: auto !important;
+        }
+
+        &.normal {
+            white-space: nowrap !important;
+            font-size: 16px !important;
+            margin: 1.5vh !important;
+        }
+    }
+
+    .td-approving-container {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-direction: column;
+    }
+
+    .td-normal-container-pcf {
+        font-size: 12px !important;
+        word-break: break-word;
+        font-weight: bold;
+    }
+
+    .pcf-header-th {
+        min-width: 60px !important;
+        width: auto !important;
+        height: 100% !important;
+
+
+        &.pcf-m-col {
+            min-width: 70px !important
+        }
+
+        &.pcf-l-col {
+            min-width: 85px !important
+        }
+
+        &.pcf-xl-col {
+            min-width: 95px !important
+        }
+
+        &.pcf-item-col {
+            min-width: 0 !important
+        }
+    }
+
+
+    .pcf-header-td {
+        min-width: 60px !important;
+        width: auto !important;
+
+        &.pcf-m-col {
+            min-width: 70px !important
+        }
+
+        &.pcf-l-col {
+            min-width: 85px !important
+        }
+
+        &.pcf-xl-col {
+            min-width: 95px !important
+        }
+
+        &.pcf-item-col {
+            min-width: 0 !important
+        }
+    }
+}
+
+
+// 手機板 Item 間距調小
+@media screen and (max-width: 768px) {
+    #pcf-td {
+        min-height: 0 ;
+    }
+}
+ 
+.pcf-comments {
+    height: 8px;
+    width: 80px;
+    font-size: 12px;
+}
+
+@media screen and (max-width: 768px) {
+    .pcf-comments {
+        max-width: 40vw;
+        margin-left: auto;
+        height: 18px;
+        width: 80%;
+        font-size: 16px;
+    }
+
+}
+
+
+:host ::ng-deep {
+    @media screen and (min-width: 768px) {
+
+
+        .pcf-table-header {
+            background-color: #f1f6f9;
+            height: 80px !important;
+            display: flex;
+            align-items: center;
+            justify-self: center;
+            box-sizing: border-box;
+        }
+
+
+        .pcf-header-th {
+            border-right: 1px solid #ffffff !important;
+        }
+
+        .pcf-content-tr {
+            border: 1px solid #e5e5e5;
+        }
+
+        .pcf-header-td {
+            border: none !important;
+            border-right: 1px solid #ffffff !important;
+        }
+
+    }
+
+}
+
+
+.maintain-price {
+    color: #0000EE;
+    text-decoration: underline;
+    cursor: pointer;
+    position: absolute;
+    transform: translate(0, 100%);
+    text-align: center;
+}
+
+.batch-container {
+    display: flex;
+    flex-direction: row;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .field-btn {
+        margin: 0;
+        margin: 10px;
+
+        &.export {
+            width: calc(100% - 15px);
+        }
+    }
+
+    .batch-container {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.align-right {
+    width: 100%;
+    text-align: right !important;
+} 
+
+.mobile-toggle-all-container{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+// 明細展開 & 收起
+.extend-btn {
+    height: 35px;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: #87949d 0.3s ease, #fff 0.3s ease; /* 平滑的背景和文字顏色過渡效果 */
+  }
+  
+  .extend-btn.expand {
+    background-color: #87949d; /* 收起時的背景顏色 */
+    color: #fff; /* 收起時的文字顏色 */
+  }
+  
+  .extend-btn.collapsed {
+    background-color: #87949d; /* 展開時的背景顏色 */
+    color: #fff; /* 展開時的文字顏色 */
+  }
+   
+  .button-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  } 
+
+@media screen and (max-width: 768px) {
+    .p-column-title {
+        &.normal {
+            margin: 0 !important;
+        } 
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+
+    .td-normal-container-pcf {
+        overflow: auto !important;
+        height: 16px !important;
+        font-size: 16px !important;
+        font-weight: normal;
+    }
+
+    .p-column-title{
+        font-weight: bold;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .data-content {
+        text-align: end !important;
+    }
+}

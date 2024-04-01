@@ -1,0 +1,804 @@
+<!--# common notice-check dialog-->
+<app-common-notice-check-dialog
+  [settingParams]="noticeCheckDialogParams"
+  [contentList]="noticeContentList"
+  (closeNotice)="onRedirectHandler()"
+></app-common-notice-check-dialog>
+
+<!--# common selector dialog-->
+<app-common-selector-dialog
+  [settingParams]="selectorDialogParams"
+  (outputResult)="onSelectorDialogCallback($event)"
+>
+</app-common-selector-dialog>
+
+<!--# apply add assignee action dialog -->
+<app-common-apply-action-dialog
+  [settingParams]="applyDialogParams"
+  (outputResult)="onFormSubmitHandler('ReAssign', $event.cosigners)"
+>
+</app-common-apply-action-dialog>
+
+<!--# sc047 item selector dialog-->
+<app-am-sc047-v2-item-dialog
+  [settingParams]="itemAMDialogParams"
+  (outputResult)="onItemAMDialogCallback($event)"
+></app-am-sc047-v2-item-dialog>
+
+<app-add-sc047-v2-item-by-ref-dialog
+  [settingParams]="refERPDialogParams"
+  (outputResult)="onRefERPialogCallback($event)"
+>
+</app-add-sc047-v2-item-by-ref-dialog>
+
+<!--# Main Form Section-->
+<div formBody>
+  <app-common-license-form-header
+    [formType]="formType"
+    (outputCurFormNo)="onCurFormNoHandler($event)"
+    (outputUserDeptInfo)="onCurUserDeptHandler($event)"
+  ></app-common-license-form-header>
+
+  <ng-container *ngIf="curFormTypeId">
+  <p-tabView>
+    <p-tabPanel
+      header="{{ 'LicenseMgmt.Common.Tabs.ApplicationInfo' | translate }}"
+    >
+      <ng-container *ngIf="this.curFormStatus.status == 'draft'">
+        <div class="hint-highlight">
+          <span>*{{ "LicenseMgmt.SC047.Hint.SC047File" | translate }}</span>
+        </div>
+      </ng-container>
+      <form [formGroup]="formGroup" class="form-container form-table">
+        <!--# Form Section-->
+        <!--# oOU Group Selector -->
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{
+                    "LicenseMgmt.SC047.Label.Purchasing_Orders_OU" | translate
+                  }}</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="oOuCode"
+                      readonly
+                      placeholder="{{
+                        'Input.PlaceHolder.PleaseSelect' | translate
+                      }} {{
+                        'LicenseMgmt.SC047.Label.Purchasing_Orders_OU'
+                          | translate
+                      }}"
+                      formControlName="oOuCode"
+                      [value]="formGroup.get('oOuName').value"
+                      (click)="onOpenSelectorDialogEvent('oou')"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# OU Group Selector -->
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{
+                    "LicenseMgmt.SC047.Label.Receiving_Shipping_OU" | translate
+                  }}</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="ouCode"
+                      readonly
+                      placeholder="{{
+                        'Input.PlaceHolder.PleaseSelect' | translate
+                      }} {{
+                        'LicenseMgmt.SC047.Label.Receiving_Shipping_OU'
+                          | translate
+                      }}"
+                      formControlName="ouCode"
+                      [value]="formGroup.get('ouName').value"
+                      (click)="onOpenSelectorDialogEvent('ou')"
+                      (ngModelChange)="
+                        onOUCodeChangeHandler(); onInitHKConsigneeList()
+                      "
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ng-container
+          *ngIf="
+            formGroup.get('oOuCode').value != formGroup.get('ouCode').value &&
+            formGroup.get('oOuCode').value &&
+            formGroup.get('ouCode').value
+          "
+        >
+          <div class="form-row notice grid">
+            <div class="form-col col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label">
+                    <label class="txt">Notice</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div class="form-col col-12">
+                    <div class="form-label">
+                      <label class="txt">{{
+                        "LicenseMgmt.SC047.Hint.SCSpecialNotice" | translate
+                      }}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <!--# Warehouse Selector -->
+        <!--# ShipmentType Selector-->
+        <div class="form-row grid">
+          <div class="form-col lg:col-6 col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{
+                    "LicenseMgmt.SC047.Label.Warehouse_Location" | translate
+                  }}</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-select">
+                    <p-dropdown
+                      name="country"
+                      [options]="warehouseOptions"
+                      formControlName="country"
+                      placeholder="{{
+                        'DropDown.PlaceHolder.PleaseChoose' | translate
+                      }}"
+                      (onChange)="
+                        onCountryChangeHandler(); onInitHKConsigneeList()
+                      "
+                    ></p-dropdown>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-col lg:col-6 col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">{{
+                    "LicenseMgmt.SC047.Label.Shipping_Type" | translate
+                  }}</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-select">
+                    <p-dropdown
+                      name="shipmentType"
+                      [options]="shipmentTypeOptions"
+                      formControlName="shipmentType"
+                    ></p-dropdown>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# Customer or Vendor Selector-->
+        <div class="form-row multi-input-kit grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div
+                  class="form-label require"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: start;
+                  "
+                >
+                  <label class="txt"
+                    >{{ "ImpExpLicenseMtn.Label.Customer" | translate }} /
+                    <label>{{
+                      "ImpExpLicenseMtn.Label.Vendor" | translate
+                    }}</label>
+                  </label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input md:col-4 lg:col-3 col-12">
+                  <div class="form-select">
+                    <p-dropdown
+                      name="vcType"
+                      [options]="userTypeOptions"
+                      formControlName="vcType"
+                      (onChange)="onVCTypChangeeHandler()"
+                    ></p-dropdown>
+                  </div>
+                </div>
+                <div class="form-col form-input md:col-8 lg:col-9 col-12">
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="vcName"
+                      readonly
+                      placeholder="{{
+                        'Input.PlaceHolder.PleaseSelect' | translate
+                      }} {{ 'LicenseMgmt.SC047.Label.CV' | translate }}"
+                      formControlName="vcName"
+                      (click)="
+                        onOpenSelectorDialogEvent(
+                          formGroup.get('vcType').value === 'C'
+                            ? 'customer'
+                            : 'vendor'
+                        )
+                      "
+                      (ngModelChange)="onVCCodeChangeHandler()"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# Ship To Code -->
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">Ship To Code</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="shipToCode"
+                      readonly
+                      [placeholder]="shipToCodePlaceholder"
+                      formControlName="shipToCode"
+                      (click)="
+                        onOpenSelectorDialogEvent(
+                          'customerAddressQueryForLicenseShip'
+                        )
+                      "
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# Ship To Address Input -->
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">Ship To Address</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="shipToAddress"
+                      placeholder="{{
+                        'LicenseMgmt.SC047.PlaceHolder.PlzKeyOrByShiptoCode'
+                          | translate
+                      }}"
+                      formControlName="shipToAddress"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# Ship To Address (English) Input -->
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div
+                  class="form-label"
+                  [ngClass]="
+                    formGroup.get('vcType').value == 'C' ? 'require' : ''
+                  "
+                >
+                  <label class="txt">Ship To Address (English)</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="shipToAddressE"
+                      placeholder="{{
+                        'LicenseMgmt.SC047.PlaceHolder.PlzKeyOrByShiptoCode'
+                          | translate
+                      }}"
+                      formControlName="shipToAddressE"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# Deliver To Code -->
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">Deliver To Code</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="deliverToCode"
+                      readonly
+                      [placeholder]="deliverToCodePlaceholder"
+                      formControlName="deliverToCode"
+                      (click)="
+                        onOpenSelectorDialogEvent(
+                          'customerAddressQueryForLicenseAddress'
+                        )
+                      "
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# Deliver To Address Input -->
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div
+                  class="form-label"
+                  [ngClass]="
+                    formGroup.get('deliverToAddress').value &&
+                    formGroup.get('vcType').value == 'C'
+                      ? 'require'
+                      : ''
+                  "
+                >
+                  <label class="txt">Deliver To Address</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="deliverToAddress"
+                      placeholder="{{
+                        'LicenseMgmt.SC047.PlaceHolder.PlzKeyOrByDelivertoCode'
+                          | translate
+                      }}"
+                      formControlName="deliverToAddress"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# Deliver To Address (English) Input -->
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div
+                  class="form-label"
+                  [ngClass]="
+                    formGroup.get('deliverToAddress').value &&
+                    formGroup.get('vcType').value == 'C'
+                      ? 'require'
+                      : ''
+                  "
+                >
+                  <label class="txt">Deliver To Address (English)</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="deliverToAddressE"
+                      placeholder="{{
+                        'LicenseMgmt.SC047.PlaceHolder.PlzKeyOrByDelivertoCode'
+                          | translate
+                      }}"
+                      formControlName="deliverToAddressE"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# End Use Input -->
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label require">
+                  <label class="txt">End Use</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="endUse"
+                      placeholder="{{
+                        'Input.PlaceHolder.PleaseKeyIn' | translate
+                      }}{{
+                        'LicenseMgmt.SC047.PlaceHolder.EndUseAllowNumAndEng'
+                          | translate
+                      }}"
+                      formControlName="endUse"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# 商業登記證 Input -->
+        <div class="form-row grid">
+          <div class="form-col col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">{{
+                    "LicenseMgmt.SC047.Label.Business_Registration_Certificate"
+                      | translate
+                  }}</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-input">
+                    <input
+                      autocomplete="off"
+                      type="text"
+                      pInputText
+                      name="registerNumber"
+                      placeholder="{{
+                        'Input.PlaceHolder.PleaseKeyIn' | translate
+                      }} {{
+                        'LicenseMgmt.SC047.Label.Business_Registration_Certificate'
+                          | translate
+                      }}"
+                      formControlName="registerNumber"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# Exporter/Consignee-->
+        <div class="form-row end-selector grid">
+          <div class="form-col xl:col-6 col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">{{
+                    "LicenseMgmt.SC047.Label.ExpImpConsignee" | translate
+                  }}</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div
+                    class="form-label"
+                    *ngIf="
+                      hkConsigneeOptions.getValue().length === 0 &&
+                      formGroup.get('ouCode').value &&
+                      formGroup.get('country').value &&
+                      formGroup.get('country').value.includes('HK')
+                    "
+                  >
+                    <label class="txt" *ngIf="curOUInfo"
+                      >{{ curOUInfo.ouName }} ( {{ curOUInfo.ouShortName }} )
+                    </label>
+                    <label class="txt" *ngIf="!curOUInfo"
+                      >{{ formGroup.get("consignee").value }}
+                    </label>
+                  </div>
+                  <div
+                    class="form-label"
+                    *ngIf="hkConsigneeOptions.getValue().length === 1"
+                  >
+                    <label class="txt">{{
+                      formGroup.get("consignee").value
+                    }}</label>
+                  </div>
+                  <div
+                    class="form-select"
+                    *ngIf="hkConsigneeOptions.getValue().length > 1"
+                  >
+                    <p-dropdown
+                      [class]="
+                        formGroup.get('consignee').disabled ? 'disabled' : ''
+                      "
+                      [options]="hkConsigneeOptions.getValue()"
+                      placeholder="{{
+                        'DropDown.PlaceHolder.PleaseChoose' | translate
+                      }}"
+                      formControlName="consigneeKit"
+                      (onChange)="onHKConsigneeChangeHandler($event)"
+                    ></p-dropdown>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-col xl:col-6 col-12">
+            <div class="form-row grid">
+              <div class="form-col col-fixed">
+                <div class="form-label">
+                  <label class="txt">Exporter/Consignee address</label>
+                </div>
+              </div>
+              <div class="grid md:col col-12">
+                <div class="form-col form-input col-12">
+                  <div class="form-label">
+                    <!--# TK-21421 -->
+                    <!-- <label
+                      class="txt"
+                      *ngIf="
+                        formGroup.get('country').value &&
+                        formGroup.get('country').value.includes('HK') &&
+                        hkConsigneeOptions.getValue().length === 0
+                      "
+                      >{{ formGroup.get("shipToAddress").value }}</label
+                    > -->
+                    <label
+                      class="txt"
+                      *ngIf="
+                        formGroup.get('country').value &&
+                        formGroup.get('country').value.includes('HK') &&
+                        hkConsigneeOptions.getValue().length === 0
+                      "
+                    ></label>
+                    <label
+                      class="txt"
+                      *ngIf="
+                        hkConsigneeOptions.getValue().length > 0 &&
+                        formGroup.get('consigneeAddress').value
+                      "
+                      >{{ formGroup.get("consigneeAddress").value }}</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--# items Section-->
+        <ng-container *ngIf="curFormStatus.status != 'approve'">
+          <div class="sub-title-container item-section">
+            <div>
+              <button
+                pButton
+                class="add-item"
+                icon="pi pi-plus"
+                type="button"
+                label="Pick by Ref Shipmemt#"
+                (click)="onOpenAddItemByRefDialog()"
+              ></button>
+              <button
+                pButton
+                class="add-item"
+                icon="pi pi-plus"
+                type="button"
+                label="{{ 'Button.Label.Add' | translate }} Item"
+                (click)="onOpenAddItemDialogEvent()"
+              ></button>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container
+          *ngIf="router.url.includes('approving') && isWarehouseMember"
+        >
+          <div class="sub-title-container">
+            <p>{{ "LicenseMgmt.Common.Label.BatchEdit" | translate }}</p>
+          </div>
+
+          <app-sc047-v2-item-batch-handler
+            [formNo]="curFormNo"
+            (outputResult)="onRenewSC047ItembyBatch($event)"
+          ></app-sc047-v2-item-batch-handler>
+        </ng-container>
+
+        <!--# item list table-->
+        <app-common-data-table-viewer
+          [data]="itemQueue.getValue()"
+          [deleteKeyBeforeReturn]="false"
+          [tableCols]="itemTableCols"
+          [tableSettings]="dataTableSettings"
+          (outputTargetData)="onSelectedTargetDataCallback($event)"
+          (outputAfterDeletedData)="onAfterDeletedDatasCallback($event)"
+        ></app-common-data-table-viewer>
+
+        <ng-container *ngIf="curFormStatus.status != 'approve'">
+          <!--# comment Section-->
+          <div class="sub-title-container comment-section">
+            <p>{{ "LicenseMgmt.Common.Title.Opinion" | translate }}</p>
+          </div>
+
+          <!--# Comment -->
+          <div class="form-row remark grid">
+            <div class="form-col col-12">
+              <div class="form-row grid">
+                <div class="form-col col-fixed">
+                  <div class="form-label">
+                    <label class="txt">{{
+                      "LicenseMgmt.Common.Label.Opinion" | translate
+                    }}</label>
+                  </div>
+                </div>
+                <div class="grid md:col col-12">
+                  <div class="form-col form-input col-12">
+                    <div class="form-input no-h-full">
+                      <textarea
+                        autocomplete="off"
+                        type="text"
+                        pInputTextarea
+                        name="comment"
+                        formControlName="comment"
+                      ></textarea>
+                      <div
+                        class="form-hint"
+                        [class]="
+                          formGroup.get('comment').value &&
+                          formGroup.get('comment').value.length > 250
+                            ? 'warring'
+                            : ''
+                        "
+                      >
+                        <span
+                          >{{
+                            "LicenseMgmt.Common.Hint.CurWordCount" | translate
+                          }}&nbsp;&nbsp;{{
+                            formGroup.get("comment").value == null
+                              ? 0
+                              : formGroup.get("comment").value.length
+                          }}&nbsp;/&nbsp;250</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <!--# action Section-->
+        <ng-container *ngIf="curFormStatus.status != 'approve'">
+          <div class="btn-container">
+            <button
+              pButton
+              type="button"
+              label="{{ 'Button.Label.Cancel' | translate }}"
+              class="btn-gray"
+              (click)="onFormSubmitHandler('Cancel')"
+            ></button>
+            <button
+              pButton
+              type="button"
+              class="submit"
+              label="{{ 'Button.Label.Submit' | translate }}"
+              (click)="onFormSubmitHandler('Apply')"
+            ></button>
+            <button
+              pButton
+              type="button"
+              label="{{ 'Button.Label.Draft' | translate }}"
+              class="draft btn-teal"
+              (click)="onFormSubmitHandler('Draft')"
+            ></button>
+            <button
+              pButton
+              type="button"
+              label="{{ 'Button.Label.RedirectApproval' | translate }}"
+              class="btn-outline-blue"
+              (click)="onFormSubmitHandler('ReAssign')"
+            ></button>
+          </div>
+        </ng-container>
+      </form>
+    </p-tabPanel>
+    <ng-container *ngIf="curFormStatus.status == 'approve'">
+      <p-tabPanel
+        header="{{ 'LicenseMgmt.Common.Tabs.AuditHistoryLog' | translate }}"
+        [disabled]="curFormStatus.status == 'draft'"
+      >
+        <app-common-audit-history-log
+          *ngIf="reassignDialogService.reAssignHistoryRefreshController"
+          [formNo]="curFormNo"
+          [formTypeId]="curFormTypeId"
+        ></app-common-audit-history-log>
+      </p-tabPanel>
+    </ng-container>
+    <p-tabPanel
+      header="{{ 'LicenseMgmt.Common.Tabs.AttachmentLink' | translate }}"
+    >
+      <app-attachment-uploader [formTypeId]="curFormTypeId"  [formNo]="curFormNo"></app-attachment-uploader>
+    </p-tabPanel>
+  </p-tabView>
+</ng-container>
+</div>

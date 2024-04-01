@@ -1,0 +1,41 @@
+@import "../../../../../../../src/styles/helpers/variables";
+
+:host ::ng-deep {
+
+    @media screen and (max-width: 1301px) {
+        .data-content {
+            width: 200px;
+
+            input,
+            p-dropdown,
+            p-calendar {
+                width: 180px !important;
+                display: flex !important;
+                margin-left: auto;
+                justify-content: end;
+
+                .p-dropdown {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .require:after {
+        content: "*";
+        color: $error;
+        display: inline-block; 
+        position: absolute;
+    }
+
+    .p-datatable table {
+        border-collapse: separate;
+    }
+}
+
+.pcf-line-mtn-td{
+    background-color: #f7f8f9 !important;
+}
+
+
+ 

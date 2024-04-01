@@ -1,0 +1,25 @@
+@import "../../../../../../styles/wpg-cus-components/cus_form";
+@import "../../../../../../styles/helpers/variables";
+
+@include FormBaseOverride;
+
+.loading-container {
+  @apply flex justify-center items-center h-24 w-full;
+  span {
+    @apply text-gray-400 font-semibold;
+  }
+
+  ~ .btn-container {
+    @apply mt-0;
+  }
+}
+
+.error-section {
+  li {
+    &:not(:first-of-type) {
+      @apply mt-2;
+    }
+    @apply font-semibold tracking-wide;
+    color: $error;
+  }
+}

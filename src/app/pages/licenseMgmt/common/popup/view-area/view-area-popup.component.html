@@ -1,0 +1,87 @@
+<p-dialog header="Area" [(visible)]="visible" [draggable]="false" [blockScroll]="true" [modal]="true"
+    (onHide)="closeArea()" (onClose)="closeArea()" (onShow)="viewArea()" [style]="{width: '1200px'}">
+    <form class="form-table">
+        <div class="form-row grid">
+            <div class="form-col md:col-4 sm:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Item No</label>
+                        </div>
+                    </div>
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <label class="txt">{{getItemEccnRsp.productCode}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-col md:col-4 sm:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">ECCN</label>
+                        </div>
+                    </div>
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <label class="txt">{{getItemEccnRsp.masterEccn?.eccn ? getItemEccnRsp.masterEccn.eccn :
+                                ''}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-col md:col-4 sm:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Export Control</label>
+                        </div>
+                    </div>
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <label class="txt">{{getItemEccnRsp.masterEccn?.exportControlFlag ?
+                                getItemEccnRsp.masterEccn.exportControlFlag : ''}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <label class="txt">若所屬區域並無ECCN，請使用Master ECCN</label>
+        <br>
+        <label class="txt">(If there's no area ECCN, pls refer "Master ECCN")</label>
+        <br>
+
+        <!--# TK-35854 -->
+        <p-table #areaEccn class="table-panel" [value]="getItemEccnRsp.areaEccn" [columns]="selectedColsAreaEccn"
+            [scrollable]="true" scrollHeight="500px" [paginator]="true" [rows]="10" paginatorPosition="bottom"
+            [rowsPerPageOptions]="[10,20]" dataKey="id">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let col of selectedColsAreaEccn" [pSortableColumn]="col.field" [ngClass]="{
+                    'icon-col': (col.field == 'checkbox')
+                  }" scope="col">
+                        <ng-container *ngIf="col.field != 'checkbox'">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                        </ng-container>
+                    </th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-areaEccn>
+                <tr>
+                    <td *ngFor="let col of selectedColsAreaEccn" [ngClass]="{
+                    'icon-col': (col.field == 'checkbox')
+                  }">
+                        <ng-container *ngIf="col.field != 'checkbox'">
+                            <!-- <p>{{getItemEccnRsp.areaEccn[col.field]}}</p> -->
+                            <p>{{areaEccn[col.field]}}</p>
+                        </ng-container>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </form>
+</p-dialog>

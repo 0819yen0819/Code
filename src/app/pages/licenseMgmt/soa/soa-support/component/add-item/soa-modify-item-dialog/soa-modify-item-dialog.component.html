@@ -1,0 +1,308 @@
+<!--# common selector dialog-->
+<app-common-selector-dialog [settingParams]="selectorDialogParams" (outputResult)="onSelectorDialogCallback($event)">
+</app-common-selector-dialog>
+
+<p-progressSpinner *ngIf="showSpinner"></p-progressSpinner>
+
+<p-dialog header="{{'LicenseMgmt.Common.Title.AddItemInfo' | translate}}" [(visible)]="showDialog" modal="true"
+    [draggable]="false" [resizable]="false" (onHide)="close()">
+
+    <p-tabView>
+        <!-- 單選 -->
+        <p-tabPanel header="{{'LicenseMgmt.Common.Tabs.SingleModify' | translate}}" leftIcon="pi pi-file">
+            <div class="form-container form-table">
+                <div class="form-row grid" style="gap:3px;">
+ 
+
+                    <!--# Brand-->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Brand</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col" style="height: 100%;">
+
+                                    <div *ngIf="isCreatedByItem">
+                                        <div class="form-label">
+                                            <label class="txt">{{itemInfo.brand}}</label>
+                                        </div>    
+                                    </div>
+
+                                    <div *ngIf="!isCreatedByItem">
+                                        <div *ngIf="!enableModifyField" class="form-input"
+                                        style="display: flex; align-items: center; height: 100%; margin-left: 10px;">
+                                        {{itemInfo.brand}}
+                                        </div>
+
+                                    <div class="form-input">
+                                            <input  *ngIf="enableModifyField" type="text" pInputText name="brand" readonly
+                                                [(ngModel)]="itemInfo.brand"  (click)="onOpenSelectorBrandDialog()" 
+                                                placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}} Brand" />
+                                        </div>
+                                    </div>
+ 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--# ctg1-->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Ctg1</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col" style="height: 100%;">
+
+                                    <div *ngIf="isCreatedByItem">
+                                        <div class="form-label">
+                                            <label class="txt">{{itemInfo.ctg1}}</label>
+                                        </div>    
+                                    </div>
+
+                                    <div *ngIf="!isCreatedByItem">
+
+                                        <div *ngIf="!enableModifyField"  class="form-input"
+                                            style="display: flex; align-items: center; height: 100%; margin-left: 10px;">
+                                            {{itemInfo?.ctg1}}
+                                        </div>
+
+                                        
+                                        <div class="form-label" *ngIf="enableModifyField && ctg1Options.length === 1">
+                                            <label class="txt">No category</label>
+                                        </div>    
+
+                                        <div class="form-select" *ngIf="enableModifyField && ctg1Options.length > 1">
+                                            <p-dropdown [options]="ctg1Options" [(ngModel)]="itemInfo.ctg1"
+                                            (ngModelChange)="ctg1OnChange()"  [disabled]="!itemInfo.brand" [filter]="true"
+                                            placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}} Ctg1" appendTo="body"> 
+                                                <ng-template pTemplate="item" let-option> 
+                                                    <span>{{option.label  || 'PendingApproval.PlaceHolder.PleaseChoose' | translate}}</span>
+                                                </ng-template>
+                                            </p-dropdown>
+                                        </div> 
+
+                                    </div>
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <!--# ctg2-->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Ctg2</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col" style="height: 100%;">
+
+                                    <div *ngIf="isCreatedByItem">
+                                        <div class="form-label">
+                                            <label class="txt">{{itemInfo.ctg2}}</label>
+                                        </div>    
+                                    </div>
+
+                                    <div *ngIf="!isCreatedByItem">
+ 
+                                        <div class="form-input" *ngIf="!enableModifyField"
+                                            style="display: flex; align-items: center; height: 100%; margin-left: 10px;">
+                                            {{itemInfo?.ctg2}}
+                                        </div>
+    
+                                        <div class="form-label" *ngIf="enableModifyField && ctg2Options.length === 1">
+                                            <label class="txt">No category</label>
+                                        </div>    
+
+                                        <div class="form-select" *ngIf="enableModifyField && ctg2Options.length > 1"> 
+                                        <p-dropdown [options]="ctg2Options" [(ngModel)]="itemInfo.ctg2"
+                                        (ngModelChange)="ctg2OnChange()"  [disabled]="!itemInfo.ctg1"  [filter]="true">
+                                            <ng-template pTemplate="item" let-option> 
+                                                <span>{{option.label  || 'PendingApproval.PlaceHolder.PleaseChoose' | translate}}</span>
+                                            </ng-template>
+                                        </p-dropdown>
+                                        </div>
+                                  
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <!--# ctg3-->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Ctg3</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col" style="height: 100%;">
+
+                                    <div *ngIf="isCreatedByItem">
+                                        <div class="form-label">
+                                            <label class="txt">{{itemInfo.ctg3}}</label>
+                                        </div>    
+                                    </div>
+
+                                    <div *ngIf="!isCreatedByItem">
+
+                                        <div class="form-input" *ngIf="!enableModifyField"
+                                            style="display: flex; align-items: center; height: 100%; margin-left: 10px;">
+                                            {{itemInfo?.ctg3}}
+                                        </div>
+
+                                        <div class="form-label" *ngIf="enableModifyField && ctg3Options.length === 1">
+                                            <label class="txt">No category</label>
+                                        </div>    
+
+                                        <div class="form-select" *ngIf="enableModifyField && ctg3Options.length > 1"> 
+                                            <p-dropdown [options]="ctg3Options" [(ngModel)]="itemInfo.ctg3"
+                                                [disabled]="!itemInfo.ctg2"  [filter]="true">
+                                                <ng-template pTemplate="item" let-option> 
+                                                    <span>{{option.label  || 'PendingApproval.PlaceHolder.PleaseChoose' | translate}}</span>
+                                                </ng-template>
+                                            </p-dropdown>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--# ECCN-->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">ECCN</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col" style="height: 100%;">
+
+                                    <div *ngIf="isCreatedByItem">
+                                        <div class="form-label">
+                                            <label class="txt">{{itemInfo.eccn}}</label>
+                                        </div>    
+                                    </div>
+
+                                        <div *ngIf="!isCreatedByItem">
+
+
+                                        <div class="form-input"  *ngIf="!enableModifyField"
+                                            style="display: flex; align-items: center; height: 100%; margin-left: 10px;">
+                                            {{itemInfo?.eccn}}
+                                        </div>
+
+                                        <div class="form-select"  *ngIf="enableModifyField">
+                                            <p-dropdown [options]="eccnListOptions" [(ngModel)]="itemInfo.eccn"  [filter]="true">
+                                            </p-dropdown>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--# Item Selector-->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">Item</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <!-- 可以重新選擇Item -->
+                                <div class="form-input" *ngIf="enableModifyField">
+                                    <input type="text" pInputText name="productCode" readonly
+                                        (click)="onOpenSelectorDialogEvent()" [(ngModel)]="itemInfo.item"
+                                        placeholder="{{'Input.PlaceHolder.PleaseSelect' | translate}} Item" />
+                                </div>
+                                <!-- 不能重新選擇Item -->
+                                <div class="md:col col-12" *ngIf="!enableModifyField">
+                                    <div class="form-col" style="height: 100%; display: flex; align-items: center;">
+                                        <div class="form-input"
+                                            style="display: flex; align-items: center; height: 100%; ">
+                                            {{itemInfo.item}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--# 是否扣量-->
+                    <div class="form-col col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">{{'SOA.Button.deduct' | translate}}</label>
+                                </div>
+                            </div>
+                            <div class="md:col col-12">
+                                <div class="form-col" style="height: 100%;">
+                                    <div class="form-select">
+                                        <p-dropdown [options]="deduction.options" [(ngModel)]="itemInfo.isDeduct"
+                                            (ngModelChange)="deductChange()"
+                                            [disabled]="soaCommonService.disabledEditDeduct">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ng-container *ngIf="itemInfo.isDeduct === 'Y'">
+                                <div class="form-col col-fixed">
+                                    <div class="form-label">
+                                        <label class="txt">Qty</label>
+                                    </div>
+                                </div>
+                                <div class="md:col col-12">
+                                    <div class="form-col" style="height: 100%;">
+                                        <div class="form-input" id="qtyInput">
+                                            <p-inputNumber [style]="{'border':'none'}"
+                                                placeholder="{{'SOA.Msg.PleaseKeyInQty' | translate}}"
+                                                [(ngModel)]="itemInfo.qty"
+                                                [disabled]="soaCommonService.disabledEditDeduct" [min]="0"
+                                                [max]="999999999"
+                                                placeholder="{{ 'Input.PlaceHolder.PleaseEnter' | translate }}"
+                                                mode="decimal"></p-inputNumber>
+                                            <p class="error-active" *ngIf="qtyWarning">
+                                                <i class="pi pi-exclamation-circle"></i>
+                                                <span>{{ 'ImpExpLicenseMtn.Message.QtyMustBeGE' | translate }}0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--# Form Actions -->
+            <div class="btn-container">
+                <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray"
+                    (click)="onCloseAddItemDialogEvent()"></button>
+                <button pButton type="submit" label="{{'Button.Label.Modify' | translate}}"
+                    (click)="onFormSubmit()"></button>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+</p-dialog>

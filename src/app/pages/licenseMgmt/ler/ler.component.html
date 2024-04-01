@@ -1,0 +1,20 @@
+<app-add-modify-le-rule-dialog
+  [settingParams]="amLERuleDialogParams"
+  [mode]="LERuleDialogMode"
+  [selectedData]="selectedData"
+></app-add-modify-le-rule-dialog>
+
+<app-common-license-viewer-header
+  [formType]="formType"
+  (outputResult)="onSearchSecionsResult($event)"
+></app-common-license-viewer-header>
+
+<!--# eccn rule list table-->
+
+<app-common-data-table-viewer
+  [data]="itemQueue.getValue()"
+  [tableCols]="itemTableCols.getValue()"
+  [tableSettings]="dataTableSettings"
+  (isAddItemActive)="onOpenLEDialogToggle($event)"
+  (outputTargetData)="onEditSelectedDataCallback($event)"
+></app-common-data-table-viewer>

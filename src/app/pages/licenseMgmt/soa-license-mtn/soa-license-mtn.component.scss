@@ -1,0 +1,46 @@
+.table-selection {
+  min-width: unset !important;
+  min-height: unset !important;
+  height: unset !important;
+  text-align: center;
+  width: 40px !important;
+}
+
+:host {
+  p-table {
+    th {
+      height: auto !important;
+      width: auto !important;
+      min-width: unset !important;
+      &:nth-last-of-type(1), &:nth-last-of-type(2){
+        @apply text-center;
+      }
+    }
+    td {
+      min-height: unset !important;
+      width: auto !important;
+      min-width: unset !important;
+      @media screen and (max-width: 640px) {
+        span {
+          min-width: 80px !important;
+          width: 80px !important;
+          @apply block whitespace-pre-wrap;
+        }
+        p{
+          @apply ml-4;
+        }
+      }
+
+      @apply md:pt-0 md:pb-0 #{!important};
+
+      .btn-container {
+        @apply m-0 #{!important};
+        @apply p-2 #{!important};
+        @apply flex justify-center items-center #{!important};
+        .p-button {
+          @apply m-0 #{!important};
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,102 @@
+<p-dialog
+  [header]="dialogSetting.getValue().title"
+  [(visible)]="dialogSetting.getValue().visiable"
+  [modal]="dialogSetting.getValue().modal"
+  [draggable]="dialogSetting.getValue().draggable"
+  [resizable]="dialogSetting.getValue().resizeable"
+>
+  <ng-container *ngIf="isLoading">
+    <div class="loading-container">
+      <span>Loading...</span>
+    </div>
+    <div class="btn-container">
+      <button
+        pButton
+        type="button"
+        label="{{ 'Button.Label.Close' | translate }}"
+        class="btn-gray"
+        (click)="onSelectSubmit('cancel')"
+      ></button>
+    </div>
+  </ng-container>
+
+  <ng-container
+    *ngIf="
+      itemList.length != 0 && !isEmpty;
+      then hasDataTemplate;
+      else noDataTemplate
+    "
+  ></ng-container>
+  <ng-template #hasDataTemplate>
+    <div class="result-list-container">
+      <p-listbox
+        [options]="itemList"
+        [checkbox]="true"
+        [filter]="true"
+        [multiple]="true"
+        optionLabel="label"
+        optionValue="value"
+        emptyFilterMessage="{{
+          'LicenseMgmt.Common.Hint.NoMatchResult' | translate
+        }}"
+        [disabled]="itemList.length == 0"
+        filterPlaceHolder="{{
+          'LicenseMgmt.Common.Hint.DoubleSearch' | translate
+        }}"
+        (onChange)="onSelectResultChange($event)"
+      >
+        <ng-template let-item pTemplate="item">
+          <div class="item-label">
+            <div>{{ item.label }}</div>
+          </div>
+        </ng-template>
+      </p-listbox>
+    </div>
+
+    <!--# Selector Actions Section-->
+    <div class="btn-container">
+      <button
+        pButton
+        type="button"
+        label="{{ 'Button.Label.Cancel' | translate }}"
+        class="btn-gray"
+        (click)="onSelectSubmit('cancel')"
+      ></button>
+      <button
+        pButton
+        type="button"
+        label="{{ 'Button.Label.Confirm' | translate }}"
+        (click)="onSelectSubmit('submit')"
+        [disabled]="selectedItemList.length == 0"
+      ></button>
+    </div>
+  </ng-template>
+
+  <ng-template #noDataTemplate>
+    <ng-container *ngIf="isEmpty == true">
+      <div class="no-data-container">
+        <div class="no-data-notice">
+          <span>{{ "LicenseMgmt.Common.Hint.NoMatchResult" | translate }}</span>
+        </div>
+        <!--# Selector Actions Section-->
+        <div class="btn-container">
+          <button
+            pButton
+            type="button"
+            label="{{ 'Button.Label.Close' | translate }}"
+            class="btn-gray"
+            (click)="onSelectSubmit('cancel')"
+          ></button>
+          <ng-container *ngIf="selectType != 'bafaLicense'">
+            <button
+              pButton
+              type="button"
+              label="{{ 'Button.Label.Reset' | translate }}"
+              (click)="formGroup.reset()"
+            ></button>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+</p-dialog>

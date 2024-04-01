@@ -1,0 +1,437 @@
+<p-dialog
+  header=""
+  [(visible)]="showDialog"
+  [draggable]="false"
+  [closeOnEscape]="true"
+  [blockScroll]="true"
+  [modal]="true"
+  (onHide)="onHideDetailDialog($event)"
+  *ngIf="!showLoader"
+>
+  <ng-container>
+    <div class="form-table" *ngIf="formValue">
+      <!-- Level1 -->
+      <div class="form-row grid">
+        <!-- 客戶 / 廠商 -->
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label require">
+                <label class="txt"
+                  >{{ "SoaControlSetup.Label.CustomerVendorType" | translate }}
+                </label>
+              </div>
+            </div>
+
+            <div class="form-col col">
+              <div class="form-col col-12" style="display: flex">
+                <div
+                  class="form-select form-col col-4"
+                  style="padding: 0 0.5rem 0 0"
+                >
+                  <p-dropdown
+                    placeholder="{{
+                      'DropDown.PlaceHolder.PleaseChoose' | translate
+                    }}"
+                    [(ngModel)]="formValue.vcType"
+                    [options]="soaControlSetupByItemService.cvOptions"
+                    [ngModelOptions]="{ standalone: true }"
+                    (ngModelChange)="vcTypeChange()"
+                    [disabled]="editDisabled"
+                  >
+                  </p-dropdown>
+                </div>
+
+                <div
+                  class="form-input form-col col-8"
+                  style="padding: 0 0 0 0.7rem"
+                >
+                  <input
+                    type="text"
+                    pInputText
+                    readonly
+                    placeholder="{{
+                      'Input.PlaceHolder.PleaseSelect' | translate
+                    }}"
+                    (click)="cvSelectDialogOnOpen()"
+                    [value]="formValue.vcCode?.label || formValue.vcLabel || ''"
+                    [disabled]="editDisabled"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Level2 -->
+      <div class="form-row grid">
+        <!-- Brand -->
+        <div class="form-col lg:col-6 md:col-6 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">Brand</label>
+              </div>
+            </div>
+
+            <div class="form-col col">
+              <div class="form-input">
+                <p-autoComplete
+                  [(ngModel)]="formValue.brand"
+                  [suggestions]="soaControlSetupByItemService.filteredBrand"
+                  (completeMethod)="
+                    soaControlSetupByItemService.filterBrand($event)
+                  "
+                  [minLength]="1"
+                  field="label"
+                  [style]="{ width: '100%' }"
+                  (onBlur)="
+                    formValue.brand &&
+                      (formValue.brand.value ?? (formValue.brand = null))
+                  "
+                  [ngModelOptions]="{ standalone: true }"
+                  placeholder="{{
+                    'Input.PlaceHolder.PleaseKeyIn' | translate
+                  }}"
+                  (ngModelChange)="onBrandSelect()"
+                  [showClear]="true"
+                  (onClear)="formValue.brand = null"
+                >
+                </p-autoComplete>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Ctg1 -->
+        <div class="form-col lg:col-6 md:col-6 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">Ctg1</label>
+              </div>
+            </div>
+
+            <div class="form-col col">
+              <div class="form-select">
+                <p-dropdown
+                  [options]="soaControlSetupByItemService.filteredCtg1"
+                  appendTo="body"
+                  placeholder="{{
+                    'DropDown.PlaceHolder.PleaseChoose' | translate
+                  }}"
+                  [(ngModel)]="formValue.ctg1"
+                  (onBlur)="formValue.ctg1 ?? (formValue.ctg1 = null)"
+                  [disabled]="!formValue.brand || !formValue.brand.value"
+                  [ngModelOptions]="{ standalone: true }"
+                  [style]="{ width: '100%' }"
+                  [filter]="true"
+                  (ngModelChange)="onCtg1Select()"
+                  [showClear]="true"
+                  (onClear)="formValue.ctg1 = null"
+                >
+                </p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Level3 -->
+      <div class="form-row grid">
+        <!-- Ctg2 -->
+        <div class="form-col lg:col-6 md:col-6 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">Ctg2</label>
+              </div>
+            </div>
+
+            <div class="form-col col">
+              <div class="form-select">
+                <p-dropdown
+                  [options]="soaControlSetupByItemService.filteredCtg2"
+                  appendTo="body"
+                  placeholder="{{
+                    'DropDown.PlaceHolder.PleaseChoose' | translate
+                  }}"
+                  [(ngModel)]="formValue.ctg2"
+                  (onBlur)="formValue.ctg2 ?? (formValue.ctg2 = null)"
+                  [ngModelOptions]="{ standalone: true }"
+                  [style]="{ width: '100%' }"
+                  [filter]="true"
+                  [disabled]="
+                    !formValue.brand ||
+                    !formValue.brand.value ||
+                    !formValue.ctg1
+                  "
+                  (ngModelChange)="onCtg2Select()"
+                  [showClear]="true"
+                  (onClear)="formValue.ctg2 = null"
+                >
+                </p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Ctg3 -->
+        <div class="form-col lg:col-6 md:col-6 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">Ctg3</label>
+              </div>
+            </div>
+
+            <div class="form-col col">
+              <div class="form-select">
+                <p-dropdown
+                  [options]="soaControlSetupByItemService.filteredCtg3"
+                  appendTo="body"
+                  placeholder="{{
+                    'DropDown.PlaceHolder.PleaseChoose' | translate
+                  }}"
+                  [(ngModel)]="formValue.ctg3"
+                  (onBlur)="formValue.ctg3 ?? (formValue.ctg3 = null)"
+                  [ngModelOptions]="{ standalone: true }"
+                  [style]="{ width: '100%' }"
+                  [filter]="true"
+                  [disabled]="
+                    !formValue.brand ||
+                    !formValue.brand.value ||
+                    !formValue.ctg1 ||
+                    !formValue.ctg2
+                  "
+                  [showClear]="true"
+                  (onClear)="formValue.ctg3 = null"
+                >
+                </p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Level4 -->
+      <div class="form-row grid">
+        <!-- ECCN -->
+        <div class="form-col lg:col-6 md:col-6 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">ECCN</label>
+              </div>
+            </div>
+
+            <div class="form-col col">
+              <div class="form-input">
+                <p-dropdown
+                  [options]="soaControlSetupByItemService.filteredECCN"
+                  appendTo="body"
+                  placeholder="{{
+                    'DropDown.PlaceHolder.PleaseChoose' | translate
+                  }}"
+                  [(ngModel)]="formValue.eccn"
+                  (onBlur)="formValue.eccn ?? (formValue.eccn = null)"
+                  [ngModelOptions]="{ standalone: true }"
+                  [style]="{ width: '100%' }"
+                  [filter]="true"
+                  [showClear]="true"
+                  (onClear)="formValue.eccn = null"
+                >
+                </p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Item -->
+        <div class="form-col lg:col-6 md:col-6 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">Item</label>
+              </div>
+            </div>
+
+            <div class="form-col col">
+              <div class="form-input">
+                <p-autoComplete
+                  [(ngModel)]="formValue.item"
+                  [suggestions]="soaControlSetupByItemService.cacheFilterItem"
+                  (completeMethod)="
+                    soaControlSetupByItemService.filterItemforCache($event)
+                  "
+                  [minLength]="1"
+                  field="label"
+                  [style]="{ width: '100%' }"
+                  (onBlur)="
+                    formValue.item &&
+                      (formValue.item.value ?? (formValue.item = null))
+                  "
+                  [ngModelOptions]="{ standalone: true }"
+                  placeholder="{{
+                    'Input.PlaceHolder.PleaseKeyIn' | translate
+                  }}"
+                  [showClear]="true"
+                  appendTo="body"
+                  [showClear]="true"
+                  (onClear)="formValue.item = null"
+                >
+                </p-autoComplete>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Level5 -->
+      <div class="form-row grid">
+        <!-- 有效/無效 -->
+        <div class="form-col lg:col-6 md:col-6 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label require">
+                <label class="txt">{{
+                  "SoaControlSetup.Label.Flag" | translate
+                }}</label>
+              </div>
+            </div>
+
+            <div class="form-col col">
+              <div class="form-select">
+                <p-dropdown
+                  appendTo="body"
+                  [options]="soaControlSetupByItemService.flagOptions"
+                  placeholder="{{
+                    'DropDown.PlaceHolder.PleaseChoose' | translate
+                  }}"
+                  [(ngModel)]="formValue.flag"
+                  name="flag"
+                >
+                </p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Publish Date -->
+        <div class="form-col lg:col-6 md:col-6 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label require">
+                <label class="txt">{{
+                  "SoaControlSetup.Label.ValidFrom" | translate
+                }}</label>
+              </div>
+            </div>
+
+            <div class="form-col col">
+              <div class="form-date">
+                <p-calendar [selectOtherMonths]="true"
+                  [showButtonBar]="true"
+                  [showIcon]="true"
+                  dateFormat="yy/mm/dd"
+                  dataType="string"
+                  appendTo="body"
+                  [(ngModel)]="formValue.validFrom"
+                  name="validFromDate"
+                  (onInput)="onDatePickerInput($event)"
+                  (onSelect)="onDatePickerSelectAndBlur()"
+                  (onBlur)="onDatePickerSelectAndBlur()"
+                  (onClose)="onDatePickerClose('validFrom')"
+                  placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101"
+                >
+                </p-calendar>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Level6 -->
+      <div class="form-row grid">
+        <!-- 有效/無效 -->
+        <div class="form-col lg:col-6 md:col-6 col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label require">
+                <label class="txt">{{
+                  "SOA.Label.SpecialApproval" | translate
+                }}</label>
+              </div>
+            </div>
+
+            <div class="form-col col">
+              <div class="form-select">
+                <p-dropdown
+                  appendTo="body"
+                  [options]="specialApprovalOptions"
+                  placeholder="{{
+                    'DropDown.PlaceHolder.PleaseChoose' | translate
+                  }}"
+                  [(ngModel)]="formValue.specialApproval"
+                  name="specialApproval"
+                >
+                </p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>      
+
+      <!-- Level7 -->
+      <div class="form-row grid">
+        <div class="form-col col-12">
+          <div class="form-row grid">
+            <div class="form-col col-fixed">
+              <div class="form-label">
+                <label class="txt">Remark</label>
+              </div>
+            </div>
+
+            <div class="form-col col">
+              <div class="form-textarea">
+                <textarea
+                  pInputTextarea
+                  [(ngModel)]="formValue.remark"
+                  name="remark"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <div class="btn-container">
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Cancel' | translate }}"
+      class="btn-gray"
+      (click)="showDialog = false"
+    ></button>
+    <button
+      pButton
+      type="button"
+      label="{{ 'Button.Label.Save' | translate }}"
+      (click)="saveOnClick()"
+    ></button>
+  </div>
+</p-dialog>
+
+<!-- 客戶/廠商 詳細選擇框 -->
+<app-common-selector-dialog
+  [settingParams]="selectorDialogParams"
+  (outputResult)="onSelectorDialogCallback($event)"
+>
+</app-common-selector-dialog>
+
+<!-- 訊息dialog -->
+<app-common-notice-check-dialog
+  [settingParams]="noticeCheckDialogParams"
+  [contentList]="noticeContentList"
+>
+</app-common-notice-check-dialog>
+
+<p-progressSpinner *ngIf="showLoader"></p-progressSpinner>

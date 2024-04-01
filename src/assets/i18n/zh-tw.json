@@ -1,0 +1,5276 @@
+{
+  "LANG": {
+    "zh-tw": "繁體中文",
+    "en-us": "English",
+    "Options": [
+      {
+        "label": "繁體中文",
+        "value": "zh-tw"
+      },
+      {
+        "label": "English",
+        "value": "en-us"
+      }
+    ]
+  },
+  "MainLayout": {
+    "Label": {
+      "testEnv": "測試環境"
+    }
+  },
+  "Login": {
+    "Label": {
+      "DevLogin": "開發者登入"
+    }
+  },
+  "PendingApproval": {
+    "Label": {
+      "PendingList": "待簽核項目",
+      "CompletedAndNotification": "已處理&通知",
+      "FormName": "表單名稱",
+      "FormNo": "表單編號",
+      "Applicant": "申請人",
+      "StartDate": "起始日期",
+      "EndDate": "結束日期",
+      "ProcessStatus": "處理狀態"
+    },
+    "Columns": [
+      {
+        "field": "submitDate",
+        "header": "申請日期",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formNo",
+        "header": "表單編號",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formTypeNameE",
+        "header": "表單名稱",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "subject",
+        "header": "標題",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "requesterName",
+        "header": "申請人",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "lastUpdatedDate",
+        "header": "處理日期",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "owner",
+        "header": "處理者",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "desc",
+        "header": "摘要",
+        "isDefault": true,
+        "isDisabled": false
+      }
+    ],
+    "ColumnsTab2": [
+      {
+        "field": "submitDate",
+        "header": "申請日期",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formNo",
+        "header": "表單編號",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formTypeNameE",
+        "header": "表單名稱",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "subject",
+        "header": "標題",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "requesterName",
+        "header": "申請人",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "lastUpdatedDate",
+        "header": "處理日期",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "owner",
+        "header": "處理者",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "workflowStatus",
+        "header": "表單狀態",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "status",
+        "header": "處理狀態",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "desc",
+        "header": "摘要",
+        "isDefault": true,
+        "isDisabled": false
+      }
+    ],
+    "PlaceHolder": {
+      "PleaseChoose": "請選擇",
+      "PleaseEnter": "請輸入"
+    }
+  },
+  "NewApplication": {
+    "Label": {
+      "NewForm": "新表單申請"
+    }
+  },
+  "MyApplication": {
+    "Label": {
+      "MyForm": "我的表單",
+      "TrackForm": "表單追蹤",
+      "FormName": "表單名稱",
+      "FormNo": "表單編號",
+      "Applicant": "申請者",
+      "StartDate": "起始日期",
+      "EndDate": "結束日期",
+      "Status": "表單狀態",
+      "ConfirmDelete": "確認刪除?",
+      "SearchType": "查詢方式",
+      "Subject": "標題",
+      "Owner": "處理者",
+      "Corp": "公司別",
+      "Keyword": "關鍵字"
+    },
+    "Columns": [
+      {
+        "field": "submitDate",
+        "header": "申請日期",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formNo",
+        "header": "表單編號",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formTypeNameE",
+        "header": "表單名稱",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "subject",
+        "header": "標題",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "requesterName",
+        "header": "申請人",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "lastUpdatedDate",
+        "header": "處理日期",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "owner",
+        "header": "處理者",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "status",
+        "header": "表單狀態",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "desc",
+        "header": "摘要",
+        "isDefault": true,
+        "isDisabled": false
+      }
+    ],
+    "PlaceHolder": {
+      "PleaseChoose": "請選擇",
+      "PleaseEnter": "請輸入",
+      "Keyword": "按Enter新增多個查詢條件"
+    },
+    "EditColums": {
+      "field": "edit",
+      "header": "編輯"
+    },
+    "ColumnFunctions": [
+      {
+        "field": "edit",
+        "header": "編輯"
+      },
+      {
+        "field": "del",
+        "header": "刪除"
+      }
+    ],
+    "Options": {
+      "searchTypeOptions": [
+        {
+          "label": "一般",
+          "value": "General"
+        },
+        {
+          "label": "主管專用-申請",
+          "value": "SupervisorApplicant"
+        },
+        {
+          "label": "主管專用-簽核",
+          "value": "SupervisorOwner"
+        },
+        {
+          "label": "助理專用-申請",
+          "value": "AssistantApplicant"
+        },
+        {
+          "label": "助理專用-簽核",
+          "value": "AssistantOwner"
+        },
+        {
+          "label": "離職代理-申請",
+          "value": "ResignApplicant"
+        },
+        {
+          "label": "離職代理-簽核",
+          "value": "ResignOwner"
+        }
+      ],
+      "StatusOptions": [
+        {
+          "label": "請選擇",
+          "value": ""
+        },
+        {
+          "label": "草稿",
+          "value": "Draft"
+        },
+        {
+          "label": "簽核中",
+          "value": "Approving"
+        },
+        {
+          "label": "已結案",
+          "value": "Approve"
+        },
+        {
+          "label": "駁回",
+          "value": "Reject"
+        }
+      ],
+      "trackFormStatusOptions": [
+        {
+          "label": "所有",
+          "value": "All"
+        },
+        {
+          "label": "處理中",
+          "value": "Approving"
+        },
+        {
+          "label": "處理完成",
+          "value": "Approve"
+        },
+        {
+          "label": "駁回",
+          "value": "Reject"
+        },
+        {
+          "label": "系統撤回",
+          "value": "SystemWithdraw"
+        }
+      ],
+      "trackFormApplicantOptions": [
+        {
+          "label": "全部",
+          "value": "All"
+        }
+      ],
+      "trackFormOwnerOptions": [
+        {
+          "label": "全部",
+          "value": "All"
+        }
+      ]
+    },
+    "TrackFormColumns": [
+      {
+        "field": "createdDate",
+        "header": "申請日期",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formNo",
+        "header": "表單編號",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formTypeNameE",
+        "header": "表單名稱",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "subject",
+        "header": "標題",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "status",
+        "header": "表單狀態",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "owner",
+        "header": "處理者",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "requesterName",
+        "header": "申請者",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "remark",
+        "header": "摘要",
+        "isDefault": true,
+        "isDisabled": false
+      }
+    ],
+    "statusDesc": {
+      "Approving": "簽核中",
+      "Approve": "已結案",
+      "Reject": "駁回",
+      "Draft": "草稿"
+    },
+    "Message": {
+      "DelSuccess": "表單已刪除"
+    }
+  },
+  "MyFlow": {
+    "Label": {},
+    "Options": {
+      "documentTypeOptions": [
+        {
+          "label": "通知",
+          "value": "Notfication"
+        },
+        {
+          "label": "已處理",
+          "value": "Completed"
+        }
+      ]
+    },
+    "workflowStatusDesc": {
+      "Approving": "簽核中",
+      "Approve": "已結案",
+      "Reject": "駁回",
+      "Withdrawed": "撤回"
+    },
+    "statusDesc": {
+      "Notice": "通知",
+      "Cancel": "通知",
+      "AddCosigner": "通知",
+      "Approve": "已處理",
+      "Reject": "已處理",
+      "Resolve": "已處理",
+      "Approving": "簽核中",
+      "Rollback": "已處理"
+    },
+    "accordionStepChart":{
+      "closure" : "Closure"
+    }
+  },
+  "Delegation": {
+    "Title": {
+      "AddDelegationSetting": "新增代理人設定",
+      "EditDelegationSetting": "編輯代理人設定"
+    },
+    "Label": {
+      "DelegationSetting": "代理人設定",
+      "AgentUserStatus": "代理人狀態",
+      "User": "被代理人",
+      "AgentDate": "代理期間",
+      "GeneralType": "一般設定",
+      "DeptType": "個人部門設定",
+      "MailFlag": "發生代理時，是否收到Mail通知",
+      "FormType": "代理表單",
+      "DeptName": "部門",
+      "ActiveFlag": "是否啟用",
+      "Yes": "是",
+      "No": "否",
+      "PleaseInputUserCode":"請輸入代理人員工號"
+    },
+    "Columns": [
+      {
+        "field": "activeFlag",
+        "header": "狀態",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "userName",
+        "header": "被代理人",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "agentType",
+        "header": "設定方式",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "agentDeptNameC",
+        "header": "部門",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "agentUser",
+        "header": "代理人",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "startDate",
+        "header": "起始時間",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "endDate",
+        "header": "結束時間",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formTypeId",
+        "header": "代理表單",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "ouCode",
+        "header": "OU",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "mailFlag",
+        "header": "接受Mail",
+        "isDefault": true,
+        "isDisabled": false
+      }
+    ],
+    "Options": {
+      "ActiveFlagOptions": [
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ],
+      "SupervisorUserOptions": [{ "label": "請選擇", "value": null }]
+    },
+    "Descs": {
+      "YesOrNoDesc": {
+        "Y": "是",
+        "N": "否"
+      },
+      "ActiveFlagDesc": {
+        "Y": "使用",
+        "N": "停用"
+      },
+      "AgentTypeDesc": {
+        "GENERAL": "一般設定",
+        "DEPT": "個人部門設定"
+      }
+    },
+    "EditColums": {
+      "field": "edit",
+      "header": "編輯",
+      "isDefault": true,
+      "isDisabled": false
+    },
+    "Message": {
+      "AgentInfoDuplicate": "代理人設定有重復,請檢查!"
+    }
+  },
+  "DPLResult": {
+    "Label": {
+      "DPLCheckResultSearch": "黑名單檢核查詢",
+      "TransactionCheckResultQuery": "交易檢核結果查詢",
+      "BatchCheckResultQuery": "批次檢核結果查詢",
+      "StartDate": "起始日期",
+      "EndDate": "結束日期",
+      "AreaOrCountry": "地區/國家"
+    },
+    "Columns": [
+      {
+        "field": "trxReferenceNo",
+        "header": "Trx Reference No",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "precisionRunNumber",
+        "header": "Precision Run Number",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "sourceType",
+        "header": "Source Type",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "dataType",
+        "header": "Data Type",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "partyType",
+        "header": "Party Type",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "custNameE",
+        "header": "Cust Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "addressId",
+        "header": "Address Id",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "addressLine",
+        "header": "Address Line",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "country",
+        "header": "Country",
+        "isDefault": true,
+        "css": "sm-col",
+        "maxWidth": "4%",
+        "textAlign": "left"
+      },
+      {
+        "field": "eccnItemLine",
+        "header": "ECCN Item Line",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "resultsStatus",
+        "header": "Results Status",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "resultsUrl",
+        "header": "Results Url",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "complianceStatus",
+        "header": "Compliance Status",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "dplResultsStatus",
+        "header": "DplResults Status",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ebcResultsStatus",
+        "header": "EbcResults Status",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "eccnResultsStatus",
+        "header": "EccnResults Status",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayCreatedDate",
+        "header": "Run Date",
+        "isDefault": true,
+        "css": "datetime-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "BatchColumns": [
+      {
+        "field": "batchReference",
+        "header": "Batch Reference",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouCode",
+        "header": "Ou Code",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouName",
+        "header": "Ou Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "additionalReference3",
+        "header": "Cust Code",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "custName",
+        "header": "Cust Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "addressId",
+        "header": "Address Id",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "addressLine",
+        "header": "Address Line",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "addressLineCn",
+        "header": "Address Line Cn",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "country",
+        "header": "Country",
+        "isDefault": true,
+        "css": "sm-col",
+        "maxWidth": "6%",
+        "textAlign": "left"
+      },
+      {
+        "field": "countryName",
+        "header": "Country Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "resultsStatus",
+        "header": "Results Status",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "resultsUrl",
+        "header": "Results Url",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "location",
+        "header": "Location Code",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "hubCtm",
+        "header": "HUB CTM",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayCreatedDate",
+        "header": "Run Date",
+        "isDefault": true,
+        "css": "datetime-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "DetailColums": {
+      "field": "detail",
+      "header": "明細",
+      "css": "icon-col",
+      "maxWidth": "",
+      "textAlign": "left"
+    },
+    "Options": {
+      "countryOptions": [
+        {
+          "label": "請選擇",
+          "value": null
+        }
+      ],
+      "sourceTypeOptions": [
+        {
+          "label": "請選擇",
+          "value": null
+        },
+        {
+          "label": "online",
+          "value": "online"
+        },
+        {
+          "label": "shipment",
+          "value": "shipment"
+        }
+      ]
+    },
+    "Message": {
+      "DownloadProcess": "檔案處理中，結果會透過mail發送"
+    }
+  },
+  "DPL_Hold_Fail": {
+    "statusDesc": {
+      "Approve": "處理完成",
+      "Reject": "駁回",
+      "Approving": "處理中"
+    }
+  },
+  "DPL_Hold": {
+    "Label": {
+      "Applicant": "申請人",
+      "Department": "申請部門",
+      "ApplicantDate": "申請日期",
+      "ApplicationInformation": "申請資訊",
+      "ApprovalHistory": "簽核歷程",
+      "AttachFileAndURL": "附件連結",
+      "AttachFile": "附加檔案",
+      "AttachURL": "附加連結",
+      "Censor": "審核",
+      "GoBack": "上一頁",
+      "ReferenceNumber": "單號",
+      "FormNo": "單號",
+      "Sales": "業務員",
+      "Date": "表單日期",
+      "SalesDept": "業務部門",
+      "CreatedByLastUpdateBy": "處理人",
+      "CustomerCode": "客戶代碼",
+      "Facility": "倉別",
+      "CustomerChineseName": "客戶中文名稱",
+      "CustomerEnglishName": "客戶英文名稱",
+      "FileUpload": "檔案上傳",
+      "CensorAction": "審核動作",
+      "Approve": "核准",
+      "Reject": "駁回",
+      "Return": "退回",
+      "AddCosigner": "加簽至下一關",
+      "AddAssignee": "加簽後傳回",
+      "Endorser": "加簽人員",
+      "Opinion": "意見",
+      "ReturnTo": "退回關卡",
+      "CustNameE": "CustNameE",
+      "City": "City",
+      "Country": "Country",
+      "PostalCode": "Postal Code",
+      "ResultURL": "Result URL",
+      "ResultStatus": "Result Status",
+      "ShipTo": "Ship To",
+      "DeliverTo": "Deliver To",
+      "AddFileOrLink": "新增檔案或連結",
+      "MaxFileSize": "檔案請勿超過 40 MB",
+      "Confirm": "確認",
+      "ConfirmSubmit": "是否確認送出?",
+      "ConfirmAccept": "是",
+      "ConfirmReject": "否"
+    },
+    "Message": {
+      "DuplicateFileName": "重複檔案名稱。",
+      "SubmitSuccess": "送出成功!"
+    }
+  },
+  "DPL_Fail": {
+    "Label": {
+      "Applicant": "申請人",
+      "Department": "申請部門",
+      "ApplicantDate": "申請日期",
+      "ApplicationInformation": "申請資訊",
+      "ApprovalHistory": "簽核歷程",
+      "AttachFileAndURL": "附件連結",
+      "AttachFile": "附加檔案",
+      "AttachURL": "附加連結",
+      "Censor": "審核",
+      "GoBack": "上一頁",
+      "ReferenceNumber": "單號",
+      "FormNo": "單號",
+      "Sales": "業務員",
+      "Date": "表單日期",
+      "SalesDept": "業務部門",
+      "CreatedByLastUpdateBy": "處理人",
+      "CustomerCode": "客戶代碼",
+      "Facility": "倉別",
+      "CustomerChineseName": "客戶中文名稱",
+      "CustomerEnglishName": "客戶英文名稱",
+      "FileUpload": "檔案上傳",
+      "CensorAction": "審核動作",
+      "Approve": "核准",
+      "Reject": "駁回",
+      "Return": "退回",
+      "AddCosigner": "加簽至下一關",
+      "AddAssignee": "加簽後傳回",
+      "Endorser": "加簽人員",
+      "Opinion": "意見",
+      "ReturnTo": "退回關卡",
+      "ReviewResults": "審核結果",
+      "WhiteListDPLHold": "White List DPL Hold",
+      "CustomerNumber": "Customer Number",
+      "CustomerName": "Customer Name",
+      "Country": "Country",
+      "Address": "Address",
+      "ResultsStatus": "Results Status",
+      "ResultsUrl": "Results Url",
+      "AddressID": "Address ID",
+      "AddFileOrLink": "新增檔案或連結",
+      "MaxFileSize": "檔案請勿超過 40 MB",
+      "Confirm": "確認",
+      "ConfirmSubmit": "是否確認送出?",
+      "ConfirmAccept": "是",
+      "ConfirmReject": "否"
+    },
+    "Message": {
+      "DuplicateFileName": "重複檔案名稱。",
+      "SubmitSuccess": "送出成功!"
+    }
+  },
+  "BlackMtn": {
+    "Label": {
+      "DPLMtn": "黑名單維護",
+      "Flag": "有效/無效(Y/N)"
+    },
+    "Columns": [
+      {
+        "field": "customerNo",
+        "header": "Customer No",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "customerName",
+        "header": "Customer Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "customerNameEg",
+        "header": "Customer Eng Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "frNumber",
+        "header": "FR Number",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "source",
+        "header": "Source",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayPublishDate",
+        "header": "Publish Date",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "remark",
+        "header": "Remark",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "flag",
+        "header": "有效/無效(Y/N)",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "6%",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayCreatedDate",
+        "header": "Created Date",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "createdBy",
+        "header": "Created By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayLastUpdatedDate",
+        "header": "Last Updated Date",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "header": "Last Updated By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "EditColums": {
+      "field": "edit",
+      "header": "編輯",
+      "css": "icon-col",
+      "maxWidth": "4%",
+      "textAlign": "left"
+    },
+    "Options": {
+      "flagOptions": [
+        {
+          "label": "請選擇",
+          "value": null
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ]
+    },
+    "DplSuccess": {
+      "flowEnd": "處理完成！",
+      "waitFor": "需等待 ",
+      "approve": " 處理！",
+      "assignee": "加簽"
+    }
+  },
+  "WhiteListTempMtn": {
+    "Label": {
+      "TemporaryWhiteListManagement": "暫時性白名單維護",
+      "TemporaryWhiteListFileUpload": "暫時性白名單檔案上傳",
+      "Flag": "有效/無效(Y/N)"
+    },
+    "Columns": [
+      {
+        "field": "customerNameEg",
+        "header": "Customer Eng Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "country",
+        "header": "Country",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "8%",
+        "textAlign": "left"
+      },
+      {
+        "field": "address",
+        "header": "Address",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "flag",
+        "header": "有效/無效(Y/N)",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "8%",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayEndDate",
+        "header": "End Date",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "10%",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayCreatedDate",
+        "header": "Created Date",
+        "isDefault": true,
+        "css": "datetime-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "createdBy",
+        "header": "Created By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayLastUpdatedDate",
+        "header": "Last Updated Date",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "header": "Last Updated By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "Options": {
+      "flagOptions": [
+        {
+          "label": "請選擇",
+          "value": null
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ]
+    },
+    "Message": {
+      "UploadSuccessfully": "上傳檔案成功"
+    }
+  },
+  "WhiteListMtn": {
+    "Label": {
+      "WhiteListManagement": "白名單維護",
+      "Flag": "有效/無效(Y/N)"
+    },
+    "Columns": [
+      {
+        "field": "ouCode",
+        "header": "OU Code",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "customerNo",
+        "header": "Customer No",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "customerName",
+        "header": "Customer Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "customerNameEg",
+        "header": "Customer Eng Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "country",
+        "header": "Country",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "addressId",
+        "header": "Address Id",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "address",
+        "header": "Address",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "flag",
+        "header": "有效/無效(Y/N)",
+        "isDefault": true,
+        "css": "lg-col",
+        "maxWidth": "6%",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayCreatedDate",
+        "header": "Created Date",
+        "isDefault": true,
+        "css": "datetime-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "createdBy",
+        "header": "Created By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayLastUpdatedDate",
+        "header": "Last Updated Date",
+        "isDefault": true,
+        "css": "datetime-col",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "header": "Last Updated By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "Options": {
+      "flagOptions": [
+        {
+          "label": "請選擇",
+          "value": null
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ]
+    }
+  },
+  "NonEARItemMtn": {
+    "Label": {
+      "NonEARItemMtn": "不受EAR管轄料號維護",
+      "NonEARItemItem": "不受EAR管轄料號",
+      "DownloadSampleFile": "範本下載",
+      "Flag": "有效/無效(Y/N)",
+      "DPLCustomerNo": "限定DPL"
+    },
+    "Columns": [
+      {
+        "field": "brand",
+        "header": "Brand",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "productCode",
+        "header": "Item",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "15%",
+        "textAlign": "left"
+      },
+      {
+        "field": "corpGroup",
+        "header": "Group",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouCode",
+        "header": "OU Code",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouName",
+        "header": "OU Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "customerNo",
+        "header": "限定DPL",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "customerName",
+        "header": "DPL Name",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "remark",
+        "header": "Remark",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "flag",
+        "header": "有效/無效(Y/N)",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "5%",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayCreatedDate",
+        "header": "Created Date",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "createdBy",
+        "header": "Created By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayLastUpdatedDate",
+        "header": "Last Updated Date",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "header": "Last Updated By",
+        "isDefault": true,
+        "css": "",
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "EditColums": {
+      "field": "edit",
+      "header": "編輯",
+      "css": "icon-col",
+      "maxWidth": "4%",
+      "textAlign": "left"
+    },
+    "Options": {
+      "flagOptions": [
+        {
+          "label": "請選擇",
+          "value": null
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ],
+      "groupOptions": [
+        {
+          "label": "請選擇",
+          "value": null
+        }
+      ]
+    }
+  },
+  "SampleOutDPL": {
+    "Label": {
+      "SampleOutDPLCheck": "Sample Out DPL Check",
+      "SingleQuery": "單筆查詢",
+      "BatchQuery": "多筆查詢",
+      "DPLLog": "DPL Log(單筆)",
+      "CustomerName": "客戶英文名稱",
+      "AreaOrCountry": "地區 / 國家",
+      "CustomerAddress": "客戶英文地址",
+      "ECCNCode": "ECCN Code",
+      "PleaseFillCompany": "請放公司英文全名／不可放直譯英文",
+      "PleaseFillCompanyAddress": "請放公司英文地址全名／不可放直譯英文",
+      "PleaseFillCustomerName": "客戶名稱須為半型英文",
+      "PleaseFillCustomerAddress": "客戶地址須為半型英文",
+      "RequiredField": "此欄位為必填",
+
+      "RequiredCustomerName": "客戶英文名稱需少於80個字元，若超過長度由系統截斷",
+      "RequiredCustomerAddress": "客戶英文地址需少於120字元，若超過長度由系統截斷",
+      "AcceptsUploadFileType": "允許的檔案類型 : CSV/XLS/XLSX",
+      "Range": "區間",
+      "Today": "今天",
+      "LastWeek": "前一週",
+      "ThisMonth": "本月",
+      "LastMonth": "上一個月",
+      "DownloadSampleFile": "範本下載"
+    },
+    "Columns": [
+      {
+        "field": "displayCreatedDate",
+        "header": "日期",
+        "isDefault": true,
+        "css": "datetime-col"
+      },
+      {
+        "field": "ouName",
+        "header": "OU 名稱",
+        "isDefault": true,
+        "css": ""
+      },
+      {
+        "field": "userCode",
+        "header": "工號",
+        "isDefault": true,
+        "css": ""
+      },
+      {
+        "field": "userName",
+        "header": "姓名",
+        "isDefault": true,
+        "css": ""
+      },
+      {
+        "field": "custNameE",
+        "header": "客戶英文名稱",
+        "isDefault": true,
+        "css": "lg-col"
+      },
+      {
+        "field": "country",
+        "header": "地區/國家",
+        "isDefault": true,
+        "css": ""
+      },
+      {
+        "field": "addressLine",
+        "header": "客戶英文地址",
+        "isDefault": true,
+        "css": "lg-col"
+      },
+      {
+        "field": "resultsStatus",
+        "header": "DPL Result",
+        "isDefault": true,
+        "css": ""
+      },
+      {
+        "field": "eccn",
+        "header": "ECCN Code",
+        "isDefault": true,
+        "css": ""
+      },
+      {
+        "field": "exportFlag",
+        "header": "管制料號",
+        "isDefault": true,
+        "css": ""
+      },
+      {
+        "field": "runNumber",
+        "header": "Compliance Run#",
+        "isDefault": true,
+        "css": ""
+      }
+    ],
+    "Options": {
+      "countryOptions": [
+        {
+          "label": "請選擇",
+          "value": null
+        }
+      ]
+    },
+    "Message": {
+      "UploadSuccessfully": "上傳檔案成功，結果會透過mail發送",
+      "NotAllowMulitpleFileUpload": "上傳檔案失敗，僅可上傳單一檔案",
+      "NotAllowThisUploadFileType": "上傳檔案失敗，非允許的檔案類型",
+      "FileSizeExceed": "上傳檔案失敗，檔案過大"
+    }
+  },
+  "ImpExpLicenseMtn": {
+    "Label": {
+      "ImpLicenseMtn": "進口許可證",
+      "ExpLicenseMtn": "出口許可證",
+      "FormName": "表單名稱",
+      "FormNo": "表單編號",
+      "CountryCode": "倉庫所在地區",
+      "CustomerVendorType": "客戶/廠商",
+      "CustomerVendorCode": "客戶/廠商#",
+      "Item": "Item No",
+      "Flag": "有效/無效(Y/N)",
+      "StartDate": "起始日期",
+      "EndDate": "結束日期",
+      "OOuCode": "採購公司別",
+      "OuCode": "進貨公司別",
+      "OOuCodeExp": "接單公司別",
+      "OuCodeExp": "出貨公司別",
+      "Consignee": "Exporter/ Consignee",
+      "ConsigneeAddress": "Exporter/ Consignee Address",
+      "CCATS": "CCATs",
+      "ConfirmDelete": "確認刪除?",
+      "LicenseNo": "License#",
+      "ECCN": "ECCN",
+      "ShipFrom": "Ship From",
+      "ShipTo": "Ship To Address",
+      "DeliverTo": "Deliver To Address",
+      "Customer": "客戶",
+      "Vendor": "廠商"
+    },
+    "ImpColumns": [
+      {
+        "field": "displayOOuCode",
+        "header": "Purchasing OU",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "datetime-col"
+      },
+      {
+        "field": "oouName",
+        "header": "Order OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayOuCode",
+        "header": "Receiving OU",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "datetime-col"
+      },
+      {
+        "field": "ouName",
+        "header": "Receiving OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "licenseNo",
+        "header": "License#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "productCode",
+        "header": "Item No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "eccn",
+        "header": "ECCN",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ccats",
+        "header": "CCATs",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "proviso",
+        "header": "Proviso",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "vcType",
+        "header": "VC Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "vcNo",
+        "header": "Vendor#/Customer#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "vcName",
+        "header": "Vendor/Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "shipFromAddress",
+        "header": "Ship From",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "price",
+        "header": "Price",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "quantity",
+        "header": "Apply Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "balanceQuantity",
+        "header": "Balance Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "scFlag",
+        "header": "Special  Condition",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "countryCode",
+        "header": "Warehouse Location",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "remark",
+        "header": "Remark",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "formNo",
+        "header": "Flow No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "licenseType",
+        "header": "Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "activeFlag",
+        "header": "Flag",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "ExpColumns": [
+      {
+        "field": "displayOOuCode",
+        "header": "Orders OU",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "datetime-col"
+      },
+      {
+        "field": "oouName",
+        "header": "Orders OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayOuCode",
+        "header": "Shipping OU",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "datetime-col"
+      },
+      {
+        "field": "ouName",
+        "header": "Shipping OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "licenseNo",
+        "header": "License#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "productCode",
+        "header": "Item No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "eccn",
+        "header": "ECCN",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ccats",
+        "header": "CCATs",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "proviso",
+        "header": "Proviso",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "vcType",
+        "header": "VC Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "vcNo",
+        "header": "Vendor#/Customer#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "vcName",
+        "header": "Vendor/Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "shipToAddress",
+        "header": "Ship To Address",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "deliveryToAddress",
+        "header": "Deliver To Address",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "price",
+        "header": "Price",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "quantity",
+        "header": "Apply Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "balanceQuantity",
+        "header": "Balance Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "deliveryNo",
+        "header": "Delivery No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "endUseRmk",
+        "header": "End Use",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "endUser",
+        "header": "End User",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "endUserAddress",
+        "header": "End User Address",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "countryCode",
+        "header": "Warehouse Location",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "remark",
+        "header": "Remark",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "formNo",
+        "header": "Flow No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "licenseType",
+        "header": "Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "activeFlag",
+        "header": "Flag",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "EditColums": {
+      "field": "edit",
+      "header": "編輯",
+      "isDefault": true,
+      "isDisabled": false,
+      "maxWidth": "",
+      "textAlign": "left",
+      "css": "sm-col"
+    },
+    "Options": {
+      "customerVendorTypeOptions": [
+        {
+          "label": "客戶",
+          "value": "Customer"
+        },
+        {
+          "label": "廠商",
+          "value": "Vendor"
+        }
+      ],
+      "flagOptions": [
+        {
+          "label": "請選擇",
+          "value": null
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ],
+      "vcTypeOptions": [
+        {
+          "label": "客戶",
+          "value": "C"
+        },
+        {
+          "label": "廠商",
+          "value": "V"
+        }
+      ],
+      "countryCodeOptions": [
+        {
+          "label": "請選擇",
+          "value": null
+        }
+      ],
+      "itemFilterTypeOptions": [
+        {
+          "label": "包含",
+          "value": "Include"
+        },
+        {
+          "label": "開頭為",
+          "value": "StartsWith"
+        },
+        {
+          "label": "結尾為",
+          "value": "EndsWith"
+        },
+        {
+          "label": "複選",
+          "value": "Multi"
+        }
+      ],
+      "editScFlagOptions": [
+        {
+          "label": "請選擇",
+          "value": null
+        },
+        {
+          "label": "SC047",
+          "value": "SC047"
+        },
+        {
+          "label": "SC054",
+          "value": "SC054"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ]
+    },
+    "Message": {
+      "AddSuccess": "新增成功",
+      "EditSuccess": "更新成功",
+      "DelSuccess": "刪除成功",
+      "AddFailed": "新增失敗",
+      "EditFailed": "更新失敗",
+      "DelFailed": "刪除失敗",
+      "ShipFromAddressOuCodeAndVcNoRequired": "OuCode 、 VcNo 必須選擇，才進行搜索",
+      "LicenseMasterExists": "已有設定紀錄存在，請您確認一下",
+      "MustBeNumber": "必須為數字且",
+      "QtyMustBeGE": "必須大於 ",
+      "DateMustBeLater": "End Date 必須晚於 Start Date"
+    },
+    "ColumnFunctions": [
+      {
+        "field": "del",
+        "header": "刪除",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "viewArea",
+        "header": "檢視Area",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "viewHistory",
+        "header": "檢視History",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      }
+    ],
+    "AreaEccnColums": [
+      {
+        "field": "country",
+        "header": "Country",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "eccn",
+        "header": "ECCN",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "exportControlFlag",
+        "header": "Export Control",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "HistoryColums": [
+      {
+        "field": "trxReferenceNo",
+        "header": "Trx Number",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "displayCreateDate",
+        "header": "Delivery Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "productCode",
+        "header": "Item",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ccats",
+        "header": "CCATs",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "quantity",
+        "header": "Used Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "balanceQuantity",
+        "header": "Balance Quantity",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "PlaceHolder": {
+      "Items": "按下Enter以新增多個查詢條件"
+    }
+  },
+  "EucLicenseMtn": {
+    "PageTitle": "最終用途最終用戶保證書(EUC)",
+    "Dialog": {
+      "Label": {
+        "Group": "Group",
+        "Exp": "有效日期",
+        "Flag": "Flag"
+      },
+      "Hint": {
+        "DelSuccess": "刪除成功",
+        "DelFailed": "刪除失敗"
+      }
+    },
+    "Message": {
+      "AddSuccess": "新增成功",
+      "EditSuccess": "更新成功",
+      "DelSuccess": "刪除成功",
+      "AddFailed": "新增失敗",
+      "EditFailed": "更新失敗",
+      "DelFailed": "刪除失敗",
+      "LicenseMasterExists": "已有設定紀錄存在，請您確認一下"
+    },
+    "Columns": [
+      {
+        "field": "displayOuGroup",
+        "header": "Group",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "licenseNo",
+        "header": "License#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "productCode",
+        "header": "Item No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "eccn",
+        "header": "ECCN",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ccats",
+        "header": "CCATs",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "proviso",
+        "header": "Proviso",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "vcType",
+        "header": "VC Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "vcNo",
+        "header": "Vendor#/Customer#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "vcName",
+        "header": "Vendor/Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "quantity",
+        "header": "Apply Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "balanceQuantity",
+        "header": "Balance Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+
+      {
+        "field": "government",
+        "header": "Government Unit",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "civilianEndUser",
+        "header": "Civilian End User",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "civilianEndUse",
+        "header": "Civilian End Use",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "remark",
+        "header": "Remark",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "formNo",
+        "header": "Flow No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "licenseType",
+        "header": "Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "activeFlag",
+        "header": "Flag",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "ColumnFunctions": [
+      {
+        "field": "edit",
+        "header": "編輯",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "del",
+        "header": "刪除",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "viewArea",
+        "header": "檢視Area",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "viewHistory",
+        "header": "檢視History",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      }
+    ]
+  },
+
+  "SoaLicenseMtn": {
+    "PageTitle": "貿易合規客戶確認函(SOA)",
+    "Message": {
+      "DownloadProcess": "檔案處理中，結果會透過mail發送"
+    },
+    "Label": {
+      "IsOriginal": "正本/副本",
+      "OuGroup": "Group",
+      "OOuCode": "接單公司別",
+      "OuCode": "出貨公司別",
+      "Original": "正本",
+      "NonOriginal": "副本"
+    },
+    "Columns": [
+      {
+        "field": "displayOuGroup",
+        "header": "Group",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ouCode",
+        "header": "Orders OU",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ouName",
+        "header": "Order OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "vcNo",
+        "header": "Vendor#/Customer#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "vcName",
+        "header": "Vendor/Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "specialApproval",
+        "header": "特批",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "isOriginal",
+        "header": "Original/Non-Original",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "productCode",
+        "header": "Item",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "brand",
+        "header": "Brand",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ctg1",
+        "header": "Ctg1",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ctg2",
+        "header": "Ctg2",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ctg3",
+        "header": "Ctg3",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "eccn",
+        "header": "ECCN",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "quantityFlag",
+        "header": "Deduction",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "licenseNo",
+        "header": "License#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ccats",
+        "header": "CCATs",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "proviso",
+        "header": "Proviso",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "quantity",
+        "header": "Apply Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "balanceQuantity",
+        "header": "Balance Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "formNo",
+        "header": "Flow No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "licenseType",
+        "header": "Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "vcType",
+        "header": "VC Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "activeFlag",
+        "header": "Flag",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "ColumnFunctions": [
+      {
+        "field": "viewArea",
+        "header": "檢視Area",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "viewHistory",
+        "header": "檢視History",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "edit",
+        "header": "編輯",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "del",
+        "header": "刪除",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      }
+    ],
+    "Options": {
+      "IsOriginalOptions": [
+        {
+          "label": "請選擇",
+          "value": null
+        },
+        {
+          "label": "正本",
+          "value": "Y"
+        },
+        {
+          "label": "副本",
+          "value": "N"
+        }
+      ]
+    },
+    "Msg":{
+      "ApplyForErpPermission":"請申請ERP權限"
+    }
+  },
+  "Sc047LicenseMtn": {
+    "PageTitle": "HK特別條款(SC047/SC054)",
+    "Label": {
+      "ShipTo": "Ship To Address",
+      "DeliverTo": "Deliver To Address"
+    },
+    "Dialog": {
+      "Label": {
+        "Flag": "有效/無效(Y/N)"
+      }
+    },
+    "Columns": [
+      {
+        "field": "displayOOuCode",
+        "header": "Orders OU",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "oouName",
+        "header": "Orders OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "displayOuCode",
+        "header": "Shipping OU",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ouName",
+        "header": "Shipping OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "licenseNo",
+        "header": "License#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "productCode",
+        "header": "Item No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "eccn",
+        "header": "ECCN",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "ccats",
+        "header": "CCATs",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "proviso",
+        "header": "Proviso",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "vcType",
+        "header": "VC Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "vcNo",
+        "header": "Vendor#/Customer#",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "vcName",
+        "header": "Vendor/Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "shipToAddress",
+        "header": "Ship To Address",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "lg-col"
+      },
+      {
+        "field": "deliveryToAddress",
+        "header": "Deliver To Address",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "price",
+        "header": "Price",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "quantity",
+        "header": "Apply Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "balanceQuantity",
+        "header": "Balance Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "endUseRmk",
+        "header": "End Use",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "countryCode",
+        "header": "Warehouse Location",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "remark",
+        "header": "Remark",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "formNo",
+        "header": "Flow No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "licenseType",
+        "header": "Type",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": ""
+      },
+      {
+        "field": "activeFlag",
+        "header": "Flag",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "Message": {
+      "AddSuccess": "新增成功",
+      "EditSuccess": "更新成功",
+      "DelSuccess": "刪除成功",
+      "AddFailed": "新增失敗",
+      "EditFailed": "更新失敗",
+      "DelFailed": "刪除失敗",
+      "LicenseMasterExists": "已有設定紀錄存在，請您確認一下"
+    }
+  },
+  "RuleSetup": {
+    "Title": {
+      "EditRuleSetup": "編輯規則設定"
+    },
+    "Label": {
+      "RuleSetting": "規則設定",
+      "Tenant": "Tenant",
+      "RuleItem": "規則",
+      "RuleVal": "設定值"
+    },
+    "Columns": [
+      {
+        "field": "rulesTenant",
+        "header": "Tenant",
+        "isDefault": true,
+        "isDisabled": false,
+        "css": "sm-col"
+      },
+      {
+        "field": "rulesCategoryRuleNameCn",
+        "header": "規則說明",
+        "isDefault": true,
+        "isDisabled": false,
+        "css": "sm-col"
+      },
+      {
+        "field": "ruleVal",
+        "header": "規則設定檔",
+        "isDefault": true,
+        "isDisabled": false,
+        "css": "sm-col"
+      }
+    ],
+    "ColumnFunctions": [
+      {
+        "field": "edit",
+        "header": "編輯"
+      }
+    ],
+    "Options": {
+      "DefaultNull": [
+        {
+          "label": "請選擇",
+          "value": null
+        }
+      ]
+    },
+    "Message": {
+      "RuleValRequied": "請輸入設定值"
+    }
+  },
+  "FormFileQuery": {
+    "PageTitle": "取得管制文件",
+    "Label": {
+      "FormTypeName": "表單名稱",
+      "FormNo": "表單編號",
+      "Subject": "標題",
+      "Remark": "摘要",
+      "FileName": "文件名稱",
+      "UploadBy": "上傳者",
+      "UploadDate": "上傳日期"
+    },
+    "Columns": [
+      {
+        "field": "displayUploadDate",
+        "header": "上傳日期",
+        "isDefault": true
+      },
+      {
+        "field": "formNo",
+        "header": "表單編號",
+        "isDefault": true
+      },
+      {
+        "field": "formTypeName",
+        "header": "表單名稱",
+        "isDefault": true
+      },
+      {
+        "field": "subject",
+        "header": "標題",
+        "isDefault": true
+      },
+      {
+        "field": "fileName",
+        "header": "文件名稱",
+        "isDefault": true
+      },
+      {
+        "field": "uploadBy",
+        "header": "上傳者",
+        "isDefault": true
+      },
+      {
+        "field": "remark",
+        "header": "摘要",
+        "isDefault": true
+      }
+    ],
+    "PlaceHolder": {
+      "PleaseChoose": "請選擇",
+      "Remark": "按Enter新增多個查詢條件"
+    }
+  },
+  "FormType": {
+    "Label": {
+      "FormTypeAuth": "表單權限",
+      "Category": "表單分類",
+      "FormType": "表單類別",
+      "FormTypeNameC": "表單中文名稱",
+      "FormTypeNameE": "表單英文名稱",
+      "IsWithdraw": "是否具有撤回功能",
+      "Status": "狀態",
+      "Display": "是否顯示於新表單申請",
+      "AddUrl": "新表單申請連結",
+      "ProcessKey": "Camunda流程Key",
+      "ConfirmDelete": "確認刪除？"
+    },
+    "Title": {
+      "AddFormTypeAuth": "新增表單權限",
+      "EditFormTypeAuth": "編輯表單權限",
+      "ViewFormTypeAuth": "檢視表單權限"
+    },
+    "Columns": [
+      {
+        "field": "category",
+        "header": "表單分類",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formType",
+        "header": "表單類別",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "formTypeNameC",
+        "header": "表單中文名稱",
+        "isDefault": true,
+        "isDisabled": true
+      },
+      {
+        "field": "formTypeNameE",
+        "header": "表單英文名稱",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "status",
+        "header": "狀態",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "display",
+        "header": "是否顯示於新表單申請",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "addUrl",
+        "header": "新表單申請連結",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "processKey",
+        "header": "Camunda流程Key",
+        "isDefault": true,
+        "isDisabled": false
+      }
+    ],
+    "Message": {
+      "formTypeRequired": "此欄位必填",
+      "formTypeNameCRequired": "此欄位必填",
+      "formTypeNameERequired": "此欄位必填",
+      "FormTypeAlreadyExists": "表單類別已存在，請更改表單類別",
+      "addUrlRequired": "此欄位必填"
+    },
+    "isWithdrawDesc": {
+      "true": "是",
+      "false": "否"
+    },
+    "statusDesc": {
+      "Deactivate": "停用",
+      "Activate": "啟用"
+    },
+    "displayDesc": {
+      "true": "是",
+      "false": "否"
+    },
+    "Options": {
+      "statusOptions": [
+        {
+          "label": "停用",
+          "value": "Deactivate"
+        },
+        {
+          "label": "啟用",
+          "value": "Activate"
+        }
+      ],
+      "isWithdrawOptions": [
+        {
+          "label": "是",
+          "value": "true"
+        },
+        {
+          "label": "否",
+          "value": "false"
+        }
+      ],
+      "displayOptions": [
+        {
+          "label": "是",
+          "value": "true"
+        },
+        {
+          "label": "否",
+          "value": "false"
+        }
+      ]
+    },
+    "PlaceHolder": {
+      "PleaseChoose": "請選擇",
+      "PleaseEnter": "請輸入"
+    },
+    "EditColums": {
+      "field": "edit",
+      "header": "編輯"
+    }
+  },
+  "AuthGroup": {
+    "Title": {
+      "AddAuthGroup": "新增群組",
+      "EditAuthGroup": "編輯群組",
+      "ViewAuthGroup": "檢視群組"
+    },
+    "Label": {
+      "AuthGroupMgmt": "群組管理",
+      "Tenant": "Tenant",
+      "AuthGroupType": "群組類別",
+      "AuthGroupDesc": "群組描述",
+      "IsDefault": "預設群組",
+      "AuthGroupName": "群組名稱",
+      "Member": "成員",
+      "ConfirmDelete": "確認刪除？"
+    },
+    "Options": {
+      "DefaultNull": [
+        {
+          "label": "請選擇",
+          "value": null
+        }
+      ],
+      "AuthGroupType": [
+        {
+          "label": "使用者",
+          "value": "USER"
+        },
+        {
+          "label": "BU",
+          "value": "BU"
+        },
+        {
+          "label": "部門",
+          "value": "DEPT"
+        }
+      ],
+      "IsDefault": [
+        {
+          "label": "是",
+          "value": "Y"
+        },
+        {
+          "label": "否",
+          "value": "N"
+        }
+      ]
+    },
+    "Columns": [
+      {
+        "field": "tenant",
+        "header": "Tenant",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "authGroupName",
+        "header": "群組名稱",
+        "isDefault": true,
+        "isDisabled": true
+      },
+      {
+        "field": "authGroupType",
+        "header": "群組類別",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "isDefault",
+        "header": "預設群組",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "authGroupDesc",
+        "header": "群組描述",
+        "isDefault": true,
+        "isDisabled": false
+      }
+    ],
+    "ColumnFunctions": [
+      {
+        "field": "edit",
+        "header": "編輯"
+      },
+      {
+        "field": "del",
+        "header": "刪除"
+      },
+      {
+        "field": "view",
+        "header": "檢視"
+      }
+    ],
+    "Message": {
+      "AuthGroupNameRequired": "此欄位必填",
+      "AuthGroupNameExists": "此群組名稱已經存在，請使用其他名稱",
+      "AddSuccess": "群組已新增",
+      "EditSuccess": "群組已更新",
+      "DelSuccess": "群組已刪除",
+      "MemberRequired": "請選擇成員",
+      "AuthGroupNameOverLength": "超過長度100",
+      "AuthGroupDescOverLength": "超過長度300"
+    }
+  },
+  "Role": {
+    "Label": {
+      "RoleMgmt": "角色權限查詢",
+      "Tenant": "Tenant",
+      "RoleName": "角色名稱",
+      "RoleDesc": "角色描述",
+      "RoleType": "角色類別",
+      "RoleStatus": "角色狀態",
+      "Permission": "權限",
+      "FilterColumns": "欄位篩選",
+      "ConfirmDelete": "確認刪除？",
+      "ExpandAll": "全展開",
+      "SelectGroup": "選擇群組",
+      "AuthGroupIsDefault": "預設",
+      "RolePermissionSetting": "功能權限設定"
+    },
+    "PlaceHolder": {
+      "RoleName": "請輸入",
+      "RoleDesc": "請輸入",
+      "Search": "搜尋"
+    },
+    "Options": {
+      "DefaultNull": [
+        {
+          "label": "請選擇",
+          "value": null
+        }
+      ],
+      "RoleType": [
+        {
+          "label": "預設角色",
+          "value": "DEFAULT"
+        },
+        {
+          "label": "一般角色",
+          "value": "GENERAL"
+        },
+        {
+          "label": "系統管理員",
+          "value": "ADMIN"
+        }
+      ],
+      "RoleStatus": [
+        {
+          "label": "啟用",
+          "value": "ACTIVATE"
+        },
+        {
+          "label": "停用",
+          "value": "DEACTIVATE"
+        }
+      ],
+      "AuthGroupType": [
+        {
+          "label": "使用者",
+          "value": "USER"
+        },
+        {
+          "label": "BU",
+          "value": "BU"
+        },
+        {
+          "label": "部門",
+          "value": "DEPT"
+        }
+      ],
+      "AuthGroupIsDefault": [
+        {
+          "label": "預設",
+          "value": "Y"
+        },
+        {
+          "label": "",
+          "value": "N"
+        }
+      ]
+    },
+    "Columns": [
+      {
+        "field": "roleName",
+        "header": "角色名稱",
+        "isDefault": true,
+        "isDisabled": true
+      },
+      {
+        "field": "roleDesc",
+        "header": "角色描述",
+        "isDefault": true
+      },
+      {
+        "field": "roleType",
+        "header": "角色類別",
+        "isDefault": true
+      },
+      {
+        "field": "status",
+        "header": "角色狀態",
+        "isDefault": true,
+        "isDisabled": true
+      },
+      {
+        "field": "lastUpdatedDate",
+        "header": "最後更新時間",
+        "isDefault": true
+      },
+      {
+        "field": "lastUpdatedBy",
+        "header": "最後更新人",
+        "isDefault": true
+      }
+    ],
+    "ColumnFunctions": [
+      {
+        "field": "edit",
+        "header": "編輯"
+      },
+      {
+        "field": "del",
+        "header": "刪除"
+      },
+      {
+        "field": "view",
+        "header": "檢視"
+      }
+    ],
+    "Role-Step1": {
+      "Title1": "角色設定",
+      "Title2": "選擇群組"
+    },
+    "Role-Step2": {
+      "Title": "功能權限設定"
+    },
+    "Role-Step3": {
+      "Title": "角色資訊"
+    },
+    "Message": {
+      "TenantRequired": "Tenant欄位必填",
+      "RoleNameRequired": "此欄位必填",
+      "RoleTypeRequired": "此欄位必填",
+      "RoleStatusRequired": "此欄位必填",
+      "RoleNameExists": "此角色名稱已經存在，請使用其他名稱",
+      "AddSuccess": "角色已新增",
+      "EditSuccess": "角色已更新",
+      "DelSuccess": "角色已刪除",
+      "AuthGroupRequired": "請選擇群組",
+      "PermissionRequired": "請選擇權限",
+      "RoleNameOverLength": "超過長度100",
+      "RoleDescOverLength": "超過長度300"
+    },
+    "StepItems": [
+      {
+        "label": "角色設定&選擇群組"
+      },
+      {
+        "label": "功能權限設定"
+      },
+      {
+        "label": "設定確認"
+      }
+    ],
+    "SubscribedDesc": [
+      {
+        "label": "",
+        "value": "Y"
+      },
+      {
+        "label": "(尚未訂閱)",
+        "value": "N"
+      }
+    ]
+  },
+  "System": {
+    "Message": {
+      "Error": "系統發生錯誤，請稍後再試"
+    }
+  },
+  "Button": {
+    "Label": {
+      "Action": "審核",
+      "Accept": "核准",
+      "Download": "下載",
+      "Edit": "編輯",
+      "Add": "新增",
+      "Modify": "修改",
+      "Delete": "刪除",
+      "Query": "查詢",
+      "Reset": "重置",
+      "Save": "儲存",
+      "Cancel": "取消",
+      "Confirm": "確定",
+      "ConfirmAction": "確定送出",
+      "Filter": "篩選",
+      "PreviousPage": "上一頁",
+      "PreviousStep": "上一步",
+      "NextStep": "下一步",
+      "Close": "關閉",
+      "Login": "登入",
+      "Quering": "查詢中...",
+      "Logout": "登出",
+      "Submit": "送出",
+      "Approve": "審核",
+      "Draft": "存成草稿",
+      "BackToPendingList": "回到待處理",
+      "ExportList": "匯出資料",
+      "RedirectApprove": "加簽",
+      "RedirectApproval": "加簽",
+      "Extend": "展開",
+      "PackUp": "收起",
+      "ExportPdf":"匯出PDF"
+    }
+  },
+  "Input": {
+    "PlaceHolder": {
+      "PleaseKeyIn": "請輸入",
+      "PleaseEnter": "請輸入",
+      "PleaseSelect": "請選擇",
+      "Choose": "選擇",
+      "PleaseSelectOrKeyIn": "請選擇或輸入",
+      "PleaseEnterKeyword": "請輸入關鍵字",
+      "PleaseEnterRefShipment": "請輸入 Ref Shipment#",
+      "SearchTableByKeyword": "搜尋",
+      "OnlyPosIntAndBig0": "只能為正整數，且大於 0",
+      "OnlyBig0": "只能大於 0",
+      "PleaseSelectStartDate": "請選擇起日",
+      "PleaseSelectEndDate": "請選擇迄日",
+      "FreeKeyInorSelect": "可自由輸入或依選擇自動帶入",
+      "NoMatch": "沒有符合的"
+    }
+  },
+  "DropDown": {
+    "PlaceHolder": {
+      "PleaseChoose": "請選擇",
+      "NoChooseEqualtoALL":"，未選擇則代表 ALL",
+      "NoData":"無資料"
+    }
+  },
+  "Dialog": {
+    "Header": {
+      "AddAssignee": "加簽",
+      "Choose": "選擇",
+      "Approve": "審核",
+      "MessagePrompt": "訊息提示",
+      "FilterColumns": "欄位篩選"
+    },
+    "Message": {
+      "SuccessfullySaved": "保存成功",
+      "SelectAtLeastOne": "至少選擇一筆資料"
+    }
+  },
+  "Span": {
+    "Label": {
+      "RequiredField": "此欄位為必填",
+      "InvalidURL": "必須為有效連結",
+      "OnlyPosIntAndBig0": "只能為正整數，且大於 0",
+      "OnlyBig0": "只能大於 0",
+      "OnlyBigEqual0": "只能大於等於 0",
+      "RequiredBig0Field": "此欄位需為整數且大於0"
+    }
+  },
+  "Info": "資訊",
+  "Success": "成功",
+  "Warn": "警告",
+  "Error": "錯誤",
+  "LEHRuleManager": {
+    "Label": {
+      "Flag": "有效/無效(Y/N)"
+    },
+    "Dialog": {
+      "Header": {
+        "Add": "新增 License Exception 規則",
+        "Modify": "修改 License Exception 規則"
+      }
+    },
+    "Columns": [
+      {
+        "field": "eccn",
+        "label": "ECCN"
+      },
+      { "field": "civ", "label": "CIV" },
+      { "field": "gbs", "label": "GBS" },
+      { "field": "enc", "label": "ENC" },
+      { "field": "lvs", "label": "LVS" },
+      { "field": "orderAmt", "label": "Order AMT" },
+      { "field": "yearAmt", "label": "Year AMT" },
+      { "field": "remark", "label": "Remark" },
+      {
+        "field": "flag",
+        "label": "有效/無效(Y/N)"
+      },
+      {
+        "field": "createdDate",
+        "label": "Creation Date"
+      },
+      {
+        "field": "createdBy",
+        "label": "Creation By"
+      },
+      {
+        "field": "lastUpdatedDate",
+        "label": "Last Update Date"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "label": "Last Updated By"
+      }
+    ]
+  },
+  "ECCNStatusMTNManager": {
+    "Label": {
+      "Flag": "有效/無效(Y/N)"
+    },
+    "Columns": [
+      {
+        "field": "eccn",
+        "label": "ECCN"
+      },
+      {
+        "field": "activeFlag",
+        "label": "有效/無效(Y/N)"
+      },
+      {
+        "field": "createdDate",
+        "label": "Creation Date"
+      },
+      {
+        "field": "createdBy",
+        "label": "Creation By"
+      },
+      {
+        "field": "lastUpdatedDate",
+        "label": "Last Update Date"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "label": "Last Updated By"
+      }
+    ],
+    "Dialog": {
+      "Header": {
+        "Add": "新增 License Exception 規則",
+        "Modify": "修改 License Exception 規則"
+      }
+    }
+  },
+  "LicenseMgmt": {
+    "FormType": {
+      "Imp": "進口許可證",
+      "Exp": "出口許可證",
+      "SC047": "SC047 / SC054 單",
+      "SOA": "貿易合規客戶確認函申請單",
+      "ECCNStatusMtn": "ECCN 維護",
+      "LEH": "License Exception HOLD"
+    },
+    "Status": {
+      "Approve": "處理完成",
+      "Reject": "駁回",
+      "Approving": "處理中",
+      "Draft": "草稿",
+      "null": "System Error"
+    },
+    "Common": {
+      "Label": {
+        "Apply": "申請",
+        "ReferenceNo": "單號",
+        "Applicant": "申請人",
+        "Date": "申請日期",
+        "Department": "申請人部門",
+        "SimpleAction": "動作",
+        "Action": "審核動作",
+        "FileUpload": "檔案上傳",
+        "AttachedLink": "附加連結",
+        "FlowReturnTo": "退回關卡",
+        "Endorsement": "加簽人員",
+        "Opinion": "意見",
+        "BatchEdit": "批次修改"
+      },
+      "Button": {
+        "AddAttachment": "新增檔案或連結"
+      },
+      "Title": {
+        "FormArea": "表單填寫區",
+        "AddItemInfo": "新增 Item 相關資料",
+        "AddECCNInfo": "新增 ECCN",
+        "AttachedFile": "附加檔案",
+        "AttachedLink": "附加連結",
+        "AuditHistoryLog": "簽核歷程",
+        "Notification": "訊息通知",
+        "SelectField": "欄位篩選",
+        "SelectItems": "選擇 Item(s) 從",
+        "Opinion": "意見",
+        "Attachment": "附件",
+        "AddFileOrLink": "新增檔案或連結",
+        "AddEUCMtnRecord": "新增最終用途最終用戶保證書(EUC)",
+        "ModifyEUCMtnRecord": "修改最終用途最終用戶保證書(EUC)",
+        "AddSCMtnRecord": "新增HK特別條款(SC047)",
+        "ModifySCMtnRecord": "修改HK特別條款(SC047)"
+      },
+      "Tabs": {
+        "AuditHistoryLog": "簽核歷程",
+        "AttachmentLink": "附件連結",
+        "ApplicationInfo": "申請資訊",
+        "SingleModify": "單筆修改",
+        "SingleAdd": "單筆新增",
+        "MultiAdd": "多筆新增",
+        "File": "檔案",
+        "Link": "連結",
+        "SignOffHistory": "簽核歷程"
+      },
+      "Option": {
+        "Accept": "核准",
+        "Reject": "駁回",
+        "RedirectApproval": "加簽至下一關",
+        "SeekEndorsement": "加簽後傳回",
+        "FlowReturn": "退回"
+      },
+      "Hint": {
+        "AddURLFailed": "新增連結失敗",
+        "AddURLSuccess": "新增連結成功",
+        "AddFileFailed": "檔案上傳失敗",
+        "AddFileSuccess": "新增檔案成功",
+        "AddURLFailedExisted": "該連結已存在既有列表中",
+        "NoData": "目前無資料",
+        "NoMatchResult": "無符合條件的結果",
+        "DoubleSearch": "可對結果進行二次查詢",
+        "AddProductFirst": "請先進行新增",
+        "QDeleteData": "是否要刪除所選擇的資料 ?",
+        "QDeleteFile": "是否要刪除所選擇的檔案 ?",
+        "QDeleteLink": "是否要刪除所選擇的連結 ?",
+        "QSubmit": "是否要送出表單 ?",
+        "FileExistTemOrQueueList": "檔案已存在 暫存/既有 檔案列表中。",
+        "URLExistTemOrQueueList": "該 URL 已存在 暫存/既有 檔案列表中。",
+        "PlzChooseReturnTask": "請選擇退回關卡。",
+        "PlzChooseCosigners": "請選擇加簽人員。",
+        "PlzChoose": "請選擇",
+        "Timeout": "資料處理逾時",
+        "AttachedURL": "附加連結格式，要有 http:// 或 https://",
+        "AttachedURLFormatError": "網址格式錯誤，( ex : http(s)://... )",
+        "AuditApprovingPrefix": "該表單需等待",
+        "AuditApprovingSuffix": " 簽核",
+        "AuditApprovingConSigneeSuffix": "( 此人員為加簽人 )",
+        "AddFileCKMe": "新增附加檔案，請點我",
+        "NotAllowReturn": "當前不允許退回",
+        "CurWordCount": "目前字數",
+        "ItemExistError": "已存在，不能重複! 若欲修改，請點選該筆的編輯按鈕。",
+        "ApplySuccess": "申請送出成功。",
+        "DraftSuccess": "草稿儲存成功。",
+        "ApproveSuccess": "送出成功。",
+        "ApplyFailed": "申請送出失敗。",
+        "DraftFailed": "草稿儲存失敗。",
+        "ApproveFailed": "送出失敗。",
+        "NotKeyIn": "尚未填寫",
+        "OpinionUpto250": "意見只能 250(含) 字以內",
+        "FileNotUploaded": "檔案尚未上傳，確認是否要關閉視窗",
+        "NotAllowedChinese": "不可輸入中文",
+        "NoResult": "目前無資料",
+        "CreateSuccess": "新增成功",
+        "EditSuccess": "更新成功",
+        "EditFailed": "更新失敗",
+        "EXPDOError": "Delivery No. 有誤!",
+        "DupItemLicenseError": "相同 Item，不可輸入相同的 License !",
+        "DupCCATsLicenseError": "相同 CCATs，不可輸入相同的 License !",
+        "ITEMCCATsChooseOne": "請輸入 Item 或 CCATs",
+        "LicenseQtyMustLessThanBAFAQty": "License# Qty 不可超過 BAFA# Balance Qty",
+        "ServerErrorPleaseContactAdmin":"伺服器發生內部錯誤，請聯繫系統管理員",
+        "ReminderSend":"已催促處理人員！",
+        "ReminderSendFailed":"催促處理人員錯誤！"
+      }
+    },
+    "EUC": {
+      "Title": {},
+      "Tabs": {},
+      "Label": {
+        "CV": "客戶/廠商",
+        "Group": "Group",
+        "Exp": "有效日期",
+        "EndUser": "最終用戶",
+        "EndUse": "最終用途",
+        "Remark": "備註",
+        "Customer": "客戶",
+        "Vendor": "廠商"
+      },
+      "Option": {
+        "Gov": "政府單位",
+        "Civ": "民間單位",
+        "NCivUse": "非民間用途",
+        "CivUse": "民間用途"
+      },
+      "Hint": {
+        "EUCFile": "請上傳附件:客戶簽署之EUC檔案"
+      },
+      "Cols": {
+        "productCode": "Item",
+        "brand": "Brand",
+        "eccn": "ECCN",
+        "ccats": "CCATs",
+        "proviso": "Proviso",
+        "quantity": "Quantity",
+        "ctmPo": "Ctm Po",
+        "project": "Project",
+        "periodFrom": "Period From",
+        "periodTo": "Period To"
+      }
+    },
+    "IMPEXP": {
+      "Option": {
+        "AJB_Shipping": "AJB 出貨",
+        "General_Shipping": "一般出貨"
+      },
+      "PlaceHolder": {
+        "EndUseAllowNumAndEng": "，End Use 只允許英數",
+        "PlzSelectOOUAndCVIMP": "請先選擇 採購公司別 & 客戶/廠商",
+        "PlzSelectOOUAndCVEXP": "請先選擇 接單公司別 & 客戶/廠商",
+        "PlzKeyOrByShiptoCode": "請輸入，也可由 ship to code 選擇後自動帶入",
+        "PleaseKeyInUSDPrice": "請輸入 Price (USD)",
+        "PleaseKeyInPrice": "請輸入 Price"
+      },
+      "Label": {
+        "Receiving_Shipping_OU_IMP": "採購公司別",
+        "Receiving_Shipping_OU_EXP": "接單公司別",
+        "Receiving_Shipping_Inventory_OU_IMP": "進貨公司別 ( 申請 License 公司別 )",
+        "Receiving_Shipping_Inventory_OU_EXP": "出貨公司別 ( 申請 License 公司別 )",
+        "Warehouse_Location": "倉庫所在地區",
+        "CV": "客戶/廠商",
+        "Shipping_Type": "出貨型態",
+        "ExpImpConsignee": "Exporter/Consignee (出口人/收貨人(進口))",
+        "ExpConsignee": "Exporter(出口人)",
+        "ImpConsignee": "Consignee (收貨人(進口))"
+      },
+      "Hint": {
+        "ProductSelectFirst": "請先選擇 Item",
+        "EndUseAllowNumAndEng": "End Use 只允許英數",
+        "SelectWarehouseFirst": "請先選擇倉庫所在地區！",
+        "SelectShipToAddressFirst": "請先輸入 Ship To Address",
+        "SelectCVFirst": "請先選擇 客戶/廠商！",
+        "SelectOUFirstIMP": "請先選擇 進貨公司別 ( 申請 License 公司別 )！",
+        "SelectOUFirstEXP": "請先選擇 出貨公司別 ( 申請 License 公司別 )！",
+        "EXPSpecialNotice": "此單為 AJB，申請 License 時請特別注意公司別！",
+        "IMPSpecialNotice": "此單為代採購，申請 License 時請特別注意公司別！",
+        "LicenseQtyMustLessThanBalanceQty": "BAFA License Qty不可超過剩餘可用量",
+        "ItemNoRecord":"尚無申請紀錄，請先附件上傳相關資訊\n範例：產品規格書、工業貿易署文件(CSC037)、美國出口管制(CCATS)...等",
+        "WarehouseHKPriceRequired":"倉庫所在地區為香港，Price (USD) 不得為空"
+      },
+      "Cols": {
+        "IMP": {
+          "key":"Seq",
+          "productCode": "Item",
+          "quantity": "Quantity",
+          "price": "Price",
+          "usdPrice":"Price (USD)",
+          "eccn": "ECCN",
+          "ccats": "CCATs",
+          "specialLabel": "Special Condition",
+          "shipFrom": "Ship From",
+          "remark": "Remark",
+          "license": "License#",
+          "licenseQty": "License# QTY",
+          "bafaLicense": "BAFA#",
+          "bafaBalQty": "BAFA# Balance QTY",
+          "bafaTotalQty": "BAFA# Total QTY",
+          "startDate": "Start Date",
+          "endDate": "End Date"
+        },
+        "EXP": {
+          "key":"Seq",
+          "productCode": "Item",
+          "quantity": "Quantity",
+          "price": "Price",
+          "usdPrice":"Price (USD)",
+          "eccn": "ECCN",
+          "ccats": "CCATs",
+          "remark": "Remark",
+          "deliveryNo": "Delivery No.",
+          "refShipment": "Ref Shipment",
+          "license": "License#",
+          "licenseQty": "License# QTY",
+          "bafaLicense": "BAFA#",
+          "bafaBalQty": "BAFA# Balance QTY",
+          "bafaTotalQty": "BAFA# Total QTY",
+          "startDate": "Start Date",
+          "endDate": "End Date"
+        }
+      }
+    },
+    "SC047": {
+      "Option": {
+        "AJB_Shipping": "AJB 出貨",
+        "General_Shipping": "一般出貨"
+      },
+      "PlaceHolder": {
+        "PlzSelectOOUAndCV": "請先選擇 接單公司別 & 客戶/廠商",
+        "PlzSelectOUAndCV": "請先選擇 接單公司別 & 客戶/廠商",
+        "PlzKeyOrByShiptoCode": "請輸入，也可由 Ship To Code 選擇後自動帶入",
+        "PlzKeyOrByDelivertoCode": "請輸入，也可由 Deliver To Code 選擇後自動帶入",
+        "AutoFillbySelectLicense": "選擇 License 後，自動帶入單號",
+        "EndUseAllowNumAndEng": "，End Use 只允許英數",
+        "AutoFillbyImportLicense": "Import License 後，自動帶入採購/接單公司別",
+        "PlzSelectLicense": "請先選擇 Import License",
+        "PlzSelectItem": "請先選擇 Item",
+        "Loading": "自動查詢中..."
+      },
+      "Label": {
+        "Purchasing_Orders_OU": "接單公司別",
+        "Receiving_Shipping_OU": "出貨公司別 (申請 License 公司別)",
+        "Warehouse_Location": "倉庫所在地區",
+        "CV": "客戶/廠商",
+        "Shipping_Type": "出貨型態",
+        "ExpImpConsignee": "Exporter/Consignee 出口人/收貨人(進口)",
+        "Business_Registration_Certificate": "商業登記證"
+      },
+      "Hint": {
+        "SC047File": "如有SC047 template 附件,請在點選附加連結頁籤上傳 SC047 template 附件!",
+        "SelectWarehouseFirst": "請先選擇倉庫所在地區！",
+        "SelectOUFirst": "請先選擇 出貨公司別 (申請 License 公司別)！",
+        "SelectCVFirst": "請先選擇 客戶/廠商！",
+        "KeyInShipToAddressFirst": "請先輸入 Ship To Address！",
+        "SCSpecialNotice": "此單為 AJB，申請 License 時請特別注意公司別！",
+        "FillItemQTY": "，請填寫 Applied QTY",
+        "FillItemIMPLicense": "，請選擇 Import License No.",
+        "EndUseAllowNumAndEng": "End Use 只允許英數",
+        "ApplyNumOverControlNum": "申請量不可大於SC047的控管量!"
+      },
+      "Cols": {
+        "key":"Seq",
+        "productCode": "Item",
+        "quantity": "Applied QTY",
+        "ccats": "CCATs",
+        "license": "Import License No.",
+        "refShipment": "Ref Shipment",
+        "receipt": "Receipt",
+        "remark": "Remark"
+      }
+    },
+    "ICP": {
+      "Option": {
+        "NewCustomer": "新客戶",
+        "OldCustomer": "舊客戶"
+      },
+      "PlaceHolder": {
+        "CustName": "請填寫負責篩選人員",
+        "TrxDate": "請填寫執行日期",
+        "CompanyName": "請填客戶公司名稱",
+        "CustAddress": "請填寫客戶通訊地址",
+        "NewOldCustomer": "請選擇新舊客戶",
+        "KeywordSearch": "請輸入關鍵字查詢",
+        "EmpInfo": "請選擇負責篩選人員"
+      },
+      "Label": {
+        "CustName": "負責篩選人員",
+        "ExecutionDate": "執行日期",
+        "ClientCompanyName": "客戶公司名稱",
+        "CustomerMailingAddress": "客戶通訊地址",
+        "NewOldCustomer": "新/舊客戶",
+        "AllSelect": "全部選擇"
+      },
+      "Hint": {
+        "ICPWarring": "若出現以下紅色警戒指標，且後續調查無法消除客戶嫌疑，相關交易應立即中止。"
+      }
+    },
+    "ECCNStatusMtn": {
+      "Label": {
+        "Flag": "有效/無效(Y/N)"
+      }
+    }
+  },
+  "Common": {
+    "TableView": {
+      "Default": {
+        "Columns": {
+          "Edit": "編輯",
+          "Detail": "詳細",
+          "ViewHistory": "檢視History"
+        }
+      },
+      "Message": {
+        "PlzAdd": "請先新增資料"
+      }
+    },
+    "Dialog": {
+      "Header": {
+        "Error": "發生了一些錯誤",
+        "Notice": "訊息提示"
+      },
+      "Message": {
+        "PlzChoose": "請選擇",
+        "PlzKeyIn": "請輸入",
+        "Upto300": "最多 300 個字元",
+        "OnlyPosDecimal": "僅能輸入數字(允許小數)"
+      }
+    },
+    "Toast": {
+      "SuccessAdd": "已成功新增",
+      "SuccessSave": "已成功保存",
+      "SuccessUpdate": "已成功更新"
+    },
+    "Options": {
+      "flagOptions": [
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ],
+      "flagOptionsWithDefault": [
+        {
+          "label": "請選擇",
+          "value": ""
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ]
+    }
+  },
+  "APPROVING_LEH": {
+    "Label": {
+      "ReferenceNo": "單號",
+      "Applicant": "申請人",
+      "ApplicantDate": "申請日期",
+      "Type": "類別",
+      "Corp": "公司別",
+      "ReferenceNumber": "單號",
+      "Group": "集團別",
+      "Sales": "業務員",
+      "SalesDept": "業務員部門",
+      "CreatedByLastUpdateBy": "處理人",
+      "CustomerChineseName": "客戶中文名稱",
+      "CustomerEnglishName": "客戶英文名稱",
+      "CustomerCode": "客戶代碼",
+      "EUC": "EUC",
+      "Brand": "Brand",
+      "Item": "Item",
+      "Qty": "Qty",
+      "CtmPo": "CTM PO/Project",
+      "ECCN": "ECCN",
+      "CCATs": "CCATs",
+      "Proviso": "Proviso",
+      "ExceptionHoldReason": "Exception Hold Reason",
+      "BillToCountry": "Bill to Country",
+      "BillTo": "Bill to",
+      "ShipToCountry": "Ship to Country",
+      "ShipTo": "Ship to",
+      "DeliverToCountry": "Deliver to Country",
+      "DeliverTo": "Deliver to",
+      "Approved": "處理完成",
+      "Reject": "駁回",
+      "Approving": "處理中",
+      "BackToPendingList": "回到待處理",
+      "GoBack": "上一頁",
+      "AuditApprovingPrefix": "該表單需等待",
+      "Approve": "簽核",
+      "AuditApprovingSuffix": "( 此人員為加簽人 )",
+      "GovermentUnit": "政府單位",
+      "CivillianEndUser": "民間單位",
+      "CillianEndUse": "民用"
+    }
+  },
+  "SOA": {
+    "Label": {
+      "CV": "客戶/廠商",
+      "Customer": "客戶",
+      "Vendor": "廠商",
+      "FillingArea": "正本歸檔區域",
+      "Origin": "正本",
+      "SpecialApproval":"特批"
+    },
+    "Msg": {
+      "ShouldBeOrigin": "WPG-CLOUD or WPGH需有正本！",
+      "ItemAlreadyExist": "此ITEM已選過，不能重複",
+      "duplicateItem":"Brand、ctg1、ctg2、ctg3、ECCN、Item no已選過，不能重複",
+      "AllItemNotAllowEdit": "All Item 僅可刪除，不可編輯",
+      "AlreadySend": "已成功送出。",
+      "AlreadySaveAsDraft": "已成功儲存為草稿",
+      "MulitpleUploadItemAlreadExist": "已存在，不能重複",
+      "ItemNotFound": "查無對應資料",
+      "DateInvaild": "有效起始時間必須小於有效截止時間",
+      "FileFormatError": "檔案格式錯誤",
+      "ErrorDateFormat": "有效期間設定錯誤",
+      "PlzChooseDept": "請選擇申請人部門",
+      "PlzChooseDocArea": "請選擇正本歸檔區域",
+      "AllGroupOnlyAllowOrigin": "當SOA 為非正本時,不可選All Groups",
+      "PleaseKeyInQty": "請輸入Qty"
+    },
+    "Button": {
+      "confirm": "確定",
+      "deduct": "是否扣量"
+    },
+    "ApprovingLicense":{
+      "Title":"已申請SOA查詢",
+      "Label": {
+        "NotFound": "查無對應資料",
+        "AlreadyHaveApprovingLicense": "SOA信息已存在貴集團, 請透過Bpaas SOA management 查詢"
+      },
+      "Table": [
+        {
+          "field": "applicantName",
+          "header": "申請人",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left",
+          "minWidth":"200"
+        },
+        {
+          "field": "formNo",
+          "header": "SOA#",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        },
+        {
+          "field": "status",
+          "header": "表單狀態",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        },
+        {
+          "field": "displayOuGroup",
+          "header": "Group",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        },
+        {
+          "field": "ouCode",
+          "header": "Orders OU",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        },
+        {
+          "field": "ouName",
+          "header": "Order OU Name",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        },
+        {
+          "field": "specialApproval",
+          "header": "特批",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        },
+        {
+          "field": "isOriginal",
+          "header": "Original/Non-Original",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        },
+        {
+          "field": "productCode",
+          "header": "Item",
+          "isDefault": true,
+          "isDisabled": false,
+          "maxWidth": "",
+          "textAlign": "left"
+        }
+      ]
+    }
+  },
+  "EccnMtn": {
+    "Label": {
+      "AreaEccnSetting": "Area ECCN 設定",
+      "SplitHint": "請以,隔開要查詢的關鍵字",
+      "PleaseSearchOrAdd": "當前無資料，請搜尋或新增"
+    },
+    "Msg": {
+      "CreateSuccess": "新增成功",
+      "EditSuccess": "更新成功",
+      "DelSuccess": "刪除成功",
+      "PleaseChoose": "請選擇",
+      "ItemExistError": "已有設定紀錄存在，請您確認一下",
+      "PleaseEnter": "請輸入",
+      "PleaseEnterKeyWord": "請輸入料號",
+      "PleaseChooseType": "請選擇搜尋類型",
+      "PleaseChooseMasterEccn": "若所屬區域並無ECCN，請使用Master ECCN"
+    },
+    "Options": {
+      "itemFilterTypeOptions": [
+        {
+          "label": "等於",
+          "value": "Equals"
+        },
+        {
+          "label": "包含",
+          "value": "Include"
+        },
+        {
+          "label": "開頭為",
+          "value": "StartsWith"
+        },
+        {
+          "label": "結尾為",
+          "value": "EndsWith"
+        },
+        {
+          "label": "複選",
+          "value": "Multi"
+        }
+      ]
+    }
+  },
+  "ReAssignDialog": {
+    "Btn": {
+      "ReAssign": "重新分派"
+    },
+    "Label": {
+      "RedirectFrom": "需重新分派人員",
+      "RedirectEmp": "指派人員",
+      "PleaseChoose": "請選擇",
+      "SelectReAssginer": "請選擇需重新分配人員"
+    },
+    "Msg": {
+      "SaveFail": "重新分派失敗",
+      "AlreadyReAssign": "已重新分派給",
+      "PleaseSelectRedirectFrom": "請選擇重新分配人員",
+      "PleaseSelectRedirectEmp": "請選擇指派人員"
+    }
+  },
+  "SoaControlSetup": {
+    "Label": {
+      "SoaControlSetup": "貿易合規控管設定",
+      "SoaControlSetupByUser":"客戶控管",
+      "SoaControlSetupByItem":"料號控管",
+      "SoaExclusionControl":"排除控管",
+      "CustomerVendorType": "客戶/廠商",
+      "Flag": "有效/無效(Y/N)",
+      "CV": "客戶/廠商",
+      "PleaseSearchOrAdd": "當前無資料，請搜尋或新增",
+      "ValidFrom": "開始控管日",
+      "SpecialApproval":"特批",
+      "Update":"更新"
+    },
+    "Options": {
+      "flagOptions": [
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ],
+      "flagOptionsWithDefault": [
+        {
+          "label": "請選擇",
+          "value": ""
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ]
+    },
+    "Msg": {
+      "CreateSuccess": "新增成功",
+      "EditSuccess": "更新成功",
+      "EditFail": "更新失敗",
+      "DelSuccess": "刪除成功",
+      "NotAllowEmpty": "不得為空",
+      "NotAllowEditAllItem": "批次修改不得包含All Item",
+      "DownloadProcess": "檔案處理中，結果會透過mail發送"
+    },
+    "TableColumn": {
+      "soaControlTableColByUser": [
+        {
+          "label": "Group",
+          "field": "group"
+        },
+        {
+          "label": "OU Code",
+          "field": "ouCode"
+        },
+        {
+          "label": "OU Name",
+          "field": "ouName"
+        },
+        {
+          "label": "Type",
+          "field": "vcType"
+        },
+        {
+          "label": "Vendor#/Customer#",
+          "field": "vcCode"
+        },
+        {
+          "label": "Vendor/Customer",
+          "field": "vcName"
+        },
+        {
+          "label": "有效/無效(Y/N)",
+          "field": "flag"
+        },
+        {
+          "label": "開始控管日",
+          "field": "validFrom"
+        },
+        {
+          "label": "Remark",
+          "field": "remark"
+        },
+        {
+          "label": "Creation Date",
+          "field": "createdDate"
+        },
+        {
+          "label": "Creation By",
+          "field": "createdBy"
+        },
+        {
+          "label": "Last Update Date",
+          "field": "lastUpdatedDate"
+        },
+        {
+          "label": "Last Update By",
+          "field": "lastUpdatedBy"
+        }
+      ],
+      "soaControlTableColByItem": [
+        {
+          "label": "Vendor#/Customer#",
+          "field": "vcCode"
+        },
+        {
+          "label": "Vendor/Customer",
+          "field": "vcName"
+        },
+        {
+          "label": "Brand",
+          "field": "brand"
+        },
+        {
+          "label": "特批",
+          "field": "specialApproval"
+        },
+        {
+          "label": "Ctg1",
+          "field": "ctg1"
+        },
+        {
+          "label": "Ctg2",
+          "field": "ctg2"
+        },
+        {
+          "label": "Ctg3",
+          "field": "ctg3"
+        },
+        {
+          "label": "ECCN",
+          "field": "eccn"
+        },
+        {
+          "label": "Item",
+          "field": "productCode"
+        },
+        {
+          "label": "有效/無效(Y/N)",
+          "field": "flag"
+        },
+        {
+          "label": "開始控管日",
+          "field": "validFrom"
+        },
+        {
+          "label": "Remark",
+          "field": "remark"
+        },
+        {
+          "label": "Creation Date",
+          "field": "createdDate"
+        },
+        {
+          "label": "Creation By",
+          "field": "createdBy"
+        },
+        {
+          "label": "Last Update Date",
+          "field": "lastUpdatedDate"
+        },
+        {
+          "label": "Last Update By",
+          "field": "lastUpdatedBy"
+        }
+      ],
+      "soaExclusionControlTableCol": [
+        {
+          "label": "Group",
+          "field": "group"
+        },
+        {
+          "label": "Vendor#/Customer#",
+          "field": "vcCode"
+        },
+        {
+          "label": "Vendor/Customer",
+          "field": "vcName"
+        },
+        {
+          "label": "Brand",
+          "field": "brand"
+        },
+        {
+          "label": "開始控管日",
+          "field": "validFrom"
+        },
+        {
+          "label": "有效/無效(Y/N)",
+          "field": "flag"
+        },
+        {
+          "label": "Remark",
+          "field": "remark"
+        },
+        {
+          "label": "Creation Date",
+          "field": "createdDate"
+        },
+        {
+          "label": "Creation By",
+          "field": "createdBy"
+        },
+        {
+          "label": "Last Update Date",
+          "field": "lastUpdatedDate"
+        },
+        {
+          "label": "Last Update By",
+          "field": "lastUpdatedBy"
+        }
+      ]
+    }
+  },
+  "BafaLicenseMtn": {
+    "Label": {
+      "BafaLicenseMtn": "BAFA License管理",
+      "LicenseNo": "BAFA License#",
+      "Flag": "有效/無效(Y/N)",
+      "AddBafaLicense":"新增 BAFA License# 資料",
+      "EditBafaLicense":"編輯 BAFA License# 資料",
+      "ApproveDate":"批核日期",
+      "EffectiveDate":"有效日期",
+      "StartDate": "起始日期",
+      "EndDate": "結束日期",
+      "impExpLicenseNo":"進出口License#"
+    },
+    "Msg": {
+      "PleaseSelectFlag": "請選擇 有效/無效",
+      "PleaseChooseEndDate": "請選擇 有效日期",
+      "InvalidEndDate": "有效日期必須大於批核日期",
+      "PleaseChooseBatchField": "請輸入 有效/無效 或 結束日期",
+      "PleaseInputLicense": "請輸入License！",
+      "PleaseInputItem": "請輸入Item！",
+      "PleaseInputStartDate": "請輸入批核日期！",
+      "PleaseInputEndDate": "請輸入有效日期！",
+      "PleaseInputEndQty": "請輸入Qty！"
+    },
+    "Options": {
+      "flagOptions": [
+        {
+          "label": "請選擇",
+          "value": null
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ],
+      "itemFilterTypeOptions": [
+        {
+          "label": "等於",
+          "value": "Equals"
+        },
+        {
+          "label": "包含",
+          "value": "Include"
+        },
+        {
+          "label": "開頭為",
+          "value": "StartsWith"
+        },
+        {
+          "label": "結尾為",
+          "value": "EndsWith"
+        },
+        {
+          "label": "複選",
+          "value": "Multi"
+        }
+      ]
+    },
+    "ImportHistoryColumns": [
+      {
+        "field": "licenseNo",
+        "header": "進口證 License No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "startDate",
+        "header": "Apply Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouCode",
+        "header": "OU Code",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouName",
+        "header": "OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "useQty",
+        "header": "AD Qty",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "formNo",
+        "header": "Flow No.",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "ExportHistoryColumns": [
+      {
+        "field": "licenseNo",
+        "header": "出口證 License No",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "startDate",
+        "header": "Apply Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouCode",
+        "header": "OU Code",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "ouName",
+        "header": "OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "useQty",
+        "header": "Apply Quantity",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      },
+      {
+        "field": "formNo",
+        "header": "Flow No.",
+        "isDefault": true,
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left"
+      }
+    ],
+    "Table": {
+      "mainTable": [
+        {
+          "field": "viewHistory",
+          "label": "檢視History"
+        },
+        {
+          "field": "productCode",
+          "label": "Item"
+        },
+        {
+          "field": "bafaLicense",
+          "label": "BAFA License#"
+        },
+        {
+          "field": "quantity",
+          "label": "BAFA License Qty"
+        },
+        {
+          "field": "balanceQty",
+          "label": "Balance Qty"
+        },
+        {
+          "field": "approveDate",
+          "label": "Apply Date"
+        },
+        {
+          "field": "endDate",
+          "label": "End Date"
+        },
+        {
+          "field": "active",
+          "label": "Active Flag"
+        },
+        {
+          "field": "remark",
+          "label": "Remark"
+        },
+        {
+          "field": "createdDate",
+          "label": "Creation Date"
+        },
+        {
+          "field": "createdBy",
+          "label": "Creation By"
+        },
+        {
+          "field": "lastUpdatedDate",
+          "label": "LastUpdate Date"
+        },
+        {
+          "field": "lastUpdatedBy",
+          "label": "LastUpdate By"
+        }
+      ]
+    }
+  },
+  "EditAndSubmit": {
+    "Btn": {
+      "EditAndSubmit":"複製重送"
+    }
+  },
+  "SalesMarginToleranceSetup": {
+    "PageTitle": "Sales Margin Tolerance 設定",
+    "Label": {
+      "Flag": "有效/無效(Y/N)",
+      "EnabledFlag": "是否啟用",
+      "FromDate": "有效起始日",
+      "ToDate": "有效結束日",
+      "FileUpload": "檔案上傳",
+      "SingleAdd": "單筆新增",
+      "MultiAdd": "多筆新增",
+      "ConfirmDelete": "確認刪除?",
+      "Notification": "訊息通知"
+    },
+    "Msg": {
+      "CreateSuccess": "新增成功",
+      "EditSuccess": "更新成功",
+      "DelSuccess": "刪除成功",
+      "DownloadProcess": "檔案處理中，結果會透過mail發送",
+      "UploadSuccessfully": "上傳檔案成功"
+    },
+    "Error":{
+      "MinViolationMustOver0":"必須大於等於 0",
+      "ToleranceViolationMustOverMin":"必須大於等於 Tolerance(%) - from",
+      "ToleranceViolationMustLess100":"必須小於等於 100"
+    },
+    "Columns": [
+      {
+        "field": "ouGroup",
+        "header": "Group",
+        "isDefault": true,
+        "isDisabled": false,
+        "textAlign": "left"
+      },
+      {
+        "field": "ouCode",
+        "header": "OU Code",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "ouName",
+        "header": "OU Name",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"250"
+      },
+      {
+        "field": "custCode",
+        "header": "Customer #",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "custName",
+        "header": "Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"350"
+      },
+      {
+        "field": "endCustomer",
+        "header": "End Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"150"
+      },
+      {
+        "field": "brand",
+        "header": "Brand",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "ctg1",
+        "header": "Ctg1",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "productCode",
+        "header": "Item",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"200"
+      },
+      {
+        "field": "fromTolerance",
+        "header": "Tolerance(%) - from",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "toTolerance",
+        "header": "Tolerance(%) - to",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "fromDate",
+        "header": "有效起始日",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "toDate",
+        "header": "有效結束日",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "status",
+        "header": "是否啟用",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "createdDate",
+        "header": "Creation Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"170"
+      },
+      {
+        "field": "createdBy",
+        "header": "Creation By",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"210"
+      },
+      {
+        "field": "lastUpdatedDate",
+        "header": "Last Update Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"170"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "header": "Last Updated By",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"210"
+      }
+    ],
+    "ColumnFunctions": [
+      {
+        "field": "edit",
+        "header": "編輯",
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "del",
+        "header": "刪除",
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      }
+    ]
+  },
+  "PriceControlForm": {
+    "Label":{
+      "MaintainPrice":"維護0-0 Price",
+      "Maintain":"維護",
+      "Price":"Price"
+    },
+    "PCFLinesMtnColumns": [
+      {
+        "field": "currency",
+        "header": "Currency",
+        "columnId": "p_currency"
+      },
+      {
+        "field": "minSellingPrice",
+        "header": "Worst Selling Price",
+        "columnId": "p_minSelling"
+      },
+      {
+        "field": "salesCost",
+        "header": "Sales Cost",
+        "columnId": "p_salesCost"
+      },
+      {
+        "field": "controlFlag",
+        "header": "Control Flag",
+        "columnId": "p_controlFlag"
+      },
+      {
+        "field": "maxSellingPrice",
+        "header": "Max Selling Price",
+        "columnId": "p_maxSelling"
+      },
+      {
+        "field": "salesGP",
+        "header": "Sales Gp%",
+        "columnId": "p_salesGp"
+      },
+      {
+        "field": "startDateString",
+        "header": "Effective from",
+        "columnId": "p_start"
+      },
+      {
+        "field": "endDateString",
+        "header": "Effective to",
+        "columnId": "p_end"
+      },
+      {
+        "field": "endCustomer",
+        "header": "End Customer",
+        "columnId": "p_endCust"
+      },
+      {
+        "field": "message",
+        "header": "Message",
+        "columnId": "p_message"
+      }
+    ],
+    "PCFLinesMtnColumnsWSP": [
+      {
+        "field": "currency",
+        "header": "Currency",
+        "columnId": "p_currency"
+      },
+      {
+        "field": "minSellingPrice",
+        "header": "Worst Selling Price",
+        "columnId": "p_minSelling"
+      },
+      {
+        "field": "salesCost",
+        "header": "Sales Cost",
+        "columnId": "p_salesCost"
+      },
+      {
+        "field": "controlFlag",
+        "header": "Control Flag",
+        "columnId": "p_controlFlag"
+      },
+      {
+        "field": "maxSellingPrice",
+        "header": "Max Selling Price",
+        "columnId": "p_maxSelling"
+      },
+      {
+        "field": "salesGP",
+        "header": "Sales Gp%",
+        "columnId": "p_salesGp"
+      },
+      {
+        "field": "startDateString",
+        "header": "Effective from",
+        "columnId": "p_start"
+      },
+      {
+        "field": "endDateString",
+        "header": "Effective to",
+        "columnId": "p_end"
+      },
+      {
+        "field": "endCustomer",
+        "header": "End Customer",
+        "columnId": "p_endCust"
+      },
+      {
+        "field": "message",
+        "header": "Message",
+        "columnId": "p_message"
+      }
+    ],
+    "Msg":{
+      "allowOnly0To1":"只允許填入 0 ~ 1",
+      "Error": "系統發生錯誤，請稍後再試",
+      "LineMtnSellingPriceError":"Worst Selling Price 必須大於等於 Sales Cost"
+    }
+  },
+  "FreightAdder": {
+    "Label":{
+      "title":"Freight Adder 維護",
+      "addFreightAdder":"新增 Freight Adder",
+      "modifyFreightAdder":"編輯 Freight Adder",
+      "Notification": "訊息通知"
+    },
+    "Msg": {
+      "CreateSuccess": "新增成功",
+      "EditSuccess": "更新成功",
+      "DelSuccess": "刪除成功",
+      "DownloadProcess": "檔案處理中，結果會透過mail發送"
+    },
+    "Columns": [
+      {
+        "field": "groupName",
+        "header": "Group",
+        "isDefault": true,
+        "isDisabled": false,
+        "textAlign": "left"
+      },
+      {
+        "field": "ouCode",
+        "header": "OU Code",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "ouName",
+        "header": "OU Name",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "custCode",
+        "header": "Customer #",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "custName",
+        "header": "Customer",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "endCustomer",
+        "header": "End Customer",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"150"
+      },
+      {
+        "field": "vendorCode",
+        "header": "Vendor #",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "vendorName",
+        "header": "Vendor",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "brand",
+        "header": "Brand",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "ctg1",
+        "header": "Ctg1",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "productCode",
+        "header": "productCode",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "ncnr",
+        "header": "NCNR",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "eol",
+        "header": "EOL",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "single",
+        "header": "Single",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "customize",
+        "header": "Customize",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "freightAdder",
+        "header": "Adder",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "startDate",
+        "header": "起始日期",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "endDate",
+        "header": "結束日期",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "flag",
+        "header": "是否啟用",
+        "isDefault": true,
+        "isDisabled": false
+      },
+      {
+        "field": "creationDate",
+        "header": "Creation Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"170"
+      },
+      {
+        "field": "createdBy",
+        "header": "Creation By",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"210"
+      },
+      {
+        "field": "lastUpdatedDate",
+        "header": "Last Update Date",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"170"
+      },
+      {
+        "field": "lastUpdatedBy",
+        "header": "Last Updated By",
+        "isDefault": true,
+        "isDisabled": false,
+        "minWidth":"210"
+      }
+    ],
+    "ColumnFunctions": [
+      {
+        "field": "edit",
+        "header": "編輯",
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      },
+      {
+        "field": "del",
+        "header": "刪除",
+        "isDisabled": false,
+        "maxWidth": "",
+        "textAlign": "left",
+        "css": "sm-col"
+      }
+    ],
+    "Options": {
+      "normalOptions": [
+        {
+          "label": "請選擇",
+          "value": null
+        },
+        {
+          "label": "Y",
+          "value": "Y"
+        },
+        {
+          "label": "N",
+          "value": "N"
+        }
+      ]
+    }
+  }
+  ,"SalesOrderChange": {
+    "field": {
+      "Corp":"公司別",
+      "OrderNumber":"Order Number",
+      "Sales":"業務員",
+      "Customer":"客戶",
+      "OrderDate":"Order Date",
+      "SalesDept":"業務員部門",
+      "Currency":"幣別",
+      "CustomerPONo":"Customer PO No."
+    },
+    "button":{
+      "withdraws":"撤回"
+    },
+    "Status": {
+      "APPROVE": "處理完成",
+      "REJECT": "駁回",
+      "APPROVING": "處理中",
+      "DRAFT": "草稿",
+      "NULL": "System Error",
+      "WITHDRAW":"撤回"
+    },
+    "Msg":{
+      "ApproveRejectRequired":"請選擇Approve/Reject",
+      "SalesDeptCodeEmpty":"此業務無有效部門，請找系統人員協助"
+    },
+    "Label":{
+      "ApplyDate": "申請日期",
+      "SelectAll":"全選"
+    }
+  },"SOVCommon":{
+    "Option": {
+      "Accept": "核准"
+    }
+  },
+  "AgentInfoHint":{
+    "Type":"類型",
+    "AgentUser":"代理人",
+    "StartDate":"開始時間",
+    "EndDate":"結束時間",
+    "ApplicationForm":"代理表單",
+    "DeputyStaffInformation":"代理人資訊",
+    "Hint":" 目前有設定代理人,但是系統不會自動送至代理人,您確定要繼續加簽,或按'取消'後參考設定明細,自行選擇代理人?"
+  }
+}

@@ -1,0 +1,444 @@
+<p-dialog header="{{ 'FreightAdder.Label.addFreightAdder' | translate }}" [(visible)]="showDialog" [draggable]="false"
+    [closeOnEscape]="true" [blockScroll]="true" [modal]="true" (onHide)="onHideDetailDialog()">
+
+    <form #ngForm="ngForm" class="form-table">
+
+        <!-- Group -->
+        <div class="form-row grid">
+            <div class="form-col lg:col-12 md:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">Group</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-select">
+                            <p-dropdown name="ouGroup" [(ngModel)]="formValue.ouGroup" [options]="groupOptions"
+                                placeholder="{{ 'Input.PlaceHolder.PleaseKeyIn' | translate }}" #ouGroup="ngModel"
+                                (ngModelChange)="formValue.ou = null">
+                            </p-dropdown>
+
+                            <app-error-hint *ngIf="isSubmitted && !formValue.ouGroup"></app-error-hint>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row grid">
+            <!-- OU Code -->
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">OU Code</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <p-autoComplete [(ngModel)]="formValue.ou" [suggestions]="ouOptions"
+                                (completeMethod)="filterOu($event)" [minLength]="1" field="displayOu"
+                                [style]="{ width: '100%' }" (onSelect)="filterEndCustomer({ query: '' })"
+                                (onBlur)="formValue.ou && (formValue.ou.ouCode?? (formValue.ou = null))"
+                                [ngModelOptions]="{ standalone: true }"
+                                placeholder="{{'Input.PlaceHolder.PleaseKeyIn' | translate}}"
+                                (ngModelChange)="formValue.endCustomer = null;">
+                            </p-autoComplete>
+                            <app-error-hint *ngIf="isSubmitted && !formValue.ou"></app-error-hint>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OU Name -->
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">OU Name</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col lg:col-6 md:col-6 col-12">
+                        <label class="txt" class="ou-name">{{formValue.ou?.ouName}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row grid">
+            <div class="form-col lg:col-12 md:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">Customer</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <p-autoComplete appendTo="body" [(ngModel)]="formValue.customer"
+                                [ngModelOptions]="{standalone: true}" [suggestions]="customerOptions"
+                                (completeMethod)="filterCustomer($event)"
+                                (onBlur)="formValue.customer && (formValue.customer.value ?? (formValue.customer = null))"
+                                [minLength]=3 field="label" [style]="{'width': '100%'}"
+                                placeholder="{{'Input.PlaceHolder.PleaseKeyIn' | translate}}" [showClear]="true"
+                                (onClear)="formValue.customer= null">
+                            </p-autoComplete>
+                            <app-error-hint *ngIf="isSubmitted && !formValue.customer"></app-error-hint>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row grid">
+            <div class="form-col lg:col-12 md:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">Vendor</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <p-autoComplete appendTo="body" [(ngModel)]="formValue.vendor"
+                                [ngModelOptions]="{standalone: true}" [suggestions]="vendorOptions"
+                                (completeMethod)="filterVendor($event)"
+                                (onBlur)="formValue.vendor && (formValue.vendor.value ?? (formValue.vendor = null))"
+                                [minLength]=3 field="label" [style]="{'width': '100%'}"
+                                placeholder="{{'Input.PlaceHolder.PleaseKeyIn' | translate}}" [showClear]="true"
+                                (onClear)="formValue.vendor= null">
+                            </p-autoComplete>
+                            <app-error-hint *ngIf="isSubmitted && !formValue.vendor"></app-error-hint>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Brand -->
+        <div class="form-row grid">
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed require">
+                        <div class="form-label require">
+                            <label class="txt">Brand</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <p-autoComplete [(ngModel)]="formValue.brand" [suggestions]="brandOptions"
+                                (completeMethod)="filterBrand($event)" [minLength]="1" field="label"
+                                [style]="{ width: '100%' }"
+                                (onBlur)="formValue.brand && (formValue.brand.value ?? (formValue.brand = null))"
+                                [ngModelOptions]="{ standalone: true }" (onSelect)="onBrandSelect($event.value)"
+                                (ngModelChange)="formValue.ctg1 = null;formValue.productCode = null;formValue.endCustomer = null;"
+                                placeholder="{{ 'Input.PlaceHolder.PleaseKeyIn' | translate }}" [showClear]="true"
+                                (onClear)="formValue.brand = null">
+                            </p-autoComplete>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label">
+                            <label class="txt">Ctg1</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-select">
+                            <p-dropdown [options]="ctg1Options" appendTo="body"
+                                placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}"
+                                [(ngModel)]="formValue.ctg1" (onBlur)="formValue.ctg1 ?? (formValue.ctg1 = null)"
+                                [disabled]="!formValue.brand" [ngModelOptions]="{ standalone: true }"
+                                [style]="{ width: '100%' }" [filter]="true" [showClear]="true"
+                                (onClear)="formValue.ctg1 = null">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row grid">
+            <div class="form-col col-12">
+                <div class="form-row grid">
+
+                    <div class="form-col lg:col-12 md:col-12 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label">
+                                    <label class="txt">End Customer</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col">
+                                <div class="form-select">
+                                    <p-dropdown [options]="endCustomerOptions" appendTo="body"
+                                        placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate}}"
+                                        [(ngModel)]="formValue.endCustomer" name="endCustomer"
+                                        (onBlur)="formValue.endCustomer ?? (formValue.endCustomer = null)"
+                                        [disabled]="!formValue.ouGroup||!formValue.ou||!formValue.brand"
+                                        [ngModelOptions]="{ standalone: true }" [style]="{ width: '100%' }"
+                                        [filter]="true" [showClear]="true" (onClear)="formValue.endCustomer = null">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row grid">
+            <div class="form-col col-12">
+                <div class="form-row grid">
+
+                    <div class="form-col lg:col-6 md:col-6 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label require">
+                                    <label class="txt">NCNR</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col">
+                                <div class="form-select">
+                                    <div class="form-select-btnkit">
+                                        <p-selectButton [options]="selectButtonOptions" optionLabel="label"
+                                            optionValue="value" [(ngModel)]="formValue.ncnr"
+                                            [ngModelOptions]="{ standalone: true }"></p-selectButton>
+                                        <app-error-hint *ngIf="isSubmitted && !formValue.ncnr"></app-error-hint>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-col lg:col-6 md:col-6 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label require">
+                                    <label class="txt">EOL</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col">
+                                <div class="form-select-btnkit">
+                                    <p-selectButton [options]="selectButtonOptions" optionLabel="label"
+                                        optionValue="value" [(ngModel)]="formValue.eol"
+                                        [ngModelOptions]="{ standalone: true }"></p-selectButton>
+                                    <app-error-hint *ngIf="isSubmitted && !formValue.eol"></app-error-hint>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row grid">
+            <div class="form-col col-12">
+                <div class="form-row grid">
+
+                    <div class="form-col lg:col-6 md:col-6 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label require">
+                                    <label class="txt">Single</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col">
+                                <div class="form-select">
+                                    <div class="form-select-btnkit">
+                                        <p-selectButton [options]="selectButtonOptions" optionLabel="label"
+                                            optionValue="value" [(ngModel)]="formValue.single"
+                                            [ngModelOptions]="{ standalone: true }"></p-selectButton>
+                                        <app-error-hint *ngIf="isSubmitted && !formValue.single"></app-error-hint>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-col lg:col-6 md:col-6 col-12">
+                        <div class="form-row grid">
+                            <div class="form-col col-fixed">
+                                <div class="form-label require">
+                                    <label class="txt">Customize</label>
+                                </div>
+                            </div>
+
+                            <div class="form-col col">
+                                <div class="form-select-btnkit">
+                                    <p-selectButton [options]="selectButtonOptions" optionLabel="label"
+                                        optionValue="value" [(ngModel)]="formValue.customize"
+                                        [ngModelOptions]="{ standalone: true }"></p-selectButton>
+                                    <app-error-hint *ngIf="isSubmitted && !formValue.customize"></app-error-hint>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Item -->
+        <div class="form-row grid">
+            <div class="form-col lg:col-12 md:col-12 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">Item</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <p-autoComplete [(ngModel)]="formValue.productCode" [suggestions]="productCodeOptions"
+                                (completeMethod)="filterProductCode($event)" [minLength]="1" field="label"
+                                [style]="{ width: '100%' }"
+                                (onBlur)="formValue.productCode && (formValue.productCode.value ?? (formValue.productCode = null))"
+                                [ngModelOptions]="{ standalone: true }" (onSelect)="filterEndCustomer({ query: '' })"
+                                placeholder="{{'Input.PlaceHolder.PleaseKeyIn' | translate}}" [showClear]="true"
+                                appendTo="body" [showClear]="true" (onClear)="formValue.item = null">
+                            </p-autoComplete>
+                            <app-error-hint *ngIf="isSubmitted && !formValue.productCode"></app-error-hint>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Adder -->
+        <div class="form-row grid">
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">Adder</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-input">
+                            <input type="number" pInputText name="formNo" [(ngModel)]="formValue.freightAdder"
+                                [ngModelOptions]="{ standalone: true }"
+                                placeholder="{{ 'PendingApproval.PlaceHolder.PleaseEnter' | translate }}"
+                                autocomplete="off" />
+                            <app-error-hint *ngIf="isSubmitted && !formValue.freightAdder"></app-error-hint>
+
+                            <p class="error-active" *ngIf="isSubmitted && (+formValue.freightAdder < 0)">
+                                <i class="pi pi-exclamation-circle"></i>
+                                <span>{{ 'Input.PlaceHolder.OnlyBig0' | translate }}</span>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">{{"SalesMarginToleranceSetup.Label.EnabledFlag" |
+                                translate}}</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-select">
+                            <p-dropdown [options]="flagOptions" appendTo="body"
+                                placeholder="{{'DropDown.PlaceHolder.PleaseChoose' | translate }}"
+                                [ngModelOptions]="{ standalone: true }" [(ngModel)]="formValue.flag">
+                            </p-dropdown>
+                            <app-error-hint *ngIf="isSubmitted && !formValue.flag"></app-error-hint>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row grid">
+            <!-- Start Date -->
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">{{"SalesMarginToleranceSetup.Label.FromDate" | translate }}</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-date">
+                            <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true"
+                                appendTo="body" name="startDate" [(ngModel)]="formValue.startDate" dateFormat="yy/mm/dd"
+                                (onInput)="dateInputHandlerService.concat($event.data)"
+                                (onSelect)="dateInputHandlerService.clean();formValue.endDate = formValue.startDate > formValue.endDate ?  null : formValue.endDate"
+                                (onBlur)="dateInputHandlerService.clean()"
+                                placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101">
+                            </p-calendar>
+
+                            <app-error-hint *ngIf="isSubmitted && !formValue.startDate"></app-error-hint>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- End Date -->
+            <div class="form-col lg:col-6 md:col-6 col-12">
+                <div class="form-row grid">
+                    <div class="form-col col-fixed">
+                        <div class="form-label require">
+                            <label class="txt">{{ "SalesMarginToleranceSetup.Label.ToDate" | translate }}</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col col">
+                        <div class="form-date">
+
+                            <p-calendar [selectOtherMonths]="true" [showButtonBar]="true" [showIcon]="true"
+                                name="endDate" appendTo="body" [(ngModel)]="formValue.endDate" dateFormat="yy/mm/dd"
+                                [minDate]="formValue.startDate" (onInput)="dateInputHandlerService.concat($event.data)"
+                                (onSelect)="dateInputHandlerService.clean();" (onBlur)="dateInputHandlerService.clean()"
+                                placeholder="{{ 'Input.PlaceHolder.PleaseSelectOrKeyIn' | translate }} e.g. 20200101">
+                            </p-calendar>
+
+                            <app-error-hint *ngIf="isSubmitted && !formValue.endDate"></app-error-hint>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+    <div class="btn-container">
+        <button pButton type="button" label="{{ 'Button.Label.Cancel' | translate }}" class="btn-gray"
+            (click)="onHideDetailDialog()"></button>
+        <button pButton type="button" label="{{ 'Button.Label.Save' | translate }}" (click)="saveOnClick()"></button>
+    </div>
+
+
+</p-dialog>

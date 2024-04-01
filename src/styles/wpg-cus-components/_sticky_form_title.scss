@@ -1,0 +1,17 @@
+.main-title-container {
+  @apply flex;
+  @apply sticky z-10;
+  @apply top-0;
+  @apply bg-white;
+
+  .override-content-container-padding {
+    @apply absolute;
+    @apply absolute z-10 -top-5;
+    @apply bg-white;
+    @apply w-full h-5;
+
+    @media screen and (max-width: 767px) {
+      padding: 10px;
+    }
+  }
+}

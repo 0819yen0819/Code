@@ -1,0 +1,456 @@
+@import "../helpers/variables";
+
+p-dialog,
+p-confirmdialog {
+  &.notify .p-dialog,
+  &.notify .ui-dialog {
+    width: 300px;
+  }
+  &.width-sm .p-dialog,
+  &.width-sm .ui-dialog {
+    width: 480px;
+  }
+  &.width-md .p-dialog,
+  &.width-md .ui-dialog {
+    width: 600px;
+  }
+  &.width-xl .p-dialog,
+  &.width-xl .ui-dialog {
+    width: 1200px;
+  }
+
+  .p-dialog {
+    max-height: unset !important;
+  }
+
+  .p-dialog,
+  .ui-dialog {
+    max-width: 100%;
+    width: 850px;
+    box-shadow: none;
+    border: 0;
+
+    .p-dialog-header,
+    .ui-dialog-titlebar {
+      position: relative;
+      min-height: 40px;
+
+      padding: $space-1;
+      border: 0;
+      border-bottom: 1px solid $bg-blue;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      background-color: $white;
+      color: $primary;
+
+      .main-title-txt {
+        margin: 0;
+
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 1.3em;
+        color: $gray-01;
+      }
+
+      .p-dialog-title,
+      .ui-dialog-title {
+        display: inline-block;
+        font-size: 20px;
+      }
+
+      .p-dialog-header-icons {
+        margin-left: auto;
+      }
+      .p-dialog-header-icon,
+      .ui-dialog-titlebar-icon {
+        border: 2px solid #f99d16;
+        color: #f99d16;
+
+        &:enabled:hover {
+          border-color: #d48511;
+          color: #d48511;
+        }
+        .pi {
+          // display: none;
+          font-size: 16px;
+          color: inherit;
+        }
+      } // end ui-dialog-titlebar-icon
+    } // end ui-dialog-titlebar
+
+    .p-dialog-content,
+    .ui-dialog-content {
+      border: 0;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+
+      max-height: calc(100vh - 40px - 100px);
+      height: auto;
+      padding: $space-2;
+
+      @media screen and (max-width: 767px) {
+        padding: $space-1;
+      } // end < 768
+
+      .btn-container {
+        justify-content: center;
+        text-align: center;
+
+        .ui-button {
+          min-width: 120px;
+        }
+
+        &.text-right {
+          justify-content: flex-end;
+          text-align: right;
+        }
+      }
+    } // end ui-dialog-content
+
+    .btn-container {
+      margin-top: $space-3;
+
+      .p-button {
+        min-width: 120px;
+        height: 30px;
+        padding: $space-1 / 2 $space-1;
+      }
+    }
+  } // end ui-dialog
+
+  .popup-content {
+    margin-bottom: $space-2;
+    font-size: 16px;
+    line-height: 1.3em;
+    color: $gray-01;
+
+    &.center {
+      text-align: center;
+    }
+
+    > * + * {
+      margin-top: $space-2;
+    }
+
+    .highlight-txt {
+      font-weight: bold;
+      color: $primary;
+    }
+  }
+
+  &.no-header {
+    .p-dialog-header,
+    .ui-dialog .ui-dialog-titlebar {
+      margin-bottom: -1 * $space-3;
+    }
+  }
+
+  &.notify {
+    .p-dialog-header,
+    .ui-dialog-titlebar {
+      min-height: auto;
+    }
+    .p-dialog-content,
+    .ui-dialog-content {
+      height: auto;
+      padding: 0 $space-1 $space-3;
+      text-align: center;
+    }
+
+    .notify-content {
+      margin-top: $space-2;
+      margin-bottom: $space-2;
+      font-size: 24px;
+      line-height: 1.3em;
+      color: $gray-01;
+
+      & > * {
+        vertical-align: top;
+      }
+
+      .pi {
+        margin-right: $space-1;
+        font-size: 1.5em;
+      }
+      &.success .pi {
+        color: $success;
+      }
+      &.fail .pi {
+        color: $error;
+      }
+    } // end notify-content
+  } // end notify
+
+  &.width-sm {
+    .ui-dialog .ui-dialog-titlebar {
+      min-height: auto;
+      padding: $space-3 $space-3 0;
+      text-align: center;
+
+      .ui-dialog-title {
+        margin: 0;
+      }
+
+      .main-title-txt {
+        margin: 0;
+
+        font-weight: bold;
+        font-size: 20px;
+        color: $primary;
+        line-height: 1.3em;
+      } // main-title-txt
+    }
+
+    .ui-dialog .ui-dialog-content {
+      height: auto;
+      padding: $space-3;
+      text-align: center;
+    }
+
+    .popup-content {
+      .txt {
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 1.3em;
+        color: $gray-01;
+      }
+
+      & + .btn-container {
+        margin-top: $space-5;
+      }
+    } // end popup-content
+
+    .btn-container {
+      .ui-button {
+        min-width: 120px;
+      }
+
+      .btn-secondary-txt .ui-button {
+        min-width: auto;
+      }
+    }
+  } // end width-sm
+
+  &.width-md {
+    //
+  } // end width-md
+
+  &.width-lg {
+    .ui-dialog .ui-dialog-titlebar {
+      padding: $space-2 $space-3 0;
+      border: 0;
+
+      .ui-dialog-title {
+        margin: 0;
+
+        .main-title-txt {
+          margin: 0;
+
+          font-weight: bold;
+          font-size: 24px;
+          color: $primary;
+          line-height: 1.3em;
+        }
+      } // end ui-dialog-title
+    } // end ui-dialog-titlebar
+
+    .ui-dialog .ui-dialog-content {
+      padding: $space-2 $space-3;
+
+      > form {
+        display: block;
+        height: 100%;
+      }
+
+      .btn-container {
+        text-align: right;
+        justify-content: flex-end;
+      }
+    }
+
+    &.has-fixed-footer {
+      .ui-dialog-content {
+        position: relative;
+        padding-bottom: calc(#{$footer-btn-h} + #{$space-2});
+        overflow: hidden;
+
+        .popup-content {
+          max-height: 100%;
+          overflow: hidden auto;
+        }
+
+        .footer-btn-container .btn-container {
+          text-align: right;
+          justify-content: flex-end;
+        }
+      } // end ui-dialog-content
+    } // end has-fixed-footer
+  } // end width-lg
+} // end popup
+
+.p-dialog-mask.p-component-overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+p-confirmdialog {
+  .p-dialog {
+    width: 300px;
+
+    .p-dialog-header-close {
+      display: none;
+    }
+
+    .p-dialog-content {
+      border-radius: 0;
+
+      .p-confirm-dialog-icon {
+        color: #f99d16;
+      }
+    }
+
+    .p-dialog-footer {
+      border-color: $bg-blue;
+
+      button.p-button {
+        min-width: 50px;
+        padding: $space-1;
+
+        &.p-confirm-dialog-accept {
+          background-color: $white;
+          border-color: $primary;
+          color: $primary;
+
+          &:enabled:hover {
+            background-color: $dark-blue;
+            border-color: transparent;
+            color: $white;
+          }
+        } // end p-confirm-dialog-accept
+        &.p-confirm-dialog-reject {
+          background-color: $white;
+          border-color: $gray-02;
+          color: $gray-02;
+
+          &:enabled:hover {
+            background-color: $gray-03;
+            border-color: transparent;
+            color: $white;
+          }
+        } // end p-confirm-dialog-reject
+      }
+    } // end p-dialog-footer
+  } // end .p-dialog
+} // end p-confirmdialog
+
+.p-toast {
+  opacity: 1;
+  // background-color: $white;
+
+  .p-toast-message {
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgb(182 182 182 / 25%);
+
+    .ui-toast-icon {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 60px;
+      padding-top: 20px;
+    }
+
+    &.p-toast-message-success {
+      // background-color: inherit;
+      background-color: $white;
+
+      .p-toast-message-content .p-toast-message-icon,
+      .ui-toast-icon {
+        background-color: $success;
+        color: $white;
+      }
+    }
+    &.p-toast-message-error {
+      // background-color: inherit;
+      background-color: $white;
+
+      .p-toast-message-content .p-toast-message-icon,
+      .ui-toast-icon {
+        background-color: $error;
+        color: $white;
+      }
+    }
+    &.p-toast-message-info {
+      // background-color: inherit;
+      background-color: $white;
+
+      .p-toast-message-content .p-toast-message-icon,
+      .ui-toast-icon {
+        background-color: $light-blue;
+        color: $white;
+      }
+    }
+
+    .p-toast-message-content,
+    .ui-toast-message-text-content {
+      padding: 0;
+      align-items: stretch;
+      flex: 1;
+
+      .ui-toast-summary {
+        padding: 0;
+        font-size: 16px;
+        color: #4d4d4d;
+      }
+      .ui-toast-detail {
+        word-break: break-word;
+        overflow: hidden;
+        padding: 0;
+        font-size: 14px;
+        color: $gray-01;
+      }
+
+      > * {
+        padding: $space-1;
+      }
+
+      .p-toast-message-icon {
+        background-color: $gray-03;
+        padding: 0 15px;
+        color: $white;
+        font-size: 30px;
+        line-height: 2.3;
+
+        &.pi-check:before {
+          content: "\e90a";
+        }
+      }
+
+      .p-toast-message-text {
+        font-size: 18px;
+        color: #4d4d4d;
+
+        .p-toast-summary {
+          font-size: inherit;
+          color: inherit;
+        }
+        .p-toast-detail {
+          font-size: 12px;
+          color: $gray-03;
+        }
+      }
+
+      .p-toast-icon-close {
+        width: auto;
+        height: auto;
+        padding: 15px;
+        border-left: 1px solid $line;
+        border-radius: 0;
+        color: $gray-03;
+
+        &:focus {
+          outline: 0;
+          box-shadow: none;
+        }
+      } // end close
+    }
+  }
+} // end toast
